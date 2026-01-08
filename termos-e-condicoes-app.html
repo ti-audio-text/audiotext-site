@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Termos de Uso e Política de Privacidade - Audiotext</title>
+  <meta name="description" content="Termos de uso, política de privacidade e condições de reembolso do App Audiotext. Leia atentamente antes de utilizar nossos serviços.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://audiotext.com.br/terms.html">
+  
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            background: 'hsl(0, 0%, 100%)',
+            foreground: 'hsl(222.2, 47%, 11%)',
+            card: 'hsl(0, 0%, 100%)',
+            'card-foreground': 'hsl(222.2, 47%, 11%)',
+            popover: 'hsl(0, 0%, 100%)',
+            'popover-foreground': 'hsl(222.2, 47%, 11%)',
+            primary: 'hsl(218, 40%, 29%)',
+            'primary-foreground': 'hsl(0, 0%, 100%)',
+            secondary: 'hsl(218, 20%, 20%)',
+            'secondary-foreground': 'hsl(0, 0%, 100%)',
+            muted: 'hsl(220, 13%, 95%)',
+            'muted-foreground': 'hsl(220, 9%, 46%)',
+            accent: 'hsl(220, 13%, 95%)',
+            'accent-foreground': 'hsl(218, 40%, 29%)',
+            destructive: 'hsl(0, 84%, 60%)',
+            'destructive-foreground': 'hsl(0, 0%, 100%)',
+            border: 'hsl(220, 13%, 91%)',
+            input: 'hsl(220, 13%, 91%)',
+            ring: 'hsl(218, 40%, 29%)',
+          },
+          borderRadius: {
+            lg: '0.75rem',
+            md: 'calc(0.75rem - 2px)',
+            sm: 'calc(0.75rem - 4px)',
+          },
+        }
+      }
+    }
+  </script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+  
+  <!-- Custom Styles -->
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    /* Smooth scroll */
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    /* Navigation active state */
+    .nav-item {
+      transition: all 0.2s;
+    }
+    .nav-item.active {
+      color: hsl(218, 40%, 29%);
+      background-color: hsl(220, 13%, 95%);
+    }
+    .nav-item:hover {
+      background-color: hsl(220, 13%, 95%);
+    }
+    
+    /* Mobile menu */
+    .mobile-menu {
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+    .mobile-overlay {
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    .mobile-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    /* Button hover states */
+    .btn-outline {
+      border: 1px solid hsl(220, 13%, 91%);
+      background-color: white;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    .btn-outline:hover {
+      background-color: hsl(220, 13%, 95%);
+    }
+    
+    /* Article styling */
+    article h3 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    article p {
+      margin-bottom: 1rem;
+    }
+    article ul, article ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+    article li {
+      margin-bottom: 0.5rem;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-background text-foreground">
+  <!-- Skip to content link -->
+  <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md">
+    Pular para o conteúdo principal
+  </a>
+
+  <!-- Mobile Header -->
+  <header class="lg:hidden sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur">
+    <div class="flex h-14 items-center justify-between px-4">
+      <a href="./landing.html" class="flex items-center gap-2">
+        <i data-lucide="chevron-left" class="h-5 w-5"></i>
+        <span class="font-medium">Voltar</span>
+      </a>
+      <button 
+        id="mobileMenuBtn"
+        class="btn-outline inline-flex items-center justify-center rounded-md p-2"
+        onclick="toggleMobileMenu()"
+        aria-label="Abrir menu de navegação"
+      >
+        <i data-lucide="menu" class="h-5 w-5"></i>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileOverlay" class="mobile-overlay fixed inset-0 z-50 bg-black/50 lg:hidden" onclick="toggleMobileMenu()"></div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu fixed left-0 top-0 z-50 h-full w-80 bg-background border-r border-border lg:hidden">
+    <div class="flex items-center justify-between p-4 border-b border-border">
+      <h2 class="font-semibold">Navegação</h2>
+      <button onclick="toggleMobileMenu()" class="p-2 hover:bg-muted rounded-md" aria-label="Fechar menu">
+        <i data-lucide="x" class="h-5 w-5"></i>
+      </button>
+    </div>
+    <nav class="p-4" aria-label="Navegação de termos (mobile)">
+      <ul class="space-y-1">
+        <li>
+          <a href="#termos" onclick="toggleMobileMenu()" class="nav-item flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium" data-section="termos">
+            <i data-lucide="file-text" class="h-4 w-4"></i>
+            Termos de Uso
+          </a>
+        </li>
+        <li>
+          <a href="#privacidade" onclick="toggleMobileMenu()" class="nav-item flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium" data-section="privacidade">
+            <i data-lucide="lock" class="h-4 w-4"></i>
+            Política de Privacidade
+          </a>
+        </li>
+        <li>
+          <a href="#legal" onclick="toggleMobileMenu()" class="nav-item flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium" data-section="legal">
+            <i data-lucide="info" class="h-4 w-4"></i>
+            Informações Legais
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="flex">
+    <!-- Desktop Sidebar -->
+    <aside class="hidden lg:block w-64 shrink-0 border-r border-border bg-muted/30 sticky top-0 h-screen overflow-y-auto">
+      <div class="p-6">
+        <a href="./landing.html" class="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-8">
+          <i data-lucide="chevron-left" class="h-4 w-4"></i>
+          <span>Voltar ao início</span>
+        </a>
+        <h2 class="font-semibold text-lg mb-4">Documentos Legais</h2>
+        <nav aria-label="Navegação de termos">
+          <ul class="space-y-1">
+            <li>
+              <a href="#termos" class="nav-item flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium" data-section="termos">
+                <i data-lucide="file-text" class="h-4 w-4"></i>
+                Termos de Uso
+              </a>
+            </li>
+            <li>
+              <a href="#privacidade" class="nav-item flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium" data-section="privacidade">
+                <i data-lucide="lock" class="h-4 w-4"></i>
+                Política de Privacidade
+              </a>
+            </li>
+            <li>
+              <a href="#legal" class="nav-item flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium" data-section="legal">
+                <i data-lucide="info" class="h-4 w-4"></i>
+                Informações Legais
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main id="main-content" class="flex-1 min-h-screen">
+      <div class="max-w-4xl mx-auto px-4 py-8 lg:py-12">
+        <!-- Header -->
+        <header class="mb-12">
+          <h1 class="text-3xl lg:text-4xl font-bold mb-4">Termos de Uso e Política de Privacidade</h1>
+          <p class="text-lg text-muted-foreground">
+            Leia atentamente os termos e condições que regem o uso do App Audiotext.
+          </p>
+        </header>
+
+        <!-- Terms of Use Section -->
+        <section id="termos" class="mb-16 scroll-mt-20">
+          <article>
+            <h2 class="text-2xl font-bold mb-6 pb-4 border-b border-border">Termos de Uso e Reembolso</h2>
+            
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mb-8">
+              <p class="text-sm text-amber-800">
+                <strong>ACEITAÇÃO DOS TERMOS:</strong> Ao criar uma conta e utilizar o APP AUDIOTEXT, você concorda integralmente com estes Termos de Uso e Política de Privacidade. A utilização do serviço implica na aceitação de todas as condições aqui estabelecidas.
+              </p>
+            </div>
+
+            <h3 class="text-xl font-semibold">1. Definições</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li><strong>APP AUDIOTEXT</strong>: Plataforma de transcrição automática de áudio para texto, acessível via web.</li>
+              <li><strong>Usuário</strong>: Pessoa física ou jurídica que utiliza os serviços do APP AUDIOTEXT.</li>
+              <li><strong>Créditos/Minutos</strong>: Unidade de medida para utilização do serviço de transcrição.</li>
+              <li><strong>Transcrição</strong>: Processo de conversão de áudio em texto realizado pela inteligência artificial.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">2. Serviço Oferecido</h3>
+            <p class="text-muted-foreground">
+              O APP AUDIOTEXT oferece serviço de transcrição automática de áudio para texto utilizando tecnologia de inteligência artificial. O serviço é fornecido "como está", sem garantias de precisão absoluta, sendo a qualidade da transcrição dependente de fatores como qualidade do áudio, clareza da fala, ruídos de fundo e outros elementos.
+            </p>
+
+            <h3 class="text-xl font-semibold">3. Cadastro e Conta</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>O usuário deve fornecer informações verdadeiras e completas ao criar sua conta.</li>
+              <li>O usuário é responsável por manter a confidencialidade de suas credenciais de acesso.</li>
+              <li>Cada pessoa física ou jurídica pode manter apenas uma conta ativa.</li>
+              <li>O uso da conta é pessoal e intransferível.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">4. Créditos Gratuitos</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>Novos usuários recebem 10 (dez) minutos gratuitos para teste.</li>
+              <li>Os créditos gratuitos são válidos apenas para a primeira conta criada por CPF/CNPJ.</li>
+              <li>Tentativas de criar múltiplas contas para obter créditos gratuitos adicionais resultarão em banimento.</li>
+              <li>Os créditos gratuitos não são cumulativos com promoções.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">5. Pagamentos e Planos</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>Os preços são expressos em Reais (BRL) e podem ser alterados sem aviso prévio.</li>
+              <li>Os créditos adquiridos não expiram enquanto a conta estiver ativa.</li>
+              <li>Aceitamos pagamentos via PIX e cartão de crédito.</li>
+              <li>A ativação dos créditos é imediata após a confirmação do pagamento.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">6. Política de Reembolso</h3>
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-4 my-4">
+              <p class="text-sm text-blue-800">
+                <strong>Importante:</strong> Devido à natureza digital do serviço e à disponibilização de créditos gratuitos para teste, aplicam-se as seguintes regras de reembolso:
+              </p>
+            </div>
+            <ul class="list-disc text-muted-foreground">
+              <li><strong>Créditos não utilizados:</strong> Reembolso integral em até 7 dias após a compra.</li>
+              <li><strong>Créditos parcialmente utilizados:</strong> Reembolso proporcional aos créditos não utilizados, menos taxa administrativa de 15%.</li>
+              <li><strong>Créditos totalmente utilizados:</strong> Não há possibilidade de reembolso.</li>
+              <li><strong>Prazo para solicitação:</strong> Até 30 dias após a compra.</li>
+              <li>Solicitações devem ser feitas pelo email: suporte@audiotext.com.br</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">7. Uso Aceitável</h3>
+            <p class="text-muted-foreground">O usuário se compromete a:</p>
+            <ul class="list-disc text-muted-foreground">
+              <li>Utilizar o serviço apenas para fins lícitos.</li>
+              <li>Não fazer upload de conteúdo ilegal, difamatório, ou que viole direitos de terceiros.</li>
+              <li>Não tentar burlar ou comprometer a segurança do sistema.</li>
+              <li>Não utilizar automação não autorizada para acessar o serviço.</li>
+              <li>Não revender ou sublicenciar o serviço sem autorização.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">8. Limitações de Responsabilidade</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>O APP AUDIOTEXT não garante precisão de 100% nas transcrições.</li>
+              <li>Não nos responsabilizamos por perdas decorrentes de imprecisões na transcrição.</li>
+              <li>Recomendamos revisão humana para documentos críticos.</li>
+              <li>Não nos responsabilizamos por interrupções temporárias do serviço.</li>
+              <li>A responsabilidade máxima está limitada ao valor pago pelo usuário nos últimos 12 meses.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">9. Propriedade Intelectual</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>O usuário mantém todos os direitos sobre o conteúdo que envia.</li>
+              <li>O APP AUDIOTEXT mantém os direitos sobre sua tecnologia e interface.</li>
+              <li>O usuário concede licença limitada para processamento do conteúdo enviado.</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">10. Suspensão e Encerramento</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>Reservamo-nos o direito de suspender contas que violem estes termos.</li>
+              <li>O usuário pode encerrar sua conta a qualquer momento.</li>
+              <li>Créditos não utilizados após encerramento voluntário não serão reembolsados após 30 dias.</li>
+            </ul>
+          </article>
+        </section>
+
+        <!-- Privacy Policy Section -->
+        <section id="privacidade" class="mb-16 scroll-mt-20">
+          <article>
+            <h2 class="text-2xl font-bold mb-6 pb-4 border-b border-border">Política de Privacidade</h2>
+
+            <h3 class="text-xl font-semibold">1. Dados Coletados</h3>
+            <p class="text-muted-foreground"><strong>Dados de Cadastro:</strong></p>
+            <ul class="list-disc text-muted-foreground">
+              <li>Nome completo</li>
+              <li>Endereço de email</li>
+              <li>Dados de pagamento (processados por terceiros)</li>
+            </ul>
+            <p class="text-muted-foreground mt-4"><strong>Dados de Uso:</strong></p>
+            <ul class="list-disc text-muted-foreground">
+              <li>Arquivos de áudio enviados (temporariamente)</li>
+              <li>Transcrições geradas</li>
+              <li>Logs de acesso e utilização</li>
+              <li>Informações do dispositivo e navegador</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">2. Uso dos Dados</h3>
+            <p class="text-muted-foreground">Utilizamos seus dados para:</p>
+            <ul class="list-disc text-muted-foreground">
+              <li>Fornecer o serviço de transcrição</li>
+              <li>Processar pagamentos</li>
+              <li>Enviar comunicações sobre o serviço</li>
+              <li>Melhorar a qualidade do serviço</li>
+              <li>Cumprir obrigações legais</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">3. Retenção de Dados</h3>
+            <div class="bg-green-50 border border-green-200 rounded-lg p-4 my-4">
+              <p class="text-sm text-green-800">
+                <strong>Política de exclusão automática:</strong>
+              </p>
+              <ul class="list-disc text-green-700 mt-2 ml-4 text-sm">
+                <li>Arquivos de áudio: excluídos automaticamente em até 10 dias após o upload</li>
+                <li>Transcrições: excluídas automaticamente em até 15 dias após a criação</li>
+              </ul>
+            </div>
+            <ul class="list-disc text-muted-foreground">
+              <li>Dados de conta: mantidos enquanto a conta estiver ativa</li>
+              <li>Logs de transação: mantidos por 5 anos (obrigação legal)</li>
+              <li>O usuário pode solicitar exclusão antecipada de transcrições</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">4. Compartilhamento de Dados</h3>
+            <p class="text-muted-foreground">Seus dados podem ser compartilhados com:</p>
+            <ul class="list-disc text-muted-foreground">
+              <li><strong>Processadores de pagamento:</strong> para realizar transações</li>
+              <li><strong>Provedores de infraestrutura:</strong> para hospedar o serviço</li>
+              <li><strong>Autoridades legais:</strong> quando exigido por lei</li>
+            </ul>
+            <p class="text-muted-foreground mt-4">
+              <strong>Não vendemos seus dados</strong> para terceiros para fins de marketing.
+            </p>
+
+            <h3 class="text-xl font-semibold">5. Segurança</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>Utilizamos criptografia TLS/SSL para transmissão de dados</li>
+              <li>Dados são armazenados em servidores seguros</li>
+              <li>Acesso restrito a funcionários autorizados</li>
+              <li>Monitoramento contínuo de segurança</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">6. Seus Direitos (LGPD)</h3>
+            <p class="text-muted-foreground">Conforme a Lei Geral de Proteção de Dados, você tem direito a:</p>
+            <ul class="list-disc text-muted-foreground">
+              <li>Acessar seus dados pessoais</li>
+              <li>Corrigir dados incompletos ou inexatos</li>
+              <li>Solicitar exclusão de dados</li>
+              <li>Solicitar portabilidade de dados</li>
+              <li>Revogar consentimento</li>
+              <li>Solicitar informações sobre compartilhamento</li>
+            </ul>
+            <p class="text-muted-foreground mt-4">
+              Para exercer seus direitos, entre em contato: <a href="mailto:suporte@audiotext.com.br" class="text-primary hover:underline">suporte@audiotext.com.br</a>
+            </p>
+
+            <h3 class="text-xl font-semibold">7. Cookies</h3>
+            <p class="text-muted-foreground">Utilizamos cookies para:</p>
+            <ul class="list-disc text-muted-foreground">
+              <li>Manter sua sessão ativa</li>
+              <li>Lembrar suas preferências</li>
+              <li>Analisar uso do site (analytics)</li>
+            </ul>
+            <p class="text-muted-foreground mt-4">
+              Você pode gerenciar cookies nas configurações do seu navegador.
+            </p>
+
+            <h3 class="text-xl font-semibold">8. Menores de Idade</h3>
+            <p class="text-muted-foreground">
+              O serviço é destinado a maiores de 18 anos. Menores entre 16 e 18 anos podem utilizar com autorização dos responsáveis. Não coletamos intencionalmente dados de menores de 16 anos.
+            </p>
+          </article>
+        </section>
+
+        <!-- Legal Information Section -->
+        <section id="legal" class="mb-16 scroll-mt-20">
+          <article>
+            <h2 class="text-2xl font-bold mb-6 pb-4 border-b border-border">Informações Legais</h2>
+
+            <h3 class="text-xl font-semibold">1. Legislação Aplicável</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>Estes termos são regidos pela legislação brasileira</li>
+              <li>Aplica-se o Código de Defesa do Consumidor quando aplicável</li>
+              <li>Lei Geral de Proteção de Dados (LGPD) - Lei 13.709/2018</li>
+              <li>Marco Civil da Internet - Lei 12.965/2014</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">2. Foro</h3>
+            <p class="text-muted-foreground">
+              Fica eleito o foro da Comarca de São Paulo/SP para dirimir quaisquer questões oriundas destes termos, com renúncia expressa a qualquer outro, por mais privilegiado que seja.
+            </p>
+
+            <h3 class="text-xl font-semibold">3. Alterações nos Termos</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>Reservamo-nos o direito de alterar estes termos a qualquer momento</li>
+              <li>Alterações significativas serão comunicadas por email</li>
+              <li>O uso continuado após alterações implica aceitação dos novos termos</li>
+              <li>Versões anteriores ficam disponíveis mediante solicitação</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">4. Contato</h3>
+            <p class="text-muted-foreground">Para questões sobre estes termos ou o serviço:</p>
+            <ul class="list-disc text-muted-foreground">
+              <li><strong>Email:</strong> <a href="mailto:suporte@audiotext.com.br" class="text-primary hover:underline">suporte@audiotext.com.br</a></li>
+              <li><strong>Tempo de resposta:</strong> Até 5 dias úteis</li>
+            </ul>
+
+            <h3 class="text-xl font-semibold">5. Disposições Gerais</h3>
+            <ul class="list-disc text-muted-foreground">
+              <li>A invalidade de qualquer cláusula não afeta as demais</li>
+              <li>A tolerância quanto ao descumprimento não implica renúncia</li>
+              <li>Estes termos constituem o acordo integral entre as partes</li>
+            </ul>
+
+            <!-- Acceptance Notice -->
+            <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-8">
+              <p class="text-sm text-amber-800">
+                <strong>ACEITAÇÃO DOS TERMOS:</strong> Ao criar uma conta e utilizar o APP AUDIOTEXT, você declara ter lido, compreendido e aceito integralmente estes Termos de Uso e Política de Privacidade. Caso não concorde com qualquer disposição, não utilize o serviço.
+              </p>
+            </div>
+
+            <!-- Last Update -->
+            <div class="mt-8 pt-8 border-t border-border">
+              <p class="text-sm text-muted-foreground">
+                <strong>Última atualização:</strong> Janeiro de 2025
+              </p>
+            </div>
+          </article>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Mobile menu toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      
+      menu.classList.toggle('open');
+      overlay.classList.toggle('open');
+      
+      // Prevent body scroll when menu is open
+      document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+    }
+
+    // Intersection Observer for active section highlighting
+    document.addEventListener('DOMContentLoaded', function() {
+      const sections = document.querySelectorAll('section[id]');
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      const observerOptions = {
+        root: null,
+        rootMargin: '-20% 0px -60% 0px',
+        threshold: 0
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.id;
+            
+            // Update all nav items
+            navItems.forEach(item => {
+              if (item.getAttribute('data-section') === sectionId) {
+                item.classList.add('active');
+              } else {
+                item.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, observerOptions);
+      
+      sections.forEach(section => {
+        observer.observe(section);
+      });
+    });
+  </script>
+</body>
+</html>
