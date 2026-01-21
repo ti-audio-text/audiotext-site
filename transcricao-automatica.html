@@ -163,7 +163,6 @@
     
     /* Sizing */
     .w-full { width: 100%; }
-    .w-auto { width: auto !important; }
     .w-8 { width: 2rem; }
     .w-32 { width: 8rem; }
     .h-4 { height: 1rem; }
@@ -221,8 +220,8 @@
     .text-primary-foreground { color: hsl(0, 0%, 100%); }
     .text-amber-500 { color: hsl(38, 92%, 50%); }
     .text-amber-800 { color: hsl(26, 90%, 37%); }
-    .text-red-500 { color: hsl(0, 75%, 30%); }
-    .text-green-600 { color: hsl(142, 70%, 20%); }
+    .text-red-500 { color: hsl(0, 84%, 60%); }
+    .text-green-600 { color: hsl(142, 71%, 35%); }
     .text-black { color: hsl(0, 0%, 0%); }
     .text-white { color: hsl(0, 0%, 100%); }
     .fill-amber-500 { fill: hsl(38, 92%, 50%); }
@@ -451,10 +450,8 @@
             alt="Audiotext - Transcrição Automática de Áudio para Texto com IA" 
             class="h-8 w-auto flex-shrink-0" 
             loading="eager"
-            width="226"
-            height="56"
-            decoding="async"
-            fetchpriority="high"
+            width="200"
+            height="32"
           >
         </div>
         <nav class="flex items-center gap-4" aria-label="Navegação principal">
@@ -1371,15 +1368,14 @@
             <img 
               src="/assets/audiotext-logo.avif" 
               alt="Audiotext - Transcrição Automática de Áudio para Texto" 
-              class="h-8 w-auto"
+              class="h-8" 
               loading="lazy"
-              width="226"
-              height="56"
-              decoding="async"
+              width="200"
+              height="32"
             >
           </div>
           <nav class="flex gap-6 text-sm text-muted-foreground" aria-label="Links do rodapé">
-            <a href="/termos-e-condicoes-app/" class="hover:text-foreground transition-colors">Termos de Uso</a>
+            <a href="/termos-e-condicoes/" class="hover:text-foreground transition-colors">Termos de Uso</a>
             <a href="/transcricao-de-audio/" class="hover:text-foreground transition-colors">Transcrição Humana</a>
           </nav>
           <p class="text-sm text-muted-foreground text-center">
@@ -1489,12 +1485,7 @@
       "latitude": "-23.6148",
       "longitude": "-46.6963"
     },
-    "priceRange": "R$ 47 - R$ 897",
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "reviewCount": "36"
-    }
+    "priceRange": "R$ 47 - R$ 897"
   }
   </script>
 
@@ -1579,10 +1570,6 @@
     "dateModified": "2026-01-08",
     "breadcrumb": {
       "@id": "https://audiotext.com.br/transcricao-automatica/#breadcrumb"
-    },
-    "speakable": {
-      "@type": "SpeakableSpecification",
-      "cssSelector": ["#hero-heading", "#how-it-works-heading"]
     },
     "potentialAction": [{
       "@type": "ReadAction",
@@ -1697,7 +1684,7 @@
       "ratingValue": "5",
       "bestRating": "5",
       "worstRating": "5",
-      "reviewCount": "36"
+      "reviewCount": "3"
     },
     "review": [
       {
@@ -1743,78 +1730,6 @@
         "datePublished": "2026-01-05"
       }
     ]
-  }
-  </script>
-
-  <!-- Review Schema - Individual #1 -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "Service",
-      "name": "Transcrição Automática Audiotext",
-      "image": "https://audiotext.com.br/assets/og-image-ia.jpg"
-    },
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "5",
-      "bestRating": "5"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "Julio Graziani"
-    },
-    "reviewBody": "Um atendimento sem igual, eles priorizam o cliente, e o trabalho é fantástico. Recomendo demais.",
-    "datePublished": "2025-11-15"
-  }
-  </script>
-
-  <!-- Review Schema - Individual #2 -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "Service",
-      "name": "Transcrição Automática Audiotext",
-      "image": "https://audiotext.com.br/assets/og-image-ia.jpg"
-    },
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "5",
-      "bestRating": "5"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "Andréa van Herk"
-    },
-    "reviewBody": "Excelente trabalho! Comprometido, dentro do prazo, com atendimento de excelência! Gostei muito.",
-    "datePublished": "2025-12-10"
-  }
-  </script>
-
-  <!-- Review Schema - Individual #3 -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Review",
-    "itemReviewed": {
-      "@type": "Service",
-      "name": "Transcrição Automática Audiotext",
-      "image": "https://audiotext.com.br/assets/og-image-ia.jpg"
-    },
-    "reviewRating": {
-      "@type": "Rating",
-      "ratingValue": "5",
-      "bestRating": "5"
-    },
-    "author": {
-      "@type": "Person",
-      "name": "Thais Mangrich"
-    },
-    "reviewBody": "O atendimento e o trabalho deles são excelentes!",
-    "datePublished": "2026-01-05"
   }
   </script>
 
