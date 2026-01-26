@@ -16,6 +16,7 @@
   <meta name="twitter:title" content="Audiotext | Transcrição de Áudio, Degravação e Legendagem">
   <meta name="twitter:description" content="14 anos transformando áudio em texto confiável.">
   <meta name="theme-color" content="#3B82F6">
+  <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
   
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -138,11 +139,14 @@
     
     .flex-col { flex-direction: column; }
     .flex-shrink-0 { flex-shrink: 0; }
+    .shrink-0 { flex-shrink: 0; }
+    .flex-1 { flex: 1 1 0%; }
     .items-center { align-items: center; }
     .items-start { align-items: start; }
     .justify-center { justify-content: center; }
     .justify-between { justify-content: space-between; }
     
+    .gap-0\.5 { gap: 0.125rem; }
     .gap-1 { gap: 0.25rem; }
     .gap-2 { gap: 0.5rem; }
     .gap-3 { gap: 0.75rem; }
@@ -196,6 +200,7 @@
     .h-4 { height: 1rem; }
     .h-5 { height: 1.25rem; }
     .h-6 { height: 1.5rem; }
+    .h-7 { height: 1.75rem; }
     .h-8 { height: 2rem; }
     .h-10 { height: 2.5rem; }
     .h-12 { height: 3rem; }
@@ -204,8 +209,11 @@
     .w-4 { width: 1rem; }
     .w-5 { width: 1.25rem; }
     .w-6 { width: 1.5rem; }
+    .w-7 { width: 1.75rem; }
+    .w-8 { width: 2rem; }
     .w-10 { width: 2.5rem; }
     .w-12 { width: 3rem; }
+    .w-16 { width: 4rem; }
     
     .min-h-screen { min-height: 100vh; }
     .min-h-\[56px\] { min-height: 56px; }
@@ -441,11 +449,16 @@
       border: 1px solid hsl(var(--border));
       border-radius: calc(var(--radius) + 0.25rem);
       box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      transition: all 0.3s ease;
     }
     
-    .card:hover {
+    .card-hoverable:hover {
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
       transform: translateY(-0.25rem);
+    }
+    
+    .card-stats:hover {
+      box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     }
     
     /* Badge colors */
@@ -735,7 +748,7 @@
 
         <!-- Logo -->
         <a href="/" class="flex items-center gap-2 flex-shrink-0">
-          <img src="https://audiotext.com.br/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="header-logo" loading="lazy" decoding="async">
+          <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="header-logo" loading="lazy" decoding="async">
         </a>
 
         <!-- Desktop Navigation -->
@@ -873,107 +886,107 @@
                 <div class="flex animate-scroll-logos">
                   <!-- Logo images (duplicated for infinite scroll effect) -->
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/1_caixa.avif" alt="Caixa" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/1_caixa.avif" alt="Caixa" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/2_fgv.avif" alt="FGV" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/2_fgv.avif" alt="FGV" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/3_globo.avif" alt="Globo" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/3_globo.avif" alt="Globo" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/4_gp.avif" alt="GP" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/4_gp.avif" alt="GP" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/5_pda.avif" alt="PDA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/5_pda.avif" alt="PDA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/6_ias.avif" alt="IAS" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/6_ias.avif" alt="IAS" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/7_unimed.avif" alt="Unimed" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/7_unimed.avif" alt="Unimed" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/8_fiotec.avif" alt="Fiotec" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/8_fiotec.avif" alt="Fiotec" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/9_kla.avif" alt="KLA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/9_kla.avif" alt="KLA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/10_trw.avif" alt="TRW" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/10_trw.avif" alt="TRW" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/11_mdlz.avif" alt="MDLZ" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/11_mdlz.avif" alt="MDLZ" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/12_fe.avif" alt="FE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/12_fe.avif" alt="FE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/13_clba.avif" alt="CLBA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/13_clba.avif" alt="CLBA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/14_ic.avif" alt="IC" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/14_ic.avif" alt="IC" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/15_tce.avif" alt="TCE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/15_tce.avif" alt="TCE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/16_mu.avif" alt="MU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/16_mu.avif" alt="MU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/17_nyu.avif" alt="NYU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/17_nyu.avif" alt="NYU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <!-- Duplicate for infinite scroll -->
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/1_caixa.avif" alt="Caixa" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/1_caixa.avif" alt="Caixa" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/2_fgv.avif" alt="FGV" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/2_fgv.avif" alt="FGV" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/3_globo.avif" alt="Globo" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/3_globo.avif" alt="Globo" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/4_gp.avif" alt="GP" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/4_gp.avif" alt="GP" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/5_pda.avif" alt="PDA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/5_pda.avif" alt="PDA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/6_ias.avif" alt="IAS" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/6_ias.avif" alt="IAS" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/7_unimed.avif" alt="Unimed" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/7_unimed.avif" alt="Unimed" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/8_fiotec.avif" alt="Fiotec" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/8_fiotec.avif" alt="Fiotec" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/9_kla.avif" alt="KLA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/9_kla.avif" alt="KLA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/10_trw.avif" alt="TRW" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/10_trw.avif" alt="TRW" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/11_mdlz.avif" alt="MDLZ" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/11_mdlz.avif" alt="MDLZ" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/12_fe.avif" alt="FE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/12_fe.avif" alt="FE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/13_clba.avif" alt="CLBA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/13_clba.avif" alt="CLBA" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/14_ic.avif" alt="IC" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/14_ic.avif" alt="IC" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/15_tce.avif" alt="TCE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/15_tce.avif" alt="TCE" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/16_mu.avif" alt="MU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/16_mu.avif" alt="MU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                   <div class="flex-shrink-0 w-32 h-16 mx-6 flex items-center justify-center grayscale hover:grayscale-0 transition-all duration-300">
-                    <img src="https://audiotext.com.br/assets/logos/17_nyu.avif" alt="NYU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
+                    <img src="/assets/logos/17_nyu.avif" alt="NYU" class="max-h-full max-w-full object-contain" loading="lazy" decoding="async">
                   </div>
                 </div>
               </div>
@@ -998,7 +1011,7 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-6xl mx-auto">
             <!-- Card 1: Transcrição Profissional -->
-            <div class="card relative p-6">
+            <div class="card card-hoverable relative p-6">
               <span class="absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full badge-primary">MAIS PRECISA</span>
               <div class="space-y-5">
                 <svg class="icon h-12 w-12 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
@@ -1060,7 +1073,7 @@
             </div>
 
             <!-- Card 2: Degravação -->
-            <div class="card relative p-6">
+            <div class="card card-hoverable relative p-6">
               <span class="absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full badge-green">VALOR JURÍDICO</span>
               <div class="space-y-5">
                 <svg class="icon h-12 w-12 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
@@ -1122,7 +1135,7 @@
             </div>
 
             <!-- Card 3: Transcrição Automática -->
-            <div class="card relative p-6">
+            <div class="card card-hoverable relative p-6">
               <span class="absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full badge-blue">MAIS RÁPIDA</span>
               <div class="space-y-5">
                 <svg class="icon h-12 w-12 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
@@ -1184,7 +1197,7 @@
             </div>
 
             <!-- Card 4: Legendagem -->
-            <div class="card relative p-6">
+            <div class="card card-hoverable relative p-6">
               <span class="absolute top-4 right-4 text-xs font-semibold px-3 py-1 rounded-full badge-orange">ACESSIBILIDADE</span>
               <div class="space-y-5">
                 <svg class="icon h-12 w-12 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
@@ -1314,28 +1327,28 @@
           <!-- Numbers Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto mb-16">
             <!-- Stat 1: Experience -->
-            <div class="card p-6 text-center">
+            <div class="card card-stats p-6 text-center">
               <svg class="icon h-10 w-10 text-primary mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
               <p class="text-3xl font-bold text-primary mb-2">14 anos</p>
               <p class="text-sm font-medium text-foreground">De experiência no mercado</p>
               <p class="text-xs text-muted-foreground">Desde 2012</p>
             </div>
             <!-- Stat 2: Clients -->
-            <div class="card p-6 text-center">
+            <div class="card card-stats p-6 text-center">
               <svg class="icon h-10 w-10 text-primary mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               <p class="text-3xl font-bold text-primary mb-2">+15.000</p>
               <p class="text-sm font-medium text-foreground">Clientes atendidos</p>
               <p class="text-xs text-muted-foreground">Brasil e exterior</p>
             </div>
             <!-- Stat 3: Minutes -->
-            <div class="card p-6 text-center">
+            <div class="card card-stats p-6 text-center">
               <svg class="icon h-10 w-10 text-primary mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
               <p class="text-3xl font-bold text-primary mb-2">+2,5 milhões</p>
               <p class="text-sm font-medium text-foreground">De minutos transcritos</p>
               <p class="text-xs text-muted-foreground">Com precisão</p>
             </div>
             <!-- Stat 4: Security -->
-            <div class="card p-6 text-center">
+            <div class="card card-stats p-6 text-center">
               <svg class="icon h-10 w-10 text-primary mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
               <p class="text-3xl font-bold text-primary mb-2">Zero</p>
               <p class="text-sm font-medium text-foreground">Incidentes de confidencialidade</p>
@@ -1499,7 +1512,7 @@
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <!-- Pillar 1: Delivery Capacity -->
-            <div class="card p-6">
+            <div class="card card-stats p-6">
               <div class="flex items-start gap-4">
                 <div class="bg-primary-10 p-3 rounded-lg flex-shrink-0">
                   <svg class="icon h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
@@ -1520,7 +1533,7 @@
             </div>
 
             <!-- Pillar 2: Smart Pricing -->
-            <div class="card p-6">
+            <div class="card card-stats p-6">
               <div class="flex items-start gap-4">
                 <div class="bg-primary-10 p-3 rounded-lg flex-shrink-0">
                   <svg class="icon h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
@@ -1542,7 +1555,7 @@
             </div>
 
             <!-- Pillar 3: Accurate Transcriptions -->
-            <div class="card p-6">
+            <div class="card card-stats p-6">
               <div class="flex items-start gap-4">
                 <div class="bg-primary-10 p-3 rounded-lg flex-shrink-0">
                   <svg class="icon h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
@@ -1562,7 +1575,7 @@
             </div>
 
             <!-- Pillar 4: Confidentiality -->
-            <div class="card p-6">
+            <div class="card card-stats p-6">
               <div class="flex items-start gap-4">
                 <div class="bg-primary-10 p-3 rounded-lg flex-shrink-0">
                   <svg class="icon h-8 w-8 text-primary" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/></svg>
@@ -1593,7 +1606,7 @@
             </h2>
             <!-- 5-star badge -->
             <div class="inline-flex flex-col items-center gap-1 bg-amber-100 text-amber-800 px-6 py-3 rounded-lg">
-              <div class="flex gap-1">
+              <div class="flex gap-0.5">
                 <svg class="h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 <svg class="h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 <svg class="h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1608,7 +1621,7 @@
           <!-- Featured testimonial -->
           <div class="card max-w-3xl mx-auto mb-12 border-2 border-primary-20 testimonial-featured">
             <div class="pt-8 pb-8 px-8">
-              <div class="flex gap-1 mb-4 justify-center">
+              <div class="flex gap-0.5 mb-4 justify-center">
                 <svg class="h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 <svg class="h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 <svg class="h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1641,7 +1654,7 @@
             <div class="grid md:grid-cols-2 gap-4">
               <div class="card border-2 border-primary-10">
                 <div class="pt-4 pb-4 px-4">
-                  <div class="flex gap-1 mb-3">
+                  <div class="flex gap-0.5 mb-3">
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1654,7 +1667,7 @@
               </div>
               <div class="card border-2 border-primary-10">
                 <div class="pt-4 pb-4 px-4">
-                  <div class="flex gap-1 mb-3">
+                  <div class="flex gap-0.5 mb-3">
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1667,7 +1680,7 @@
               </div>
               <div class="card border-2 border-primary-10">
                 <div class="pt-4 pb-4 px-4">
-                  <div class="flex gap-1 mb-3">
+                  <div class="flex gap-0.5 mb-3">
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -1680,7 +1693,7 @@
               </div>
               <div class="card border-2 border-primary-10">
                 <div class="pt-4 pb-4 px-4">
-                  <div class="flex gap-1 mb-3">
+                  <div class="flex gap-0.5 mb-3">
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                     <svg class="h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
@@ -2015,7 +2028,7 @@
         <div class="border-t mt-12 pt-8 text-center max-w-4xl mx-auto">
           <!-- Logo -->
           <div class="flex justify-center mb-4">
-            <img src="https://audiotext.com.br/assets/audiotext-logo.avif" alt="Audiotext" class="h-8" loading="lazy" decoding="async">
+            <img src="/assets/audiotext-logo.avif" alt="Audiotext" class="h-8" loading="lazy" decoding="async">
           </div>
 
           <!-- Company Info -->
@@ -2181,7 +2194,7 @@
         return `
           <div class="card bg-card border shadow-sm ${hiddenClass}">
             <div class="pt-4 pb-4 px-4">
-              <div class="flex gap-1 mb-3">
+              <div class="flex gap-0.5 mb-3">
                 ${starSVG()}${starSVG()}${starSVG()}${starSVG()}${starSVG()}
               </div>
               <p class="text-muted-foreground text-sm mb-3">"${review.content}"</p>
