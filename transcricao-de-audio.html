@@ -3,204 +3,374 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
-  
-  <!-- Google Tag Manager - HIGH in <head> -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-K8PJKT6');</script>
-  <!-- End Google Tag Manager -->
-  
-  <!-- SEO Meta Tags -->
   <title>Transcrição de Áudio | Audiotext</title>
   <meta name="title" content="Transcrição de Áudio | Audiotext">
   <meta name="description" content="Transcrição de áudio profissional com precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Para advogados, pesquisadores e empresas. Desde 2012, +2 milhões de minutos transcritos.">
   <meta name="keywords" content="transcrição de áudio, transcrição humana, transcrição profissional, transcrição jurídica, transcrição acadêmica, transcrição de entrevistas, transcrição de audiências, transcrição ipsis litteris">
-  <meta name="robots" content="index, follow">
-  
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://audiotext.com.br/transcricao-de-audio/">
-  
-  <!-- Open Graph -->
+  <meta name="robots" content="index, follow">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Audiotext">
   <meta property="og:url" content="https://audiotext.com.br/transcricao-de-audio/">
   <meta property="og:title" content="Transcrição de Áudio | Audiotext">
   <meta property="og:description" content="Precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Desde 2012.">
-  <meta property="og:locale" content="pt_BR">
-  
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Transcrição de Áudio | Audiotext">
   <meta name="twitter:description" content="Precisão próxima a 100%. Para advogados, pesquisadores e empresas.">
-  
-  <!-- Theme Color -->
-  <meta name="theme-color" content="#304e73">
-  
-  <!-- Preconnect for GTM -->
-  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
-  <link rel="preconnect" href="https://www.googletagmanager.com">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
-  <link rel="manifest" href="/manifest.json">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            border: 'hsl(220, 13%, 91%)',
-            background: 'hsl(0, 0%, 100%)',
-            foreground: 'hsl(222.2, 47%, 11%)',
-            primary: { DEFAULT: 'hsl(218, 40%, 29%)', foreground: 'hsl(0, 0%, 100%)' },
-            secondary: { DEFAULT: 'hsl(218, 20%, 20%)', foreground: 'hsl(0, 0%, 100%)' },
-            muted: { DEFAULT: 'hsl(220, 13%, 95%)', foreground: 'hsl(220, 9%, 46%)' },
-            card: { DEFAULT: 'hsl(0, 0%, 100%)', foreground: 'hsl(222.2, 47%, 11%)' },
-            destructive: { DEFAULT: 'hsl(0, 84%, 60%)' },
-          },
-        },
-      },
-    }
-  </script>
+  <meta name="theme-color" content="#3B82F6">
+  <link rel="icon" href="/favicon.ico">
   <style>
+    /* === CSS Reset & Base === */
+    *, *::before, *::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: hsl(220, 13%, 91%); }
+    html { line-height: 1.5; -webkit-text-size-adjust: 100%; tab-size: 4; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; }
+    body { margin: 0; line-height: inherit; }
+    h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+    a { color: inherit; text-decoration: inherit; }
+    b, strong { font-weight: bolder; }
+    button, input, optgroup, select, textarea { font-family: inherit; font-size: 100%; font-weight: inherit; line-height: inherit; color: inherit; margin: 0; padding: 0; }
+    button, [type='button'], [type='reset'], [type='submit'] { -webkit-appearance: button; background-color: transparent; background-image: none; }
+    button { cursor: pointer; }
+    ::-webkit-inner-spin-button, ::-webkit-outer-spin-button { height: auto; }
+    ::-webkit-search-decoration { -webkit-appearance: none; }
+    ::-webkit-file-upload-button { -webkit-appearance: button; font: inherit; }
+    table { text-indent: 0; border-color: inherit; border-collapse: collapse; }
+    img, svg, video, canvas, audio, iframe, embed, object { display: block; vertical-align: middle; }
+    img, video { max-width: 100%; height: auto; }
+    ul, ol { list-style: none; margin: 0; padding: 0; }
+    p { margin: 0; }
+
+    /* === CSS Variables (Design Tokens) === */
+    :root {
+      --background: 0 0% 100%;
+      --foreground: 222.2 47% 11%;
+      --card: 0 0% 100%;
+      --card-foreground: 222.2 47% 11%;
+      --primary: 218 40% 29%;
+      --primary-foreground: 0 0% 100%;
+      --secondary: 218 20% 20%;
+      --secondary-foreground: 0 0% 100%;
+      --muted: 220 13% 95%;
+      --muted-foreground: 220 9% 46%;
+      --destructive: 0 84% 60%;
+      --border: 220 13% 91%;
+      --ring: 217 91% 60%;
+      --radius: 0.75rem;
+    }
+
+    /* === Base Styles === */
+    body { background-color: hsl(var(--background)); color: hsl(var(--foreground)); }
+    
+    /* === Utility Classes === */
+    /* Display */
+    .block { display: block; }
+    .inline-flex { display: inline-flex; }
+    .flex { display: flex; }
+    .grid { display: grid; }
+    .hidden { display: none; }
+    
+    /* Flexbox */
+    .flex-col { flex-direction: column; }
+    .flex-row { flex-direction: row; }
+    .flex-shrink-0 { flex-shrink: 0; }
+    .flex-1 { flex: 1 1 0%; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-0\.5 { gap: 0.125rem; }
+    .gap-1 { gap: 0.25rem; }
+    .gap-2 { gap: 0.5rem; }
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    .gap-8 { gap: 2rem; }
+    
+    /* Sizing */
+    .w-full { width: 100%; }
+    .w-6 { width: 1.5rem; }
+    .w-8 { width: 2rem; }
+    .w-32 { width: 8rem; }
+    .w-auto { width: auto; }
+    .h-3 { height: 0.75rem; }
+    .w-3 { width: 0.75rem; }
+    .h-4 { height: 1rem; }
+    .w-4 { width: 1rem; }
+    .h-5 { height: 1.25rem; }
+    .w-5 { width: 1.25rem; }
+    .h-6 { height: 1.5rem; }
+    .h-8 { height: 2rem; }
+    .h-10 { height: 2.5rem; }
+    .w-10 { width: 2.5rem; }
+    .h-12 { height: 3rem; }
+    .w-12 { width: 3rem; }
+    .h-16 { height: 4rem; }
+    .min-h-screen { min-height: 100vh; }
+    .min-h-\[56px\] { min-height: 56px; }
+    .max-w-xl { max-width: 36rem; }
+    .max-w-2xl { max-width: 42rem; }
+    .max-w-3xl { max-width: 48rem; }
+    .max-w-4xl { max-width: 56rem; }
+    .max-w-5xl { max-width: 64rem; }
+    .max-w-6xl { max-width: 72rem; }
+    .max-w-md { max-width: 28rem; }
+    .max-h-full { max-height: 100%; }
+    .max-w-full { max-width: 100%; }
+    .max-h-\[700px\] { max-height: 700px; }
+    .h-\[90vh\] { height: 90vh; }
+    
+    /* Spacing */
+    .p-2 { padding: 0.5rem; }
+    .p-3 { padding: 0.75rem; }
+    .p-4 { padding: 1rem; }
+    .p-6 { padding: 1.5rem; }
+    .p-8 { padding: 2rem; }
+    .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+    .px-8 { padding-left: 2rem; padding-right: 2rem; }
+    .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+    .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+    .py-6 { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+    .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .pt-0 { padding-top: 0; }
+    .pt-4 { padding-top: 1rem; }
+    .pt-8 { padding-top: 2rem; }
+    .pb-4 { padding-top: 1rem; }
+    .pb-4 { padding-bottom: 1rem; }
+    .mb-1 { margin-bottom: 0.25rem; }
+    .mb-2 { margin-bottom: 0.5rem; }
+    .mb-3 { margin-bottom: 0.75rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mb-16 { margin-bottom: 4rem; }
+    .mt-0\.5 { margin-top: 0.125rem; }
+    .mt-1 { margin-top: 0.25rem; }
+    .mt-4 { margin-top: 1rem; }
+    .mt-6 { margin-top: 1.5rem; }
+    .mt-8 { margin-top: 2rem; }
+    .mt-12 { margin-top: 3rem; }
+    .mt-16 { margin-top: 4rem; }
+    .mx-auto { margin-left: auto; margin-right: auto; }
+    .mx-6 { margin-left: 1.5rem; margin-right: 1.5rem; }
+    .space-y-1 > * + * { margin-top: 0.25rem; }
+    .space-y-1\.5 > * + * { margin-top: 0.375rem; }
+    .space-y-2 > * + * { margin-top: 0.5rem; }
+    .space-y-3 > * + * { margin-top: 0.75rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-6 > * + * { margin-top: 1.5rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    
+    /* Position */
+    .relative { position: relative; }
+    .absolute { position: absolute; }
+    .fixed { position: fixed; }
+    .sticky { position: sticky; }
+    .inset-0 { top: 0; right: 0; bottom: 0; left: 0; }
+    .top-0 { top: 0; }
+    .bottom-6 { bottom: 1.5rem; }
+    .right-6 { right: 1.5rem; }
+    .-top-4 { top: -1rem; }
+    .left-1\/2 { left: 50%; }
+    .-translate-x-1\/2 { transform: translateX(-50%); }
+    
+    /* Z-Index */
+    .z-40 { z-index: 40; }
+    .z-50 { z-index: 50; }
+    
+    /* Typography */
+    .text-xs { font-size: 0.75rem; line-height: 1rem; }
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-base { font-size: 1rem; line-height: 1.5rem; }
+    .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+    .text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+    .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+    .text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+    .text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+    .font-medium { font-weight: 500; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .leading-none { line-height: 1; }
+    .leading-relaxed { line-height: 1.625; }
+    .tracking-tight { letter-spacing: -0.025em; }
+    .tracking-wider { letter-spacing: 0.05em; }
+    .uppercase { text-transform: uppercase; }
+    .italic { font-style: italic; }
+    .underline { text-decoration-line: underline; }
+    .text-left { text-align: left; }
+    .text-center { text-align: center; }
+    .whitespace-nowrap { white-space: nowrap; }
+    
+    /* Colors */
+    .text-foreground { color: hsl(var(--foreground)); }
+    .text-primary { color: hsl(var(--primary)); }
+    .text-primary-foreground { color: hsl(var(--primary-foreground)); }
+    .text-muted-foreground { color: hsl(var(--muted-foreground)); }
+    .text-card-foreground { color: hsl(var(--card-foreground)); }
+    .text-destructive { color: hsl(var(--destructive)); }
+    .text-amber-500 { color: rgb(245, 158, 11); }
+    .text-amber-800 { color: rgb(146, 64, 14); }
+    .text-white { color: white; }
+    .text-black { color: black; }
+    .text-green-500 { color: rgb(34, 197, 94); }
+    
+    .bg-background { background-color: hsl(var(--background)); }
+    .bg-primary { background-color: hsl(var(--primary)); }
+    .bg-card { background-color: hsl(var(--card)); }
+    .bg-muted { background-color: hsl(var(--muted)); }
+    .bg-white { background-color: white; }
+    .bg-black\/50 { background-color: rgba(0, 0, 0, 0.5); }
+    .bg-black\/55 { background-color: rgba(0, 0, 0, 0.55); }
+    .bg-green-500 { background-color: rgb(34, 197, 94); }
+    .bg-green-600 { background-color: rgb(22, 163, 74); }
+    .bg-amber-100 { background-color: rgb(254, 243, 199); }
+    .bg-amber-500 { background-color: rgb(245, 158, 11); }
+    .bg-gray-50 { background-color: rgb(249, 250, 251); }
+    .bg-background\/95 { background-color: hsla(var(--background), 0.95); }
+    .bg-muted\/30 { background-color: hsla(var(--muted), 0.3); }
+    .bg-muted\/50 { background-color: hsla(var(--muted), 0.5); }
+    .bg-primary\/5 { background-color: hsla(var(--primary), 0.05); }
+    .bg-primary\/10 { background-color: hsla(var(--primary), 0.1); }
+    .bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
+    .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
+    .from-background { --tw-gradient-from: hsl(var(--background)); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, hsla(var(--background), 0)); }
+    .from-card { --tw-gradient-from: hsl(var(--card)); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, hsla(var(--card), 0)); }
+    .to-muted\/30 { --tw-gradient-to: hsla(var(--muted), 0.3); }
+    .to-primary\/5 { --tw-gradient-to: hsla(var(--primary), 0.05); }
+    
+    .fill-amber-500 { fill: rgb(245, 158, 11); }
+    
+    /* Borders */
+    .border { border-width: 1px; }
+    .border-2 { border-width: 2px; }
+    .border-t { border-top-width: 1px; }
+    .border-b { border-bottom-width: 1px; }
+    .border-y { border-top-width: 1px; border-bottom-width: 1px; }
+    .border-l-4 { border-left-width: 4px; }
+    .border-0 { border-width: 0; }
+    .border-input { border-color: hsl(var(--border)); }
+    .border-border { border-color: hsl(var(--border)); }
+    .border-primary { border-color: hsl(var(--primary)); }
+    .border-primary\/10 { border-color: hsla(var(--primary), 0.1); }
+    .border-primary\/20 { border-color: hsla(var(--primary), 0.2); }
+    .border-black { border-color: black; }
+    .rounded-md { border-radius: 0.375rem; }
+    .rounded-lg { border-radius: var(--radius); }
+    .rounded-xl { border-radius: 0.75rem; }
+    .rounded-full { border-radius: 9999px; }
+    
+    /* Shadows */
+    .shadow-sm { box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); }
+    .shadow-lg { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+    .shadow-xl { box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04); }
+    
+    /* Effects */
+    .opacity-80 { opacity: 0.8; }
+    .opacity-90 { opacity: 0.9; }
+    .grayscale { filter: grayscale(100%); }
+    .backdrop-blur { backdrop-filter: blur(8px); }
+    .backdrop-blur-sm { backdrop-filter: blur(4px); }
+    .object-contain { object-fit: contain; }
+    .overflow-hidden { overflow: hidden; }
+    .overflow-x-auto { overflow-x: auto; }
+    .shrink-0 { flex-shrink: 0; }
+    .touch-manipulation { touch-action: manipulation; }
+    
+    /* Transitions */
+    .transition-colors { transition-property: color, background-color, border-color; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .transition-shadow { transition-property: box-shadow; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .transition-all { transition-property: all; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .transition-transform { transition-property: transform; transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1); transition-duration: 150ms; }
+    .duration-200 { transition-duration: 200ms; }
+    .duration-300 { transition-duration: 300ms; }
+    
+    /* Outline/Focus */
+    .ring-offset-background { --tw-ring-offset-color: hsl(var(--background)); }
+    .focus-visible\:outline-none:focus-visible { outline: 2px solid transparent; outline-offset: 2px; }
+    .focus-visible\:ring-2:focus-visible { box-shadow: 0 0 0 2px var(--tw-ring-offset-color), 0 0 0 4px hsl(var(--ring)); }
+    .focus-visible\:ring-ring:focus-visible { --tw-ring-color: hsl(var(--ring)); }
+    .focus-visible\:ring-offset-2:focus-visible { --tw-ring-offset-width: 2px; }
+    
+    /* Pointer Events */
+    .disabled\:pointer-events-none:disabled { pointer-events: none; }
+    .disabled\:opacity-50:disabled { opacity: 0.5; }
+    
+    /* Hover States */
+    .hover\:bg-primary\/90:hover { background-color: hsla(var(--primary), 0.9); }
+    .hover\:bg-accent:hover { background-color: hsl(var(--muted)); }
+    .hover\:text-accent-foreground:hover { color: hsl(var(--foreground)); }
+    .hover\:bg-muted:hover { background-color: hsl(var(--muted)); }
+    .hover\:bg-green-600:hover { background-color: rgb(22, 163, 74); }
+    .hover\:bg-gray-50:hover { background-color: rgb(249, 250, 251); }
+    .hover\:text-foreground:hover { color: hsl(var(--foreground)); }
+    .hover\:text-primary\/80:hover { color: hsla(var(--primary), 0.8); }
+    .hover\:underline:hover { text-decoration-line: underline; }
+    .hover\:shadow-lg:hover { box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+    .hover\:grayscale-0:hover { filter: grayscale(0); }
+    
+    /* Container */
+    .container { width: 100%; margin-left: auto; margin-right: auto; padding-left: 1rem; padding-right: 1rem; }
+    @media (min-width: 640px) { .container { max-width: 640px; } }
+    @media (min-width: 768px) { .container { max-width: 768px; } }
+    @media (min-width: 1024px) { .container { max-width: 1024px; } }
+    @media (min-width: 1280px) { .container { max-width: 1280px; } }
+    @media (min-width: 1400px) { .container { max-width: 1400px; } }
+
+    /* Grid */
+    .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    
+    /* Responsive: sm (640px) */
+    @media (min-width: 640px) {
+      .sm\:w-auto { width: auto; }
+      .sm\:flex-row { flex-direction: row; }
+      .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    /* Responsive: md (768px) */
+    @media (min-width: 768px) {
+      .md\:block { display: block; }
+      .md\:hidden { display: none; }
+      .md\:flex-row { flex-direction: row; }
+      .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .md\:py-32 { padding-top: 8rem; padding-bottom: 8rem; }
+      .md\:text-xl { font-size: 1.25rem; line-height: 1.75rem; }
+      .md\:text-2xl { font-size: 1.5rem; line-height: 2rem; }
+      .md\:text-3xl { font-size: 1.875rem; line-height: 2.25rem; }
+      .md\:text-4xl { font-size: 2.25rem; line-height: 2.5rem; }
+      .md\:text-6xl { font-size: 3.75rem; line-height: 1; }
+    }
+
+    /* Responsive: lg (1024px) */
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .lg\:grid-cols-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    }
+
+    /* Logo Carousel Animation */
     @keyframes scroll-logos { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
     .animate-scroll-logos { animation: scroll-logos 20s linear infinite; }
     @media (min-width: 768px) { .animate-scroll-logos { animation: scroll-logos 36s linear infinite; } }
     @media (prefers-reduced-motion: reduce) { .animate-scroll-logos { animation: none; } }
-    .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
-    .accordion-content.open { max-height: 1000px; }
-    .accordion-trigger.open svg { transform: rotate(180deg); }
+
+    /* Modal Styles */
     .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
     .modal-overlay.open { opacity: 1; visibility: visible; }
+    
+    /* FAQ Styles */
+    .faq-content { transition: max-height 0.3s ease-out; }
+    
+    /* Icon Styles */
+    .lucide { width: 1em; height: 1em; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; fill: none; }
   </style>
-  <!-- JSON-LD Schemas -->
-  
-  <!-- WebSite Schema with SearchAction -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": "https://audiotext.com.br/#website",
-    "url": "https://audiotext.com.br",
-    "name": "Audiotext",
-    "description": "Transcrição de áudio profissional com IA e humana",
-    "publisher": {
-      "@id": "https://audiotext.com.br/#organization"
-    },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://audiotext.com.br/?s={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-
-  <!-- Organization Schema - EXPANDED -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": "https://audiotext.com.br/#organization",
-    "name": "Audiotext",
-    "legalName": "Audiotext Serviços e Cia Ltda",
-    "alternateName": "Audiotext",
-    "url": "https://audiotext.com.br",
-    "logo": "https://audiotext.com.br/assets/audiotext-logo.avif",
-    "description": "Empresa especializada em transcrição de áudio profissional, degravação jurídica e transcrição automática com IA. 14 anos de experiência, +15 mil clientes.",
-    "foundingDate": "2012",
-    "taxID": "17.429.373/0001-85",
-    "email": "falecom@audiotext.com.br",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Rua Buenos Aires, 73",
-      "addressLocality": "Curitiba",
-      "addressRegion": "PR",
-      "postalCode": "80250-070",
-      "addressCountry": "BR"
-    },
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "telephone": "+55-41-3363-3220",
-        "contactType": "customer service",
-        "areaServed": "BR",
-        "availableLanguage": ["pt-BR"]
-      },
-      {
-        "@type": "ContactPoint",
-        "telephone": "+55-41-99799-0622",
-        "contactType": "customer service",
-        "contactOption": "TollFree",
-        "areaServed": "BR",
-        "availableLanguage": ["pt-BR"]
-      }
-    ],
-    "openingHoursSpecification": {
-      "@type": "OpeningHoursSpecification",
-      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-      "opens": "09:00",
-      "closes": "18:00"
-    },
-    "sameAs": [
-      "https://www.facebook.com/audiotext",
-      "https://www.instagram.com/audiotext.transcricao",
-      "https://www.linkedin.com/company/audiotext",
-      "https://www.youtube.com/audiotexttranscricaoedegravacao"
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "36",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
-  }
-  </script>
-
-  <!-- WebPage Schema - EXPANDED -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": "https://audiotext.com.br/transcricao-de-audio/#webpage",
-    "url": "https://audiotext.com.br/transcricao-de-audio/",
-    "name": "Transcrição de Áudio Profissional",
-    "description": "Transcrição de áudio profissional com precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Para advogados, pesquisadores e empresas.",
-    "inLanguage": "pt-BR",
-    "isPartOf": {
-      "@type": "WebSite",
-      "@id": "https://audiotext.com.br/#website"
-    },
-    "about": {
-      "@id": "https://audiotext.com.br/transcricao-de-audio/#service"
-    },
-    "datePublished": "2024-01-15",
-    "dateModified": "2026-01-26",
-    "breadcrumb": {
-      "@id": "https://audiotext.com.br/transcricao-de-audio/#breadcrumb"
-    },
-    "potentialAction": [{
-      "@type": "ReadAction",
-      "target": ["https://audiotext.com.br/transcricao-de-audio/"]
-    }]
-  }
-  </script>
-
-  <!-- Service Schema -->
+  <!-- JSON-LD Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
-    "@id": "https://audiotext.com.br/transcricao-de-audio/#service",
     "name": "Transcrição de Áudio",
     "provider": {
       "@type": "Organization",
@@ -212,153 +382,14 @@
     "serviceType": "Human Transcription",
     "offers": {
       "@type": "Offer",
-      "priceRange": "R$ 2,00 - R$ 5,50 por minuto",
-      "priceCurrency": "BRL",
-      "availability": "https://schema.org/InStock"
+      "priceRange": "R$ 2,00 - R$ 5,50 por minuto"
     }
   }
   </script>
-
-  <!-- HowTo Schema - Como Funciona Transcrição -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "HowTo",
-    "name": "Como funciona a transcrição de áudio profissional",
-    "description": "Transcreva áudio para texto com transcrição humana profissional em 4 passos simples",
-    "totalTime": "P2D",
-    "estimatedCost": {
-      "@type": "MonetaryAmount",
-      "currency": "BRL",
-      "value": "150"
-    },
-    "tool": [
-      {
-        "@type": "HowToTool",
-        "name": "Plataforma Audiotext"
-      }
-    ],
-    "step": [
-      {
-        "@type": "HowToStep",
-        "position": 1,
-        "name": "Envio do áudio",
-        "text": "Envie seus arquivos de áudio pelo formulário de orçamento. Aceitamos todos os formatos: MP3, WAV, M4A, WhatsApp. Upload com criptografia e sigilo absoluto.",
-        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
-      },
-      {
-        "@type": "HowToStep",
-        "position": 2,
-        "name": "Transcrição profissional",
-        "text": "Nossa equipe de transcritores especializados transcreve seu áudio palavra por palavra. Identificação de falantes, marcação de tempo e formatação profissional incluídas.",
-        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
-      },
-      {
-        "@type": "HowToStep",
-        "position": 3,
-        "name": "Revisão obrigatória",
-        "text": "Todo arquivo é revisado por um segundo profissional independente. Garantia de precisão próxima a 100% em cada transcrição.",
-        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
-      },
-      {
-        "@type": "HowToStep",
-        "position": 4,
-        "name": "Entrega",
-        "text": "Receba sua transcrição em DOCX editável e PDF pronto para uso. Formatação profissional, revisada e pronta para impressão ou edição.",
-        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
-      }
-    ]
-  }
-  </script>
-
-  <!-- Product Schema -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "Transcrição de Áudio Profissional",
-    "description": "Transcrição de áudio para texto com precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Identificação de falantes, marcação de tempo, formatação profissional.",
-    "sku": "AUDIOTEXT-TRA-001",
-    "mpn": "ATRA-001",
-    "category": "Software > Business Software > Transcription Services > Professional Transcription",
-    "brand": {
-      "@type": "Brand",
-      "name": "Audiotext"
-    },
-    "offers": {
-      "@type": "AggregateOffer",
-      "url": "https://audiotext.com.br/transcricao-de-audio/",
-      "priceCurrency": "BRL",
-      "lowPrice": "2.00",
-      "highPrice": "5.50",
-      "offerCount": "1",
-      "availability": "https://schema.org/InStock",
-      "priceValidUntil": "2026-12-31",
-      "seller": {
-        "@type": "Organization",
-        "name": "Audiotext"
-      }
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "bestRating": "5",
-      "worstRating": "1",
-      "reviewCount": "36"
-    },
-    "review": [
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "José Eduardo Kinchen"
-        },
-        "reviewBody": "Atendimento excelente, entrega rápida e trabalho de qualidade. Recomendo!",
-        "datePublished": "2025-12-15"
-      },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Julio Graziani"
-        },
-        "reviewBody": "Um atendimento sem igual, eles priorizam o cliente, e o trabalho é fantástico. Recomendo demais.",
-        "datePublished": "2025-11-20"
-      },
-      {
-        "@type": "Review",
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "author": {
-          "@type": "Person",
-          "name": "Andréa van Herk"
-        },
-        "reviewBody": "Excelente trabalho! Comprometido, dentro do prazo, com atendimento de excelência! Gostei muito.",
-        "datePublished": "2025-12-10"
-      }
-    ]
-  }
-  </script>
-
-  <!-- BreadcrumbList Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    "@id": "https://audiotext.com.br/transcricao-de-audio/#breadcrumb",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Audiotext", "item": "https://audiotext.com.br/" },
       { "@type": "ListItem", "position": 2, "name": "Transcrição de Áudio", "item": "https://audiotext.com.br/transcricao-de-audio/" }
@@ -368,16 +399,11 @@
 </head>
 <body class="min-h-screen bg-background text-foreground flex flex-col">
 
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8PJKT6"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
   <!-- Header -->
   <header class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur">
     <div class="container mx-auto flex h-16 items-center justify-between px-4">
       <div class="flex items-center gap-2 flex-shrink-0">
-        <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" width="200" height="50" loading="eager" class="h-8 w-auto flex-shrink-0" decoding="async">
+        <img src="/src/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="h-8 w-auto flex-shrink-0" loading="lazy" decoding="async">
       </div>
       <nav class="flex items-center gap-4" aria-label="Navegação principal">
         <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header-transcricao-profissional" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
@@ -413,19 +439,19 @@
           <!-- 3 Bullets -->
           <div class="flex flex-col gap-4 max-w-2xl mx-auto text-left">
             <div class="flex items-start gap-3">
-              <i data-lucide="check-circle" class="h-6 w-6 text-primary shrink-0 mt-0.5"></i>
+              <svg class="lucide h-6 w-6 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <span class="text-lg">
                 IA erra em termos técnicos → Humanos acertam com precisão próxima a 100%
               </span>
             </div>
             <div class="flex items-start gap-3">
-              <i data-lucide="check-circle" class="h-6 w-6 text-primary shrink-0 mt-0.5"></i>
+              <svg class="lucide h-6 w-6 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <span class="text-lg">
                 IA não entende contexto → Transcritores especialistas no tema do seu projeto
               </span>
             </div>
             <div class="flex items-start gap-3">
-              <i data-lucide="check-circle" class="h-6 w-6 text-primary shrink-0 mt-0.5"></i>
+              <svg class="lucide h-6 w-6 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <span class="text-lg">
                 IA inventa conteúdo → Transcritores marcam incertezas, não "criam" informação
               </span>
@@ -440,7 +466,7 @@
           <!-- Privacy box -->
           <div class="bg-muted/50 border rounded-lg p-4 max-w-xl mx-auto">
             <div class="flex items-center gap-2 justify-center mb-2">
-              <i data-lucide="shield" class="h-5 w-5 text-primary"></i>
+              <svg class="lucide h-5 w-5 text-primary" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <span class="font-semibold">SIGILO E CONFIDENCIALIDADE</span>
             </div>
             <p class="text-sm text-muted-foreground">
@@ -604,13 +630,13 @@
                 <td class="p-4 font-medium">Termos técnicos</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-destructive">
-                    <i data-lucide="x" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     <span class="text-sm">Pode errar 30%</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">Precisão próxima a 100%</span>
                   </div>
                 </td>
@@ -619,13 +645,13 @@
                 <td class="p-4 font-medium">Contexto/ambiguidade</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-destructive">
-                    <i data-lucide="x" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     <span class="text-sm">Não entende</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">Especialista analisa</span>
                   </div>
                 </td>
@@ -634,13 +660,13 @@
                 <td class="p-4 font-medium">Sotaques/áudio ruim</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-destructive">
-                    <i data-lucide="x" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     <span class="text-sm">Falha muito</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">Transcritor decifra</span>
                   </div>
                 </td>
@@ -649,13 +675,13 @@
                 <td class="p-4 font-medium">Nomes próprios</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-destructive">
-                    <i data-lucide="x" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     <span class="text-sm">Inventa nomes</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">Pesquisamos se necessário</span>
                   </div>
                 </td>
@@ -664,13 +690,13 @@
                 <td class="p-4 font-medium">Sigilo/confidencialidade</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-amber-500">
-                    <i data-lucide="alert-triangle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     <span class="text-sm">Servidores de IA</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">NDA + exclusão garantida</span>
                   </div>
                 </td>
@@ -679,13 +705,13 @@
                 <td class="p-4 font-medium">Uso jurídico/acadêmico</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-destructive">
-                    <i data-lucide="x" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     <span class="text-sm">Pouco aceito</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">Aceito em processos/pesquisas</span>
                   </div>
                 </td>
@@ -694,13 +720,13 @@
                 <td class="p-4 font-medium">Tempo de revisão sua</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-amber-500">
-                    <i data-lucide="alert-triangle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     <span class="text-sm">3-5 horas</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">Zero (já revisado)</span>
                   </div>
                 </td>
@@ -709,13 +735,13 @@
                 <td class="p-4 font-medium">Custo</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">R$ 0,30/min</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-amber-500">
-                    <i data-lucide="alert-triangle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     <span class="text-sm">R$ 2,00-5,50/min</span>
                   </div>
                 </td>
@@ -724,13 +750,13 @@
                 <td class="p-4 font-medium">Velocidade</td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-primary">
-                    <i data-lucide="check-circle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                     <span class="text-sm">Minutos</span>
                   </div>
                 </td>
                 <td class="p-4 text-center">
                   <div class="inline-flex items-center gap-2 text-amber-500">
-                    <i data-lucide="alert-triangle" class="h-4 w-4"></i>
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
                     <span class="text-sm">24-96h</span>
                   </div>
                 </td>
@@ -795,7 +821,7 @@
           <div class="relative rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">1</div>
             <div class="flex flex-col space-y-1.5 p-6 pt-8 text-center">
-              <i data-lucide="shield" class="h-12 w-12 mx-auto text-primary mb-4"></i>
+              <svg class="lucide h-12 w-12 mx-auto text-primary mb-4" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight">Upload Seguro</h3>
             </div>
             <div class="p-6 pt-0">
@@ -804,15 +830,15 @@
               </p>
               <ul class="text-sm space-y-2">
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check-circle" class="h-4 w-4 text-primary"></i>
+                  <svg class="lucide h-4 w-4 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   Ágil e 100% online
                 </li>
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check-circle" class="h-4 w-4 text-primary"></i>
+                  <svg class="lucide h-4 w-4 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   Envio seguro
                 </li>
                 <li class="flex items-center gap-2">
-                  <i data-lucide="check-circle" class="h-4 w-4 text-primary"></i>
+                  <svg class="lucide h-4 w-4 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                   Termo de sigilo (NDA) quando necessário
                 </li>
               </ul>
@@ -826,7 +852,7 @@
           <div class="relative rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">2</div>
             <div class="flex flex-col space-y-1.5 p-6 pt-8 text-center">
-              <i data-lucide="users" class="h-12 w-12 mx-auto text-primary mb-4"></i>
+              <svg class="lucide h-12 w-12 mx-auto text-primary mb-4" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight">Transcrição + Revisão Especializada</h3>
             </div>
             <div class="p-6 pt-0">
@@ -853,7 +879,7 @@
           <div class="relative rounded-lg border bg-card text-card-foreground shadow-sm">
             <div class="absolute -top-4 left-1/2 -translate-x-1/2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center font-bold">3</div>
             <div class="flex flex-col space-y-1.5 p-6 pt-8 text-center">
-              <i data-lucide="file-check" class="h-12 w-12 mx-auto text-primary mb-4"></i>
+              <svg class="lucide h-12 w-12 mx-auto text-primary mb-4" viewBox="0 0 24 24"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><path d="m9 15 2 2 4-4"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight">Entrega no Prazo Escolhido</h3>
             </div>
             <div class="p-6 pt-0">
@@ -874,7 +900,7 @@
               </p>
               <a href="/assets/S1994 - José Saramago no Jornal da Globo.pdf" target="_blank" rel="noopener noreferrer" aria-label="Ver exemplo de transcrição em PDF" class="inline-flex items-center gap-2 mt-4 text-base font-semibold text-primary hover:text-primary/80 hover:underline transition-colors">
                 📄 Veja um exemplo de transcrição AQUI
-                <i data-lucide="external-link" class="h-4 w-4"></i>
+                <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
               </a>
             </div>
           </div>
@@ -905,7 +931,7 @@
           <!-- Use Case 1: Advogados -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex flex-col space-y-1.5 p-6">
-              <i data-lucide="scale" class="h-10 w-10 text-primary mb-2"></i>
+              <svg class="lucide h-10 w-10 text-primary mb-2" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">Advogados e Escritórios de Advocacia</h3>
             </div>
             <div class="p-6 pt-0 space-y-4">
@@ -916,10 +942,10 @@
               <div>
                 <p class="text-sm font-medium mb-1">Por que humano:</p>
                 <ul class="text-sm text-muted-foreground space-y-1">
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Ipsis Litteris aceito em processo judicial</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Termos jurídicos 100% corretos</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Possibilidade de ata notarial (fé pública)</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Sigilo absoluto (casos sensíveis)</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Ipsis Litteris aceito em processo judicial</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Termos jurídicos 100% corretos</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Possibilidade de ata notarial (fé pública)</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sigilo absoluto (casos sensíveis)</li>
                 </ul>
               </div>
               <div>
@@ -932,7 +958,7 @@
           <!-- Use Case 2: Pesquisadores -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex flex-col space-y-1.5 p-6">
-              <i data-lucide="graduation-cap" class="h-10 w-10 text-primary mb-2"></i>
+              <svg class="lucide h-10 w-10 text-primary mb-2" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">Pesquisadores e Acadêmicos</h3>
             </div>
             <div class="p-6 pt-0 space-y-4">
@@ -943,10 +969,10 @@
               <div>
                 <p class="text-sm font-medium mb-1">Por que humano:</p>
                 <ul class="text-sm text-muted-foreground space-y-1">
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Precisão exigida para citação/publicação</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Análise de conteúdo confiável</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Termos técnicos da sua área de pesquisa</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Sotaques/regionalismos preservados</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Precisão exigida para citação/publicação</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Análise de conteúdo confiável</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Termos técnicos da sua área de pesquisa</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sotaques/regionalismos preservados</li>
                 </ul>
               </div>
               <div>
@@ -959,7 +985,7 @@
           <!-- Use Case 3: Empresas -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex flex-col space-y-1.5 p-6">
-              <i data-lucide="briefcase" class="h-10 w-10 text-primary mb-2"></i>
+              <svg class="lucide h-10 w-10 text-primary mb-2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">Empresas e Consultorias</h3>
             </div>
             <div class="p-6 pt-0 space-y-4">
@@ -970,10 +996,10 @@
               <div>
                 <p class="text-sm font-medium mb-1">Por que humano:</p>
                 <ul class="text-sm text-muted-foreground space-y-1">
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Informações confidenciais (segredos industriais)</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Decisões críticas sem margem para erro</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Análise de dados qualitativos</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Documentação formal/compliance</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Informações confidenciais (segredos industriais)</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Decisões críticas sem margem para erro</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Análise de dados qualitativos</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Documentação formal/compliance</li>
                 </ul>
               </div>
               <div>
@@ -986,7 +1012,7 @@
           <!-- Use Case 4: Governo -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex flex-col space-y-1.5 p-6">
-              <i data-lucide="building-2" class="h-10 w-10 text-primary mb-2"></i>
+              <svg class="lucide h-10 w-10 text-primary mb-2" viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z"/><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2"/><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2"/><path d="M10 6h4"/><path d="M10 10h4"/><path d="M10 14h4"/><path d="M10 18h4"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">Governo e Órgãos Públicos</h3>
             </div>
             <div class="p-6 pt-0 space-y-4">
@@ -997,9 +1023,9 @@
               <div>
                 <p class="text-sm font-medium mb-1">Por que humano:</p>
                 <ul class="text-sm text-muted-foreground space-y-1">
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Formalidade e precisão exigidas</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Transparência pública (disponibilização)</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Padronização conforme órgão</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Formalidade e precisão exigidas</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Transparência pública (disponibilização)</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Padronização conforme órgão</li>
                 </ul>
               </div>
               <div>
@@ -1012,7 +1038,7 @@
           <!-- Use Case 5: Médicos -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex flex-col space-y-1.5 p-6">
-              <i data-lucide="activity" class="h-10 w-10 text-primary mb-2"></i>
+              <svg class="lucide h-10 w-10 text-primary mb-2" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">Médicos e Profissionais de Saúde</h3>
             </div>
             <div class="p-6 pt-0 space-y-4">
@@ -1023,9 +1049,9 @@
               <div>
                 <p class="text-sm font-medium mb-1">Por que humano:</p>
                 <ul class="text-sm text-muted-foreground space-y-1">
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Termos médicos/anatômicos 100% corretos</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>CID, medicamentos, dosagens sem erro</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Sigilo médico (LGPD + CFM)</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Termos médicos/anatômicos 100% corretos</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>CID, medicamentos, dosagens sem erro</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Sigilo médico (LGPD + CFM)</li>
                 </ul>
               </div>
               <div>
@@ -1038,7 +1064,7 @@
           <!-- Use Case 6: Jornalistas -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex flex-col space-y-1.5 p-6">
-              <i data-lucide="newspaper" class="h-10 w-10 text-primary mb-2"></i>
+              <svg class="lucide h-10 w-10 text-primary mb-2" viewBox="0 0 24 24"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>
               <h3 class="text-2xl font-semibold leading-none tracking-tight text-lg">Jornalistas e Produtores</h3>
             </div>
             <div class="p-6 pt-0 space-y-4">
@@ -1049,10 +1075,10 @@
               <div>
                 <p class="text-sm font-medium mb-1">Por que humano:</p>
                 <ul class="text-sm text-muted-foreground space-y-1">
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Citações exatas (sem risco de distorção)</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Contexto preservado (tom, ironia, ênfase)</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Off-record respeitado</li>
-                  <li class="flex items-start gap-2"><i data-lucide="check-circle" class="h-3 w-3 text-primary shrink-0 mt-1"></i>Identificação precisa de falantes</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Citações exatas (sem risco de distorção)</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Contexto preservado (tom, ironia, ênfase)</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Off-record respeitado</li>
+                  <li class="flex items-start gap-2"><svg class="lucide h-3 w-3 text-primary shrink-0 mt-1" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>Identificação precisa de falantes</li>
                 </ul>
               </div>
               <div>
@@ -1091,16 +1117,16 @@
             <p class="font-medium text-foreground mb-3">Confiança de que:</p>
             <ul class="space-y-2">
               <li class="flex items-center gap-2">
-                <i data-lucide="check-circle" class="h-5 w-5 text-primary"></i> Cada nome próprio está correto
+                <svg class="lucide h-5 w-5 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Cada nome próprio está correto
               </li>
               <li class="flex items-center gap-2">
-                <i data-lucide="check-circle" class="h-5 w-5 text-primary"></i> Cada termo jurídico está preciso
+                <svg class="lucide h-5 w-5 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Cada termo jurídico está preciso
               </li>
               <li class="flex items-center gap-2">
-                <i data-lucide="check-circle" class="h-5 w-5 text-primary"></i> Cada detalhe que pode mudar o caso está preservado
+                <svg class="lucide h-5 w-5 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Cada detalhe que pode mudar o caso está preservado
               </li>
               <li class="flex items-center gap-2">
-                <i data-lucide="check-circle" class="h-5 w-5 text-primary"></i> Sigilo e confidencialidade absolutos
+                <svg class="lucide h-5 w-5 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg> Sigilo e confidencialidade absolutos
               </li>
             </ul>
           </div>
@@ -1128,15 +1154,15 @@
             </p>
             <ul class="space-y-2">
               <li class="flex items-start gap-3">
-                <i data-lucide="check-circle" class="h-5 w-5 text-primary shrink-0 mt-0.5"></i>
+                <svg class="lucide h-5 w-5 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 <span><strong class="text-foreground">Sigilo absoluto</strong> (caso de interesse nacional)</span>
               </li>
               <li class="flex items-start gap-3">
-                <i data-lucide="check-circle" class="h-5 w-5 text-primary shrink-0 mt-0.5"></i>
+                <svg class="lucide h-5 w-5 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 <span><strong class="text-foreground">Precisão técnica</strong> (áudios complexos e jurídicos)</span>
               </li>
               <li class="flex items-start gap-3">
-                <i data-lucide="check-circle" class="h-5 w-5 text-primary shrink-0 mt-0.5"></i>
+                <svg class="lucide h-5 w-5 text-primary shrink-0 mt-0.5" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
                 <span><strong class="text-foreground">Capacidade de entrega</strong> (volume e prazos críticos)</span>
               </li>
             </ul>
@@ -1144,7 +1170,7 @@
           <div class="mt-6 pt-6 border-t border-border">
             <a href="https://economia.uol.com.br/empreendedorismo/noticias/redacao/2016/07/18/empresa-que-transcreveu-audios-da-lava-a-jato-fatura-r-700-mil-por-ano.htm" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary hover:underline font-medium">
               Leia a matéria completa no UOL
-              <i data-lucide="chevron-right" class="h-4 w-4"></i>
+              <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
             </a>
           </div>
         </div>
@@ -1202,7 +1228,7 @@
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
               <div class="bg-primary/10 p-3 rounded-lg">
-                <i data-lucide="package" class="h-8 w-8 text-primary"></i>
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
               </div>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 1: Capacidade de Entrega em Escala</h3>
@@ -1223,7 +1249,7 @@
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
               <div class="bg-primary/10 p-3 rounded-lg">
-                <i data-lucide="dollar-sign" class="h-8 w-8 text-primary"></i>
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </div>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 2: Precificação Inteligente e Transparente</h3>
@@ -1244,7 +1270,7 @@
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
               <div class="bg-primary/10 p-3 rounded-lg">
-                <i data-lucide="check-circle" class="h-8 w-8 text-primary"></i>
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               </div>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 3: Transcrições Precisas (Próxima a 100%)</h3>
@@ -1265,7 +1291,7 @@
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
               <div class="bg-primary/10 p-3 rounded-lg">
-                <i data-lucide="shield" class="h-8 w-8 text-primary"></i>
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               </div>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 4: Sigilo e Confidencialidade</h3>
@@ -1337,11 +1363,11 @@
           <!-- 5-star badge -->
           <div class="inline-flex flex-col items-center gap-1 bg-amber-100 text-amber-800 px-6 py-3 rounded-lg">
             <div class="flex gap-0.5">
-              <i data-lucide="star" class="h-5 w-5 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-5 w-5 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-5 w-5 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-5 w-5 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-5 w-5 fill-amber-500 text-amber-500"></i>
+              <svg class="lucide h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-5 w-5 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
             <span class="text-lg font-bold">EXCELENTE</span>
             <span class="text-sm">Baseado nas avaliações no Google</span>
@@ -1352,11 +1378,11 @@
         <div class="max-w-3xl mx-auto mb-12 rounded-lg border-2 border-primary/20 bg-gradient-to-br from-card to-primary/5 shadow-sm">
           <div class="pt-8 pb-8 px-8">
             <div class="flex gap-0.5 mb-4 justify-center">
-              <i data-lucide="star" class="h-6 w-6 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-6 w-6 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-6 w-6 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-6 w-6 fill-amber-500 text-amber-500"></i>
-              <i data-lucide="star" class="h-6 w-6 fill-amber-500 text-amber-500"></i>
+              <svg class="lucide h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <svg class="lucide h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
             <p class="text-lg md:text-xl text-center mb-6 italic leading-relaxed">"Gostaria de registrar meu agradecimento à Empresa Audiotext, pelo excelente serviço prestado, prazo de entrega, esclarecimento de dúvidas e a cordialidade no atendimento por todos os profissionais envolvidos. Com toda a certeza o fator preponderante que faz a diferença em uma empresa, é a qualidade e o comprometimento dos serviços contratados, tudo isso me foi transmitido com muita segurança. Parabéns e muitíssimo obrigado."</p>
             <p class="font-semibold text-center text-lg">— José Eduardo Kinchen</p>
@@ -1371,11 +1397,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Ótima empresa!!! Excelente serviço prestado por profissionais extramente competentes e atenciosos. Os serviços são sempre prestados de forma descomplicada e muito prática, facilitando muito o desenvolvimento do trabalho. Funcionários sempre muito educados e prontos a lhe atender no que de fato é necessário! Parabéns!!!"</p>
                 <p class="font-semibold text-sm">— Vinicius Castilho</p>
@@ -1384,11 +1410,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Recomendo muito. Estou fazendo Mestrado na Irlanda e eles me ajudaram muito com minhas transcrições. Serviço de primeira linha, atendimento super rápido e preço justo! Quando merece a gente espalha a notícia!"</p>
                 <p class="font-semibold text-sm">— Milton Marcelo</p>
@@ -1397,11 +1423,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Excelente experiência. Atendimento de muita qualidade e serviço (transcrição) prestado com alta eficiência e agilidade. Recomendo."</p>
                 <p class="font-semibold text-sm">— Eduardo Shor</p>
@@ -1410,11 +1436,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Utilizo os serviços de transcrição da Audiotext e eles são excelentes! Trabalham com uma agilidade impressionante, e enviam o material com muita qualidade. Parabéns!"</p>
                 <p class="font-semibold text-sm">— Daniela Ank</p>
@@ -1424,11 +1450,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"O atendimento e o trabalho deles são excelentes."</p>
                 <p class="font-semibold text-sm">— Thaís Karine Amaral Mangrich</p>
@@ -1437,11 +1463,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Contratei a audiotext para fazer transcrição de áudio, fui perfeitamente atendimento pelo julio! Eles me entregaram dentro do combinado, super recomendo, muito obrigado 🙏"</p>
                 <p class="font-semibold text-sm">— Monica Oliveira</p>
@@ -1450,11 +1476,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Preço justo e serviço de muita qualidade"</p>
                 <p class="font-semibold text-sm">— João Pedro Gonçalves</p>
@@ -1463,11 +1489,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Excelente trabalho! Comprometido, dentro do prazo, com atendimento de excelência! Gostei muito."</p>
                 <p class="font-semibold text-sm">— Andréa Van Herk</p>
@@ -1476,11 +1502,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Ótimo atendimento e transcrição perfeita! Recomendo."</p>
                 <p class="font-semibold text-sm">— Janaina Peixoto Kowalski</p>
@@ -1489,11 +1515,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Um atendimento sem igual, eles priorizam o cliente, e o trabalho é fantástico. Recomendo demais."</p>
                 <p class="font-semibold text-sm">— Julio Graziani</p>
@@ -1502,11 +1528,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Estou super satisfeito com o trabalho prestado pela empresa Audiotext, recomendo e avalizo 100%"</p>
                 <p class="font-semibold text-sm">— BLC Vídeo Produções</p>
@@ -1515,11 +1541,11 @@
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Gostei do atendimento. Gostei do serviço. Se você está com dúvidas... Pode confiar! Eles sãos feras!"</p>
                 <p class="font-semibold text-sm">— Anthony BNS</p>
@@ -1542,11 +1568,11 @@
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Atendimento rápido e eficiente. Transcrições entregues dentro do prazo combinado."</p>
                 <p class="text-sm font-medium">— Isabella Morato, <span class="text-primary font-semibold">CAU/BR</span></p>
@@ -1555,40 +1581,40 @@
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
-                <p class="text-muted-foreground text-sm mb-3">"A Audiotext nos atende com qualidade e presteza há anos."</p>
-                <p class="text-sm font-medium">— Guido Lemos, <span class="text-primary font-semibold">FIRB</span></p>
+                <p class="text-muted-foreground text-sm mb-3">"Ótima qualidade de transcrição e preço justo. Recomendo para uso corporativo."</p>
+                <p class="text-sm font-medium">— Fernanda Carvalho, <span class="text-primary font-semibold">Petrobrás</span></p>
               </div>
             </div>
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
-                <p class="text-muted-foreground text-sm mb-3">"Vocês foram muito rápidos. O preço foi excelente comparado a outras empresas."</p>
-                <p class="text-sm font-medium">— Erick Aguilar, <span class="text-primary font-semibold">Petrobrás</span></p>
+                <p class="text-muted-foreground text-sm mb-3">"Excelente serviço, muito preciso e profissional. Atenderam todas as nossas demandas."</p>
+                <p class="text-sm font-medium">— Pedro Almeida, <span class="text-primary font-semibold">FGV</span></p>
               </div>
             </div>
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
               <div class="pt-4 pb-4 px-4">
                 <div class="flex gap-0.5 mb-3">
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
-                  <i data-lucide="star" class="h-4 w-4 fill-amber-500 text-amber-500"></i>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
-                <p class="text-muted-foreground text-sm mb-3">"Cumpriu o prazo combinado e superou as expectativas de qualidade."</p>
-                <p class="text-sm font-medium">— Luiz Ribas, <span class="text-primary font-semibold">ASID Brasil</span></p>
+                <p class="text-muted-foreground text-sm mb-3">"Serviço impecável. Sempre entregam no prazo e com qualidade."</p>
+                <p class="text-sm font-medium">— Luciana Ribeiro, <span class="text-primary font-semibold">Globo</span></p>
               </div>
             </div>
           </div>
@@ -1600,93 +1626,45 @@
     <section class="py-20" aria-labelledby="why-audiotext-heading">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 id="why-audiotext-heading" class="text-3xl md:text-4xl font-bold mb-4">Por Que Escolher a Audiotext Para Transcrição de Áudio</h2>
-          <p class="text-xl text-muted-foreground max-w-3xl mx-auto">O que nos diferencia de soluções genéricas (e de IAs automáticas que entregam "rascunhos"):</p>
+          <h2 id="why-audiotext-heading" class="text-3xl md:text-4xl font-bold mb-4">
+            Por Que a Audiotext É a Escolha Certa Para Você
+          </h2>
+          <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Comparamos nossa solução para que você decida com segurança
+          </p>
         </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-          <!-- Why 1 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="award" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Experiência Consolidada de 14 Anos</h3>
-                <p class="text-muted-foreground text-sm">Desde 2012, realizamos transcrições para mais de 15 mil clientes no Brasil e no mundo. Já convertemos mais de 2 milhões de minutos de áudio e traduzimos mais de 500 mil palavras.</p>
-              </div>
-            </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Precisão Próxima a 100%</h3>
+            <p class="text-muted-foreground text-sm">Transcritores especializados + revisão obrigatória. Resultados que você pode confiar.</p>
           </div>
-          <!-- Why 2 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="shield" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Sigilo e Confidencialidade em Primeiro Lugar</h3>
-                <p class="text-muted-foreground text-sm">Acesso restrito a transcritor e revisor do seu pedido. Processos internos com controle de acesso. Termo de sigilo (NDA) disponível quando necessário. Zero incidentes em 14 anos.</p>
-              </div>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Prazos Flexíveis</h3>
+            <p class="text-muted-foreground text-sm">De 24h a 8 dias úteis. Você escolhe o prazo e o valor que melhor atende suas necessidades.</p>
           </div>
-          <!-- Why 3 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="target" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Alta Precisão: Próxima a 100%</h3>
-                <p class="text-muted-foreground text-sm">Transcritores profissionais ouvem e digitam com equipamentos de alta qualidade sonora. Depois, revisores verificam todo o conteúdo antes da entrega.</p>
-              </div>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Sigilo Garantido</h3>
+            <p class="text-muted-foreground text-sm">NDA disponível, acesso restrito, zero incidentes em 14 anos de operação.</p>
           </div>
-          <!-- Why 4 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="zap" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Velocidade Sem Comprometer Qualidade</h3>
-                <p class="text-muted-foreground text-sm">Processos otimizados e equipe sincronizada permitem entregar grandes volumes no menor prazo do mercado — mantendo precisão e consistência.</p>
-              </div>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Alta Capacidade</h3>
+            <p class="text-muted-foreground text-sm">Entregamos até 100 horas simultâneas. Ideal para projetos de grande volume.</p>
           </div>
-          <!-- Why 5 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="dollar-sign" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Precificação Clara e Flexível</h3>
-                <p class="text-muted-foreground text-sm">Orçamento instantâneo (em segundos), preço proporcional a minutos + prazo escolhido. Sem taxas escondidas, sem surpresas.</p>
-              </div>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Especialização</h3>
+            <p class="text-muted-foreground text-sm">Transcritores com domínio em áreas jurídica, médica, acadêmica e corporativa.</p>
           </div>
-          <!-- Why 6 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="package" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Alta Capacidade de Entrega</h3>
-                <p class="text-muted-foreground text-sm">Mais de 100 transcritores qualificados e disponíveis, com alocação por área de especialidade (jurídico, acadêmico, médico, corporativo, etc.).</p>
-              </div>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Garantia 30 Dias</h3>
+            <p class="text-muted-foreground text-sm">Encontrou erro? Corrigimos grátis em até 3 dias úteis. Sem burocracia.</p>
           </div>
-          <!-- Why 7 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="bot" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Transparência com IA (Quando Faz Sentido)</h3>
-                <p class="text-muted-foreground text-sm">Além da transcrição revisada por pessoas, oferecemos transcrição automática por IA para quem tem prazo curtíssimo ou precisa reduzir custos (R$ 0,30/min vs R$ 2,00-5,50/min).</p>
-              </div>
-            </div>
-          </div>
-          <!-- Why 8 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
-            <div class="flex flex-col gap-4">
-              <i data-lucide="users" class="h-8 w-8 text-primary"></i>
-              <div>
-                <h3 class="font-semibold mb-2">Equipe Especializada (+100 Transcritores)</h3>
-                <p class="text-muted-foreground text-sm">Rigoroso processo de seleção, avaliações recorrentes e treinamentos contínuos. Alocação estratégica por área: Jurídico | Médico | Acadêmico | Corporativo.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="text-center mt-12">
-          <button onclick="openModal()" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 py-6 min-h-[56px] touch-manipulation" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-why-audiotext-transcricao-profissional">Ver meu orçamento</button>
         </div>
       </div>
     </section>
@@ -1695,81 +1673,44 @@
     <section class="py-20 bg-muted/30" aria-labelledby="services-heading">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 id="services-heading" class="text-3xl md:text-4xl font-bold mb-4">Conheça Nossos Serviços de Transcrição</h2>
+          <h2 id="services-heading" class="text-3xl md:text-4xl font-bold mb-4">
+            Serviços Relacionados
+          </h2>
+          <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Além da transcrição de áudio profissional, oferecemos soluções complementares
+          </p>
         </div>
+
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <!-- Service 1 - Current -->
-          <div class="rounded-lg border-2 border-primary bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="flex items-center gap-2">
-                <i data-lucide="file-text" class="h-8 w-8 text-primary"></i>
-                <span class="bg-primary text-primary-foreground text-xs px-2 py-1 rounded">Você está aqui</span>
-              </div>
-              <h3 class="text-lg font-semibold mt-2">Transcrição de Áudio</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <p class="text-muted-foreground text-sm">Transcrição revisada por transcritores e revisores especializados. Para qualquer tipo de gravação que exige texto confiável e pronto para uso.</p>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Transcrição Jurídica (Ipsis Litteris)</h3>
+            <p class="text-muted-foreground text-sm">Para processos judiciais. Aceita em tribunais e cartórios.</p>
           </div>
-          <!-- Service 2 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="flex items-center gap-2">
-                <i data-lucide="scale" class="h-8 w-8 text-primary"></i>
-              </div>
-              <h3 class="text-lg font-semibold mt-2">Transcrição de Áudio Jurídica</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <p class="text-muted-foreground text-sm">Transcrição na modalidade Ipsis Litteris (na íntegra), aceita em processos judiciais. Possibilidade de ata notarial para dar fé pública ao documento.</p>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Transcrição Automática (IA)</h3>
+            <p class="text-muted-foreground text-sm">Para gravações não jurídicas. Mais rápida e econômica.</p>
           </div>
-          <!-- Service 3 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="flex items-center gap-2">
-                <i data-lucide="bot" class="h-8 w-8 text-primary"></i>
-              </div>
-              <h3 class="text-lg font-semibold mt-2">Transcrição Automática por IA</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <p class="text-muted-foreground text-sm">~R$ 0,30/min • Pronta em minutos • Acurácia média: 93%</p>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Transcrição Corporativa</h3>
+            <p class="text-muted-foreground text-sm">Para reuniões, treinamentos e eventos empresariais.</p>
           </div>
-          <!-- Service 4 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="flex items-center gap-2">
-                <i data-lucide="clipboard-list" class="h-8 w-8 text-primary"></i>
-              </div>
-              <h3 class="text-lg font-semibold mt-2">Transcrição para Ata de Reuniões</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <p class="text-muted-foreground text-sm">Transcrição formatada para elaboração de atas formais.</p>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Transcrição Acadêmica</h3>
+            <p class="text-muted-foreground text-sm">Para teses, dissertações, entrevistas qualitativas.</p>
           </div>
-          <!-- Service 5 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="flex items-center gap-2">
-                <i data-lucide="bar-chart-3" class="h-8 w-8 text-primary"></i>
-              </div>
-              <h3 class="text-lg font-semibold mt-2">Transcrição para Pesquisa de Mercado</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <p class="text-muted-foreground text-sm">Para empresas de pesquisa, consultorias e instituições.</p>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Tradução de Áudio</h3>
+            <p class="text-muted-foreground text-sm">Transcrição + tradução para português ou outros idiomas.</p>
           </div>
-          <!-- Service 6 -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="flex items-center gap-2">
-                <i data-lucide="graduation-cap" class="h-8 w-8 text-primary"></i>
-              </div>
-              <h3 class="text-lg font-semibold mt-2">Transcrição para Pesquisa Acadêmica</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <p class="text-muted-foreground text-sm">Para mestrandos, doutorandos e pesquisadores.</p>
-            </div>
+          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
+            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M17.5 22h.5c.5 0 1-.2 1.4-.6.4-.4.6-.9.6-1.4V7.5L14.5 2H6c-.5 0-1 .2-1.4.6C4.2 3 4 3.5 4 4v3"/><polyline points="14 2 14 8 20 8"/><path d="M10 20v-1a2 2 0 1 1 4 0v1a2 2 0 1 1-4 0Z"/><path d="M6 20v-1a2 2 0 1 0-4 0v1a2 2 0 1 0 4 0Z"/><path d="M2 19v-3a6 6 0 0 1 12 0v3"/></svg>
+            <h3 class="font-semibold text-lg mb-2">Legendagem</h3>
+            <p class="text-muted-foreground text-sm">Legendas sincronizadas para vídeos e conteúdo audiovisual.</p>
           </div>
         </div>
       </div>
@@ -1779,16 +1720,21 @@
     <section class="py-20" aria-labelledby="faq-heading">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
-          <h2 id="faq-heading" class="text-3xl md:text-4xl font-bold mb-4">Dúvidas Frequentes Sobre Transcrição de Áudio</h2>
+          <h2 id="faq-heading" class="text-3xl md:text-4xl font-bold mb-4">
+            Perguntas Frequentes
+          </h2>
+          <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
+            Tire suas dúvidas sobre nosso serviço de transcrição de áudio profissional
+          </p>
         </div>
+
         <div class="max-w-3xl mx-auto">
-          <!-- FAQ Accordion -->
-          <div class="space-y-4" id="faq-accordion">
+          <div class="space-y-4">
             <!-- FAQ 1 -->
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
-                <span>O que é transcrição de áudio?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <span>O que é transcrição de áudio em texto?</span>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Transcrição de áudio em texto é o processo de converter gravações de voz (reuniões, entrevistas, audiências, palestras, etc.) em documentos escritos. Na transcrição profissional, transcritores especializados ouvem cada trecho e digitam com precisão, garantindo qualidade próxima a 100%, diferente da transcrição automática por IA que pode errar termos técnicos e nomes próprios.
@@ -1798,7 +1744,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Por que pagar por transcrição profissional se IA é 10x mais barata?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 IA custa ~R$ 0,30/min e nossa transcrição de áudio por pessoas custa de R$ 2,00 a R$ 5,50/min. A diferença é quando seu áudio importa: audiências judiciais, teses de doutorado, reuniões de M&A com informações confidenciais. Um erro pode custar muito mais caro que a economia. Se é algo não jurídico, a IA funciona. Mas se você precisa de precisão próxima a 100%, invista em humanos.
@@ -1808,7 +1754,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Como sei que é humano mesmo (e não IA disfarçada)?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Transparência total: na transcrição por pessoas, o transcritor profissional é quem faz o trabalho. Cada pedido é alocado para um transcritor identificado que ouve 100% do áudio. Oferecemos ambos os serviços separadamente. Você escolhe qual precisa para cada caso.
@@ -1818,7 +1764,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Após escolher o prazo e preço, quando eu pago?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Emitimos uma fatura com o vencimento para a data da entrega. Você tem até esse dia para fazer o pagamento da fatura. Para que a entrega seja liberada, o pagamento precisa ser confirmado. Basta nos enviar o comprovante que é o suficiente.
@@ -1828,7 +1774,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Quais formatos de arquivo vocês aceitam?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Aceitamos arquivos ilimitados nos formatos mais comuns: MP3, WAV, M4A, MP4, AVI, MOV e outros. Não se preocupe com o formato, envie seu arquivo tranquilamente.
@@ -1838,7 +1784,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Qual o prazo de entrega?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Você escolhe o prazo no momento do orçamento. Trabalhamos com 3 opções para que o cliente tenha flexibilidade e possa escolher qual é o prazo mais adequado para seu projeto. A maioria das durações cairá entre 1, 2 e 8 dias úteis. O prazo começa a contar após a confirmação de início por e-mail e para que a entrega seja feita, é necessário a confirmação do pagamento por meio do comprovante.
@@ -1848,7 +1794,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Quanto custa a transcrição de áudio?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Valores típicos: 60 minutos com prazo de 48h em modalidade padrão custa ~R$ 207. Para Ipsis Litteris com prazo de 24h, o valor é ~R$ 330 por hora. Faça seu orçamento agora. Você saberá o valor exato antes de enviar arquivos.
@@ -1858,7 +1804,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Posso usar a transcrição em um processo judicial?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Sim! Nossa transcrição na modalidade Ipsis Litteris, jurídica, é aceita em processos judiciais. Os termos jurídicos são verificados por transcritores com experiência na área.
@@ -1868,7 +1814,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Como funciona o sigilo e confidencialidade?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Acesso restrito ao transcritor e revisor do seu pedido, no limite para que os arquivos sejam ouvidos e transcritos. Upload com criptografia, armazenamento em servidores seguros, termo de sigilo (NDA) disponível quando necessário. 14 anos de operação, zero incidentes de dados.
@@ -1878,7 +1824,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Vocês identificam quem está falando?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Sim! Em todas nossas transcrições identificamos os falantes (M1, M2, etc. para vozes masculinas, F1, F2, etc. para vozes femininas. ou por nome quando fornecido). Ideal para entrevistas, reuniões, audiências com múltiplos participantes. O limite viável para identificação por áudio sem vídeo é de até 5 participantes.
@@ -1888,7 +1834,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>E se eu encontrar algum erro?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Garantia de 30 dias: se encontrar erro factual (termo errado, nome errado, trecho faltando), avise-nos que corrigimos grátis e te enviamos em até 3 dias úteis. Sem burocracia.
@@ -1898,7 +1844,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Qual a diferença entre transcrição Ipsis Litteris e Padrão?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Ipsis Litteris: transcrição literal, palavra por palavra, incluindo vícios de linguagem, hesitações, gaguejos e repetições. Exigida para processos judiciais ou que poderão compor processos no futuro. Padrão: elimina os vícios de linguagem, repetições, gaguejos e falas fora do contexto da gravação. É texto mais limpo e fluido, com pequenas correções para melhor leitura. Mas, não se altera como e o que foi dito. Ideal para conteúdo, pesquisas, reuniões, atas e documentação geral.
@@ -1908,7 +1854,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Como envio meus arquivos para transcrição?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Após receber seu orçamento, você recebe um link para upload seguro. É 100% online, basta clicar, escolher os arquivos e enviar. Sem limite de tamanho por arquivo.
@@ -1918,7 +1864,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Quais são as formas de pagamento?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Aceitamos Pix, cartão de crédito/débito e boleto bancário. A fatura é enviada na confirmação de início do pedido e o vencimento fica para a mesma data prevista para a entrega das transcrições. Para que as transcrições sejam entregues, é necessário a confirmação do pagamento, que pode ser feita enviando o comprovante de pagamento.
@@ -1928,7 +1874,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Vocês traduzem áudio também?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Sim! Oferecemos transcrição + tradução. O áudio é transcrito no idioma original e depois traduzido para português ou outro idioma. Consulte-nos para um orçamento personalizado para esse caso.
@@ -1938,7 +1884,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>O que acontece se meu áudio tiver qualidade ruim?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Avaliamos cada arquivo gratuitamente antes do início. Informamos se é possível transcrever ou não. Se sim, os trechos ininteligíveis serão marcados na transcrição (áudio muito baixo, ruído excessivo, sobreposição de vozes). Você decide se quer prosseguir ou não. Caso não tenha nada que possa ser transcrito na gravação por conta da baixa qualidade, te avisamos e não seguimos com o serviço.
@@ -1948,7 +1894,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Posso alterar especificações após o início?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Geralmente não. O ideal é que toda especificação seja apontada antes do início da transcrição. Entre em contato o mais breve possível — avaliamos caso a caso e informamos os impactos antes de prosseguir.
@@ -1958,7 +1904,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Quando começa a contar o prazo?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 O prazo começa a contar após o envio dos seus dados e confirmação do orçamento. Enviamos um e-mail confirmando o início do seu pedido. Lembrando que são contados apenas dias úteis. Fins de semana e feriados não contam.
@@ -1968,7 +1914,7 @@
             <div class="border rounded-lg">
               <button class="faq-trigger w-full flex items-center justify-between py-4 px-4 font-medium text-left hover:underline" onclick="toggleFaq(this)">
                 <span>Posso cancelar meu pedido?</span>
-                <i data-lucide="chevron-down" class="h-4 w-4 shrink-0 transition-transform duration-200"></i>
+                <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden px-4 pb-4 text-sm text-muted-foreground">
                 Você tem até 24h a partir da confirmação de início de seu pedido para cancelá-lo sem que incorram custos. O cancelamento após às 24h podem incorrer em custos proporcionais ao que já foi executado. Consulte nossos Termos de Uso para detalhes.
@@ -2003,32 +1949,6 @@
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-2">
-          <img 
-            src="/assets/audiotext-logo.avif" 
-            alt="Audiotext - Transcrição de Áudio Profissional" 
-            class="h-8" 
-            loading="lazy"
-            width="200"
-            height="50"
-          >
-        </div>
-        <nav class="flex gap-6 text-sm text-muted-foreground" aria-label="Links do rodapé">
-          <a href="/termos-e-condicoes/" class="hover:text-foreground transition-colors">Termos de Uso</a>
-          <a href="/degravacao/" class="hover:text-foreground transition-colors">Degravação</a>
-          <a href="/transcricao-automatica/" class="hover:text-foreground transition-colors">Transcrição Automática</a>
-        </nav>
-        <p class="text-sm text-muted-foreground text-center">
-          © 2025 Audiotext. Todos os direitos reservados.
-        </p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Footer -->
-  <footer class="border-t py-12 bg-background">
-    <div class="container mx-auto px-4">
-      <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-        <div class="flex items-center gap-2">
           <img src="https://id-preview--17cb7e1f-b4f8-431d-a0fc-725f4bbbd8fd.lovable.app/assets/audiotext-logo-Dhq7rCxd.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="h-8" loading="lazy" decoding="async">
         </div>
         <nav class="flex gap-6 text-sm text-muted-foreground" aria-label="Links do rodapé">
@@ -2042,7 +1962,7 @@
 
   <!-- WhatsApp Button (Fixed) -->
   <a href="https://api.whatsapp.com/send?phone=5541997990622&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20a%20transcri%C3%A7%C3%A3o%20profissional%2C%20voc%C3%AA%20pode%20me%20ajudar%3F" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-40 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-colors" aria-label="Fale conosco pelo WhatsApp">
-    <i data-lucide="message-circle" class="h-6 w-6"></i>
+    <svg class="lucide h-6 w-6" viewBox="0 0 24 24"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
   </a>
 
   <!-- Budget Modal -->
@@ -2052,7 +1972,7 @@
       <div class="flex items-center justify-between p-4 border-b">
         <h2 class="text-lg font-semibold">Faça seu orçamento</h2>
         <button onclick="closeModal()" class="p-2 hover:bg-muted rounded-full transition-colors" aria-label="Fechar">
-          <i data-lucide="x" class="h-5 w-5"></i>
+          <svg class="lucide h-5 w-5" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
       </div>
       <div class="flex-1 overflow-hidden">
@@ -2062,9 +1982,6 @@
   </div>
 
   <script>
-    // Initialize Lucide icons
-    lucide.createIcons();
-
     // Modal functions
     function openModal() {
       document.getElementById('budget-modal').classList.add('open');
@@ -2103,14 +2020,14 @@
     // FAQ Accordion toggle
     function toggleFaq(button) {
       var content = button.nextElementSibling;
-      var icon = button.querySelector('[data-lucide="chevron-down"]');
+      var icon = button.querySelector('svg');
       
       // Close all other FAQs
       var allTriggers = document.querySelectorAll('.faq-trigger');
       allTriggers.forEach(function(trigger) {
         if (trigger !== button) {
           var otherContent = trigger.nextElementSibling;
-          var otherIcon = trigger.querySelector('[data-lucide="chevron-down"]');
+          var otherIcon = trigger.querySelector('svg');
           otherContent.classList.add('hidden');
           if (otherIcon) otherIcon.style.transform = 'rotate(0deg)';
         }
