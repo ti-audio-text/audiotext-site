@@ -232,6 +232,7 @@
     .w-14 { width: 3.5rem; }
     .w-32 { width: 8rem; }
     .w-full { width: 100%; }
+    .w-auto { width: auto !important; } /* <- ADICIONE ESTA LINHA */
     .h-4 { height: 1rem; }
     .h-5 { height: 1.25rem; }
     .h-6 { height: 1.5rem; }
@@ -842,7 +843,7 @@
   <header class="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-[hsl(220,13%,91%)]">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
       <a href="/">
-        <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" width="200" height="50" loading="eager" class="h-8 md:h-10">
+        <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" width="226" height="56" loading="eager"  class="h-8 w-auto flex-shrink-0">
       </a>
       <button onclick="openModal()" class="bg-primary text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
         Ver meu orçamento
