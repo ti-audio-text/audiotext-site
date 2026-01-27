@@ -377,6 +377,20 @@
     .modal-iframe { width: 768px; height: 674px; border: 0; background-color: hsl(var(--background)); border-radius: 0.75rem; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
     @media (max-width: 768px) { .modal-iframe { width: 90vw; max-width: 768px; height: 85vh; max-height: 674px; } }
     @media (max-width: 480px) { .modal-iframe { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; } }
+
+    /* Contraste só na tabela (sem mexer no site todo) */
+    .table-contrast-fix .text-destructive {
+    color: hsl(0 84% 52%); /* antes era 60% no token, aqui só escurece um pouco */
+    }
+
+    .table-contrast-fix .text-amber-500 {
+    color: hsl(38 92% 40%); /* substitui o rgb(245,158,11) por um âmbar mais escuro */
+    }
+
+    .table-contrast-fix svg {
+    stroke: currentColor; /* ícones seguem a mesma cor do texto */
+    }
+
   </style>
   <!-- JSON-LD Schema -->
   <script type="application/ld+json">
@@ -628,7 +642,7 @@
         </div>
 
         <!-- Comparison Table -->
-        <div class="max-w-5xl mx-auto overflow-x-auto">
+        <div class="max-w-5xl mx-auto overflow-x-auto table-contrast-fix">
           <table class="w-full border-collapse bg-card rounded-lg overflow-hidden">
             <thead>
               <tr class="bg-muted">
