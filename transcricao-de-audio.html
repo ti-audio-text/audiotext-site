@@ -3,21 +3,51 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
+  
+  <!-- Google Tag Manager - HIGH in <head> -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-K8PJKT6');</script>
+  <!-- End Google Tag Manager -->
+  
+  <!-- SEO Meta Tags -->
   <title>Transcrição de Áudio | Audiotext</title>
   <meta name="title" content="Transcrição de Áudio | Audiotext">
   <meta name="description" content="Transcrição de áudio profissional com precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Para advogados, pesquisadores e empresas. Desde 2012, +2 milhões de minutos transcritos.">
   <meta name="keywords" content="transcrição de áudio, transcrição humana, transcrição profissional, transcrição jurídica, transcrição acadêmica, transcrição de entrevistas, transcrição de audiências, transcrição ipsis litteris">
-  <link rel="canonical" href="https://audiotext.com.br/transcricao-de-audio/">
   <meta name="robots" content="index, follow">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://audiotext.com.br/transcricao-de-audio/">
+  
+  <!-- Open Graph -->
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Audiotext">
   <meta property="og:url" content="https://audiotext.com.br/transcricao-de-audio/">
   <meta property="og:title" content="Transcrição de Áudio | Audiotext">
   <meta property="og:description" content="Precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Desde 2012.">
+  <meta property="og:locale" content="pt_BR">
+  
+  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Transcrição de Áudio | Audiotext">
   <meta name="twitter:description" content="Precisão próxima a 100%. Para advogados, pesquisadores e empresas.">
-  <meta name="theme-color" content="#3B82F6">
-  <link rel="icon" href="/assets/favicon.ico">
+  
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#304e73">
+  
+  <!-- Preconnect for GTM -->
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
   <style>
     /* === CSS Reset & Base === */
     *, *::before, *::after { box-sizing: border-box; border-width: 0; border-style: solid; border-color: hsl(220, 13%, 91%); }
@@ -49,7 +79,7 @@
       --secondary: 218 20% 20%;
       --secondary-foreground: 0 0% 100%;
       --muted: 220 13% 95%;
-      --muted-foreground: 220 9% 40%;
+      --muted-foreground: 220 9% 46%;
       --destructive: 0 84% 60%;
       --border: 220 13% 91%;
       --ring: 217 91% 60%;
@@ -300,7 +330,7 @@
     .disabled\:opacity-50:disabled { opacity: 0.5; }
     
     /* Hover States */
-    .hover\:bg-primary\/90:hover { background-color: hsla(var(--primary), 0.9); }
+    .hover\:bg-primary\/90:hover { background-color: hsl(var(--primary) / 0.9); }
     .hover\:bg-accent:hover { background-color: hsl(var(--muted)); }
     .hover\:text-accent-foreground:hover { color: hsl(var(--foreground)); }
     .hover\:bg-muted:hover { background-color: hsl(var(--muted)); }
@@ -377,26 +407,129 @@
     .modal-iframe { width: 768px; height: 674px; border: 0; background-color: hsl(var(--background)); border-radius: 0.75rem; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
     @media (max-width: 768px) { .modal-iframe { width: 90vw; max-width: 768px; height: 85vh; max-height: 674px; } }
     @media (max-width: 480px) { .modal-iframe { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; } }
-
-    /* Contraste só na tabela (sem mexer no site todo) */
-    .table-contrast-fix .text-destructive {
-    color: hsl(0 84% 48%); /* antes era 60% no token, aqui só escurece um pouco */
-    }
-
-    .table-contrast-fix .text-amber-500 {
-    color: hsl(38 92% 50%); /* substitui o rgb(245,158,11) por um âmbar mais escuro */
-    }
-
-    .table-contrast-fix svg {
-    stroke: currentColor; /* ícones seguem a mesma cor do texto */
-    }
-
   </style>
-  <!-- JSON-LD Schema -->
+  <!-- JSON-LD Schemas -->
+  
+  <!-- WebSite Schema with SearchAction -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://audiotext.com.br/#website",
+    "url": "https://audiotext.com.br",
+    "name": "Audiotext",
+    "description": "Transcrição de áudio profissional com IA e humana",
+    "publisher": {
+      "@id": "https://audiotext.com.br/#organization"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://audiotext.com.br/?s={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <!-- Organization Schema - EXPANDED -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://audiotext.com.br/#organization",
+    "name": "Audiotext",
+    "legalName": "Audiotext Serviços e Cia Ltda",
+    "alternateName": "Audiotext",
+    "url": "https://audiotext.com.br",
+    "logo": "https://audiotext.com.br/assets/audiotext-logo.avif",
+    "description": "Empresa especializada em transcrição de áudio profissional, degravação jurídica e transcrição automática com IA. 14 anos de experiência, +15 mil clientes.",
+    "foundingDate": "2012",
+    "taxID": "17.429.373/0001-85",
+    "email": "falecom@audiotext.com.br",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Rua Buenos Aires, 73",
+      "addressLocality": "Curitiba",
+      "addressRegion": "PR",
+      "postalCode": "80250-070",
+      "addressCountry": "BR"
+    },
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+55-41-3363-3220",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": ["pt-BR"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+55-41-99799-0622",
+        "contactType": "customer service",
+        "contactOption": "TollFree",
+        "areaServed": "BR",
+        "availableLanguage": ["pt-BR"]
+      }
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    "sameAs": [
+      "https://www.facebook.com/audiotext",
+      "https://www.instagram.com/audiotext.transcricao",
+      "https://www.linkedin.com/company/audiotext",
+      "https://www.youtube.com/audiotexttranscricaoedegravacao"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "36",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
+  }
+  </script>
+
+  <!-- WebPage Schema - EXPANDED -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://audiotext.com.br/transcricao-de-audio/#webpage",
+    "url": "https://audiotext.com.br/transcricao-de-audio/",
+    "name": "Transcrição de Áudio Profissional",
+    "description": "Transcrição de áudio profissional com precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Para advogados, pesquisadores e empresas.",
+    "inLanguage": "pt-BR",
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": "https://audiotext.com.br/#website"
+    },
+    "about": {
+      "@id": "https://audiotext.com.br/transcricao-de-audio/#service"
+    },
+    "datePublished": "2024-01-15",
+    "dateModified": "2026-01-26",
+    "breadcrumb": {
+      "@id": "https://audiotext.com.br/transcricao-de-audio/#breadcrumb"
+    },
+    "potentialAction": [{
+      "@type": "ReadAction",
+      "target": ["https://audiotext.com.br/transcricao-de-audio/"]
+    }]
+  }
+  </script>
+
+  <!-- Service Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Service",
+    "@id": "https://audiotext.com.br/transcricao-de-audio/#service",
     "name": "Transcrição de Áudio",
     "provider": {
       "@type": "Organization",
@@ -408,14 +541,153 @@
     "serviceType": "Human Transcription",
     "offers": {
       "@type": "Offer",
-      "priceRange": "R$ 2,00 - R$ 5,50 por minuto"
+      "priceRange": "R$ 2,00 - R$ 5,50 por minuto",
+      "priceCurrency": "BRL",
+      "availability": "https://schema.org/InStock"
     }
   }
   </script>
+
+  <!-- HowTo Schema - Como Funciona Transcrição -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "Como funciona a transcrição de áudio profissional",
+    "description": "Transcreva áudio para texto com transcrição humana profissional em 4 passos simples",
+    "totalTime": "P2D",
+    "estimatedCost": {
+      "@type": "MonetaryAmount",
+      "currency": "BRL",
+      "value": "150"
+    },
+    "tool": [
+      {
+        "@type": "HowToTool",
+        "name": "Plataforma Audiotext"
+      }
+    ],
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Envio do áudio",
+        "text": "Envie seus arquivos de áudio pelo formulário de orçamento. Aceitamos todos os formatos: MP3, WAV, M4A, WhatsApp. Upload com criptografia e sigilo absoluto.",
+        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "Transcrição profissional",
+        "text": "Nossa equipe de transcritores especializados transcreve seu áudio palavra por palavra. Identificação de falantes, marcação de tempo e formatação profissional incluídas.",
+        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Revisão obrigatória",
+        "text": "Todo arquivo é revisado por um segundo profissional independente. Garantia de precisão próxima a 100% em cada transcrição.",
+        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
+      },
+      {
+        "@type": "HowToStep",
+        "position": 4,
+        "name": "Entrega",
+        "text": "Receba sua transcrição em DOCX editável e PDF pronto para uso. Formatação profissional, revisada e pronta para impressão ou edição.",
+        "url": "https://audiotext.com.br/transcricao-de-audio/#how-it-works"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Product Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Transcrição de Áudio Profissional",
+    "description": "Transcrição de áudio para texto com precisão próxima a 100%. Transcritores especializados + revisão obrigatória. Identificação de falantes, marcação de tempo, formatação profissional.",
+    "sku": "AUDIOTEXT-TRA-001",
+    "mpn": "ATRA-001",
+    "category": "Software > Business Software > Transcription Services > Professional Transcription",
+    "brand": {
+      "@type": "Brand",
+      "name": "Audiotext"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "url": "https://audiotext.com.br/transcricao-de-audio/",
+      "priceCurrency": "BRL",
+      "lowPrice": "2.00",
+      "highPrice": "5.50",
+      "offerCount": "1",
+      "availability": "https://schema.org/InStock",
+      "priceValidUntil": "2026-12-31",
+      "seller": {
+        "@type": "Organization",
+        "name": "Audiotext"
+      }
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "bestRating": "5",
+      "worstRating": "1",
+      "reviewCount": "36"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "José Eduardo Kinchen"
+        },
+        "reviewBody": "Atendimento excelente, entrega rápida e trabalho de qualidade. Recomendo!",
+        "datePublished": "2025-12-15"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Julio Graziani"
+        },
+        "reviewBody": "Um atendimento sem igual, eles priorizam o cliente, e o trabalho é fantástico. Recomendo demais.",
+        "datePublished": "2025-11-20"
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Andréa van Herk"
+        },
+        "reviewBody": "Excelente trabalho! Comprometido, dentro do prazo, com atendimento de excelência! Gostei muito.",
+        "datePublished": "2025-12-10"
+      }
+    ]
+  }
+  </script>
+
+  <!-- BreadcrumbList Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": "https://audiotext.com.br/transcricao-de-audio/#breadcrumb",
     "itemListElement": [
       { "@type": "ListItem", "position": 1, "name": "Audiotext", "item": "https://audiotext.com.br/" },
       { "@type": "ListItem", "position": 2, "name": "Transcrição de Áudio", "item": "https://audiotext.com.br/transcricao-de-audio/" }
@@ -425,11 +697,16 @@
 </head>
 <body class="min-h-screen bg-background text-foreground flex flex-col">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K8PJKT6"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
   <!-- Header -->
   <header class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur">
     <div class="container mx-auto flex h-16 items-center justify-between px-4">
       <div class="flex items-center gap-2 flex-shrink-0">
-        <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="h-8 w-auto flex-shrink-0" loading="lazy" decoding="async">
+        <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" width="200" height="50" loading="eager" class="h-8 w-auto flex-shrink-0" decoding="async">
       </div>
       <nav class="flex items-center gap-4" aria-label="Navegação principal">
         <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header-transcricao-profissional" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
@@ -642,7 +919,7 @@
         </div>
 
         <!-- Comparison Table -->
-        <div class="max-w-5xl mx-auto overflow-x-auto table-contrast-fix">
+        <div class="max-w-5xl mx-auto overflow-x-auto">
           <table class="w-full border-collapse bg-card rounded-lg overflow-hidden">
             <thead>
               <tr class="bg-muted">
@@ -1253,9 +1530,7 @@
           <!-- Pillar 1 -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
-              <div class="bg-primary/10 p-3 rounded-lg">
-                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
-              </div>
+              <svg class="lucide h-12 w-12 text-primary flex-shrink-0" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 1: Capacidade de Entrega em Escala</h3>
                 <p class="text-muted-foreground mb-4">Operação preparada para grandes volumes: entregamos projetos de 100+ horas em prazos curtos, mantendo qualidade e consistência.</p>
@@ -1274,9 +1549,7 @@
           <!-- Pillar 2 -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
-              <div class="bg-primary/10 p-3 rounded-lg">
-                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-              </div>
+              <svg class="lucide h-12 w-12 text-primary flex-shrink-0" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 2: Precificação Inteligente e Transparente</h3>
                 <p class="text-muted-foreground mb-4">Preço proporcional à quantidade de minutos e ao prazo escolhido. Sem surpresas, sem taxas escondidas.</p>
@@ -1295,9 +1568,7 @@
           <!-- Pillar 3 -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
-              <div class="bg-primary/10 p-3 rounded-lg">
-                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-              </div>
+              <svg class="lucide h-12 w-12 text-primary flex-shrink-0" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 3: Transcrições Precisas (Próxima a 100%)</h3>
                 <p class="text-muted-foreground mb-4">Transcritores especializados por área de conhecimento + revisão obrigatória antes da entrega.</p>
@@ -1316,9 +1587,7 @@
           <!-- Pillar 4 -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
             <div class="flex items-start gap-4">
-              <div class="bg-primary/10 p-3 rounded-lg">
-                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              </div>
+              <svg class="lucide h-12 w-12 text-primary flex-shrink-0" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
               <div class="flex-1">
                 <h3 class="font-semibold text-lg mb-2">Pilar 4: Sigilo e Confidencialidade</h3>
                 <p class="text-muted-foreground mb-4">Acesso restrito apenas a transcritor e revisor do seu pedido. Processos internos com controle de acesso. Termo de sigilo (NDA) disponível quando necessário.</p>
@@ -1806,7 +2075,7 @@
             </div>
             <div class="p-6 pt-0">
               <p class="text-muted-foreground text-sm">~R$ 0,30/min • Pronta em minutos • Acurácia média: 93%</p>
-              <a href="transcricao-automatica" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
+              <a href="https://app.audiotext.com.br" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
                 Saiba mais
                 <svg class="lucide h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
               </a>
@@ -2042,7 +2311,7 @@
                 <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden pb-4 pt-0 text-muted-foreground">
-                Geralmente não. O ideal é que toda especificação seja apontada antes do início da transcrição. Entre em contato o mais breve possível, avaliamos caso a caso e informamos os impactos antes de prosseguir.
+                Geralmente não. O ideal é que toda especificação seja apontada antes do início da transcrição. Entre em contato o mais breve possível — avaliamos caso a caso e informamos os impactos antes de prosseguir.
               </div>
             </div>
             <!-- FAQ 18 -->
@@ -2094,11 +2363,11 @@
     <div class="container mx-auto px-4">
       <div class="flex flex-col md:flex-row justify-between items-center gap-4">
         <div class="flex items-center gap-2">
-          <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="h-8" loading="lazy" decoding="async">
+          <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" width="200" height="50" class="h-8" loading="lazy" decoding="async">
         </div>
         <nav class="flex gap-6 text-sm text-muted-foreground" aria-label="Links do rodapé">
           <a href="/termos-e-condicoes-app" class="hover:text-foreground transition-colors">Termos de Uso</a>
-          <a href="/transcricao-automatica" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">Transcrição Automática</a>
+          <a href="https://app.audiotext.com.br" target="_blank" rel="noopener noreferrer" class="hover:text-foreground transition-colors">Transcrição Automática</a>
         </nav>
         <p class="text-sm text-muted-foreground text-center">© 2026 Audiotext. Todos os direitos reservados.</p>
       </div>
