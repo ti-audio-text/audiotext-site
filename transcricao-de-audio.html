@@ -229,19 +229,20 @@
     .bg-amber-100 { background-color: rgb(254, 243, 199); }
     .bg-amber-500 { background-color: rgb(245, 158, 11); }
     .bg-gray-50 { background-color: rgb(249, 250, 251); }
-    .bg-background\/95 { background-color: hsla(var(--background), 0.95); }
-    .bg-muted\/30 { background-color: hsla(var(--muted), 0.3); }
-    .bg-muted\/50 { background-color: hsla(var(--muted), 0.5); }
-    .bg-primary\/5 { background-color: hsla(var(--primary), 0.05); }
-    .bg-primary\/10 { background-color: hsla(var(--primary), 0.1); }
+    .bg-background\/95 { background-color: hsl(var(--background) / 0.95); }
+    .bg-muted\/30 { background-color: hsl(var(--muted) / 0.3); }
+    .bg-muted\/50 { background-color: hsl(var(--muted) / 0.5); }
+    .bg-primary\/5 { background-color: hsl(var(--primary) / 0.05); }
+    .bg-primary\/10 { background-color: hsl(var(--primary) / 0.1); }
     .bg-gradient-to-b { background-image: linear-gradient(to bottom, var(--tw-gradient-stops)); }
     .bg-gradient-to-br { background-image: linear-gradient(to bottom right, var(--tw-gradient-stops)); }
-    .from-background { --tw-gradient-from: hsl(var(--background)); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, hsla(var(--background), 0)); }
-    .from-card { --tw-gradient-from: hsl(var(--card)); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, hsla(var(--card), 0)); }
-    .to-muted\/30 { --tw-gradient-to: hsla(var(--muted), 0.3); }
-    .to-primary\/5 { --tw-gradient-to: hsla(var(--primary), 0.05); }
+    .from-background { --tw-gradient-from: hsl(var(--background)); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, hsl(var(--background) / 0)); }
+    .from-card { --tw-gradient-from: hsl(var(--card)); --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, hsl(var(--card) / 0)); }
+    .to-muted\/30 { --tw-gradient-to: hsl(var(--muted) / 0.3); }
+    .to-primary\/5 { --tw-gradient-to: hsl(var(--primary) / 0.05); }
     
     .fill-amber-500 { fill: rgb(245, 158, 11); }
+    .fill-amber-500 polygon { fill: rgb(245, 158, 11); stroke: rgb(245, 158, 11); }
     
     /* Borders */
     .border { border-width: 1px; }
@@ -1598,8 +1599,8 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
-                <p class="text-muted-foreground text-sm mb-3">"Ótima qualidade de transcrição e preço justo. Recomendo para uso corporativo."</p>
-                <p class="text-sm font-medium">— Fernanda Carvalho, <span class="text-primary font-semibold">Petrobrás</span></p>
+                <p class="text-muted-foreground text-sm mb-3">"A Audiotext nos atende com qualidade e presteza há anos."</p>
+                <p class="text-sm font-medium">— Guido Lemos, <span class="text-primary font-semibold">FIRB</span></p>
               </div>
             </div>
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
@@ -1611,8 +1612,8 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
-                <p class="text-muted-foreground text-sm mb-3">"Excelente serviço, muito preciso e profissional. Atenderam todas as nossas demandas."</p>
-                <p class="text-sm font-medium">— Pedro Almeida, <span class="text-primary font-semibold">FGV</span></p>
+                <p class="text-muted-foreground text-sm mb-3">"Vocês foram muito rápidos. O preço foi excelente comparado a outras empresas."</p>
+                <p class="text-sm font-medium">— Erick Aguilar, <span class="text-primary font-semibold">Petrobrás</span></p>
               </div>
             </div>
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
@@ -1624,8 +1625,8 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
-                <p class="text-muted-foreground text-sm mb-3">"Serviço impecável. Sempre entregam no prazo e com qualidade."</p>
-                <p class="text-sm font-medium">— Luciana Ribeiro, <span class="text-primary font-semibold">Globo</span></p>
+                <p class="text-muted-foreground text-sm mb-3">"Cumpriu o prazo combinado e superou as expectativas de qualidade."</p>
+                <p class="text-sm font-medium">— Luiz Ribas, <span class="text-primary font-semibold">ASID Brasil</span></p>
               </div>
             </div>
           </div>
@@ -1638,44 +1639,106 @@
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <h2 id="why-audiotext-heading" class="text-3xl md:text-4xl font-bold mb-4">
-            Por Que a Audiotext É a Escolha Certa Para Você
+            Por Que Escolher a Audiotext Para Transcrição de Áudio
           </h2>
-          <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Comparamos nossa solução para que você decida com segurança
+          <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
+            O que nos diferencia de soluções genéricas (e de IAs automáticas que entregam "rascunhos"):
           </p>
         </div>
 
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Precisão Próxima a 100%</h3>
-            <p class="text-muted-foreground text-sm">Transcritores especializados + revisão obrigatória. Resultados que você pode confiar.</p>
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <!-- Card 1: Award -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Experiência Consolidada de 14 Anos</h3>
+                <p class="text-muted-foreground text-sm">Desde 2012, realizamos transcrições para mais de 15 mil clientes no Brasil e no mundo. Já convertemos mais de 2 milhões de minutos de áudio e traduzimos mais de 500 mil palavras.</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Prazos Flexíveis</h3>
-            <p class="text-muted-foreground text-sm">De 24h a 8 dias úteis. Você escolhe o prazo e o valor que melhor atende suas necessidades.</p>
+          <!-- Card 2: Shield -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Sigilo e Confidencialidade em Primeiro Lugar</h3>
+                <p class="text-muted-foreground text-sm">Acesso restrito a transcritor e revisor do seu pedido. Processos internos com controle de acesso. Termo de sigilo (NDA) disponível quando necessário. Zero incidentes em 14 anos.</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Sigilo Garantido</h3>
-            <p class="text-muted-foreground text-sm">NDA disponível, acesso restrito, zero incidentes em 14 anos de operação.</p>
+          <!-- Card 3: Target -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Alta Precisão: Próxima a 100%</h3>
+                <p class="text-muted-foreground text-sm">Transcritores profissionais ouvem e digitam com equipamentos de alta qualidade sonora. Depois, revisores verificam todo o conteúdo antes da entrega.</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Alta Capacidade</h3>
-            <p class="text-muted-foreground text-sm">Entregamos até 100 horas simultâneas. Ideal para projetos de grande volume.</p>
+          <!-- Card 4: Zap -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Velocidade Sem Comprometer Qualidade</h3>
+                <p class="text-muted-foreground text-sm">Processos otimizados e equipe sincronizada permitem entregar grandes volumes no menor prazo do mercado — mantendo precisão e consistência.</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Especialização</h3>
-            <p class="text-muted-foreground text-sm">Transcritores com domínio em áreas jurídica, médica, acadêmica e corporativa.</p>
+          <!-- Card 5: DollarSign -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" x2="12" y1="2" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Precificação Clara e Flexível</h3>
+                <p class="text-muted-foreground text-sm">Orçamento instantâneo (em segundos), preço proporcional a minutos + prazo escolhido. Sem taxas escondidas, sem surpresas.</p>
+              </div>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Garantia 30 Dias</h3>
-            <p class="text-muted-foreground text-sm">Encontrou erro? Corrigimos grátis em até 3 dias úteis. Sem burocracia.</p>
+          <!-- Card 6: Package -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m7.5 4.27 9 5.15"/><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Alta Capacidade de Entrega</h3>
+                <p class="text-muted-foreground text-sm">Mais de 100 transcritores qualificados e disponíveis, com alocação por área de especialidade (jurídico, acadêmico, médico, corporativo, etc.).</p>
+              </div>
+            </div>
           </div>
+          <!-- Card 7: Bot -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Transparência com IA (Quando Faz Sentido)</h3>
+                <p class="text-muted-foreground text-sm">Além da transcrição revisada por pessoas, oferecemos transcrição automática por IA para quem tem prazo curtíssimo ou precisa reduzir custos (R$ 0,30/min vs R$ 2,00-5,50/min).</p>
+              </div>
+            </div>
+          </div>
+          <!-- Card 8: Users -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-6">
+            <div class="flex flex-col gap-4">
+              <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <div>
+                <h3 class="font-semibold mb-2">Equipe Especializada (+100 Transcritores)</h3>
+                <p class="text-muted-foreground text-sm">Rigoroso processo de seleção, avaliações recorrentes e treinamentos contínuos. Alocação estratégica por área: Jurídico | Médico | Acadêmico | Corporativo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="text-center mt-12">
+          <button
+            class="inline-flex items-center justify-center whitespace-nowrap rounded-lg text-lg font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 px-8 py-6 min-h-[56px] touch-manipulation"
+            data-gtm-category="cta"
+            data-gtm-action="click"
+            data-gtm-label="cta-why-audiotext-transcricao-profissional"
+            onclick="openModal()"
+          >
+            Ver meu orçamento
+          </button>
         </div>
       </div>
     </section>
@@ -1685,63 +1748,103 @@
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <h2 id="services-heading" class="text-3xl md:text-4xl font-bold mb-4">
-            Serviços Relacionados
+            Conheça Nossos Serviços de Transcrição
           </h2>
-          <p class="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Além da transcrição de áudio profissional, oferecemos soluções complementares
-          </p>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Transcrição Jurídica (Ipsis Litteris)</h3>
-            <p class="text-muted-foreground text-sm">Para processos judiciais. Aceita em tribunais e cartórios.</p>
-            <a href="/degravacao" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
-              Saiba mais
-              <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
+          <!-- Card 1: Transcrição de Áudio (Current) -->
+          <div class="rounded-lg border-2 border-primary bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="flex items-center gap-2">
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
+                <span class="bg-primary text-primary-foreground text-xs px-2 py-1 rounded">Você está aqui</span>
+              </div>
+              <h3 class="text-lg font-semibold leading-none tracking-tight mt-2">Transcrição de Áudio</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <p class="text-muted-foreground text-sm">Transcrição revisada por transcritores e revisores especializados. Para qualquer tipo de gravação que exige texto confiável e pronto para uso.</p>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Transcrição Automática (IA)</h3>
-            <p class="text-muted-foreground text-sm">Para gravações não jurídicas. Mais rápida e econômica.</p>
-            <a href="https://app.audiotext.com.br" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
-              Saiba mais
-              <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
+          <!-- Card 2: Transcrição Jurídica -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="flex items-center gap-2">
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg>
+              </div>
+              <h3 class="text-lg font-semibold leading-none tracking-tight mt-2">Transcrição de Áudio Jurídica</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <p class="text-muted-foreground text-sm">Transcrição na modalidade Ipsis Litteris (na íntegra), aceita em processos judiciais. Possibilidade de ata notarial para dar fé pública ao documento.</p>
+              <a href="/degravacao" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
+                Saiba mais
+                <svg class="lucide h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Transcrição para Ata de Reuniões</h3>
-            <p class="text-muted-foreground text-sm">Para reuniões, treinamentos e eventos empresariais.</p>
-            <a href="/transcricao-de-ata" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
-              Saiba mais
-              <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
+          <!-- Card 3: Transcrição Automática IA -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="flex items-center gap-2">
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
+              </div>
+              <h3 class="text-lg font-semibold leading-none tracking-tight mt-2">Transcrição Automática por IA</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <p class="text-muted-foreground text-sm">~R$ 0,30/min • Pronta em minutos • Acurácia média: 93%</p>
+              <a href="https://app.audiotext.com.br" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
+                Saiba mais
+                <svg class="lucide h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Transcrição para Pesquisa de Mercado</h3>
-            <p class="text-muted-foreground text-sm">Para empresas de pesquisa, consultorias e instituições.</p>
-            <a href="/transcricao-de-audio" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
-              Saiba mais
-              <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
+          <!-- Card 4: Ata de Reuniões -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="flex items-center gap-2">
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><path d="M12 11h4"/><path d="M12 16h4"/><path d="M8 11h.01"/><path d="M8 16h.01"/></svg>
+              </div>
+              <h3 class="text-lg font-semibold leading-none tracking-tight mt-2">Transcrição para Ata de Reuniões</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <p class="text-muted-foreground text-sm">Transcrição formatada para elaboração de atas formais.</p>
+              <a href="/transcricao-de-ata" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
+                Saiba mais
+                <svg class="lucide h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Transcrição para Pesquisa Acadêmica</h3>
-            <p class="text-muted-foreground text-sm">Para mestrandos, doutorandos e pesquisadores.</p>
-            <a href="/transcricao-de-audio" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
-              Saiba mais
-              <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
-            </a>
+          <!-- Card 5: Pesquisa de Mercado -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="flex items-center gap-2">
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" x2="18" y1="20" y2="10"/><line x1="12" x2="12" y1="20" y2="4"/><line x1="6" x2="6" y1="20" y2="14"/></svg>
+              </div>
+              <h3 class="text-lg font-semibold leading-none tracking-tight mt-2">Transcrição para Pesquisa de Mercado</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <p class="text-muted-foreground text-sm">Para empresas de pesquisa, consultorias e instituições.</p>
+              <a href="/transcricao-de-audio" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
+                Saiba mais
+                <svg class="lucide h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+            </div>
           </div>
-          <div class="bg-card p-6 rounded-lg border hover:shadow-lg transition-shadow">
-            <svg class="lucide h-10 w-10 text-primary mb-4" viewBox="0 0 24 24"><path d="M17.5 22h.5c.5 0 1-.2 1.4-.6.4-.4.6-.9.6-1.4V7.5L14.5 2H6c-.5 0-1 .2-1.4.6C4.2 3 4 3.5 4 4v3"/><polyline points="14 2 14 8 20 8"/><path d="M10 20v-1a2 2 0 1 1 4 0v1a2 2 0 1 1-4 0Z"/><path d="M6 20v-1a2 2 0 1 0-4 0v1a2 2 0 1 0 4 0Z"/><path d="M2 19v-3a6 6 0 0 1 12 0v3"/></svg>
-            <h3 class="font-semibold text-lg mb-2">Legendagem</h3>
-            <p class="text-muted-foreground text-sm">Legendas sincronizadas para vídeos e conteúdo audiovisual.</p>
+          <!-- Card 6: Pesquisa Acadêmica -->
+          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
+            <div class="flex flex-col space-y-1.5 p-6">
+              <div class="flex items-center gap-2">
+                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              </div>
+              <h3 class="text-lg font-semibold leading-none tracking-tight mt-2">Transcrição para Pesquisa Acadêmica</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <p class="text-muted-foreground text-sm">Para mestrandos, doutorandos e pesquisadores.</p>
+              <a href="/transcricao-de-audio" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
+                Saiba mais
+                <svg class="lucide h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -2001,7 +2104,7 @@
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
     <!-- Tooltip -->
-    <span class="absolute bg-foreground text-background text-sm px-3 py-2 rounded-md opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none" style="right: 72px;">
+    <span class="whatsapp-tooltip absolute text-sm px-3 py-2 rounded-md transition-opacity">
       Dúvidas? Fale conosco
     </span>
   </a>
