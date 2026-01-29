@@ -447,6 +447,10 @@ window.dataLayer = window.dataLayer || [];
     .gap-6 { gap: 1.5rem; }
     .gap-8 { gap: 2rem; }
     
+    .mt-0\.5 { margin-top: 0.125rem; }
+    .mb-0\.5 { margin-bottom: 0.125rem; }
+    .mt-1\.5 { margin-top: 0.375rem; }
+    
     .space-y-1 > * + * { margin-top: 0.25rem; }
     .space-y-2 > * + * { margin-top: 0.5rem; }
     .space-y-4 > * + * { margin-top: 1rem; }
@@ -473,8 +477,6 @@ window.dataLayer = window.dataLayer || [];
     .mb-6 { margin-bottom: 1.5rem; }
     .mb-8 { margin-bottom: 2rem; }
     .mb-12 { margin-bottom: 3rem; }
-    .mt-0\.5 { margin-top: 0.125rem; }
-    .mt-1\.5 { margin-top: 0.375rem; }
     .mt-6 { margin-top: 1.5rem; }
     .mx-auto { margin-left: auto; margin-right: auto; }
     .mx-6 { margin-left: 1.5rem; margin-right: 1.5rem; }
@@ -651,7 +653,7 @@ window.dataLayer = window.dataLayer || [];
       gap: 1.5rem;
       flex: 1;
       justify-content: flex-start;
-      margin-left: 2rem;
+      margin-left: 3.5rem;
     }
     
     @media (min-width: 768px) {
@@ -659,7 +661,8 @@ window.dataLayer = window.dataLayer || [];
       .mobile-menu-btn { display: none; }
     }
     
-    .nav-link {
+    .nav-link,
+    .dropdown-trigger {
       display: flex;
       align-items: center;
       gap: 0.25rem;
@@ -668,9 +671,15 @@ window.dataLayer = window.dataLayer || [];
       color: hsl(var(--muted-foreground));
       text-decoration: none;
       transition: color 0.15s ease;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      font-family: inherit;
     }
     
-    .nav-link:hover {
+    .nav-link:hover,
+    .dropdown-trigger:hover {
       color: hsl(var(--foreground));
     }
     
@@ -679,36 +688,31 @@ window.dataLayer = window.dataLayer || [];
       position: relative;
     }
     
-    .dropdown-trigger {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: hsl(var(--muted-foreground));
-      background: none;
-      border: none;
-      cursor: pointer;
-      transition: color 0.15s ease;
-    }
-    
-    .dropdown-trigger:hover {
-      color: hsl(var(--foreground));
-    }
-    
     .dropdown-content {
       display: none;
       position: absolute;
       top: 100%;
       left: 0;
-      margin-top: 0.5rem;
+      padding-top: 0.75rem;
       min-width: 280px;
+      z-index: 50;
+    }
+    
+    .dropdown-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 0.75rem;
+    }
+    
+    .dropdown-content-inner {
       background-color: hsl(var(--background));
       border: 1px solid hsl(var(--border));
       border-radius: calc(var(--radius) - 2px);
       box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
       padding: 0.25rem;
-      z-index: 50;
     }
     
     .dropdown:hover .dropdown-content {
@@ -1049,7 +1053,7 @@ window.dataLayer = window.dataLayer || [];
 
         <!-- Logo -->
         <a href="/" class="flex items-center gap-2 flex-shrink-0">
-          <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="header-logo" loading="lazy" decoding="async">
+          <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" class="header-logo" decoding="async">
         </a>
 
         <!-- Desktop Navigation -->
@@ -1061,6 +1065,7 @@ window.dataLayer = window.dataLayer || [];
               <svg class="icon h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>
             </button>
             <div class="dropdown-content">
+              <div class="dropdown-content-inner">
               <a href="/transcricao-automatica" class="dropdown-item">
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
                 Transcrição Automática por IA
@@ -1077,6 +1082,7 @@ window.dataLayer = window.dataLayer || [];
                 <svg class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2" ry="2"/></svg>
                 Legendagem de Vídeos
               </a>
+              </div>
             </div>
           </div>
 
@@ -1085,7 +1091,7 @@ window.dataLayer = window.dataLayer || [];
         </nav>
 
         <!-- CTA Button -->
-        <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+        <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header" class="btn btn-primary h-10 px-4 py-2">
         Ver meu orçamento
         </button>
       </div>
@@ -1725,66 +1731,52 @@ window.dataLayer = window.dataLayer || [];
               </div>
             </div>
 
-            <!-- Mobile Steps -->
-            <div class="lg:hidden space-y-6">
-              <!-- Mobile Step 1 -->
-              <div class="card p-6">
-                <div class="flex gap-4">
-                  <div class="relative">
-                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <!-- Mobile Steps - Horizontal Layout -->
+            <div class="lg:hidden">
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <!-- Step 1 -->
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-3">
+                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">1</span>
+                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     </div>
-                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">1</div>
                   </div>
-                  <div class="flex-1">
-                    <h3 class="font-bold mb-1">Escolha o Serviço</h3>
-                    <p class="text-sm text-muted-foreground">Identifique qual serviço atende seu projeto: transcrição profissional, degravação, IA ou legendagem.</p>
-                  </div>
+                  <h3 class="font-bold text-sm mb-1">Escolha o Serviço</h3>
+                  <p class="text-xs text-muted-foreground">Identifique qual serviço atende seu projeto: transcrição profissional, degravação, IA ou legendagem.</p>
                 </div>
-              </div>
-              <!-- Mobile Step 2 -->
-              <div class="card p-6">
-                <div class="flex gap-4">
-                  <div class="relative">
-                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                <!-- Step 2 -->
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-3">
+                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">2</span>
+                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
                     </div>
-                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">2</div>
                   </div>
-                  <div class="flex-1">
-                    <h3 class="font-bold mb-1">Receba Orçamento Instantâneo</h3>
-                    <p class="text-sm text-muted-foreground">Em menos de 1 minuto você sabe o preço exato. Sem surpresas, sem taxas escondidas.</p>
-                  </div>
+                  <h3 class="font-bold text-sm mb-1">Receba Orçamento Instantâneo</h3>
+                  <p class="text-xs text-muted-foreground">Em menos de 1 minuto você sabe o preço exato. Sem surpresas, sem taxas escondidas.</p>
                 </div>
-              </div>
-              <!-- Mobile Step 3 -->
-              <div class="card p-6">
-                <div class="flex gap-4">
-                  <div class="relative">
-                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                <!-- Step 3 -->
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-3">
+                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">3</span>
+                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                     </div>
-                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">3</div>
                   </div>
-                  <div class="flex-1">
-                    <h3 class="font-bold mb-1">Envie Seus Arquivos</h3>
-                    <p class="text-sm text-muted-foreground">Upload 100% seguro e criptografado. Sem limite de tamanho por arquivo.</p>
-                  </div>
+                  <h3 class="font-bold text-sm mb-1">Envie Seus Arquivos</h3>
+                  <p class="text-xs text-muted-foreground">Upload 100% seguro e criptografado. Sem limite de tamanho por arquivo.</p>
                 </div>
-              </div>
-              <!-- Mobile Step 4 -->
-              <div class="card p-6">
-                <div class="flex gap-4">
-                  <div class="relative">
-                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-5 w-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <!-- Step 4 -->
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-3">
+                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">4</span>
+                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                     </div>
-                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">4</div>
                   </div>
-                  <div class="flex-1">
-                    <h3 class="font-bold mb-1">Receba no Prazo</h3>
-                    <p class="text-sm text-muted-foreground">Você escolhe o prazo de entrega (24h a 10 dias úteis). Entregamos conforme combinado ou seu dinheiro de volta.</p>
-                  </div>
+                  <h3 class="font-bold text-sm mb-1">Receba no Prazo</h3>
+                  <p class="text-xs text-muted-foreground">Você escolhe o prazo de entrega (24h a 10 dias úteis). Entregamos conforme combinado ou seu dinheiro de volta.</p>
                 </div>
               </div>
             </div>
@@ -2255,15 +2247,15 @@ window.dataLayer = window.dataLayer || [];
               <!-- Email -->
               <li>
                 <p class="text-xs text-muted-foreground mb-0.5">Email</p>
-                <a href="/cdn-cgi/l/email-protection#4026212c25232f2d00213524292f342538346e232f2d6e2232" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  <span class="__cf_email__" data-cfemail="b8ded9d4dddbd7d5f8d9cddcd1d7ccddc0cc96dbd7d596daca">[email&#160;protected]</span>
+                <a href="mailto:falecom@audiotext.com.br" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  falecom@audiotext.com.br
                 </a>
               </li>
 
               <!-- Phones -->
               <li>
                 <p class="text-xs text-muted-foreground mb-0.5">Telefones</p>
-                <div class="space-y-0.5">
+                <div class="space-y-1">
                   <a href="tel:+554133633220" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
                     (41) 3363-3220 - Curitiba
                   </a>
@@ -2389,6 +2381,14 @@ window.dataLayer = window.dataLayer || [];
 
   <!-- JavaScript for interactivity -->
     <script>
+
+    // Mobile Menu Toggle
+    function toggleMobileMenu() {
+      const menu = document.getElementById('mobileMenu');
+      const overlay = document.getElementById('mobileOverlay');
+      menu.classList.toggle('open');
+      overlay.classList.toggle('open');
+    }
 
     // Mobile Services Accordion
     function toggleMobileServices() {
