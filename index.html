@@ -1492,7 +1492,7 @@ window.dataLayer = window.dataLayer || [];
                     <span class="font-semibold">Imediato (minutos)</span>
                   </div>
                 </div>
-                <a href=/transcricao-automatica" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary font-medium hover:underline">
+                <a href="/transcricao-automatica" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary font-medium hover:underline">
                   Saiba mais sobre Transcrição Automática
                   <svg class="icon h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
@@ -2244,8 +2244,8 @@ window.dataLayer = window.dataLayer || [];
               <!-- Email -->
               <li>
                 <p class="text-xs text-muted-foreground mb-0.5">Email</p>
-                <a href="mailto:falecom@audiotext.com.br" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  falecom@audiotext.com.br
+                <a href="/cdn-cgi/l/email-protection#0e686f626b6d61634e6f7b6a67617a6b767a206d6163206c7c" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <span class="__cf_email__" data-cfemail="7016111c15131f1d30110514191f041508045e131f1d5e1202">[email&#160;protected]</span>
                 </a>
               </li>
 
@@ -2377,7 +2377,7 @@ window.dataLayer = window.dataLayer || [];
   </div>
 
   <!-- JavaScript for interactivity -->
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
     // Mobile Menu Toggle
     function toggleMobileMenu() {
@@ -2537,4 +2537,19 @@ window.dataLayer = window.dataLayer || [];
           window.open(
             'https://api.whatsapp.com/send?phone=5541997990622&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20meu%20or%C3%A7amento%2C%20voc%C3%AA%20pode%20me%20ajudar%3F%20',
             '_blank'
-    
+          );
+        }
+        
+        if (data === 'openTransfer') {
+          window.open('https://audiotext.wetransfer.com', '_blank');
+        }
+      }
+    });
+
+    // Initialize reviews on page load
+    renderReviews();
+
+  </script>
+
+</body>
+</html>
