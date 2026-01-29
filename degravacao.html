@@ -475,21 +475,6 @@ window.dataLayer = window.dataLayer || [];
       }
     }
     
-    /* ===== Inline Lucide icon styling ===== */
-    .lucide-icon {
-      display: inline-block;
-      vertical-align: middle;
-      width: 1em;
-      height: 1em;
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      fill: none;
-    }
-    .lucide-icon.fill-current {
-      fill: currentColor;
-    }
   </style>
   
   <!-- Schema.org Structured Data -->
@@ -1633,9 +1618,6 @@ window.dataLayer = window.dataLayer || [];
     </div>
   </div>
 
-  <!-- Lucide Icons loaded with defer -->
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
-
   <script>
     // Modal functions
     function openModal() {
@@ -1936,10 +1918,6 @@ window.dataLayer = window.dataLayer || [];
       renderCorporateTestimonials();
       renderFAQ();
       
-      // Initialize Lucide icons if available
-      if (typeof lucide !== 'undefined') {
-        lucide.createIcons();
-      }
     });
   </script>
 </body>
