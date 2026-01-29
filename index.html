@@ -426,6 +426,14 @@ window.dataLayer = window.dataLayer || [];
     .grid { display: grid; }
     .hidden { display: none; }
     
+    /* Responsive display utilities */
+    @media (min-width: 768px) {
+      .md\:block { display: block; }
+      .md\:hidden { display: none; }
+      .md\:flex { display: flex; }
+      .md\:grid { display: grid; }
+    }
+    
     .flex-col { flex-direction: column; }
     .flex-shrink-0 { flex-shrink: 0; }
     .shrink-0 { flex-shrink: 0; }
@@ -518,8 +526,18 @@ window.dataLayer = window.dataLayer || [];
     .sticky { position: sticky; }
     .top-0 { top: 0; }
     .top-4 { top: 1rem; }
+    .top-8 { top: 2rem; }
+    .-top-1 { top: -0.25rem; }
+    .left-0 { left: 0; }
+    .-left-1 { left: -0.25rem; }
+    .-left-2 { left: -0.5rem; }
+    .right-0 { right: 0; }
     .right-4 { right: 1rem; }
+    .z-10 { z-index: 10; }
     .z-50 { z-index: 50; }
+    
+    .h-0\.5 { height: 0.125rem; }
+    .bg-border { background-color: hsl(var(--border)); }
     
     .grayscale { filter: grayscale(100%); }
     .grayscale:hover { filter: grayscale(0); }
@@ -537,6 +555,7 @@ window.dataLayer = window.dataLayer || [];
     
     /* Grid responsive */
     .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+    .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     
     @media (min-width: 640px) {
       .sm\:w-auto { width: auto; }
@@ -547,8 +566,6 @@ window.dataLayer = window.dataLayer || [];
     }
     
     @media (min-width: 768px) {
-      .md\:flex { display: flex; }
-      .md\:hidden { display: none; }
       .md\:py-32 { padding-top: 8rem; padding-bottom: 8rem; }
       .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -729,7 +746,12 @@ window.dataLayer = window.dataLayer || [];
     }
     
     .dropdown-item:hover {
-      background-color: hsl(var(--accent));
+      background-color: hsl(var(--primary));
+      color: hsl(var(--primary-foreground));
+    }
+    
+    .dropdown-item:hover svg {
+      color: hsl(var(--primary-foreground));
     }
     
     .dropdown-item svg {
@@ -952,7 +974,6 @@ window.dataLayer = window.dataLayer || [];
       .review-hidden-mobile {
         display: block;
       }
-      .md\:block { display: block; }
     }
     
     /* Button outline variant */
@@ -1492,7 +1513,7 @@ window.dataLayer = window.dataLayer || [];
                     <span class="font-semibold">Imediato (minutos)</span>
                   </div>
                 </div>
-                <a href="/transcricao-automatica" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary font-medium hover:underline">
+                <a href=/transcricao-automatica" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary font-medium hover:underline">
                   Saiba mais sobre Transcrição Automática
                   <svg class="icon h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
                 </a>
@@ -1669,6 +1690,7 @@ window.dataLayer = window.dataLayer || [];
       </section>
 
       <!-- SECTION 5: How it Works -->
+      <!-- SECTION 5: How it Works -->
       <section class="py-20 bg-muted-30" aria-labelledby="how-it-works-heading">
         <div class="container mx-auto px-4">
           <div class="text-center mb-16">
@@ -1683,97 +1705,125 @@ window.dataLayer = window.dataLayer || [];
 
           <!-- Steps Timeline -->
           <div class="max-w-5xl mx-auto">
-            <!-- Desktop Timeline -->
-            <div class="hidden lg:block relative">
+            <!-- Desktop Timeline - hidden on mobile, visible md+ -->
+            <div class="hidden md:block relative">
               <!-- Connecting Line -->
-              <div class="absolute top-16 left-0 right-0 h-0.5 bg-border"></div>
+              <div class="absolute top-8 left-0 right-0 h-0.5 bg-border"></div>
               
               <div class="grid grid-cols-4 gap-6">
                 <!-- Step 1 -->
-                <div class="relative flex flex-col items-center text-center">
-                  <div class="relative z-10 w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    <svg class="icon h-7 w-7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-6">
+                    <div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+                    </div>
+                    <div class="absolute -top-1 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">1</div>
                   </div>
-                  <div class="absolute top-0 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">1</div>
                   <h3 class="font-bold text-lg mb-2">Escolha o Serviço</h3>
                   <p class="text-sm text-muted-foreground">Identifique qual serviço atende seu projeto: transcrição profissional, degravação, IA ou legendagem.</p>
                 </div>
+
                 <!-- Step 2 -->
-                <div class="relative flex flex-col items-center text-center">
-                  <div class="relative z-10 w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    <svg class="icon h-7 w-7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-6">
+                    <div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+                    </div>
+                    <div class="absolute -top-1 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">2</div>
                   </div>
-                  <div class="absolute top-0 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">2</div>
-                  <h3 class="font-bold text-lg mb-2">Receba Orçamento Instantâneo</h3>
-                  <p class="text-sm text-muted-foreground">Em menos de 1 minuto você sabe o preço exato. Sem surpresas, sem taxas escondidas.</p>
+                  <h3 class="font-bold text-lg mb-2">Orçamento Instantâneo</h3>
+                  <p class="text-sm text-muted-foreground">Em menos de 1 minuto você sabe o preço exato. Sem surpresas, sem taxas escondidas. Ou, para IA, escolha o pacote que prefira.</p>
                 </div>
+
                 <!-- Step 3 -->
-                <div class="relative flex flex-col items-center text-center">
-                  <div class="relative z-10 w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    <svg class="icon h-7 w-7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-6">
+                    <div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+                    </div>
+                    <div class="absolute -top-1 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">3</div>
                   </div>
-                  <div class="absolute top-0 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">3</div>
                   <h3 class="font-bold text-lg mb-2">Envie Seus Arquivos</h3>
-                  <p class="text-sm text-muted-foreground">Upload 100% seguro e criptografado. Sem limite de tamanho por arquivo.</p>
+                  <p class="text-sm text-muted-foreground">Escolha entre os 3 prazos de entrega e envie seus arquivos. Upload seguro. Sem limite de tamanho por arquivo.</p>
                 </div>
+
                 <!-- Step 4 -->
-                <div class="relative flex flex-col items-center text-center">
-                  <div class="relative z-10 w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center mb-6 shadow-lg">
-                    <svg class="icon h-7 w-7" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                <div class="flex flex-col items-center text-center">
+                  <div class="relative mb-6">
+                    <div class="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-lg">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+                    </div>
+                    <div class="absolute -top-1 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">4</div>
                   </div>
-                  <div class="absolute top-0 -left-2 w-8 h-8 bg-background border-2 border-primary rounded-full flex items-center justify-center text-sm font-bold text-primary">4</div>
                   <h3 class="font-bold text-lg mb-2">Receba no Prazo</h3>
-                  <p class="text-sm text-muted-foreground">Você escolhe o prazo de entrega (24h a 10 dias úteis). Entregamos conforme combinado ou seu dinheiro de volta.</p>
+                  <p class="text-sm text-muted-foreground">Após o pagamento, receba suas transcrições por e-mail no prazo escolhido.</p>
                 </div>
               </div>
             </div>
 
-            <!-- Mobile Steps - Horizontal Layout -->
-            <div class="lg:hidden">
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <!-- Step 1 -->
-                <div class="flex flex-col items-center text-center">
-                  <div class="relative mb-3">
-                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">1</span>
-                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <!-- Mobile Steps - visible on mobile, hidden md+ -->
+            <div class="md:hidden space-y-4">
+              <!-- Step 1 -->
+              <div class="card p-6">
+                <div class="flex gap-4">
+                  <div class="relative flex-shrink-0">
+                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
                     </div>
+                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">1</div>
                   </div>
-                  <h3 class="font-bold text-sm mb-1">Escolha o Serviço</h3>
-                  <p class="text-xs text-muted-foreground">Identifique qual serviço atende seu projeto: transcrição profissional, degravação, IA ou legendagem.</p>
+                  <div class="flex-1">
+                    <h3 class="font-bold mb-1">Escolha o Serviço</h3>
+                    <p class="text-sm text-muted-foreground">Identifique qual serviço atende seu projeto: transcrição profissional, degravação, IA ou legendagem.</p>
+                  </div>
                 </div>
-                <!-- Step 2 -->
-                <div class="flex flex-col items-center text-center">
-                  <div class="relative mb-3">
-                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">2</span>
-                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="card p-6">
+                <div class="flex gap-4">
+                  <div class="relative flex-shrink-0">
+                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/></svg>
                     </div>
+                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">2</div>
                   </div>
-                  <h3 class="font-bold text-sm mb-1">Receba Orçamento Instantâneo</h3>
-                  <p class="text-xs text-muted-foreground">Em menos de 1 minuto você sabe o preço exato. Sem surpresas, sem taxas escondidas.</p>
+                  <div class="flex-1">
+                    <h3 class="font-bold mb-1">Orçamento Instantâneo</h3>
+                    <p class="text-sm text-muted-foreground">Em menos de 1 minuto você sabe o preço exato. Sem surpresas, sem taxas escondidas. Ou, para IA, escolha o pacote que prefira.</p>
+                  </div>
                 </div>
-                <!-- Step 3 -->
-                <div class="flex flex-col items-center text-center">
-                  <div class="relative mb-3">
-                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">3</span>
-                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="card p-6">
+                <div class="flex gap-4">
+                  <div class="relative flex-shrink-0">
+                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" x2="12" y1="3" y2="15"/></svg>
                     </div>
+                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">3</div>
                   </div>
-                  <h3 class="font-bold text-sm mb-1">Envie Seus Arquivos</h3>
-                  <p class="text-xs text-muted-foreground">Upload 100% seguro e criptografado. Sem limite de tamanho por arquivo.</p>
+                  <div class="flex-1">
+                    <h3 class="font-bold mb-1">Envie Seus Arquivos</h3>
+                    <p class="text-sm text-muted-foreground">Escolha entre os 3 prazos de entrega e envie seus arquivos. Upload seguro. Sem limite de tamanho por arquivo.</p>
+                  </div>
                 </div>
-                <!-- Step 4 -->
-                <div class="flex flex-col items-center text-center">
-                  <div class="relative mb-3">
-                    <span class="absolute -top-2 -left-2 w-5 h-5 bg-background border border-muted-foreground rounded-full flex items-center justify-center text-xs text-muted-foreground">4</span>
-                    <div class="w-14 h-14 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
-                      <svg class="icon h-6 w-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="card p-6">
+                <div class="flex gap-4">
+                  <div class="relative flex-shrink-0">
+                    <div class="w-12 h-12 bg-primary text-primary-foreground rounded-full flex items-center justify-center shadow-md">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="m9 11 3 3L22 4"/></svg>
                     </div>
+                    <div class="absolute -top-1 -left-1 w-6 h-6 bg-background border-2 border-primary rounded-full flex items-center justify-center text-xs font-bold text-primary">4</div>
                   </div>
-                  <h3 class="font-bold text-sm mb-1">Receba no Prazo</h3>
-                  <p class="text-xs text-muted-foreground">Você escolhe o prazo de entrega (24h a 10 dias úteis). Entregamos conforme combinado ou seu dinheiro de volta.</p>
+                  <div class="flex-1">
+                    <h3 class="font-bold mb-1">Receba no Prazo</h3>
+                    <p class="text-sm text-muted-foreground">Após o pagamento, receba suas transcrições por e-mail no prazo escolhido.</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1781,7 +1831,7 @@ window.dataLayer = window.dataLayer || [];
 
           <div class="text-center mt-12">
             <button class="btn btn-primary btn-lg text-lg px-8 py-6 min-h-[56px] touch-manipulation" onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-how-it-works-home">
-              Ver meu orçamento
+              Solicitar orçamento agora
             </button>
           </div>
         </div>
@@ -2244,8 +2294,8 @@ window.dataLayer = window.dataLayer || [];
               <!-- Email -->
               <li>
                 <p class="text-xs text-muted-foreground mb-0.5">Email</p>
-                <a href="/cdn-cgi/l/email-protection#0e686f626b6d61634e6f7b6a67617a6b767a206d6163206c7c" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  <span class="__cf_email__" data-cfemail="7016111c15131f1d30110514191f041508045e131f1d5e1202">[email&#160;protected]</span>
+                <a href="/cdn-cgi/l/email-protection#0462656861676b69446571606d6b70617c702a676b692a6676" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  <span class="__cf_email__" data-cfemail="0b6d6a676e6864664b6a7e6f62647f6e737f25686466256979">[email&#160;protected]</span>
                 </a>
               </li>
 
@@ -2546,10 +2596,10 @@ window.dataLayer = window.dataLayer || [];
       }
     });
 
-    // Initialize reviews on page load
-    renderReviews();
-
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      renderReviews();
+    });
   </script>
-
 </body>
 </html>
