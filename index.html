@@ -1083,10 +1083,19 @@ window.dataLayer = window.dataLayer || [];
         padding-left: 1rem;
       }
       
-      /* 3. Carrossel - garantir animação no mobile */
+      /* 3. Carrossel - velocidade ajustada para ~10s no mobile */
       .animate-scroll-logos {
-        animation: scroll-logos 20s linear infinite !important;
+        animation: scroll-logos 12s linear infinite !important;
         will-change: transform;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+      }
+      
+      /* Garantir que logos não encolham no mobile */
+      .animate-scroll-logos > div {
+        flex-shrink: 0 !important;
+        width: 8rem !important;
+        min-width: 8rem !important;
       }
       
       /* 4. Links serviços - fonte +1pt e weight +100 */
