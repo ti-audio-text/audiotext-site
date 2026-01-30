@@ -57,5 +57,167 @@
         }
       ]
     }
+  ],
+  "redirects": [
+    {
+      "source": "/dicas-gravar-audio-celular-com-qualidade",
+      "destination": "https://www.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
+      "permanent": true
+    },
+    {
+      "source": "/dicas-gravar-audio-celular-com-qualidade/",
+      "destination": "https://www.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter/regras-padroes-transcricao-de-audio-em-texto",
+      "destination": "https://www.audiotext.com.br/canal-do-texter/regras-padroes-transcricao-de-audio-em-texto/",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter/regras-padroes-transcricao-de-audio-em-texto/",
+      "destination": "https://www.audiotext.com.br/canal-do-texter/regras-padroes-transcricao-de-audio-em-texto/",
+      "permanent": true
+    },
+    {
+      "source": "/vagas/transcritor",
+      "destination": "https://www.audiotext.com.br/vagas/transcritor/",
+      "permanent": true
+    },
+    {
+      "source": "/vagas/transcritor/",
+      "destination": "https://www.audiotext.com.br/vagas/transcritor/",
+      "permanent": true
+    },
+    {
+      "source": "/softwares-de-transcricao-de-audio",
+      "destination": "https://www.audiotext.com.br/softwares-de-transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/softwares-de-transcricao-de-audio/",
+      "destination": "https://www.audiotext.com.br/softwares-de-transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/transcricao-de-audio-por-ia",
+      "destination": "https://www.audiotext.com.br/transcricao-de-audio-por-ia/",
+      "permanent": true
+    },
+    {
+      "source": "/transcricao-de-audio-por-ia/",
+      "destination": "https://www.audiotext.com.br/transcricao-de-audio-por-ia/",
+      "permanent": true
+    },
+    {
+      "source": "/modelos-de-transcricao-de-audio-em-texto",
+      "destination": "https://www.audiotext.com.br/modelos-de-transcricao-de-audio-em-texto/",
+      "permanent": true
+    },
+    {
+      "source": "/modelos-de-transcricao-de-audio-em-texto/",
+      "destination": "https://www.audiotext.com.br/modelos-de-transcricao-de-audio-em-texto/",
+      "permanent": true
+    },
+    {
+      "source": "/melhores-apps-gravacao-audio-celular",
+      "destination": "https://www.audiotext.com.br/melhores-apps-gravacao-audio-celular/",
+      "permanent": true
+    },
+    {
+      "source": "/melhores-apps-gravacao-audio-celular/",
+      "destination": "https://www.audiotext.com.br/melhores-apps-gravacao-audio-celular/",
+      "permanent": true
+    },
+    {
+      "source": "/vagas",
+      "destination": "https://www.audiotext.com.br/vagas/",
+      "permanent": true
+    },
+    {
+      "source": "/vagas/",
+      "destination": "https://www.audiotext.com.br/vagas/",
+      "permanent": true
+    },
+    {
+      "source": "/categoria-Faq/transcricao-de-audio",
+      "destination": "https://www.audiotext.com.br/categoria-Faq/transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/categoria-Faq/transcricao-de-audio/",
+      "destination": "https://www.audiotext.com.br/categoria-Faq/transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter/como-revisar-formatar-transcricao-de-audio",
+      "destination": "https://www.audiotext.com.br/canal-do-texter/como-revisar-formatar-transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter/como-revisar-formatar-transcricao-de-audio/",
+      "destination": "https://www.audiotext.com.br/canal-do-texter/como-revisar-formatar-transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter/o-que-e-transcricao-de-audio",
+      "destination": "https://www.audiotext.com.br/canal-do-texter/o-que-e-transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter/o-que-e-transcricao-de-audio/",
+      "destination": "https://www.audiotext.com.br/canal-do-texter/o-que-e-transcricao-de-audio/",
+      "permanent": true
+    },
+    {
+      "source": "/o-que-e-degravacacao-ipsis-litteris",
+      "destination": "https://www.audiotext.com.br/o-que-e-degravacacao-ipsis-litteris/",
+      "permanent": true
+    },
+    {
+      "source": "/o-que-e-degravacacao-ipsis-litteris/",
+      "destination": "https://www.audiotext.com.br/o-que-e-degravacacao-ipsis-litteris/",
+      "permanent": true
+    },
+    {
+      "source": "/pergunta-frequentes/quais-os-tipos-de-legenda",
+      "destination": "https://www.audiotext.com.br/pergunta-frequentes/quais-os-tipos-de-legenda/",
+      "permanent": true
+    },
+    {
+      "source": "/pergunta-frequentes/quais-os-tipos-de-legenda/",
+      "destination": "https://www.audiotext.com.br/pergunta-frequentes/quais-os-tipos-de-legenda/",
+      "permanent": true
+    },
+    {
+      "source": "/analisar-degravacao-de-audio-em-texto",
+      "destination": "https://www.audiotext.com.br/analisar-degravacao-de-audio-em-texto/",
+      "permanent": true
+    },
+    {
+      "source": "/analisar-degravacao-de-audio-em-texto/",
+      "destination": "https://www.audiotext.com.br/analisar-degravacao-de-audio-em-texto/",
+      "permanent": true
+    },
+    {
+      "source": "/servicos/transcricao-empresarial",
+      "destination": "https://www.audiotext.com.br/servicos/transcricao-empresarial/",
+      "permanent": true
+    },
+    {
+      "source": "/servicos/transcricao-empresarial/",
+      "destination": "https://www.audiotext.com.br/servicos/transcricao-empresarial/",
+      "permanent": true
+    },
+    {
+      "source": "/texter",
+      "destination": "https://www.audiotext.com.br/texter/",
+      "permanent": true
+    },
+    {
+      "source": "/texter/",
+      "destination": "https://www.audiotext.com.br/texter/",
+      "permanent": true
+    }
   ]
 }
