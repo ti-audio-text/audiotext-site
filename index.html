@@ -1050,6 +1050,64 @@ window.dataLayer = window.dataLayer || [];
         border-radius: 0;
       }
     }
+    
+    /* === CORREÇÕES MOBILE === */
+    @media (max-width: 767px) {
+      /* 1. Hamburger - barras maiores, pretas, mais peso */
+      .mobile-menu-btn svg {
+        width: 28px;
+        height: 28px;
+        stroke: hsl(var(--foreground));
+        stroke-width: 2.5;
+      }
+      
+      /* 2. Menu mobile - opções padronizadas e maiores */
+      .mobile-menu {
+        padding: 1.5rem;
+      }
+      .mobile-menu nav {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .mobile-menu button,
+      .mobile-menu a {
+        font-size: 1.125rem;
+        padding: 0.875rem 0;
+        color: hsl(var(--foreground));
+        font-weight: 500;
+      }
+      .mobile-menu #mobileServicesContent a {
+        font-size: 1rem;
+        padding: 0.75rem 0;
+        padding-left: 1rem;
+      }
+      
+      /* 3. Carrossel - garantir animação no mobile */
+      .animate-scroll-logos {
+        animation: scroll-logos 20s linear infinite !important;
+        will-change: transform;
+      }
+      
+      /* 4. Links serviços - fonte +1pt e weight +100 */
+      .card a.inline-flex {
+        font-size: 0.9375rem;
+        font-weight: 600;
+      }
+      
+      /* 5. FAQ - cor correta e peso da fonte */
+      .accordion-trigger {
+        color: hsl(var(--foreground));
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      .accordion-trigger span {
+        color: hsl(var(--foreground));
+      }
+      .accordion-icon {
+        stroke: hsl(var(--foreground));
+      }
+    }
   </style>
 </head>
 <body>
@@ -2295,8 +2353,8 @@ window.dataLayer = window.dataLayer || [];
               <li>
                 <p class="text-xs text-muted-foreground mb-0.5">Telefones</p>
                 <div class="space-y-1">
-                  <a href="mailto:falecom@audiotext.com.br" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
-                    falecom@audiotext.com.br
+                  <a href="/cdn-cgi/l/email-protection#1076717c75737f7d50716574797f647568643e737f7d3e7262" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
+                    <span class="__cf_email__" data-cfemail="e583848980868a88a58490818c8a91809d91cb868a88cb8797">[email&#160;protected]</span>
                   </a>
               </li>
 
@@ -2428,7 +2486,7 @@ window.dataLayer = window.dataLayer || [];
   </div>
 
   <!-- JavaScript for interactivity -->  
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
     // Mobile Menu Toggle
     function toggleMobileMenu() {
@@ -2595,11 +2653,6 @@ window.dataLayer = window.dataLayer || [];
           window.open('https://audiotext.wetransfer.com', '_blank');
         }
       }
-    });
-
-    // Initialize on page load
-    document.addEventListener('DOMContentLoaded', function() {
-      renderReviews();
     });
   </script>
 </body>
