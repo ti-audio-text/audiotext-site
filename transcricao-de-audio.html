@@ -434,6 +434,15 @@ window.dataLayer = window.dataLayer || [];
     @media (min-width: 768px) { .animate-scroll-logos { animation: scroll-logos 36s linear infinite; } }
     @media (prefers-reduced-motion: reduce) { .animate-scroll-logos { animation: none; } }
 
+   /* Carrossel - velocidade ajustada para ~20s no mobile */
+      .animate-scroll-logos {
+        animation: scroll-logos 20s linear infinite !important; /* Ajustado para 9s (dentro de 8-10s) */
+        will-change: transform;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        width: max-content; /* CORREÇÃO CRUCIAL: Garante que o loop seja infinito e contenha todos os 17 logos */
+      }
+
     /* Modal Styles */
     .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
     .modal-overlay.open { opacity: 1; visibility: visible; }
