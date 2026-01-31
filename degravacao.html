@@ -474,6 +474,15 @@ window.dataLayer = window.dataLayer || [];
         display: block;
       }
     }
+
+    /* 3. Carrossel - velocidade ajustada para ~10s no mobile */
+    .animate-scroll-logos {
+        animation: scroll-logos 20s linear infinite !important; /* Ajustado para 9s (dentro de 8-10s) */
+        will-change: transform;
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        width: max-content; /* CORREÇÃO CRUCIAL: Garante que o loop seja infinito e contenha todos os 17 logos */
+      }
     
   </style>
   
