@@ -474,7 +474,16 @@ window.dataLayer = window.dataLayer || [];
     @media (min-width: 1024px) {
       .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
-    
+
+    @media (max-width: 767px) {
+    .animate-scroll-logos {
+    animation: scroll-logos 20s linear infinite !important;
+    will-change: transform;
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    width: max-content;
+    }
+  }
     @media (prefers-reduced-motion: reduce) {
       .animate-scroll-logos { animation: none; }
     }
