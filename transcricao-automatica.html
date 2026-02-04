@@ -1447,6 +1447,21 @@ window.dataLayer = window.dataLayer || [];
 
   <!-- Schema Markup - JSON-LD -->
 
+    <!-- WebSite Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "@id": "https://audiotext.com.br/#website",
+  "url": "https://audiotext.com.br",
+  "name": "Audiotext",
+  "description": "Transcrição de áudio profissional, IA, degravação jurídica e legendagem",
+  "publisher": {
+    "@id": "https://audiotext.com.br/#organization"
+  }
+}
+</script>
+
   <!-- Organization Schema - EXPANDED -->
   <script type="application/ld+json">
   {
@@ -1454,11 +1469,12 @@ window.dataLayer = window.dataLayer || [];
     "@type": "Organization",
     "@id": "https://audiotext.com.br/#organization",
     "name": "Audiotext",
-    "legalName": "Audiotext Transcrição de Áudio e Degravação",
+    "legalName": "Audiotext Serviços e Cia Ltda",
     "alternateName": "Audiotext",
     "url": "https://audiotext.com.br",
     "logo": "https://audiotext.com.br/assets/audiotext-logo.avif",
-    "description": "Transcrição de áudio profissional com IA e humana desde 2012. Mais de 15 mil clientes atendidos no Brasil e no mundo.",
+    "image": "https://audiotext.com.br/assets/audiotext-logo.avif",
+    "description": "Empresa especializada em transcrição de áudio profissional, degravação jurídica, transcrição automática com IA e legendagem. 14 anos de experiência, +15 mil clientes.",
     "foundingDate": "2012",
     "email": "falecom@audiotext.com.br",
     "taxID": "17.429.373/0001-85",
@@ -1466,20 +1482,11 @@ window.dataLayer = window.dataLayer || [];
       "@type": "QuantitativeValue",
       "value": 100
     },
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Av. das Nações Unidas, 12551",
-      "addressLocality": "São Paulo",
-      "addressRegion": "SP",
-      "postalCode": "04578-903",
-      "addressCountry": "BR"
-    },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+55-11-4502-4489",
       "contactType": "customer service",
       "areaServed": "BR",
-      "availableLanguage": ["Portuguese", "English"],
+      "availableLanguage": "Portuguese",
       "email": "falecom@audiotext.com.br"
     },
     "sameAs": [
@@ -1492,7 +1499,7 @@ window.dataLayer = window.dataLayer || [];
       "@type": "AggregateRating",
       "ratingValue": "5",
       "bestRating": "5",
-      "worstRating": "5",
+      "worstRating": "1",
       "reviewCount": "36"
     }
   }
@@ -1638,7 +1645,7 @@ window.dataLayer = window.dataLayer || [];
       "@type": "AggregateRating",
       "ratingValue": "5",
       "bestRating": "5",
-      "worstRating": "5",
+      "worstRating": "1",
       "reviewCount": "3"
     },
     "review": [
@@ -1784,13 +1791,13 @@ window.dataLayer = window.dataLayer || [];
     "@context": "https://schema.org",
     "@type": "Service",
     "@id": "https://audiotext.com.br/transcricao-automatica/#service",
-    "serviceType": "Transcrição Automática de Áudio com IA",
+    "serviceType": "Transcrição Automática de Áudio por IA",
     "provider": {
       "@type": "Organization",
       "name": "Audiotext"
     },
     "areaServed": "BR",
-    "description": "Tecnologia de ponta para transcrever áudio para texto em português brasileiro e em mais de 50 idiomas",
+    "description": "Transcrição de áudio automática com tecnologia de ponta para passar áudio para texto em português brasileiro e em mais de 50 idiomas",
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Planos de Transcrição Automática",
@@ -1820,6 +1827,15 @@ window.dataLayer = window.dataLayer || [];
             "name": "Plano Avançado"
           },
           "price": "347",
+          "priceCurrency": "BRL"
+        }
+      {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Alto Volume"
+          },
+          "price": "897",
           "priceCurrency": "BRL"
         }
       ]
