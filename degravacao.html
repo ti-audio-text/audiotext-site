@@ -485,6 +485,21 @@ window.dataLayer = window.dataLayer || [];
       }
     
   </style>
+
+  <!-- WebSite Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://audiotext.com.br/#website",
+    "url": "https://audiotext.com.br",
+    "name": "Audiotext",
+    "description": "Transcrição de áudio profissional, IA, degravação jurídica e legendagem",
+    "publisher": {
+      "@id": "https://audiotext.com.br/#organization"
+    }
+  }
+  </script>
   
   <!-- Schema.org Structured Data -->
   <script type="application/ld+json">
@@ -507,7 +522,14 @@ window.dataLayer = window.dataLayer || [];
       ],
       "contactPoint": {
         "@type": "ContactPoint",
-        "telephone": "+55-41-99799-0622",
+        "telephone": "+55-41-3363-3220",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": ["pt-BR"]
+      }
+    "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+55-41-99799",
         "contactType": "customer service",
         "areaServed": "BR",
         "availableLanguage": ["pt-BR"]
@@ -522,34 +544,70 @@ window.dataLayer = window.dataLayer || [];
     }
   }
   </script>
+ <!-- Organization Schema - EXPANDED -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Organization",
+    "@type": ["Organization", "LocalBusiness", "ProfessionalService"],
     "@id": "https://audiotext.com.br/#organization",
     "name": "Audiotext",
+    "legalName": "Audiotext Serviços e Cia Ltda",
+    "alternateName": "Audiotext",
     "url": "https://audiotext.com.br",
     "logo": "https://audiotext.com.br/assets/audiotext-logo.avif",
+    "image": "https://audiotext.com.br/assets/audiotext-logo.avif",
+    "telephone": "+55-41-3363-3220",
+    "priceRange": "R$ 0,26-R$12",
     "description": "Empresa especializada em transcrição de áudio profissional, degravação jurídica e transcrição automática com IA. 14 anos de experiência, +15 mil clientes.",
     "foundingDate": "2012",
+    "taxID": "17.429.373/0001-85",
+    "email": "falecom@audiotext.com.br",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Rua Buenos Aires, 73",
+      "addressLocality": "Curitiba",
+      "addressRegion": "PR",
+      "postalCode": "80250-070",
       "addressCountry": "BR"
     },
-    "contactPoint": {
-      "@type": "ContactPoint",
-      "telephone": "+55-41-99799-0622",
-      "contactType": "customer service",
-      "areaServed": "BR",
-      "availableLanguage": ["pt-BR"]
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+55-41-3363-3220",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": ["pt-BR"]
+      },
+      {
+        "@type": "ContactPoint",
+        "telephone": "+55-41-99799-0622",
+        "contactType": "customer service",
+        "areaServed": "BR",
+        "availableLanguage": ["pt-BR"]
+      }
+    ],
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
     },
     "sameAs": [
-      "https://www.facebook.com/audiotextbr",
-      "https://www.instagram.com/audiotext.br",
-      "https://www.linkedin.com/company/audiotext"
-    ]
+      "https://www.facebook.com/audiotext",
+      "https://www.instagram.com/audiotext.transcricao",
+      "https://www.linkedin.com/company/audiotext",
+      "https://www.youtube.com/audiotexttranscricaoedegravacao"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5.0",
+      "reviewCount": "36",
+      "bestRating": "5",
+      "worstRating": "1"
+    }
   }
   </script>
+  
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -779,7 +837,7 @@ window.dataLayer = window.dataLayer || [];
     "@context": "https://schema.org",
     "@type": "Product",
     "name": "Degravação de Áudio Profissional",
-    "description": "Transcrição jurídica ipsis litteris aceita em processos judiciais. Marcação de tempo por fala, identificação de falantes, sigilo absoluto. Para advogados, escritórios e empresas.",
+    "description": "Degravação de áudio, transcrição jurídica ipsis litteris aceita em processos judiciais. Marcação de tempo por fala, identificação de falantes, sigilo absoluto. Para advogados, escritórios e empresas.",
     "sku": "AUDIOTEXT-DEG-001",
     "mpn": "ADEG-001",
     "category": "Software > Business Software > Transcription Services > Legal Transcription",
