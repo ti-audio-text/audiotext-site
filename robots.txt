@@ -1,0 +1,13 @@
+# Robots.txt - Audiotext (audiotext.com.br)
+# Atualizado: 2026-02-05
+
+User-agent: *
+Allow: /
+
+# Páginas não indexáveis
+Disallow: /legal
+Disallow: /termos-e-condicoes-app
+Disallow: /404
+
+# Sitemap
+Sitemap: https://audiotext.com.br/sitemap.xml
