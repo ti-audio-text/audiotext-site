@@ -7,7 +7,6 @@ Allow: /
 # Páginas não indexáveis
 Disallow: /legal
 Disallow: /termos-e-condicoes-app
-Disallow: /404
 
 # Sitemap
 Sitemap: https://audiotext.com.br/sitemap.xml
