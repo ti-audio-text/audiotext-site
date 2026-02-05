@@ -2779,132 +2779,360 @@ window.dataLayer = window.dataLayer || [];
     renderReviews();
   </script>
 
-   <!-- UTM Tracker v2 - com postMessage -->
-      <script>
-      (function() {
-        'use strict';
-        
-        const STORAGE_KEY = 'audiotext_utms';
-        const UTM_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-        
-        function captureUTMs() {
-          const urlParams = new URLSearchParams(window.location.search);
-          const utms = {};
-          let hasUtm = false;
-          
-          UTM_PARAMS.forEach(param => {
-            const value = urlParams.get(param);
-            if (value) {
-              utms[param] = value;
-              hasUtm = true;
-            }
-          });
-          
-          if (hasUtm) {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(utms));
-            console.log('[UTM Tracker] UTMs capturadas e salvas:', utms);
-          }
-        }
-        
-        function getSavedUTMs() {
-          try {
-            const saved = localStorage.getItem(STORAGE_KEY);
-            return saved ? JSON.parse(saved) : null;
-          } catch (error) {
-            console.error('[UTM Tracker] Erro ao carregar UTMs:', error);
-            return null;
-          }
-        }
-        
-        function buildBudgetURL() {
-          const baseURL = 'https://budget.audiotext.com.br/';
-          const utms = getSavedUTMs();
-          
-          if (!utms) {
-            console.log('[UTM Tracker] Nenhuma UTM salva, usando URL base');
-            return baseURL;
-          }
-          
-          const params = new URLSearchParams(utms);
-          const finalURL = baseURL + '?' + params.toString();
-          console.log('[UTM Tracker] URL do iframe com UTMs:', finalURL);
-          return finalURL;
-        }
-        
-        function sendUTMsToIframe(iframe) {
-          const utms = getSavedUTMs();
-          
-          if (!utms) {
-            console.log('[UTM Tracker] Sem UTMs para enviar');
-            return;
-          }
-          
-          const messageData = {
-            type: 'SET_UTMS',
-            payload: {
-              utm_source: utms.utm_source || '',
-              utm_medium: utms.utm_medium || '',
-              utm_campaign: utms.utm_campaign || '',
-              utm_term: utms.utm_term || '',
-              utm_content: utms.utm_content || ''
-            }
+<!-- ============================================================================
+     UTM TRACKER v3 - SOLUÇÃO DEFINITIVA (baseado no WordPress)
+     
+     O QUE ELE FAZ:
+     1. Captura UTMs da URL (se existirem)
+     2. Se não existir UTMs, seta valores DEFAULT ("Direct", "none")
+     3. Salva no localStorage na estrutura EXATA que o React espera
+     4. Injeta no iframe quando modal abre
+     
+     SUBSTITUIR: Script v2 (postMessage) por este
+     ONDE: Final do index.html, antes do </body>
+     ========================================================================= -->
+<script>
+(function() {
+  'use strict';
+  
+  // ============================================================================
+  // CONFIGURAÇÃO
+  // ============================================================================
+  
+  const CONFIG = {
+    // Key que o React usa (EXATA do WordPress)
+    reactStorageKey: 'budge-data-stap-Key',
+    
+    // Key para salvar UTMs no site principal (backup)
+    siteStorageKey: 'audiotext_utms',
+    
+    // Valores DEFAULT (quando não tem UTMs)
+    defaults: {
+      utmSource: 'Direct',
+      utmMedium: 'none',
+      utmCampaign: 'none',
+      utmTerm: 'none',
+      utmContent: 'none'
+    }
+  };
+  
+  // ============================================================================
+  // FUNÇÕES DE UTM
+  // ============================================================================
+  
+  /**
+   * Captura UTMs da URL atual OU retorna defaults
+   */
+  function getUTMsFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    
+    const utms = {
+      utmSource: urlParams.get('utm_source') || CONFIG.defaults.utmSource,
+      utmMedium: urlParams.get('utm_medium') || CONFIG.defaults.utmMedium,
+      utmCampaign: urlParams.get('utm_campaign') || CONFIG.defaults.utmCampaign,
+      utmTerm: urlParams.get('utm_term') || CONFIG.defaults.utmTerm,
+      utmContent: urlParams.get('utm_content') || CONFIG.defaults.utmContent
+    };
+    
+    // Log para debug
+    const hasRealUtms = urlParams.get('utm_source') !== null;
+    if (hasRealUtms) {
+      console.log('[UTM Tracker v3] ✅ UTMs REAIS capturadas da URL:', utms);
+    } else {
+      console.log('[UTM Tracker v3] ℹ️ Sem UTMs na URL, usando defaults:', utms);
+    }
+    
+    return utms;
+  }
+  
+  /**
+   * Cria estrutura de dados EXATA que o React espera
+   */
+  function createReactStorageData(utms) {
+    // Estrutura EXATA do localStorage do React (budge-data-stap-Key)
+    return {
+      sessionCode: '',
+      csrfToken: '',
+      username: '',
+      company: '',
+      email: '',
+      phone: '',
+      isWhatsApp: false,
+      serviceCode: '',
+      amount: '',
+      participantsAmount: 1,
+      finalityCode: '',
+      languageCode: '',
+      status: '',
+      howDidMeetUs: '',
+      observation: '',
+      maxInstallment: 1,
+      discount: '',
+      proposalChosen: null,
+      custom: false,
+      
+      // UTMs - ATENÇÃO: React usa camelCase
+      utmSource: utms.utmSource,
+      utmMedium: utms.utmMedium,
+      utmCampaign: utms.utmCampaign,
+      utmTerm: utms.utmTerm,
+      utmContent: utms.utmContent,
+      
+      userAgent: navigator.userAgent || '',
+      ip: '',
+      created_at: new Date().toISOString(),
+      updated_at: ''
+    };
+  }
+  
+  /**
+   * Salva UTMs nos 2 locais (site + estrutura React)
+   */
+  function saveUTMs(utms) {
+    try {
+      // 1. Salvar no localStorage do site (backup, formato simples)
+      localStorage.setItem(CONFIG.siteStorageKey, JSON.stringify(utms));
+      console.log('[UTM Tracker v3] 💾 UTMs salvas no site (backup)');
+      
+      // 2. Criar estrutura completa para o React
+      const reactData = createReactStorageData(utms);
+      
+      // 3. Verificar se já existe dados do React no localStorage
+      const existingData = localStorage.getItem(CONFIG.reactStorageKey);
+      let finalData = reactData;
+      
+      if (existingData) {
+        try {
+          // Merge: manter dados existentes + atualizar UTMs
+          const existing = JSON.parse(existingData);
+          finalData = {
+            ...existing,
+            utmSource: utms.utmSource,
+            utmMedium: utms.utmMedium,
+            utmCampaign: utms.utmCampaign,
+            utmTerm: utms.utmTerm,
+            utmContent: utms.utmContent,
+            updated_at: new Date().toISOString()
           };
-          
-          console.log('[UTM Tracker] Enviando UTMs via postMessage:', messageData);
-          
-          iframe.onload = function() {
-            iframe.contentWindow.postMessage(messageData, 'https://budget.audiotext.com.br');
-            console.log('[UTM Tracker] Mensagem enviada para iframe');
-            
-            setTimeout(() => {
-              iframe.contentWindow.postMessage(messageData, 'https://budget.audiotext.com.br');
-              console.log('[UTM Tracker] Mensagem reenviada (500ms)');
-            }, 500);
-            
-            setTimeout(() => {
-              iframe.contentWindow.postMessage(messageData, 'https://budget.audiotext.com.br');
-              console.log('[UTM Tracker] Mensagem reenviada (1s)');
-            }, 1000);
-          };
+          console.log('[UTM Tracker v3] 🔄 Merge com dados existentes do React');
+        } catch (e) {
+          console.warn('[UTM Tracker v3] ⚠️ Erro ao fazer merge, usando novos dados');
         }
-        
-        function overrideBudgetModal() {
-          if (typeof window.openBudgetModal !== 'function') {
-            console.warn('[UTM Tracker] openBudgetModal não encontrada, aguardando...');
-            setTimeout(overrideBudgetModal, 100);
-            return;
+      }
+      
+      // 4. Salvar estrutura completa para o React
+      localStorage.setItem(CONFIG.reactStorageKey, JSON.stringify(finalData));
+      console.log('[UTM Tracker v3] ✅ Estrutura React salva:', finalData);
+      
+      return true;
+    } catch (error) {
+      console.error('[UTM Tracker v3] ❌ Erro ao salvar:', error);
+      return false;
+    }
+  }
+  
+  /**
+   * Injeta UTMs no iframe (cross-domain via postMessage + localStorage)
+   */
+  function injectUTMsIntoIframe(iframe, utms) {
+    console.log('[UTM Tracker v3] 📤 Injetando UTMs no iframe...');
+    
+    // Criar estrutura completa para o React
+    const reactData = createReactStorageData(utms);
+    
+    // Preparar mensagem postMessage
+    const message = {
+      type: 'AUDIOTEXT_INIT_UTMS',
+      storageKey: CONFIG.reactStorageKey,
+      data: reactData
+    };
+    
+    // Função para enviar mensagem
+    const sendMessage = () => {
+      try {
+        iframe.contentWindow.postMessage(message, 'https://budget.audiotext.com.br');
+        console.log('[UTM Tracker v3] 📨 Mensagem enviada para iframe');
+      } catch (e) {
+        console.warn('[UTM Tracker v3] ⚠️ Erro ao enviar postMessage:', e);
+      }
+    };
+    
+    // Aguardar iframe carregar
+    iframe.onload = function() {
+      // Enviar imediatamente
+      sendMessage();
+      
+      // Reenviar após 300ms (garantir que React inicializou)
+      setTimeout(sendMessage, 300);
+      
+      // Reenviar após 600ms (garantir processamento)
+      setTimeout(sendMessage, 600);
+      
+      // Reenviar após 1s (último backup)
+      setTimeout(sendMessage, 1000);
+    };
+  }
+  
+  /**
+   * Constrói URL do iframe com UTMs (fallback)
+   */
+  function buildIframeURL(utms) {
+    const baseURL = 'https://budget.audiotext.com.br/';
+    
+    // Construir query string
+    const params = new URLSearchParams({
+      utm_source: utms.utmSource,
+      utm_medium: utms.utmMedium,
+      utm_campaign: utms.utmCampaign,
+      utm_term: utms.utmTerm,
+      utm_content: utms.utmContent
+    });
+    
+    const finalURL = baseURL + '?' + params.toString();
+    console.log('[UTM Tracker v3] 🔗 URL do iframe:', finalURL);
+    
+    return finalURL;
+  }
+  
+  // ============================================================================
+  // OVERRIDE DA FUNÇÃO DO MODAL
+  // ============================================================================
+  
+  function overrideBudgetModal() {
+    // Verificar se função existe
+    if (typeof window.openBudgetModal !== 'function') {
+      console.warn('[UTM Tracker v3] ⏳ Aguardando openBudgetModal...');
+      setTimeout(overrideBudgetModal, 100);
+      return;
+    }
+    
+    // Substituir função
+    window.openBudgetModal = function() {
+      console.log('[UTM Tracker v3] 🚀 Modal de orçamento abrindo...');
+      
+      const modal = document.getElementById('budgetModal');
+      const iframe = document.getElementById('budgetIframe');
+      
+      // Pegar UTMs (já salvas ou recarregar)
+      let utms;
+      try {
+        const saved = localStorage.getItem(CONFIG.siteStorageKey);
+        utms = saved ? JSON.parse(saved) : getUTMsFromURL();
+      } catch (e) {
+        console.warn('[UTM Tracker v3] ⚠️ Erro ao ler UTMs salvas, recapturando');
+        utms = getUTMsFromURL();
+      }
+      
+      // Construir URL com UTMs (fallback se postMessage não funcionar)
+      iframe.src = buildIframeURL(utms);
+      
+      // Injetar UTMs via postMessage
+      injectUTMsIntoIframe(iframe, utms);
+      
+      // Abrir modal
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      
+      console.log('[UTM Tracker v3] ✅ Modal aberto');
+    };
+    
+    console.log('[UTM Tracker v3] ✅ openBudgetModal modificada');
+  }
+  
+  // ============================================================================
+  // LISTENER DE POSTMESSAGE (para iframe responder)
+  // ============================================================================
+  
+  window.addEventListener('message', function(event) {
+    // Verificar origem
+    if (event.origin !== 'https://budget.audiotext.com.br') {
+      return;
+    }
+    
+    // Log de mensagens recebidas do iframe
+    if (event.data && event.data.type === 'AUDIOTEXT_UTMS_RECEIVED') {
+      console.log('[UTM Tracker v3] ✅ Iframe confirmou recebimento de UTMs:', event.data);
+    }
+  });
+  
+  // ============================================================================
+  // INICIALIZAÇÃO
+  // ============================================================================
+  
+  function init() {
+    console.log('[UTM Tracker v3] 🚀 Inicializando...');
+    
+    // 1. Capturar UTMs da URL (ou defaults)
+    const utms = getUTMsFromURL();
+    
+    // 2. Salvar nos 2 locais
+    saveUTMs(utms);
+    
+    // 3. Override da função do modal
+    overrideBudgetModal();
+    
+    console.log('[UTM Tracker v3] ✅ Sistema pronto!');
+    console.log('[UTM Tracker v3] 📊 UTMs ativas:', utms);
+  }
+  
+  // Executar quando DOM estiver pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+  // ============================================================================
+  // API GLOBAL (para debug)
+  // ============================================================================
+  
+  window.AudiotextUTMTracker = {
+    version: '3.0.0',
+    getUTMs: function() {
+      try {
+        const site = JSON.parse(localStorage.getItem(CONFIG.siteStorageKey) || '{}');
+        const react = JSON.parse(localStorage.getItem(CONFIG.reactStorageKey) || '{}');
+        return {
+          site: site,
+          react: {
+            utmSource: react.utmSource,
+            utmMedium: react.utmMedium,
+            utmCampaign: react.utmCampaign,
+            utmTerm: react.utmTerm,
+            utmContent: react.utmContent
           }
-          
-          window.openBudgetModal = function() {
-            const modal = document.getElementById('budgetModal');
-            const iframe = document.getElementById('budgetIframe');
-            
-            iframe.src = buildBudgetURL();
-            sendUTMsToIframe(iframe);
-            
-            modal.classList.add('open');
-            document.body.style.overflow = 'hidden';
-            
-            console.log('[UTM Tracker] Modal de orçamento aberto');
-          };
-          
-          console.log('[UTM Tracker] openBudgetModal modificada com sucesso');
-        }
-        
-        function init() {
-          captureUTMs();
-          overrideBudgetModal();
-          console.log('[UTM Tracker] Sistema inicializado (com postMessage)');
-        }
-        
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', init);
-        } else {
-          init();
-        }
-        
-      })();
-      </script>
+        };
+      } catch (e) {
+        return { error: e.message };
+      }
+    },
+    clearUTMs: function() {
+      localStorage.removeItem(CONFIG.siteStorageKey);
+      localStorage.removeItem(CONFIG.reactStorageKey);
+      console.log('[UTM Tracker v3] 🗑️ UTMs limpas');
+    },
+    testCapture: function() {
+      const utms = getUTMsFromURL();
+      saveUTMs(utms);
+      console.log('[UTM Tracker v3] 🧪 Teste de captura:', utms);
+    }
+  };
+  
+})();
+</script>
+
+<!-- ============================================================================
+     INSTRUÇÕES DE USO:
+     
+     1. SUBSTITUIR o script v2 (postMessage) por este v3
+     2. Adicionar no final do index.html, antes do </body>
+     3. Testar com: AudiotextUTMTracker.getUTMs() no Console
+     
+     COMANDOS DE DEBUG NO CONSOLE:
+     - AudiotextUTMTracker.getUTMs()      → Ver UTMs salvas
+     - AudiotextUTMTracker.clearUTMs()    → Limpar tudo
+     - AudiotextUTMTracker.testCapture()  → Forçar recaptura
+     ========================================================================= -->
   
 </body>
 </html>
