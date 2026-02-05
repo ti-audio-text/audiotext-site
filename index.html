@@ -2778,5 +2778,126 @@ window.dataLayer = window.dataLayer || [];
     // Initialize reviews on page load
     renderReviews();
   </script>
+  <!-- ============================================================================
+     UTM TRACKER - Audiotext
+     Captura UTMs da URL e repassa para o iframe de orçamento
+     Adicionar DEPOIS das funções do modal (linha ~2770 do index.html)
+     ========================================================================= -->
+<script>
+(function() {
+  'use strict';
+  
+  const STORAGE_KEY = 'audiotext_utms';
+  const UTM_PARAMS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  
+  /**
+   * Captura UTMs da URL atual
+   */
+  function captureUTMs() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const utms = {};
+    let hasUtm = false;
+    
+    UTM_PARAMS.forEach(param => {
+      const value = urlParams.get(param);
+      if (value) {
+        utms[param] = value;
+        hasUtm = true;
+      }
+    });
+    
+    // Salva apenas se tiver pelo menos 1 UTM
+    if (hasUtm) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(utms));
+      console.log('[UTM Tracker] UTMs capturadas e salvas:', utms);
+    }
+  }
+  
+  /**
+   * Recupera UTMs salvas
+   */
+  function getSavedUTMs() {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : null;
+    } catch (error) {
+      console.error('[UTM Tracker] Erro ao carregar UTMs:', error);
+      return null;
+    }
+  }
+  
+  /**
+   * Constrói URL do iframe com UTMs
+   */
+  function buildBudgetURL() {
+    const baseURL = 'https://budget.audiotext.com.br/';
+    const utms = getSavedUTMs();
+    
+    if (!utms) {
+      console.log('[UTM Tracker] Nenhuma UTM salva, usando URL base');
+      return baseURL;
+    }
+    
+    const params = new URLSearchParams(utms);
+    const finalURL = baseURL + '?' + params.toString();
+    console.log('[UTM Tracker] URL do iframe com UTMs:', finalURL);
+    return finalURL;
+  }
+  
+  /**
+   * Override da função openBudgetModal para adicionar UTMs
+   */
+  function overrideBudgetModal() {
+    // Verificar se a função original existe
+    if (typeof window.openBudgetModal !== 'function') {
+      console.warn('[UTM Tracker] openBudgetModal não encontrada, aguardando...');
+      // Tentar novamente após 100ms
+      setTimeout(overrideBudgetModal, 100);
+      return;
+    }
+    
+    // Salvar referência da função original
+    const originalOpenBudgetModal = window.openBudgetModal;
+    
+    // Substituir pela versão com UTMs
+    window.openBudgetModal = function() {
+      const modal = document.getElementById('budgetModal');
+      const iframe = document.getElementById('budgetIframe');
+      
+      // URL com UTMs
+      iframe.src = buildBudgetURL();
+      
+      // Resto da lógica original
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      
+      console.log('[UTM Tracker] Modal de orçamento aberto com UTMs');
+    };
+    
+    console.log('[UTM Tracker] openBudgetModal modificada com sucesso');
+  }
+  
+  /**
+   * Inicialização
+   */
+  function init() {
+    // 1. Capturar UTMs da URL atual
+    captureUTMs();
+    
+    // 2. Override da função do modal
+    overrideBudgetModal();
+    
+    console.log('[UTM Tracker] Sistema inicializado');
+  }
+  
+  // Executar quando DOM estiver pronto
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+  
+})();
+</script>
 </body>
 </html>
