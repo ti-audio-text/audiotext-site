@@ -2590,7 +2590,7 @@ window.dataLayer = window.dataLayer || [];
     </a>
 
     <!-- Budget Modal -->
-    <div id="budgetModal" class="budget-modal" onclick="closeBudgetModalOnOverlay(event)">
+    <div id="budgetModal" class="budget-modal" role="dialog" aria-modal="true">
       <iframe
         id="budgetIframe"
         src=""
@@ -2736,12 +2736,6 @@ window.dataLayer = window.dataLayer || [];
       modal.classList.remove('open');
       iframe.src = '';
       document.body.style.overflow = '';
-    }
-
-    function closeBudgetModalOnOverlay(event) {
-      if (event.target === event.currentTarget) {
-        closeBudgetModal();
-      }
     }
 
     // Handle ESC key and iframe messages
