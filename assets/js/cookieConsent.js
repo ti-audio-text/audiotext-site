@@ -21,7 +21,7 @@
     gtmId: 'GTM_CONTAINER_ID',
     
     // URLs
-    privacyPolicyUrl: '/legal#privacidade',
+    privacyPolicyUrl: '/legal#cookies',
     
     // Delay inicial do banner (ms)
     bannerDelay: 500,
