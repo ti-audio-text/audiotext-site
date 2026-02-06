@@ -2780,40 +2780,48 @@ window.dataLayer = window.dataLayer || [];
   </script>
 
 <!-- ============================================================================
-     UTM TRACKER v4.2 - ESTRATÉGIAS MÚLTIPLAS
+     UTM TRACKER v4.4 - SOLUÇÃO COM COOKIES
      
-     DIFERENÇA DO v4.1:
-     - v4.1 dependia apenas de postMessage
-     - v4.2 usa TODAS as estratégias possíveis:
-       1. PostMessage (múltiplos formatos)
-       2. UTMs na URL do iframe
-       3. UTMs no hash (#) da URL
-       4. Listener agressivo
-       5. Polling para verificar localStorage
+     DESCOBERTA:
+     - WordPress funcionava porque a API retornava UTMs
+     - API pegava UTMs de COOKIES do navegador
+     - Cookies com domain=.audiotext.com.br são compartilhados entre todos subdomínios
      
-     SE v4.1 NÃO FUNCIONOU: Use esta v4.2
+     SOLUÇÃO:
+     1. Site cria cookies com UTMs (domain=.audiotext.com.br)
+     2. React faz request para API
+     3. Navegador envia cookies automaticamente
+     4. API lê cookies, pega UTMs, retorna para React
+     5. React salva no state
+     
+     NÃO PRECISA MODIFICAR REACT! ✅
      ========================================================================= -->
 <script>
 (function() {
   'use strict';
   
-  console.log('[UTM Tracker v4.2] 🚀 Iniciando com estratégias múltiplas...');
+  console.log('[UTM Tracker v4.4] 🚀 Inicializando (solução com cookies)...');
   
   // ============================================================================
   // CONFIGURAÇÃO
   // ============================================================================
   
   const CONFIG = {
-    // URL base do iframe (SEM query params)
-    iframeBaseURL: 'https://budget.audiotext.com.br/',
+    // Domain para cookies (com ponto = compartilhado entre subdomínios)
+    cookieDomain: '.audiotext.com.br',
     
-    // Origem para validação
-    iframeOrigin: 'https://budget.audiotext.com.br',
+    // Expiração dos cookies (30 dias)
+    cookieExpireDays: 30,
     
-    // Key do localStorage
-    reactStorageKey: 'budge-data-stap-Key',
+    // Nomes dos cookies
+    cookies: {
+      source: 'audiotext_utm_source',
+      medium: 'audiotext_utm_medium',
+      campaign: 'audiotext_utm_campaign',
+      term: 'audiotext_utm_term',
+      content: 'audiotext_utm_content'
+    },
     
-    // Defaults
     defaults: {
       utm_source: 'Direct',
       utm_medium: 'none',
@@ -2824,7 +2832,35 @@ window.dataLayer = window.dataLayer || [];
   };
   
   // ============================================================================
-  // CAPTURA DE UTMs
+  // FUNÇÕES DE COOKIE
+  // ============================================================================
+  
+  function setCookie(name, value, days, domain) {
+    const date = new Date();
+    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    
+    // SameSite=None; Secure é necessário para cross-site
+    const cookie = `${name}=${value}; ${expires}; domain=${domain}; path=/; SameSite=Lax`;
+    
+    document.cookie = cookie;
+    console.log('[UTM Tracker v4.4] 🍪 Cookie criado:', name, '=', value);
+  }
+  
+  function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(';');
+    
+    for(let i = 0; i < ca.length; i++) {
+      let c = ca[i];
+      while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
+  
+  // ============================================================================
+  // CAPTURA E ARMAZENAMENTO DE UTMs
   // ============================================================================
   
   const utmTracker = {
@@ -2834,44 +2870,46 @@ window.dataLayer = window.dataLayer || [];
     capture: function() {
       const urlParams = new URLSearchParams(window.location.search);
       
+      // Capturar da URL OU manter cookies existentes
       this.utms = {
-        utm_source: urlParams.get('utm_source') || CONFIG.defaults.utm_source,
-        utm_medium: urlParams.get('utm_medium') || CONFIG.defaults.utm_medium,
-        utm_campaign: urlParams.get('utm_campaign') || CONFIG.defaults.utm_campaign,
-        utm_term: urlParams.get('utm_term') || CONFIG.defaults.utm_term,
-        utm_content: urlParams.get('utm_content') || CONFIG.defaults.utm_content
+        utm_source: urlParams.get('utm_source') || getCookie(CONFIG.cookies.source) || CONFIG.defaults.utm_source,
+        utm_medium: urlParams.get('utm_medium') || getCookie(CONFIG.cookies.medium) || CONFIG.defaults.utm_medium,
+        utm_campaign: urlParams.get('utm_campaign') || getCookie(CONFIG.cookies.campaign) || CONFIG.defaults.utm_campaign,
+        utm_term: urlParams.get('utm_term') || getCookie(CONFIG.cookies.term) || CONFIG.defaults.utm_term,
+        utm_content: urlParams.get('utm_content') || getCookie(CONFIG.cookies.content) || CONFIG.defaults.utm_content
       };
       
       this.captured = true;
       
       const hasRealUtms = urlParams.get('utm_source') !== null;
       if (hasRealUtms) {
-        console.log('[UTM Tracker v4.2] ✅ UTMs REAIS capturadas:', this.utms);
+        console.log('[UTM Tracker v4.4] ✅ UTMs REAIS capturadas da URL:', this.utms);
       } else {
-        console.log('[UTM Tracker v4.2] ℹ️ Sem UTMs na URL, usando defaults:', this.utms);
+        console.log('[UTM Tracker v4.4] ℹ️ UTMs dos cookies ou defaults:', this.utms);
       }
       
       return this.utms;
     },
     
-    getFormatted: function() {
-      if (!this.captured) this.capture();
+    saveToCookies: function() {
+      const days = CONFIG.cookieExpireDays;
+      const domain = CONFIG.cookieDomain;
       
-      return {
-        utmSource: this.utms.utm_source,
-        utmMedium: this.utms.utm_medium,
-        utmCampaign: this.utms.utm_campaign,
-        utmTerm: this.utms.utm_term,
-        utmContent: this.utms.utm_content
-      };
+      setCookie(CONFIG.cookies.source, this.utms.utm_source, days, domain);
+      setCookie(CONFIG.cookies.medium, this.utms.utm_medium, days, domain);
+      setCookie(CONFIG.cookies.campaign, this.utms.utm_campaign, days, domain);
+      setCookie(CONFIG.cookies.term, this.utms.utm_term, days, domain);
+      setCookie(CONFIG.cookies.content, this.utms.utm_content, days, domain);
+      
+      console.log('[UTM Tracker v4.4] 💾 Cookies salvos com domain:', domain);
     }
   };
   
   // ============================================================================
-  // ESTRATÉGIA 1: URL DO IFRAME COM UTMs
+  // TAMBÉM ADICIONAR NA URL DO IFRAME (fallback duplo)
   // ============================================================================
   
-  function buildIframeURLWithUTMs() {
+  function buildIframeURL() {
     const utms = utmTracker.utms;
     
     const params = new URLSearchParams({
@@ -2882,93 +2920,12 @@ window.dataLayer = window.dataLayer || [];
       utm_content: utms.utm_content
     });
     
-    const url = CONFIG.iframeBaseURL + '?' + params.toString();
+    const url = 'https://budget.audiotext.com.br/?' + params.toString();
     
-    console.log('[UTM Tracker v4.2] 🔗 URL do iframe COM UTMs:', url);
-    
-    return url;
-  }
-  
-  // ============================================================================
-  // ESTRATÉGIA 2: HASH DA URL
-  // ============================================================================
-  
-  function buildIframeURLWithHash() {
-    const utms = utmTracker.getFormatted();
-    const hashData = encodeURIComponent(JSON.stringify(utms));
-    const url = CONFIG.iframeBaseURL + '#utms=' + hashData;
-    
-    console.log('[UTM Tracker v4.2] #️⃣ URL com hash:', url);
+    console.log('[UTM Tracker v4.4] 🔗 URL do iframe:', url);
     
     return url;
   }
-  
-  // ============================================================================
-  // ESTRATÉGIA 3: POSTMESSAGE AGRESSIVO
-  // ============================================================================
-  
-  function sendViaPostMessage(iframe) {
-    const utms = utmTracker.getFormatted();
-    
-    const messages = [
-      // Formato 1: Apenas UTMs
-      utms,
-      
-      // Formato 2: Com type
-      { type: 'UTMS_DATA', ...utms },
-      
-      // Formato 3: Estrutura completa
-      {
-        type: 'SET_UTMS',
-        data: utms
-      },
-      
-      // Formato 4: WordPress style
-      {
-        type: 'WORDPRESS_UTMS',
-        utmSource: utms.utmSource,
-        utmMedium: utms.utmMedium,
-        utmCampaign: utms.utmCampaign,
-        utmTerm: utms.utmTerm,
-        utmContent: utms.utmContent
-      },
-      
-      // Formato 5: Com storage key
-      {
-        type: 'INIT_STORAGE',
-        key: CONFIG.reactStorageKey,
-        data: {
-          utmSource: utms.utmSource,
-          utmMedium: utms.utmMedium,
-          utmCampaign: utms.utmCampaign,
-          utmTerm: utms.utmTerm,
-          utmContent: utms.utmContent,
-          created_at: new Date().toISOString()
-        }
-      }
-    ];
-    
-    messages.forEach((msg, index) => {
-      try {
-        // Tentar com origem específica
-        iframe.contentWindow.postMessage(msg, CONFIG.iframeOrigin);
-        console.log(`[UTM Tracker v4.2] 📨 PostMessage ${index + 1}/5 enviado (origin)`);
-        
-        // Tentar com * (qualquer origem) - MENOS SEGURO mas funciona
-        setTimeout(() => {
-          iframe.contentWindow.postMessage(msg, '*');
-          console.log(`[UTM Tracker v4.2] 📨 PostMessage ${index + 1}/5 enviado (*)`);
-        }, 50);
-        
-      } catch (e) {
-        console.warn(`[UTM Tracker v4.2] ⚠️ Erro postMessage ${index + 1}:`, e);
-      }
-    });
-  }
-  
-  // ============================================================================
-  // MODIFICAR SRC DO IFRAME
-  // ============================================================================
   
   function setupIframe() {
     const iframe = document.getElementById('budgetIframe');
@@ -2978,38 +2935,53 @@ window.dataLayer = window.dataLayer || [];
       return;
     }
     
-    console.log('[UTM Tracker v4.2] 🎯 Iframe detectado!');
-    console.log('[UTM Tracker v4.2] 📍 SRC original:', iframe.src);
+    console.log('[UTM Tracker v4.4] 🎯 Iframe encontrado!');
     
-    // ESTRATÉGIA 1: Modificar SRC para incluir UTMs na URL
-    const newSrc = buildIframeURLWithUTMs();
+    const newSrc = buildIframeURL();
     
-    // Se iframe ainda não tem SRC ou tem SRC sem UTMs, atualizar
-    if (!iframe.src || iframe.src === CONFIG.iframeBaseURL || !iframe.src.includes('utm_')) {
-      console.log('[UTM Tracker v4.2] 🔄 Modificando SRC do iframe para incluir UTMs');
+    if (!iframe.src || !iframe.src.includes('utm_source')) {
+      console.log('[UTM Tracker v4.4] 🔄 Definindo SRC com UTMs (fallback)');
       iframe.src = newSrc;
     }
-    
-    // Listener de load
-    iframe.addEventListener('load', function() {
-      console.log('[UTM Tracker v4.2] 📡 Iframe carregou!');
-      
-      // ESTRATÉGIA 3: PostMessage múltiplos formatos
-      const delays = [0, 100, 300, 500, 800, 1200, 1800, 2500, 3500, 5000];
-      
-      delays.forEach(delay => {
-        setTimeout(() => {
-          sendViaPostMessage(iframe);
-          console.log(`[UTM Tracker v4.2] 🔄 Tentativa após ${delay}ms`);
-        }, delay);
-      });
-    });
-    
-    // Se já carregou, enviar imediatamente
-    if (iframe.contentWindow) {
-      setTimeout(() => sendViaPostMessage(iframe), 100);
-    }
   }
+  
+  // ============================================================================
+  // INTERCEPTAR MODAL
+  // ============================================================================
+  
+  let attempts = 0;
+  const interceptModal = setInterval(function() {
+    attempts++;
+    
+    if (typeof window.openBudgetModal === 'function') {
+      const original = window.openBudgetModal;
+      
+      window.openBudgetModal = function() {
+        console.log('[UTM Tracker v4.4] 🚪 Modal abrindo, garantindo cookies...');
+        
+        // Garantir que cookies estejam atualizados
+        utmTracker.saveToCookies();
+        
+        // Garantir URL do iframe também
+        setTimeout(function() {
+          const iframe = document.getElementById('budgetIframe');
+          if (iframe) {
+            const correctURL = buildIframeURL();
+            if (iframe.src !== correctURL) {
+              iframe.src = correctURL;
+            }
+          }
+        }, 10);
+        
+        return original.apply(this, arguments);
+      };
+      
+      console.log('[UTM Tracker v4.4] ✅ openBudgetModal interceptada');
+      clearInterval(interceptModal);
+    }
+    
+    if (attempts >= 100) clearInterval(interceptModal);
+  }, 100);
   
   // ============================================================================
   // COMPATIBILIDADE WORDPRESS
@@ -3025,92 +2997,30 @@ window.dataLayer = window.dataLayer || [];
   });
   
   window.sendUtms = function(sessionCode, csrfToken) {
-    console.log('[UTM Tracker v4.2] 📤 sendUtms() chamada');
-    
-    const iframe = document.getElementById('budgetIframe');
-    if (!iframe) return;
-    
-    sendViaPostMessage(iframe);
+    console.log('[UTM Tracker v4.4] 📤 sendUtms() chamada');
+    utmTracker.saveToCookies();
   };
   
-  console.log('[UTM Tracker v4.2] ✅ Compatibilidade WordPress criada');
-  
-  // ============================================================================
-  // LISTENER UNIVERSAL
-  // ============================================================================
-  
-  window.addEventListener('message', function(event) {
-    // Log TODAS as mensagens (debug)
-    console.log('[UTM Tracker v4.2] 📥 Mensagem recebida:', {
-      origin: event.origin,
-      data: event.data
-    });
-    
-    // Se for do iframe, responder SEMPRE
-    if (event.origin === CONFIG.iframeOrigin || event.source === document.getElementById('budgetIframe')?.contentWindow) {
-      const utms = utmTracker.getFormatted();
-      
-      event.source.postMessage({
-        type: 'UTMS_RESPONSE',
-        ...utms,
-        timestamp: new Date().toISOString()
-      }, event.origin);
-      
-      console.log('[UTM Tracker v4.2] ✅ Resposta enviada');
-    }
-  });
-  
-  // ============================================================================
-  // INTERCEPTAR ABERTURA DO MODAL
-  // ============================================================================
-  
-  // Tentar interceptar função que abre modal
-  const checkAndOverride = setInterval(function() {
-    if (typeof window.openBudgetModal === 'function') {
-      const original = window.openBudgetModal;
-      
-      window.openBudgetModal = function() {
-        console.log('[UTM Tracker v4.2] 🚪 Modal abrindo...');
-        
-        // Chamar função original
-        const result = original.apply(this, arguments);
-        
-        // Garantir que iframe tenha UTMs na URL
-        setTimeout(function() {
-          const iframe = document.getElementById('budgetIframe');
-          if (iframe) {
-            const newSrc = buildIframeURLWithUTMs();
-            if (iframe.src !== newSrc) {
-              console.log('[UTM Tracker v4.2] 🔄 Atualizando SRC do iframe ao abrir modal');
-              iframe.src = newSrc;
-            }
-          }
-        }, 10);
-        
-        return result;
-      };
-      
-      console.log('[UTM Tracker v4.2] ✅ openBudgetModal interceptada');
-      clearInterval(checkAndOverride);
-    }
-  }, 100);
-  
-  // Parar de tentar após 10 segundos
-  setTimeout(() => clearInterval(checkAndOverride), 10000);
+  console.log('[UTM Tracker v4.4] ✅ Compatibilidade WordPress criada');
   
   // ============================================================================
   // INICIALIZAÇÃO
   // ============================================================================
   
   function init() {
-    // Capturar UTMs
+    // 1. Capturar UTMs
     utmTracker.capture();
     
-    // Setup iframe
+    // 2. Salvar em cookies imediatamente
+    utmTracker.saveToCookies();
+    
+    // 3. Setup iframe (fallback)
     setupIframe();
     
-    console.log('[UTM Tracker v4.2] ✅ Sistema pronto!');
-    console.log('[UTM Tracker v4.2] 📊 UTMs ativas:', utmTracker.utms);
+    console.log('[UTM Tracker v4.4] ✅ Sistema pronto!');
+    console.log('[UTM Tracker v4.4] 📊 UTMs:', utmTracker.utms);
+    console.log('[UTM Tracker v4.4] 🍪 Cookies criados com domain:', CONFIG.cookieDomain);
+    console.log('[UTM Tracker v4.4] ℹ️ Quando React fizer request para API, cookies serão enviados automaticamente');
   }
   
   if (document.readyState === 'loading') {
@@ -3124,67 +3034,81 @@ window.dataLayer = window.dataLayer || [];
   // ============================================================================
   
   window.AudiotextUTMTracker = {
-    version: '4.2.0',
+    version: '4.4.0',
     
     getUTMs: function() {
       return utmTracker.utms;
     },
     
-    getFormatted: function() {
-      return utmTracker.getFormatted();
+    getCookies: function() {
+      return {
+        source: getCookie(CONFIG.cookies.source),
+        medium: getCookie(CONFIG.cookies.medium),
+        campaign: getCookie(CONFIG.cookies.campaign),
+        term: getCookie(CONFIG.cookies.term),
+        content: getCookie(CONFIG.cookies.content)
+      };
     },
     
-    getIframeURL: function() {
-      return buildIframeURLWithUTMs();
+    verifyCookies: function() {
+      const cookies = this.getCookies();
+      console.log('🍪 Cookies atuais:');
+      console.log('  utm_source:', cookies.source);
+      console.log('  utm_medium:', cookies.medium);
+      console.log('  utm_campaign:', cookies.campaign);
+      console.log('  utm_term:', cookies.term);
+      console.log('  utm_content:', cookies.content);
+      
+      const allCookies = document.cookie;
+      console.log('\n📋 Todos os cookies:', allCookies);
     },
     
-    forceUpdate: function() {
-      const iframe = document.getElementById('budgetIframe');
-      if (iframe) {
-        iframe.src = buildIframeURLWithUTMs();
-        console.log('[UTM Tracker v4.2] 🔄 Iframe SRC atualizado forçadamente');
-      }
-    },
-    
-    testSend: function() {
-      const iframe = document.getElementById('budgetIframe');
-      if (iframe) {
-        sendViaPostMessage(iframe);
-        console.log('[UTM Tracker v4.2] 🧪 Teste de envio executado');
-      }
+    forceSave: function() {
+      utmTracker.saveToCookies();
+      console.log('✅ Cookies salvos forçadamente');
     }
   };
   
-  console.log('[UTM Tracker v4.2] 💡 Debug: AudiotextUTMTracker.getIframeURL()');
+  console.log('[UTM Tracker v4.4] 💡 Debug: AudiotextUTMTracker.verifyCookies()');
   
 })();
 </script>
 
 <!-- ============================================================================
-     INSTRUÇÕES v4.2:
+     INSTRUÇÕES:
      
-     1. SUBSTITUA o script v4.1 por este v4.2
+     1. ADICIONAR no index.html do site principal, ANTES do </body>
      
-     2. Este script usa MÚLTIPLAS estratégias:
-        ✅ Adiciona UTMs na URL do iframe
-        ✅ Envia via postMessage (5 formatos)
-        ✅ Tenta com origin específica E com *
-        ✅ Responde qualquer mensagem do React
-        ✅ Intercepta abertura do modal
+     2. COMO FUNCIONA:
+        - Site captura UTMs da URL
+        - Salva em cookies com domain=.audiotext.com.br
+        - Cookies são compartilhados entre:
+          * audiotext.com.br
+          * www.audiotext.com.br
+          * budget.audiotext.com.br
+        - Quando React faz request para API, navegador envia cookies automaticamente
+        - API lê cookies, pega UTMs, retorna para React
+        - React salva no state
      
      3. TESTE:
-        - Acesse com UTMs: ?utm_source=google&utm_medium=cpc
-        - Console: AudiotextUTMTracker.getIframeURL()
-        - Abra modal
-        - Veja iframe SRC ter as UTMs
+        a) Acesse: audiotext.com.br/?utm_source=teste&utm_medium=cpc
+        b) Console: AudiotextUTMTracker.verifyCookies()
+        c) Deve mostrar cookies criados
+        d) Abra modal
+        e) React faz request para API com cookies
+        f) UTMs devem aparecer
      
-     4. LOGS ESPERADOS:
-        [UTM Tracker v4.2] ✅ UTMs REAIS capturadas
-        [UTM Tracker v4.2] 🔗 URL do iframe COM UTMs: https://...?utm_source=...
-        [UTM Tracker v4.2] 🎯 Iframe detectado!
-        [UTM Tracker v4.2] 📨 PostMessage enviado
+     4. REQUISITOS DA API:
+        A API precisa ler os cookies:
+        - audiotext_utm_source
+        - audiotext_utm_medium
+        - audiotext_utm_campaign
+        - audiotext_utm_term
+        - audiotext_utm_content
+        
+        E retornar no response do GET /budget
+     
      ========================================================================= -->
-
   
 </body>
 </html>
