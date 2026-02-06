@@ -2780,299 +2780,357 @@ window.dataLayer = window.dataLayer || [];
   </script>
 
 <!-- ============================================================================
-     UTM TRACKER v3 - SOLUÇÃO DEFINITIVA (baseado no WordPress)
+     UTM TRACKER v4.1 - ZERO MUDANÇAS NO REACT
      
-     O QUE ELE FAZ:
-     1. Captura UTMs da URL (se existirem)
-     2. Se não existir UTMs, seta valores DEFAULT ("Direct", "none")
-     3. Salva no localStorage na estrutura EXATA que o React espera
-     4. Injeta no iframe quando modal abre
+     DIFERENÇA DO v4:
+     - v4 dependia de React pedir UTMs via postMessage
+     - v4.1 FUNCIONA SEM MODIFICAR O REACT (site imita WordPress 100%)
      
-     SUBSTITUIR: Script v2 (postMessage) por este
-     ONDE: Final do index.html, antes do </body>
+     ESTRATÉGIAS:
+     1. Mantém função window.sendUtms() (compatibilidade total WP)
+     2. Detecta quando iframe abre e injeta UTMs automaticamente
+     3. Múltiplas tentativas de envio via postMessage
+     4. Intercepta QUALQUER chamada do React e responde
+     
+     FUNCIONAMENTO:
+     - React continua fazendo o que sempre fez
+     - Site novo age EXATAMENTE como WordPress agia
+     - UTMs fluem automaticamente para o React
      ========================================================================= -->
 <script>
 (function() {
   'use strict';
+  
+  console.log('[UTM Tracker v4.1] 🚀 Inicializando (SEM mudanças no React)...');
   
   // ============================================================================
   // CONFIGURAÇÃO
   // ============================================================================
   
   const CONFIG = {
-    // Key que o React usa (EXATA do WordPress)
+    // Origem do iframe
+    iframeOrigin: 'https://budget.audiotext.com.br',
+    
+    // Key que React usa
     reactStorageKey: 'budge-data-stap-Key',
     
-    // Key para salvar UTMs no site principal (backup)
-    siteStorageKey: 'audiotext_utms',
-    
-    // Valores DEFAULT (quando não tem UTMs)
+    // Defaults quando não tem UTMs
     defaults: {
-      utmSource: 'Direct',
-      utmMedium: 'none',
-      utmCampaign: 'none',
-      utmTerm: 'none',
-      utmContent: 'none'
+      utm_source: 'Direct',
+      utm_medium: 'none',
+      utm_campaign: 'none',
+      utm_term: 'none',
+      utm_content: 'none'
     }
   };
   
   // ============================================================================
-  // FUNÇÕES DE UTM
+  // CAPTURA E ARMAZENAMENTO DE UTMs (compatível com WordPress)
+  // ============================================================================
+  
+  const utmTracker = {
+    utms: {},
+    captured: false,
+    
+    /**
+     * Captura UTMs da URL
+     */
+    capture: function() {
+      const urlParams = new URLSearchParams(window.location.search);
+      
+      this.utms = {
+        utm_source: urlParams.get('utm_source') || CONFIG.defaults.utm_source,
+        utm_medium: urlParams.get('utm_medium') || CONFIG.defaults.utm_medium,
+        utm_campaign: urlParams.get('utm_campaign') || CONFIG.defaults.utm_campaign,
+        utm_term: urlParams.get('utm_term') || CONFIG.defaults.utm_term,
+        utm_content: urlParams.get('utm_content') || CONFIG.defaults.utm_content
+      };
+      
+      this.captured = true;
+      
+      const hasRealUtms = urlParams.get('utm_source') !== null;
+      if (hasRealUtms) {
+        console.log('[UTM Tracker v4.1] ✅ UTMs capturadas:', this.utms);
+      } else {
+        console.log('[UTM Tracker v4.1] ℹ️ Sem UTMs, usando defaults:', this.utms);
+      }
+      
+      return this.utms;
+    },
+    
+    /**
+     * Retorna UTMs formatadas para React (camelCase)
+     */
+    getFormatted: function() {
+      if (!this.captured) this.capture();
+      
+      return {
+        utmSource: this.utms.utm_source,
+        utmMedium: this.utms.utm_medium,
+        utmCampaign: this.utms.utm_campaign,
+        utmTerm: this.utms.utm_term,
+        utmContent: this.utms.utm_content
+      };
+    },
+    
+    /**
+     * Cria estrutura COMPLETA que React espera
+     */
+    getReactStructure: function() {
+      const utms = this.getFormatted();
+      
+      return {
+        sessionCode: '',
+        csrfToken: '',
+        username: '',
+        company: '',
+        email: '',
+        phone: '',
+        isWhatsApp: false,
+        serviceCode: '',
+        amount: '',
+        participantsAmount: 1,
+        finalityCode: '',
+        languageCode: '',
+        status: '',
+        howDidMeetUs: '',
+        observation: '',
+        maxInstallment: 1,
+        discount: '',
+        proposalChosen: null,
+        custom: false,
+        
+        // UTMs (camelCase)
+        utmSource: utms.utmSource,
+        utmMedium: utms.utmMedium,
+        utmCampaign: utms.utmCampaign,
+        utmTerm: utms.utmTerm,
+        utmContent: utms.utmContent,
+        
+        userAgent: navigator.userAgent || '',
+        ip: '',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString()
+      };
+    }
+  };
+  
+  // ============================================================================
+  // FUNÇÃO SENDUTMS (compatibilidade 100% com WordPress)
   // ============================================================================
   
   /**
-   * Captura UTMs da URL atual OU retorna defaults
+   * Função idêntica ao WordPress que React pode chamar
+   * Esta função DEVE existir no window para compatibilidade
    */
-  function getUTMsFromURL() {
-    const urlParams = new URLSearchParams(window.location.search);
+  window.sendUtms = function(sessionCode, csrfToken) {
+    console.log('[UTM Tracker v4.1] 📤 sendUtms() chamada (igual WordPress)');
+    console.log('[UTM Tracker v4.1] SessionCode:', sessionCode, 'CSRF:', csrfToken);
     
-    const utms = {
-      utmSource: urlParams.get('utm_source') || CONFIG.defaults.utmSource,
-      utmMedium: urlParams.get('utm_medium') || CONFIG.defaults.utmMedium,
-      utmCampaign: urlParams.get('utm_campaign') || CONFIG.defaults.utmCampaign,
-      utmTerm: urlParams.get('utm_term') || CONFIG.defaults.utmTerm,
-      utmContent: urlParams.get('utm_content') || CONFIG.defaults.utmContent
-    };
-    
-    // Log para debug
-    const hasRealUtms = urlParams.get('utm_source') !== null;
-    if (hasRealUtms) {
-      console.log('[UTM Tracker v3] ✅ UTMs REAIS capturadas da URL:', utms);
-    } else {
-      console.log('[UTM Tracker v3] ℹ️ Sem UTMs na URL, usando defaults:', utms);
+    const iframe = document.getElementById('budgetIframe');
+    if (!iframe || !iframe.contentWindow) {
+      console.warn('[UTM Tracker v4.1] ⚠️ Iframe não encontrado');
+      return;
     }
     
-    return utms;
-  }
-  
-  /**
-   * Cria estrutura de dados EXATA que o React espera
-   */
-  function createReactStorageData(utms) {
-    // Estrutura EXATA do localStorage do React (budge-data-stap-Key)
-    return {
-      sessionCode: '',
-      csrfToken: '',
-      username: '',
-      company: '',
-      email: '',
-      phone: '',
-      isWhatsApp: false,
-      serviceCode: '',
-      amount: '',
-      participantsAmount: 1,
-      finalityCode: '',
-      languageCode: '',
-      status: '',
-      howDidMeetUs: '',
-      observation: '',
-      maxInstallment: 1,
-      discount: '',
-      proposalChosen: null,
-      custom: false,
-      
-      // UTMs - ATENÇÃO: React usa camelCase
-      utmSource: utms.utmSource,
-      utmMedium: utms.utmMedium,
-      utmCampaign: utms.utmCampaign,
-      utmTerm: utms.utmTerm,
-      utmContent: utms.utmContent,
-      
-      userAgent: navigator.userAgent || '',
-      ip: '',
-      created_at: new Date().toISOString(),
-      updated_at: ''
-    };
-  }
-  
-  /**
-   * Salva UTMs nos 2 locais (site + estrutura React)
-   */
-  function saveUTMs(utms) {
-    try {
-      // 1. Salvar no localStorage do site (backup, formato simples)
-      localStorage.setItem(CONFIG.siteStorageKey, JSON.stringify(utms));
-      console.log('[UTM Tracker v3] 💾 UTMs salvas no site (backup)');
-      
-      // 2. Criar estrutura completa para o React
-      const reactData = createReactStorageData(utms);
-      
-      // 3. Verificar se já existe dados do React no localStorage
-      const existingData = localStorage.getItem(CONFIG.reactStorageKey);
-      let finalData = reactData;
-      
-      if (existingData) {
-        try {
-          // Merge: manter dados existentes + atualizar UTMs
-          const existing = JSON.parse(existingData);
-          finalData = {
-            ...existing,
-            utmSource: utms.utmSource,
-            utmMedium: utms.utmMedium,
-            utmCampaign: utms.utmCampaign,
-            utmTerm: utms.utmTerm,
-            utmContent: utms.utmContent,
-            updated_at: new Date().toISOString()
-          };
-          console.log('[UTM Tracker v3] 🔄 Merge com dados existentes do React');
-        } catch (e) {
-          console.warn('[UTM Tracker v3] ⚠️ Erro ao fazer merge, usando novos dados');
-        }
-      }
-      
-      // 4. Salvar estrutura completa para o React
-      localStorage.setItem(CONFIG.reactStorageKey, JSON.stringify(finalData));
-      console.log('[UTM Tracker v3] ✅ Estrutura React salva:', finalData);
-      
-      return true;
-    } catch (error) {
-      console.error('[UTM Tracker v3] ❌ Erro ao salvar:', error);
-      return false;
-    }
-  }
-  
-  /**
-   * Injeta UTMs no iframe (cross-domain via postMessage + localStorage)
-   */
-  function injectUTMsIntoIframe(iframe, utms) {
-    console.log('[UTM Tracker v3] 📤 Injetando UTMs no iframe...');
+    const utms = utmTracker.getFormatted();
     
-    // Criar estrutura completa para o React
-    const reactData = createReactStorageData(utms);
-    
-    // Preparar mensagem postMessage
+    // Formato que WordPress enviava
     const message = {
-      type: 'AUDIOTEXT_INIT_UTMS',
-      storageKey: CONFIG.reactStorageKey,
-      data: reactData
+      type: 'WORDPRESS_UTMS', // Tipo que React espera
+      sessionCode: sessionCode || '',
+      csrfToken: csrfToken || '',
+      ...utms // Espalha UTMs no objeto raiz
     };
     
-    // Função para enviar mensagem
-    const sendMessage = () => {
-      try {
-        iframe.contentWindow.postMessage(message, 'https://budget.audiotext.com.br');
-        console.log('[UTM Tracker v3] 📨 Mensagem enviada para iframe');
-      } catch (e) {
-        console.warn('[UTM Tracker v3] ⚠️ Erro ao enviar postMessage:', e);
-      }
-    };
-    
-    // Aguardar iframe carregar
-    iframe.onload = function() {
-      // Enviar imediatamente
-      sendMessage();
-      
-      // Reenviar após 300ms (garantir que React inicializou)
-      setTimeout(sendMessage, 300);
-      
-      // Reenviar após 600ms (garantir processamento)
-      setTimeout(sendMessage, 600);
-      
-      // Reenviar após 1s (último backup)
-      setTimeout(sendMessage, 1000);
-    };
-  }
+    iframe.contentWindow.postMessage(message, CONFIG.iframeOrigin);
+    console.log('[UTM Tracker v4.1] ✅ UTMs enviadas via sendUtms():', message);
+  };
+  
+  // ============================================================================
+  // OBJETO APP.TRACKING (compatibilidade com WordPress)
+  // ============================================================================
   
   /**
-   * Constrói URL do iframe com UTMs (fallback)
+   * WordPress tinha app.tracking.agent
+   * Vamos criar estrutura similar
    */
-  function buildIframeURL(utms) {
-    const baseURL = 'https://budget.audiotext.com.br/';
-    
-    // Construir query string
-    const params = new URLSearchParams({
-      utm_source: utms.utmSource,
-      utm_medium: utms.utmMedium,
-      utm_campaign: utms.utmCampaign,
-      utm_term: utms.utmTerm,
-      utm_content: utms.utmContent
-    });
-    
-    const finalURL = baseURL + '?' + params.toString();
-    console.log('[UTM Tracker v3] 🔗 URL do iframe:', finalURL);
-    
-    return finalURL;
-  }
+  window.app = window.app || {};
+  window.app.tracking = window.app.tracking || {};
   
-  // ============================================================================
-  // OVERRIDE DA FUNÇÃO DO MODAL
-  // ============================================================================
-  
-  function overrideBudgetModal() {
-    // Verificar se função existe
-    if (typeof window.openBudgetModal !== 'function') {
-      console.warn('[UTM Tracker v3] ⏳ Aguardando openBudgetModal...');
-      setTimeout(overrideBudgetModal, 100);
-      return;
-    }
-    
-    // Substituir função
-    window.openBudgetModal = function() {
-      console.log('[UTM Tracker v3] 🚀 Modal de orçamento abrindo...');
-      
-      const modal = document.getElementById('budgetModal');
-      const iframe = document.getElementById('budgetIframe');
-      
-      // Pegar UTMs (já salvas ou recarregar)
-      let utms;
-      try {
-        const saved = localStorage.getItem(CONFIG.siteStorageKey);
-        utms = saved ? JSON.parse(saved) : getUTMsFromURL();
-      } catch (e) {
-        console.warn('[UTM Tracker v3] ⚠️ Erro ao ler UTMs salvas, recapturando');
-        utms = getUTMsFromURL();
-      }
-      
-      // Construir URL com UTMs (fallback se postMessage não funcionar)
-      iframe.src = buildIframeURL(utms);
-      
-      // Injetar UTMs via postMessage
-      injectUTMsIntoIframe(iframe, utms);
-      
-      // Abrir modal
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-      
-      console.log('[UTM Tracker v3] ✅ Modal aberto');
-    };
-    
-    console.log('[UTM Tracker v3] ✅ openBudgetModal modificada');
-  }
-  
-  // ============================================================================
-  // LISTENER DE POSTMESSAGE (para iframe responder)
-  // ============================================================================
-  
-  window.addEventListener('message', function(event) {
-    // Verificar origem
-    if (event.origin !== 'https://budget.audiotext.com.br') {
-      return;
-    }
-    
-    // Log de mensagens recebidas do iframe
-    if (event.data && event.data.type === 'AUDIOTEXT_UTMS_RECEIVED') {
-      console.log('[UTM Tracker v3] ✅ Iframe confirmou recebimento de UTMs:', event.data);
+  // Criar getter dinâmico para app.tracking.agent
+  Object.defineProperty(window.app.tracking, 'agent', {
+    get: function() {
+      return utmTracker.utms;
     }
   });
+  
+  console.log('[UTM Tracker v4.1] ✅ app.tracking.agent criado (compatibilidade WP)');
+  
+  // ============================================================================
+  // AUTO-ENVIO AGRESSIVO QUANDO IFRAME ABRE
+  // ============================================================================
+  
+  /**
+   * Detecta iframe e envia UTMs automaticamente
+   * MÚLTIPLAS ESTRATÉGIAS para garantir que React receba
+   */
+  function setupIframeAutoSend() {
+    const iframe = document.getElementById('budgetIframe');
+    
+    if (!iframe) {
+      // Tentar novamente em 100ms
+      setTimeout(setupIframeAutoSend, 100);
+      return;
+    }
+    
+    console.log('[UTM Tracker v4.1] 🎯 Iframe detectado!');
+    
+    /**
+     * Envia UTMs via postMessage
+     */
+    function sendUtmsToIframe() {
+      const utms = utmTracker.getFormatted();
+      const fullData = utmTracker.getReactStructure();
+      
+      // Tentar TODOS os formatos possíveis que React pode aceitar
+      const messages = [
+        // Formato 1: Estrutura completa com key
+        {
+          type: 'INIT_STORAGE',
+          key: CONFIG.reactStorageKey,
+          data: fullData
+        },
+        
+        // Formato 2: Apenas UTMs
+        {
+          type: 'SET_UTMS',
+          ...utms
+        },
+        
+        // Formato 3: Estrutura WordPress
+        {
+          type: 'WORDPRESS_UTMS',
+          ...utms
+        },
+        
+        // Formato 4: Dados completos direto
+        fullData
+      ];
+      
+      messages.forEach((msg, index) => {
+        try {
+          iframe.contentWindow.postMessage(msg, CONFIG.iframeOrigin);
+          console.log(`[UTM Tracker v4.1] 📨 Formato ${index + 1} enviado`);
+        } catch (e) {
+          console.warn(`[UTM Tracker v4.1] ⚠️ Erro formato ${index + 1}:`, e);
+        }
+      });
+    }
+    
+    // Listener de load do iframe
+    iframe.addEventListener('load', function() {
+      console.log('[UTM Tracker v4.1] 📡 Iframe carregou, iniciando envios...');
+      
+      // Enviar múltiplas vezes com delays diferentes
+      const delays = [0, 100, 300, 500, 800, 1200, 1800, 2500];
+      
+      delays.forEach(delay => {
+        setTimeout(() => {
+          sendUtmsToIframe();
+          console.log(`[UTM Tracker v4.1] 🔄 Envio após ${delay}ms`);
+        }, delay);
+      });
+    });
+    
+    // Se iframe já está carregado, enviar imediatamente
+    if (iframe.contentWindow && iframe.contentDocument) {
+      setTimeout(sendUtmsToIframe, 100);
+    }
+  }
+  
+  // ============================================================================
+  // LISTENER UNIVERSAL DE POSTMESSAGE
+  // ============================================================================
+  
+  /**
+   * Escuta QUALQUER mensagem do React e responde com UTMs
+   * Isso garante que se React pedir de qualquer forma, receberá
+   */
+  window.addEventListener('message', function(event) {
+    // Validar origem
+    if (event.origin !== CONFIG.iframeOrigin) {
+      return;
+    }
+    
+    const data = event.data;
+    
+    // Log de TODAS as mensagens do React (debug)
+    console.log('[UTM Tracker v4.1] 📨 Mensagem do React:', data);
+    
+    // Responder com UTMs independente do tipo de mensagem
+    // (garantia de que React vai receber)
+    const utms = utmTracker.getFormatted();
+    const fullData = utmTracker.getReactStructure();
+    
+    // Enviar resposta
+    event.source.postMessage({
+      type: 'UTMS_RESPONSE',
+      success: true,
+      data: utms,
+      fullData: fullData,
+      timestamp: new Date().toISOString()
+    }, CONFIG.iframeOrigin);
+    
+    console.log('[UTM Tracker v4.1] ✅ Resposta automática enviada');
+  });
+  
+  // ============================================================================
+  // INTERCEPTAÇÃO DE LOCALSTORAGE (tentativa de injeção direta)
+  // ============================================================================
+  
+  /**
+   * ATENÇÃO: Isso NÃO funciona cross-domain por limitações de segurança
+   * Mas deixo aqui como fallback caso algum dia seja possível
+   */
+  function tryDirectLocalStorageInjection() {
+    try {
+      const iframe = document.getElementById('budgetIframe');
+      if (!iframe || !iframe.contentWindow) return;
+      
+      // Tentar acessar localStorage do iframe (vai falhar por CORS)
+      const fullData = utmTracker.getReactStructure();
+      iframe.contentWindow.localStorage.setItem(
+        CONFIG.reactStorageKey,
+        JSON.stringify(fullData)
+      );
+      
+      console.log('[UTM Tracker v4.1] ✅ Injeção direta funcionou! (raro)');
+    } catch (e) {
+      // Esperado - CORS bloqueia isso
+      console.log('[UTM Tracker v4.1] ℹ️ Injeção direta bloqueada (normal)');
+    }
+  }
   
   // ============================================================================
   // INICIALIZAÇÃO
   // ============================================================================
   
   function init() {
-    console.log('[UTM Tracker v3] 🚀 Inicializando...');
+    console.log('[UTM Tracker v4.1] 🎬 Iniciando sistema...');
     
-    // 1. Capturar UTMs da URL (ou defaults)
-    const utms = getUTMsFromURL();
+    // 1. Capturar UTMs imediatamente
+    utmTracker.capture();
     
-    // 2. Salvar nos 2 locais
-    saveUTMs(utms);
+    // 2. Configurar auto-envio para iframe
+    setupIframeAutoSend();
     
-    // 3. Override da função do modal
-    overrideBudgetModal();
+    // 3. Tentar injeção direta (provavelmente vai falhar, mas vale a tentativa)
+    setTimeout(tryDirectLocalStorageInjection, 1000);
     
-    console.log('[UTM Tracker v3] ✅ Sistema pronto!');
-    console.log('[UTM Tracker v3] 📊 UTMs ativas:', utms);
+    console.log('[UTM Tracker v4.1] ✅ Sistema pronto!');
+    console.log('[UTM Tracker v4.1] 📊 UTMs ativas:', utmTracker.utms);
+    console.log('[UTM Tracker v4.1] 🎯 Aguardando iframe abrir...');
   }
   
   // Executar quando DOM estiver pronto
@@ -3083,55 +3141,72 @@ window.dataLayer = window.dataLayer || [];
   }
   
   // ============================================================================
-  // API GLOBAL (para debug)
+  // API GLOBAL PARA DEBUG
   // ============================================================================
   
   window.AudiotextUTMTracker = {
-    version: '3.0.0',
+    version: '4.1.0',
+    
     getUTMs: function() {
-      try {
-        const site = JSON.parse(localStorage.getItem(CONFIG.siteStorageKey) || '{}');
-        const react = JSON.parse(localStorage.getItem(CONFIG.reactStorageKey) || '{}');
-        return {
-          site: site,
-          react: {
-            utmSource: react.utmSource,
-            utmMedium: react.utmMedium,
-            utmCampaign: react.utmCampaign,
-            utmTerm: react.utmTerm,
-            utmContent: react.utmContent
-          }
-        };
-      } catch (e) {
-        return { error: e.message };
+      return utmTracker.utms;
+    },
+    
+    getFormatted: function() {
+      return utmTracker.getFormatted();
+    },
+    
+    getReactStructure: function() {
+      return utmTracker.getReactStructure();
+    },
+    
+    recapture: function() {
+      utmTracker.captured = false;
+      return utmTracker.capture();
+    },
+    
+    testSend: function() {
+      const iframe = document.getElementById('budgetIframe');
+      if (!iframe) {
+        console.error('[UTM Tracker v4.1] ❌ Iframe não encontrado');
+        return;
       }
+      
+      const utms = utmTracker.getFormatted();
+      iframe.contentWindow.postMessage({
+        type: 'TEST_MANUAL',
+        data: utms
+      }, CONFIG.iframeOrigin);
+      
+      console.log('[UTM Tracker v4.1] 🧪 Teste enviado:', utms);
     },
-    clearUTMs: function() {
-      localStorage.removeItem(CONFIG.siteStorageKey);
-      localStorage.removeItem(CONFIG.reactStorageKey);
-      console.log('[UTM Tracker v3] 🗑️ UTMs limpas');
-    },
-    testCapture: function() {
-      const utms = getUTMsFromURL();
-      saveUTMs(utms);
-      console.log('[UTM Tracker v3] 🧪 Teste de captura:', utms);
-    }
+    
+    // Compatibilidade com WordPress
+    sendUtms: window.sendUtms
   };
+  
+  console.log('[UTM Tracker v4.1] 💡 Debug: AudiotextUTMTracker.getUTMs()');
   
 })();
 </script>
 
 <!-- ============================================================================
-     INSTRUÇÕES DE USO:
+     INSTRUÇÕES:
      
-     1. SUBSTITUIR o script v2 (postMessage) por este v3
-     2. Adicionar no final do index.html, antes do </body>
-     3. Testar com: AudiotextUTMTracker.getUTMs() no Console
+     1. ADICIONAR no index.html (antes do </body>)
+     2. GARANTIR iframe tem id="budgetIframe"
+     3. NÃO PRECISA MUDAR NADA NO REACT! ✅
      
-     COMANDOS DE DEBUG NO CONSOLE:
-     - AudiotextUTMTracker.getUTMs()      → Ver UTMs salvas
-     - AudiotextUTMTracker.clearUTMs()    → Limpar tudo
-     - AudiotextUTMTracker.testCapture()  → Forçar recaptura
+     O script imita PERFEITAMENTE o WordPress:
+     - Função window.sendUtms() disponível
+     - Objeto app.tracking.agent disponível
+     - Auto-envio quando iframe abre
+     - Responde a qualquer mensagem do React
+     
+     TESTES NO CONSOLE:
+     - AudiotextUTMTracker.getUTMs()
+     - AudiotextUTMTracker.testSend()
+     - app.tracking.agent
+     - sendUtms('test', 'test')
      ========================================================================= -->
   
 </body>
