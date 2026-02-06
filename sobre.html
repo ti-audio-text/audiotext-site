@@ -608,41 +608,24 @@
     
     .modal-container {
       position: relative;
-      width: 95%;
-      max-width: 500px;
-    }
-    
-    .modal-close {
-      position: absolute;
-      top: -40px;
-      right: 0;
-      width: 36px;
-      height: 36px;
-      background: white;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.25rem;
-      font-weight: 600;
-      color: hsl(var(--foreground));
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      transition: transform 0.2s;
-    }
-    
-    .modal-close:hover {
-      transform: scale(1.1);
     }
     
     .modal-iframe {
-      width: 100%;
-      height: 90vh;
-      max-height: 700px;
-      border: none;
+      width: 768px;
+      height: 674px;
+      border: 0;
+      background-color: white;
       border-radius: 1rem;
-      background: white;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+    
+    @media (max-width: 768px) {
+      .modal-iframe {
+        width: 95%;
+        max-width: 768px;
+        height: 90vh;
+        max-height: 700px;
+      }
     }
     
     /* WhatsApp Button */
@@ -1023,11 +1006,11 @@
   </a>
 
   <!-- Budget Modal -->
-  <div id="budget-modal" class="modal-overlay" onclick="if(event.target === this) closeModal();" role="dialog" aria-modal="true">
+  <div id="budget-modal" class="modal-overlay" role="dialog" aria-modal="true">
     <div class="modal-container">
-      <button onclick="closeModal()" class="modal-close" aria-label="Fechar">✕</button>
       <iframe
-        src="https://budget.audiotext.com.br/"
+        id="budget-iframe"
+        src=""
         title="Calculadora de Orçamento Audiotext"
         class="modal-iframe"
         allow="clipboard-write"
@@ -1038,12 +1021,16 @@
   <script>
     // Modal functions
     function openModal() {
+      var iframe = document.getElementById('budget-iframe');
+      iframe.src = 'https://budget.audiotext.com.br/';
       document.getElementById('budget-modal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
+      var iframe = document.getElementById('budget-iframe');
       document.getElementById('budget-modal').classList.remove('open');
+      iframe.src = '';
       document.body.style.overflow = '';
     }
 
