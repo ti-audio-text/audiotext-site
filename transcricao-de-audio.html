@@ -449,9 +449,9 @@ window.dataLayer = window.dataLayer || [];
         width: max-content; /* CORREÇÃO CRUCIAL: Garante que o loop seja infinito e contenha todos os 17 logos */
       }
 
-    /* Modal Styles */
-    .modal-overlay { opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
-    .modal-overlay.open { opacity: 1; visibility: visible; }
+  /* Modal Styles */
+    .modal-overlay { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s ease, visibility 0.2s ease; }
+    .modal-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
     
     /* FAQ Styles */
     .faq-content { transition: max-height 0.3s ease-out; }
@@ -467,9 +467,8 @@ window.dataLayer = window.dataLayer || [];
     
     /* Modal Iframe Styles (React-matching) */
     .modal-iframe { width: 768px; height: 674px; border: 0; background-color: hsl(var(--background)); border-radius: 0.75rem; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-    @media (max-width: 768px) { .modal-iframe { width: 90vw; max-width: 768px; height: 85vh; max-height: 674px; } }
-    @media (max-width: 480px) { .modal-iframe { width: 100vw; height: 100vh; max-width: none; max-height: none; border-radius: 0; } }
-  </style>
+    @media (max-width: 768px) { .modal-iframe { width: 95%; max-width: 768px; height: 90vh; max-height: 700px; } }
+    
   <!-- JSON-LD Schemas -->
   
   <!-- WebSite Schema -->
@@ -2611,9 +2610,10 @@ window.dataLayer = window.dataLayer || [];
   </a>
 
   <!-- Budget Modal - Simple structure matching React -->
-  <div id="budget-modal" class="modal-overlay fixed inset-0 flex justify-center items-center bg-black/55" style="z-index: 9999;" onclick="if(event.target === this) closeModal();" role="dialog" aria-modal="true">
+  <div id="budget-modal" class="modal-overlay fixed inset-0 flex justify-center items-center bg-black/55" style="z-index: 9999;" role="dialog" aria-modal="true">
     <iframe
-      src="https://budget.audiotext.com.br/"
+      id="budget-iframe"
+      src=""
       title="Calculadora de Orçamento Audiotext"
       class="modal-iframe"
       allow="clipboard-write"
@@ -2623,12 +2623,16 @@ window.dataLayer = window.dataLayer || [];
   <script>
     // Modal functions
     function openModal() {
+      var iframe = document.getElementById('budget-iframe');
+      iframe.src = 'https://budget.audiotext.com.br/';
       document.getElementById('budget-modal').classList.add('open');
       document.body.style.overflow = 'hidden';
     }
 
     function closeModal() {
+      var iframe = document.getElementById('budget-iframe');
       document.getElementById('budget-modal').classList.remove('open');
+      iframe.src = '';
       document.body.style.overflow = '';
     }
 
