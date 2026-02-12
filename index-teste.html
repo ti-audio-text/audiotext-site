@@ -2727,11 +2727,228 @@ window.dataLayer = window.dataLayer || [];
       renderReviews();
     }
 
+    /**
+ * AUDIOTEXT UTM TRACKER v4.0
+ * Script para capturar UTMs da URL e passar para iframe budget.audiotext.com.br
+ * 
+ * COMPATÍVEL com tracking.js existente no React app
+ * 
+ * @date 2026-02-12
+ * @author Claude (Anthropic)
+ */
+
+(function() {
+  'use strict';
+
+  // ==================== CONFIGURAÇÃO ====================
+  var CONFIG = {
+    debug: true, // Mudar para false em produção
+    iframeBaseUrl: 'https://budget.audiotext.com.br/',
+    utmParams: ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'],
+    defaults: {
+      utm_source: 'Direct',
+      utm_medium: 'none',
+      utm_campaign: 'none',
+      utm_term: 'none',
+      utm_content: 'none'
+    }
+  };
+
+  // ==================== UTILITÁRIOS ====================
+  
+  function log(message, data) {
+    if (CONFIG.debug) {
+      console.log('[Audiotext UTM] ' + message, data || '');
+    }
+  }
+
+  /**
+   * Decodifica valor de UTM (replica função decoderUtm do WordPress)
+   */
+  function decodeUtmValue(value) {
+    if (typeof value !== 'string') return value;
+    
+    // Normaliza: + e %20 viram espaço
+    var normalized = value.replace(/\+/g, ' ').replace(/%20/g, ' ');
+    
+    try {
+      return decodeURIComponent(normalized);
+    } catch (e) {
+      log('Erro ao decodificar:', value);
+      return value;
+    }
+  }
+
+  /**
+   * Extrai UTMs da URL atual
+   */
+  function extractUTMsFromURL() {
+    var searchParams = window.location.search;
+    
+    if (!searchParams) {
+      log('Sem query params na URL');
+      return CONFIG.defaults;
+    }
+
+    var utms = {};
+    var query = searchParams.replace(/^\?/, '');
+    var pairs = query.split('&');
+
+    // Começa com defaults
+    CONFIG.utmParams.forEach(function(param) {
+      utms[param] = CONFIG.defaults[param];
+    });
+
+    // Substitui com valores da URL se existirem
+    pairs.forEach(function(pair) {
+      if (!pair) return;
+      
+      var parts = pair.split('=');
+      if (parts.length < 2) return;
+      
+      var key = parts[0];
+      var rawValue = parts[1];
+      
+      if (CONFIG.utmParams.indexOf(key) > -1) {
+        var decoded = decodeUtmValue(rawValue);
+        if (decoded && decoded.length > 0) {
+          utms[key] = decoded;
+        }
+      }
+    });
+
+    log('UTMs extraídas:', utms);
+    return utms;
+  }
+
+  /**
+   * Detecta origem pelo referrer (replica lógica do tracking.js)
+   */
+  function detectSource() {
+    var referrer = document.referrer || '';
+    
+    if (!referrer.trim()) {
+      return 'Direct';
+    } else if (referrer.match(/google\./)) {
+      return 'Google';
+    } else if (referrer.match(/facebook\./)) {
+      return 'Facebook';
+    } else if (referrer.match(/instagram\./)) {
+      return 'Instagram';
+    } else if (referrer.match(/pinterest\./)) {
+      return 'Pinterest';
+    } else if (referrer.match(/twitter\./)) {
+      return 'Twitter';
+    } else if (referrer.match(/slack\./)) {
+      return 'Slack';
+    } else {
+      // Extrair hostname do referrer
+      var hostname = '';
+      if (referrer.indexOf('//') > -1) {
+        hostname = referrer.split('/')[2];
+      } else {
+        hostname = referrer.split('/')[0];
+      }
+      hostname = hostname.split(':')[0];
+      hostname = hostname.split('?')[0];
+      return hostname;
+    }
+  }
+
+  /**
+   * Captura UTMs completas (URL + referrer)
+   */
+  function captureUTMs() {
+    var utms = extractUTMsFromURL();
+    
+    // Se não tem utm_source na URL, detecta pelo referrer
+    if (utms.utm_source === 'Direct' && !window.location.search.match(/utm_source/)) {
+      var detectedSource = detectSource();
+      utms.utm_source = detectedSource;
+      
+      // Se veio do Google (organic), seta medium = Organic
+      if (detectedSource === 'Google' && utms.utm_medium === 'none') {
+        utms.utm_medium = 'Organic';
+      }
+    }
+    
+    // Detecta Google Ads pelo gclid
+    if (window.location.search.match(/gclid=/)) {
+      utms.utm_source = 'Google';
+      utms.utm_medium = 'Google Ads';
+    }
+    
+    log('UTMs finais capturadas:', utms);
+    return utms;
+  }
+
+  /**
+   * Constrói URL do iframe com UTMs
+   */
+  function buildIframeURL(utms) {
+    var url = CONFIG.iframeBaseUrl + '?';
+    var params = [];
+    
+    CONFIG.utmParams.forEach(function(param) {
+      params.push(param + '=' + encodeURIComponent(utms[param]));
+    });
+    
+    var finalUrl = CONFIG.iframeBaseUrl + '?' + params.join('&');
+    log('URL do iframe construída:', finalUrl);
+    
+    return finalUrl;
+  }
+
+  // ==================== INICIALIZAÇÃO ====================
+  
+  var capturedUTMs = null;
+
+  function init() {
+    log('=== Audiotext UTM Tracker Iniciado ===');
+    
+    // Captura UTMs quando página carrega
+    capturedUTMs = captureUTMs();
+    
+    // Disponibiliza globalmente para openBudgetModal usar
+    window.AudiotextUTM = {
+      getUTMs: function() {
+        return capturedUTMs;
+      },
+      
+      getIframeURL: function() {
+        return buildIframeURL(capturedUTMs);
+      },
+      
+      // Debug helpers
+      testCapture: function() {
+        console.table(capturedUTMs);
+        return capturedUTMs;
+      },
+      
+      clearCache: function() {
+        capturedUTMs = CONFIG.defaults;
+        console.log('UTMs resetadas para defaults');
+      }
+    };
+    
+    log('=== Inicialização Completa ===');
+    log('Use AudiotextUTM.getUTMs() para ver UTMs capturadas');
+  }
+
+  // Executa quando DOM carregar
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+
     // Budget Modal
     function openBudgetModal() {
       const modal = document.getElementById('budgetModal');
       const iframe = document.getElementById('budgetIframe');
-      iframe.src = 'https://budget.audiotext.com.br/';
+      iframe.src = window.AudiotextUTM ? window.AudiotextUTM.getIframeURL() : 'https://budget.audiotext.com.br/';
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
