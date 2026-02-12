@@ -2728,10 +2728,10 @@ window.dataLayer = window.dataLayer || [];
     }
 
 /**
- * AUDIOTEXT UTM TRACKER v5.0 - SOLUÇÃO COMPLETA
+ * AUDIOTEXT UTM TRACKER v6.0 - COOKIE CROSS-DOMAIN
  * 
- * Este script recria window.app (cookies, tracking, api) no site principal
- * Assim o React app encontra window.app quando carrega
+ * Salva cookie com domain=.audiotext.com.br
+ * Assim budget.audiotext.com.br (iframe) consegue ler!
  * 
  * @date 2026-02-12
  */
@@ -2742,7 +2742,7 @@ window.dataLayer = window.dataLayer || [];
   // ==================== INICIALIZA window.app ====================
   window.app = window.app || {};
 
-  // ==================== app.cookies (necessário para tracking.js) ====================
+  // ==================== app.cookies COM CROSS-DOMAIN ====================
   app.cookies = {
     get: function(name) {
       var value = document.cookie
@@ -2751,22 +2751,29 @@ window.dataLayer = window.dataLayer || [];
       return value ? decodeURIComponent(value.split('=')[1]) : null;
     },
     
-    set: function(name, value, days) {
+    set: function(name, value, days, domain) {
       var expires = '';
       if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = '; expires=' + date.toUTCString();
       }
-      document.cookie = name + '=' + encodeURIComponent(value || '') + expires + '; path=/';
+      
+      // ✅ CROSS-DOMAIN: adiciona domain se fornecido
+      var domainStr = domain ? '; domain=' + domain : '';
+      
+      document.cookie = name + '=' + encodeURIComponent(value || '') + expires + domainStr + '; path=/';
+      
+      console.log('[Audiotext] Cookie criado:', name, '| Domain:', domain || 'default');
     },
     
-    remove: function(name) {
-      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+    remove: function(name, domain) {
+      var domainStr = domain ? '; domain=' + domain : '';
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT' + domainStr + '; path=/';
     }
   };
 
-  // ==================== decoderUtm (necessário para tracking.js) ====================
+  // ==================== decoderUtm ====================
   function decoderUtm(uncodedUtm) {
     if (typeof uncodedUtm !== 'string') {
       return uncodedUtm;
@@ -2780,9 +2787,10 @@ window.dataLayer = window.dataLayer || [];
   }
   window.decoderUtm = decoderUtm;
 
-  // ==================== app.tracking (tracking.js adaptado) ====================
+  // ==================== app.tracking ====================
   app.tracking = {
     cookieKey: 'audiotext-budget-tracking',
+    cookieDomain: '.audiotext.com.br', // ✅ CROSS-DOMAIN!
     queryParams: ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'],
     agent: {
       referrer: '',
@@ -2861,7 +2869,8 @@ window.dataLayer = window.dataLayer || [];
         (!app.tracking.agent.referrer && app.tracking.agent.utm_source.trim() !== 'Direct') ||
         !app.cookies.get(app.tracking.cookieKey)
       ) {
-        app.cookies.remove(app.tracking.cookieKey);
+        app.cookies.remove(app.tracking.cookieKey, app.tracking.cookieDomain);
+        
         var joinUtms = function() {
           return (
             app.tracking.agent.utm_source + '|' +
@@ -2871,7 +2880,9 @@ window.dataLayer = window.dataLayer || [];
             app.tracking.agent.utm_content
           );
         };
-        app.cookies.set(app.tracking.cookieKey, joinUtms(), 7);
+        
+        // ✅ SALVA COM CROSS-DOMAIN!
+        app.cookies.set(app.tracking.cookieKey, joinUtms(), 7, app.tracking.cookieDomain);
       }
     },
 
@@ -2890,34 +2901,32 @@ window.dataLayer = window.dataLayer || [];
 
   // ==================== EXECUTAR TRACKING ====================
   function init() {
-    console.log('[Audiotext] Inicializando tracking...');
+    console.log('[Audiotext v6] Inicializando tracking com cookie cross-domain...');
     
     // Executa tracking para capturar UTMs
     app.tracking.run();
     
-    console.log('[Audiotext] UTMs capturadas:', app.tracking.agent);
-    console.log('[Audiotext] Cookie salvo:', app.cookies.get('audiotext-budget-tracking'));
+    console.log('[Audiotext v6] UTMs capturadas:', app.tracking.agent);
+    console.log('[Audiotext v6] Cookie salvo (cross-domain):', app.cookies.get('audiotext-budget-tracking'));
+    console.log('[Audiotext v6] Cookie domain: .audiotext.com.br');
     
-    // Disponibiliza função helper para construir URL do iframe
+    // API helper
     window.AudiotextUTM = {
-      getIframeURL: function() {
-        var base = 'https://budget.audiotext.com.br/?';
-        var params = [
-          'utm_source=' + encodeURIComponent(app.tracking.agent.utm_source),
-          'utm_medium=' + encodeURIComponent(app.tracking.agent.utm_medium),
-          'utm_campaign=' + encodeURIComponent(app.tracking.agent.utm_campaign),
-          'utm_term=' + encodeURIComponent(app.tracking.agent.utm_term),
-          'utm_content=' + encodeURIComponent(app.tracking.agent.utm_content)
-        ];
-        return base + params.join('&');
-      },
-      
       getUTMs: function() {
         return app.tracking.agent;
+      },
+      
+      getCookie: function() {
+        return app.cookies.get('audiotext-budget-tracking');
+      },
+      
+      testCrossDomain: function() {
+        console.log('=== TESTE CROSS-DOMAIN ===');
+        console.log('Cookie no site principal:', app.cookies.get('audiotext-budget-tracking'));
+        console.log('O iframe budget.audiotext.com.br agora consegue ler este cookie!');
+        console.log('Formato:', app.tracking.agent.utm_source + '|' + app.tracking.agent.utm_medium + '|...');
       }
     };
-    
-    console.log('[Audiotext] URL do iframe:', window.AudiotextUTM.getIframeURL());
   }
 
   // Executa quando DOM carregar
@@ -2933,7 +2942,7 @@ window.dataLayer = window.dataLayer || [];
     function openBudgetModal() {
       const modal = document.getElementById('budgetModal');
       const iframe = document.getElementById('budgetIframe');
-      iframe.src = window.AudiotextUTM ? window.AudiotextUTM.getIframeURL() : 'https://budget.audiotext.com.br/';
+      iframe.src = 'https://budget.audiotext.com.br/';  // ← URL limpa!
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
