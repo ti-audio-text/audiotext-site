@@ -2727,212 +2727,197 @@ window.dataLayer = window.dataLayer || [];
       renderReviews();
     }
 
-    /**
- * AUDIOTEXT UTM TRACKER v4.0
- * Script para capturar UTMs da URL e passar para iframe budget.audiotext.com.br
+/**
+ * AUDIOTEXT UTM TRACKER v5.0 - SOLUÇÃO COMPLETA
  * 
- * COMPATÍVEL com tracking.js existente no React app
+ * Este script recria window.app (cookies, tracking, api) no site principal
+ * Assim o React app encontra window.app quando carrega
  * 
  * @date 2026-02-12
- * @author Claude (Anthropic)
  */
 
 (function() {
   'use strict';
 
-  // ==================== CONFIGURAÇÃO ====================
-  var CONFIG = {
-    debug: true, // Mudar para false em produção
-    iframeBaseUrl: 'https://budget.audiotext.com.br/',
-    utmParams: ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'],
-    defaults: {
+  // ==================== INICIALIZA window.app ====================
+  window.app = window.app || {};
+
+  // ==================== app.cookies (necessário para tracking.js) ====================
+  app.cookies = {
+    get: function(name) {
+      var value = document.cookie
+        .split('; ')
+        .find(function(row) { return row.startsWith(name + '='); });
+      return value ? decodeURIComponent(value.split('=')[1]) : null;
+    },
+    
+    set: function(name, value, days) {
+      var expires = '';
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = '; expires=' + date.toUTCString();
+      }
+      document.cookie = name + '=' + encodeURIComponent(value || '') + expires + '; path=/';
+    },
+    
+    remove: function(name) {
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+    }
+  };
+
+  // ==================== decoderUtm (necessário para tracking.js) ====================
+  function decoderUtm(uncodedUtm) {
+    if (typeof uncodedUtm !== 'string') {
+      return uncodedUtm;
+    }
+    var normalized = uncodedUtm.replace(/\+/g, ' ').replace(/%20/g, ' ');
+    try {
+      return decodeURIComponent(normalized);
+    } catch (e) {
+      return uncodedUtm;
+    }
+  }
+  window.decoderUtm = decoderUtm;
+
+  // ==================== app.tracking (tracking.js adaptado) ====================
+  app.tracking = {
+    cookieKey: 'audiotext-budget-tracking',
+    queryParams: ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'],
+    agent: {
+      referrer: '',
       utm_source: 'Direct',
       utm_medium: 'none',
       utm_campaign: 'none',
       utm_term: 'none',
       utm_content: 'none'
-    }
-  };
+    },
 
-  // ==================== UTILITÁRIOS ====================
-  
-  function log(message, data) {
-    if (CONFIG.debug) {
-      console.log('[Audiotext UTM] ' + message, data || '');
-    }
-  }
+    run: function() {
+      var referrer = document.referrer || '';
+      var url = window.location.search || '';
 
-  /**
-   * Decodifica valor de UTM (replica função decoderUtm do WordPress)
-   */
-  function decodeUtmValue(value) {
-    if (typeof value !== 'string') return value;
-    
-    // Normaliza: + e %20 viram espaço
-    var normalized = value.replace(/\+/g, ' ').replace(/%20/g, ' ');
-    
-    try {
-      return decodeURIComponent(normalized);
-    } catch (e) {
-      log('Erro ao decodificar:', value);
-      return value;
-    }
-  }
-
-  /**
-   * Extrai UTMs da URL atual
-   */
-  function extractUTMsFromURL() {
-    var searchParams = window.location.search;
-    
-    if (!searchParams) {
-      log('Sem query params na URL');
-      return CONFIG.defaults;
-    }
-
-    var utms = {};
-    var query = searchParams.replace(/^\?/, '');
-    var pairs = query.split('&');
-
-    // Começa com defaults
-    CONFIG.utmParams.forEach(function(param) {
-      utms[param] = CONFIG.defaults[param];
-    });
-
-    // Substitui com valores da URL se existirem
-    pairs.forEach(function(pair) {
-      if (!pair) return;
-      
-      var parts = pair.split('=');
-      if (parts.length < 2) return;
-      
-      var key = parts[0];
-      var rawValue = parts[1];
-      
-      if (CONFIG.utmParams.indexOf(key) > -1) {
-        var decoded = decodeUtmValue(rawValue);
-        if (decoded && decoded.length > 0) {
-          utms[key] = decoded;
-        }
-      }
-    });
-
-    log('UTMs extraídas:', utms);
-    return utms;
-  }
-
-  /**
-   * Detecta origem pelo referrer (replica lógica do tracking.js)
-   */
-  function detectSource() {
-    var referrer = document.referrer || '';
-    
-    if (!referrer.trim()) {
-      return 'Direct';
-    } else if (referrer.match(/google\./)) {
-      return 'Google';
-    } else if (referrer.match(/facebook\./)) {
-      return 'Facebook';
-    } else if (referrer.match(/instagram\./)) {
-      return 'Instagram';
-    } else if (referrer.match(/pinterest\./)) {
-      return 'Pinterest';
-    } else if (referrer.match(/twitter\./)) {
-      return 'Twitter';
-    } else if (referrer.match(/slack\./)) {
-      return 'Slack';
-    } else {
-      // Extrair hostname do referrer
-      var hostname = '';
-      if (referrer.indexOf('//') > -1) {
-        hostname = referrer.split('/')[2];
+      if (!referrer.trim()) {
+        return app.tracking.buildUtms(referrer, 'Direct', url);
+      } else if (referrer.match(/google\./)) {
+        return app.tracking.buildUtms(referrer, 'Google', url);
+      } else if (referrer.match(/facebook\./)) {
+        return app.tracking.buildUtms(referrer, 'Facebook', url);
+      } else if (referrer.match(/instagram\./)) {
+        return app.tracking.buildUtms(referrer, 'Instagram', url);
+      } else if (referrer.match(/pinterest\./)) {
+        return app.tracking.buildUtms(referrer, 'Pinterest', url);
+      } else if (referrer.match(/twitter\./)) {
+        return app.tracking.buildUtms(referrer, 'Twitter', url);
+      } else if (referrer.match(/slack\./)) {
+        return app.tracking.buildUtms(referrer, 'Slack', url);
       } else {
-        hostname = referrer.split('/')[0];
+        return app.tracking.buildUtms(referrer, 'Referrer', url);
+      }
+    },
+
+    buildUtms: function(referrer, utmSource, url) {
+      url = typeof url === 'string' ? url : '';
+
+      app.tracking.agent.referrer = referrer || '';
+      app.tracking.agent.utm_source = utmSource || app.tracking.agent.utm_source || 'Direct';
+
+      var query = url.replace(/^\?/, '');
+      var pairs = query ? query.split('&') : [];
+
+      pairs.forEach(function(p) {
+        if (!p) return;
+        var parts = p.split('=');
+        if (parts.length < 2) return;
+
+        var key = parts[0];
+        var rawValue = parts[1];
+
+        if (app.tracking.queryParams.indexOf(key) > -1) {
+          var valueDecoded = decoderUtm(rawValue);
+          if (typeof valueDecoded === 'string' && valueDecoded.length > 0) {
+            app.tracking.agent[key] = valueDecoded;
+          }
+        }
+
+        if (utmSource === 'Google') {
+          app.tracking.agent.utm_source = 'Google';
+          if (!app.tracking.agent.utm_medium || app.tracking.agent.utm_medium === 'none') {
+            app.tracking.agent.utm_medium = 'Organic';
+          }
+        }
+
+        if (utmSource === 'Google' && p.indexOf('gclid') > -1) {
+          app.tracking.agent.utm_medium = 'Google Ads';
+        }
+      });
+
+      if (app.tracking.agent.utm_source === 'Referrer' && referrer) {
+        app.tracking.agent.utm_source = app.tracking.extractHostname(referrer);
+      }
+
+      if (
+        (app.tracking.agent.referrer && app.tracking.agent.utm_source.trim() !== 'Direct') ||
+        (!app.tracking.agent.referrer && app.tracking.agent.utm_source.trim() !== 'Direct') ||
+        !app.cookies.get(app.tracking.cookieKey)
+      ) {
+        app.cookies.remove(app.tracking.cookieKey);
+        var joinUtms = function() {
+          return (
+            app.tracking.agent.utm_source + '|' +
+            app.tracking.agent.utm_medium + '|' +
+            app.tracking.agent.utm_campaign + '|' +
+            app.tracking.agent.utm_term + '|' +
+            app.tracking.agent.utm_content
+          );
+        };
+        app.cookies.set(app.tracking.cookieKey, joinUtms(), 7);
+      }
+    },
+
+    extractHostname: function(url) {
+      var hostname = '';
+      if (url.indexOf('//') > -1) {
+        hostname = url.split('/')[2];
+      } else {
+        hostname = url.split('/')[0];
       }
       hostname = hostname.split(':')[0];
       hostname = hostname.split('?')[0];
       return hostname;
     }
-  }
+  };
 
-  /**
-   * Captura UTMs completas (URL + referrer)
-   */
-  function captureUTMs() {
-    var utms = extractUTMsFromURL();
-    
-    // Se não tem utm_source na URL, detecta pelo referrer
-    if (utms.utm_source === 'Direct' && !window.location.search.match(/utm_source/)) {
-      var detectedSource = detectSource();
-      utms.utm_source = detectedSource;
-      
-      // Se veio do Google (organic), seta medium = Organic
-      if (detectedSource === 'Google' && utms.utm_medium === 'none') {
-        utms.utm_medium = 'Organic';
-      }
-    }
-    
-    // Detecta Google Ads pelo gclid
-    if (window.location.search.match(/gclid=/)) {
-      utms.utm_source = 'Google';
-      utms.utm_medium = 'Google Ads';
-    }
-    
-    log('UTMs finais capturadas:', utms);
-    return utms;
-  }
-
-  /**
-   * Constrói URL do iframe com UTMs
-   */
-  function buildIframeURL(utms) {
-    var url = CONFIG.iframeBaseUrl + '?';
-    var params = [];
-    
-    CONFIG.utmParams.forEach(function(param) {
-      params.push(param + '=' + encodeURIComponent(utms[param]));
-    });
-    
-    var finalUrl = CONFIG.iframeBaseUrl + '?' + params.join('&');
-    log('URL do iframe construída:', finalUrl);
-    
-    return finalUrl;
-  }
-
-  // ==================== INICIALIZAÇÃO ====================
-  
-  var capturedUTMs = null;
-
+  // ==================== EXECUTAR TRACKING ====================
   function init() {
-    log('=== Audiotext UTM Tracker Iniciado ===');
+    console.log('[Audiotext] Inicializando tracking...');
     
-    // Captura UTMs quando página carrega
-    capturedUTMs = captureUTMs();
+    // Executa tracking para capturar UTMs
+    app.tracking.run();
     
-    // Disponibiliza globalmente para openBudgetModal usar
+    console.log('[Audiotext] UTMs capturadas:', app.tracking.agent);
+    console.log('[Audiotext] Cookie salvo:', app.cookies.get('audiotext-budget-tracking'));
+    
+    // Disponibiliza função helper para construir URL do iframe
     window.AudiotextUTM = {
-      getUTMs: function() {
-        return capturedUTMs;
-      },
-      
       getIframeURL: function() {
-        return buildIframeURL(capturedUTMs);
+        var base = 'https://budget.audiotext.com.br/?';
+        var params = [
+          'utm_source=' + encodeURIComponent(app.tracking.agent.utm_source),
+          'utm_medium=' + encodeURIComponent(app.tracking.agent.utm_medium),
+          'utm_campaign=' + encodeURIComponent(app.tracking.agent.utm_campaign),
+          'utm_term=' + encodeURIComponent(app.tracking.agent.utm_term),
+          'utm_content=' + encodeURIComponent(app.tracking.agent.utm_content)
+        ];
+        return base + params.join('&');
       },
       
-      // Debug helpers
-      testCapture: function() {
-        console.table(capturedUTMs);
-        return capturedUTMs;
-      },
-      
-      clearCache: function() {
-        capturedUTMs = CONFIG.defaults;
-        console.log('UTMs resetadas para defaults');
+      getUTMs: function() {
+        return app.tracking.agent;
       }
     };
     
-    log('=== Inicialização Completa ===');
-    log('Use AudiotextUTM.getUTMs() para ver UTMs capturadas');
+    console.log('[Audiotext] URL do iframe:', window.AudiotextUTM.getIframeURL());
   }
 
   // Executa quando DOM carregar
