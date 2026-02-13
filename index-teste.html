@@ -3,40 +3,32 @@
 <head>
   <script>
   (function() {
-    // 1. Função simples para pegar parâmetros da URL
     function getQueryParam(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name);
     }
 
-    // 2. Captura as UTMs da URL atual do navegador
-    // Se não existir, define como vazio ou mantém o padrão que o sistema espera
     const utmSource = getQueryParam('utm_source');
-    
-    // SÓ executa se houver pelo menos um utm_source, para não sobrescrever cookies válidos com vazios
-    // Se o usuário veio direto (sem UTM), deixamos o app lidar com isso.
-    // Mas se veio do Google Ads (tem utm_source), nós forçamos a gravação.
+    const cookieName = "audiotext-budget-tracking";
+    const domain = ".audiotext.com.br";
+
     if (utmSource) {
         const utmMedium = getQueryParam('utm_medium') || 'none';
         const utmCampaign = getQueryParam('utm_campaign') || 'none';
         const utmTerm = getQueryParam('utm_term') || 'none';
         const utmContent = getQueryParam('utm_content') || 'none';
 
-        // 3. Monta a string no formato EXATO que o api.js espera:
-        // source|medium|campaign|term|content
         const cookieValue = [utmSource, utmMedium, utmCampaign, utmTerm, utmContent].join('|');
 
-        // 4. Configura a expiração (7 dias, igual ao original)
+        // 1. Limpa cookies antigos que possam estar no domínio errado (sem o ponto inicial)
+        document.cookie = cookieName + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        
+        // 2. Grava o cookie corretamente no domínio compartilhado
         const date = new Date();
         date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-        const expires = "; expires=" + date.toUTCString();
-
-        // 5. GRAVA O COOKIE NO DOMÍNIO RAIZ (.audiotext.com.br)
-        // O ponto antes do domínio é crucial para que o iframe (budget.audiotext...) consiga ler o cookie criado aqui.
-        // Certifica-te que estás a testar no domínio audiotext.com.br (não funcionará em localhost ou IP direto sem ajustes de hosts)
-        document.cookie = "audiotext-budget-tracking=" + cookieValue + expires + "; domain=.audiotext.com.br; path=/";
+        document.cookie = cookieName + "=" + cookieValue + "; expires=" + date.toUTCString() + "; domain=" + domain + "; path=/; SameSite=Lax";
         
-        console.log("UTMs capturadas e gravadas no cookie: ", cookieValue);
+        console.log("Cookie UTM gravado para o iframe:", cookieValue);
     }
   })();
 </script>
@@ -2772,30 +2764,24 @@ window.dataLayer = window.dataLayer || [];
       const modal = document.getElementById('budgetModal');
       const iframe = document.getElementById('budgetIframe');
       
-      // 1. Pegamos as UTMs da URL atual do site
-      const queryParams = window.location.search;
+      // Captura as UTMs da URL do navegador
+      const searchParams = window.location.search;
       
-      // 2. Forçamos o iframe a carregar a URL com as UTMs
-      // Isso garante que o tracking.js DENTRO do iframe também veja os dados
+      // Se houver UTMs, passamos na URL do iframe. 
+      // Isso força o app.js e o tracking.js do iframe a lerem os valores da URL se o cookie falhar.
       const baseUrl = 'https://budget.audiotext.com.br/';
-      iframe.src = baseUrl + queryParams;
+      iframe.src = baseUrl + searchParams;
       
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
-    
-      // 3. Pequeno truque: avisar o iframe para recarregar as UTMs após carregar
-      iframe.onload = function() {
-          iframe.contentWindow.postMessage('reload_utms', 'https://budget.audiotext.com.br');
-      };
     }
-
-    function closeBudgetModal() {
-      const modal = document.getElementById('budgetModal');
-      const iframe = document.getElementById('budgetIframe');
-      modal.classList.remove('open');
-      iframe.src = '';
-      document.body.style.overflow = '';
-    }
+        function closeBudgetModal() {
+          const modal = document.getElementById('budgetModal');
+          const iframe = document.getElementById('budgetIframe');
+          modal.classList.remove('open');
+          iframe.src = '';
+          document.body.style.overflow = '';
+        }
 
     // Handle ESC key and iframe messages
     document.addEventListener('keydown', function(e) {
