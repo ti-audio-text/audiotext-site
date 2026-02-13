@@ -1,46 +1,50 @@
-// Controle da UI e fluxo do orçamento — versão HTML pura
-// Compatível com a estrutura do original React (PersonData / BudgetData / BudgetResult)
+// Controle da UI e fluxo do orçamento — v2.0
+// Etapas invertidas: 1) Serviço → 2) Dados pessoais → 3) Resultado
+// Inclui: progress bar, validação inline, save & resume
 
 (function () {
   /* ====== DOM REFS ====== */
-  const personDataSection = document.getElementById("person-data");
-  const budgetDataSection = document.getElementById("budget-data");
-  const budgetResultSection = document.getElementById("budget-result");
-  const stepIndicator = document.getElementById("step-indicator");
-  const stepIndicator2 = document.getElementById("step-indicator-2");
-  const loader = document.getElementById("loader");
-  const errorBox = document.getElementById("error-box");
-  const resultsText = document.getElementById("results-text");
-  const resultsTable = document.getElementById("results-table");
-  const spinnerLoad = document.getElementById("spinner-load");
-  const linkReturn = document.getElementById("link-return");
-  const textFirstStep = document.getElementById("text-first-step");
-  const textSecondStep = document.getElementById("text-second-step");
+  var step1Section = document.getElementById("step-1-service");
+  var step2Section = document.getElementById("step-2-personal");
+  var budgetResultSection = document.getElementById("budget-result");
+  var loader = document.getElementById("loader");
+  var errorBox = document.getElementById("error-box");
+  var resultsText = document.getElementById("results-text");
+  var resultsTable = document.getElementById("results-table");
+  var spinnerLoad = document.getElementById("spinner-load");
+  var linkReturn = document.getElementById("link-return");
+  var textFirstStep = document.getElementById("text-first-step");
+  var textSecondStep = document.getElementById("text-second-step");
 
-  const step1Form = document.getElementById("form-step-1");
-  const step2Form = document.getElementById("form-step-2");
+  var step1Form = document.getElementById("form-step-1");
+  var step2Form = document.getElementById("form-step-2");
 
-  /* Step 1 fields */
-  const f = {
+  /* Progress bar refs */
+  var progressSteps = document.querySelectorAll(".progress-step");
+  var progressLine1 = document.getElementById("progress-line-1");
+  var progressLine2 = document.getElementById("progress-line-2");
+
+  /* Step 1 fields — service/budget data */
+  var svc = {
+    serviceCode: document.getElementById("serviceCode"),
+    participantsAmount: document.getElementById("participantsAmount"),
+    amount: document.getElementById("amount"),
+    finalityCode: document.getElementById("finalityCode"),
+    languageCode: document.getElementById("languageCode"),
+  };
+
+  /* Step 2 fields — personal data */
+  var usr = {
     username: document.getElementById("username"),
     email: document.getElementById("email"),
     phone: document.getElementById("phone"),
     company: document.getElementById("company"),
-    serviceCode: document.getElementById("serviceCode"),
-    participantsAmount: document.getElementById("participantsAmount"),
-  };
-
-  /* Step 2 fields */
-  const g = {
-    amount: document.getElementById("amount"),
-    finalityCode: document.getElementById("finalityCode"),
-    languageCode: document.getElementById("languageCode"),
     howDidMeetUs: document.getElementById("howDidMeetUs"),
     observation: document.getElementById("observation"),
   };
 
-  let csrfToken = "";
-  let sessionCode = "";
+  var csrfToken = "";
+  var sessionCode = "";
 
   /* ====== HELPERS ====== */
   function setLoading(isLoading) {
@@ -62,11 +66,17 @@
   }
 
   function showFieldError(fieldId, msg) {
-    const el = document.getElementById("err-" + fieldId);
+    var el = document.getElementById("err-" + fieldId);
     if (!el) return;
     if (msg) {
       el.textContent = msg;
       el.classList.remove("hidden");
+      // Also mark the field as invalid
+      var field = document.getElementById(fieldId);
+      if (field) {
+        field.classList.add("invalid");
+        field.classList.remove("valid");
+      }
     } else {
       el.textContent = "";
       el.classList.add("hidden");
@@ -80,9 +90,33 @@
         el.textContent = "";
       }
     });
+    // Clear all validation states
+    document.querySelectorAll(".valid, .invalid").forEach(function (el) {
+      el.classList.remove("valid", "invalid");
+    });
   }
 
-  /* ====== PHONE FORMATTING (matches original FormatPhone) ====== */
+  function markValid(field) {
+    field.classList.add("valid");
+    field.classList.remove("invalid");
+    // Clear error message if exists
+    var errEl = document.getElementById("err-" + field.id);
+    if (errEl) {
+      errEl.classList.add("hidden");
+      errEl.textContent = "";
+    }
+  }
+
+  function markInvalid(field) {
+    field.classList.add("invalid");
+    field.classList.remove("valid");
+  }
+
+  function markNeutral(field) {
+    field.classList.remove("valid", "invalid");
+  }
+
+  /* ====== PHONE FORMATTING ====== */
   function formatPhone(value) {
     if (!value) return "";
     var digits = value.replace(/\D/g, "");
@@ -108,7 +142,7 @@
     );
   }
 
-  f.phone.addEventListener("input", function () {
+  usr.phone.addEventListener("input", function () {
     var cursorPos = this.selectionStart;
     var oldLen = this.value.length;
     this.value = formatPhone(this.value);
@@ -117,19 +151,130 @@
     this.setSelectionRange(newPos, newPos);
   });
 
+  /* ====== INLINE VALIDATION ====== */
+  function setupInlineValidation() {
+    // --- Step 1 fields ---
+    svc.serviceCode.addEventListener("change", function () {
+      if (this.value) markValid(this);
+      else markNeutral(this);
+    });
+
+    svc.amount.addEventListener("blur", function () {
+      var val = Number(this.value);
+      if (val >= 1) markValid(this);
+      else if (this.value !== "") markInvalid(this);
+      else markNeutral(this);
+    });
+
+    svc.finalityCode.addEventListener("change", function () {
+      if (this.value) markValid(this);
+      else markNeutral(this);
+    });
+
+    svc.languageCode.addEventListener("change", function () {
+      if (this.value) markValid(this);
+      else markNeutral(this);
+    });
+
+    // --- Step 2 fields ---
+    usr.username.addEventListener("blur", function () {
+      var val = this.value.trim();
+      if (val.length >= 2) markValid(this);
+      else if (val.length > 0) markInvalid(this);
+      else markNeutral(this);
+    });
+
+    usr.email.addEventListener("blur", function () {
+      var val = this.value.trim();
+      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) markValid(this);
+      else if (val.length > 0) markInvalid(this);
+      else markNeutral(this);
+    });
+
+    usr.phone.addEventListener("blur", function () {
+      var digits = this.value.replace(/\D/g, "");
+      if (digits.length >= 10) markValid(this);
+      else if (digits.length > 0) markInvalid(this);
+      else markNeutral(this);
+    });
+
+    usr.howDidMeetUs.addEventListener("change", function () {
+      if (this.value) markValid(this);
+      else markNeutral(this);
+    });
+  }
+
+  /* ====== PROGRESS BAR ====== */
+  function updateProgressBar(currentStep) {
+    progressSteps.forEach(function (step, index) {
+      var stepNum = index + 1;
+      step.classList.remove("active", "completed");
+
+      if (stepNum < currentStep) {
+        step.classList.add("completed");
+      } else if (stepNum === currentStep) {
+        step.classList.add("active");
+      }
+    });
+
+    // Line fills
+    if (currentStep > 1) {
+      progressLine1.classList.add("filled");
+    } else {
+      progressLine1.classList.remove("filled");
+    }
+
+    if (currentStep > 2) {
+      progressLine2.classList.add("filled");
+    } else {
+      progressLine2.classList.remove("filled");
+    }
+  }
+
   /* ====== NAVIGATION ====== */
   function goToStep(step) {
-    personDataSection.classList.add("hidden");
-    budgetDataSection.classList.add("hidden");
+    step1Section.classList.add("hidden");
+    step2Section.classList.add("hidden");
     budgetResultSection.classList.add("hidden");
 
     if (step === 1) {
-      personDataSection.classList.remove("hidden");
-      stepIndicator.textContent = "Etapa 1 de 2";
+      step1Section.classList.remove("hidden");
     } else if (step === 2) {
-      budgetDataSection.classList.remove("hidden");
+      step2Section.classList.remove("hidden");
     } else if (step === 3) {
       budgetResultSection.classList.remove("hidden");
+    }
+
+    updateProgressBar(step);
+    showError("");
+  }
+
+  /* ====== SAVE & RESUME ====== */
+  var STORAGE_KEY = "at_budget_session";
+
+  function saveSession() {
+    if (sessionCode) {
+      try {
+        localStorage.setItem(STORAGE_KEY, sessionCode);
+      } catch (e) {
+        // localStorage not available — silently ignore
+      }
+    }
+  }
+
+  function getSavedSession() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  function clearSavedSession() {
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+    } catch (e) {
+      // ignore
     }
   }
 
@@ -146,43 +291,55 @@
   document
     .getElementById("btn-new-budget")
     .addEventListener("click", function () {
+      clearSavedSession();
+      sessionCode = "";
+      csrfToken = "";
+      clearFieldErrors();
+      // Clear all form fields
+      step1Form.reset();
+      step2Form.reset();
       goToStep(1);
     });
 
   /* ====== FILL FORM FROM BUDGET DATA ====== */
   function fillStep1FromBudget(budget) {
     if (!budget) return;
-    f.username.value = budget.username || "";
-    f.email.value = budget.email || "";
-    f.phone.value = budget.phone || "";
-    f.company.value = budget.company || "";
-    if (budget.serviceCode) f.serviceCode.value = budget.serviceCode;
+    if (budget.serviceCode) svc.serviceCode.value = budget.serviceCode;
+    if (budget.amount) svc.amount.value = budget.amount;
+    if (budget.finalityCode) svc.finalityCode.value = budget.finalityCode;
+    if (budget.languageCode) svc.languageCode.value = budget.languageCode;
   }
 
   function fillStep2FromBudget(budget) {
     if (!budget) return;
-    g.amount.value = budget.amount || "";
-    if (budget.finalityCode) g.finalityCode.value = budget.finalityCode;
-    if (budget.languageCode) g.languageCode.value = budget.languageCode;
-    if (budget.howDidMeetUs) g.howDidMeetUs.value = budget.howDidMeetUs;
-    g.observation.value = budget.observation || "";
+    usr.username.value = budget.username || "";
+    usr.email.value = budget.email || "";
+    usr.phone.value = budget.phone || "";
+    usr.company.value = budget.company || "";
+    if (budget.howDidMeetUs) usr.howDidMeetUs.value = budget.howDidMeetUs;
+    usr.observation.value = budget.observation || "";
   }
 
-  /* ====== LOAD STATIC DATA (services, finalities, languages, channels) ====== */
+  /* ====== LOAD STATIC DATA ====== */
   async function loadStaticData() {
     try {
       setLoading(true);
 
-      const [servicesRes, finalitiesRes, languagesRes, meetingChannelsRes] =
-        await Promise.allSettled([
-          app.api.services.get(),
-          app.api.finalities.get(),
-          app.api.languages.get(),
-          app.api.meetingChannels.get(),
-        ]);
+      var results = await Promise.allSettled([
+        app.api.services.get(),
+        app.api.finalities.get(),
+        app.api.languages.get(),
+        app.api.meetingChannels.get(),
+      ]);
+
+      var servicesRes = results[0];
+      var finalitiesRes = results[1];
+      var languagesRes = results[2];
+      var meetingChannelsRes = results[3];
 
       // Serviços
-      f.serviceCode.innerHTML = '<option value="">Selecione o serviço</option>';
+      svc.serviceCode.innerHTML =
+        '<option value="">Selecione o serviço*</option>';
       var services =
         servicesRes.status === "fulfilled" ? servicesRes.value : null;
       if (Array.isArray(services) && services.length) {
@@ -190,19 +347,18 @@
           var opt = document.createElement("option");
           opt.value = s.code;
           opt.textContent = s.name;
-          f.serviceCode.appendChild(opt);
+          svc.serviceCode.appendChild(opt);
         });
       } else {
-        // Fallback do original
         var opt = document.createElement("option");
         opt.value = "transcricao";
         opt.textContent = "Transcrição";
-        f.serviceCode.appendChild(opt);
+        svc.serviceCode.appendChild(opt);
       }
 
       // Finalidades
-      g.finalityCode.innerHTML =
-        '<option value="">Selecione a Finalidade</option>';
+      svc.finalityCode.innerHTML =
+        '<option value="">Selecione a finalidade*</option>';
       var finalities =
         finalitiesRes.status === "fulfilled" ? finalitiesRes.value : null;
       if (Array.isArray(finalities) && finalities.length) {
@@ -210,10 +366,9 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          g.finalityCode.appendChild(opt);
+          svc.finalityCode.appendChild(opt);
         });
       } else {
-        // Fallback do original (hardcoded options from BudgetData)
         [
           { code: "juridica", name: "Jurídica" },
           { code: "academica", name: "Acadêmica" },
@@ -226,13 +381,13 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          g.finalityCode.appendChild(opt);
+          svc.finalityCode.appendChild(opt);
         });
       }
 
       // Idiomas
-      g.languageCode.innerHTML =
-        '<option value="">Selecione o idioma</option>';
+      svc.languageCode.innerHTML =
+        '<option value="">Selecione o idioma*</option>';
       var languages =
         languagesRes.status === "fulfilled" ? languagesRes.value : null;
       if (Array.isArray(languages) && languages.length) {
@@ -240,10 +395,9 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          g.languageCode.appendChild(opt);
+          svc.languageCode.appendChild(opt);
         });
       } else {
-        // Fallback
         [
           { code: "pt-BR", name: "Português" },
           { code: "en-US", name: "Inglês" },
@@ -253,13 +407,13 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          g.languageCode.appendChild(opt);
+          svc.languageCode.appendChild(opt);
         });
       }
 
       // Canais — Como nos conheceu
-      g.howDidMeetUs.innerHTML =
-        '<option value="">Como nos conheceu?</option>';
+      usr.howDidMeetUs.innerHTML =
+        '<option value="">Como nos conheceu?*</option>';
       var channels =
         meetingChannelsRes.status === "fulfilled"
           ? meetingChannelsRes.value
@@ -269,17 +423,16 @@
           var opt = document.createElement("option");
           opt.value = typeof m === "string" ? m : m.code || m.name || m;
           opt.textContent = typeof m === "string" ? m : m.name || m;
-          g.howDidMeetUs.appendChild(opt);
+          usr.howDidMeetUs.appendChild(opt);
         });
       } else {
-        // Fallback
         ["Já sou cliente", "Indicação", "Google", "Outro"].forEach(function (
           m
         ) {
           var opt = document.createElement("option");
           opt.value = m;
           opt.textContent = m;
-          g.howDidMeetUs.appendChild(opt);
+          usr.howDidMeetUs.appendChild(opt);
         });
       }
     } catch (e) {
@@ -290,28 +443,43 @@
     }
   }
 
-  /* ====== LOAD BUDGET (session) ====== */
+  /* ====== LOAD BUDGET (session restore) ====== */
   async function loadBudget() {
     try {
+      // Try to restore sessionCode from localStorage
+      var savedSession = getSavedSession();
+      if (savedSession) {
+        sessionCode = savedSession;
+      }
+
       setLoading(true);
       var data = await app.api.budget.get();
       if (data) {
-        sessionCode = data.sessionCode || (data.budget && data.budget.sessionCode) || "";
+        sessionCode =
+          data.sessionCode ||
+          (data.budget && data.budget.sessionCode) ||
+          sessionCode;
         csrfToken = data.csrfToken || "";
         var budget = data.budget || data;
-        console.log('[Budget] GET /budget response - sessionCode:', sessionCode, 'csrfToken:', csrfToken);
+        console.log(
+          "[Budget] GET /budget response - sessionCode:",
+          sessionCode,
+          "csrfToken:",
+          csrfToken
+        );
         fillStep1FromBudget(budget);
         fillStep2FromBudget(budget);
+        saveSession();
       }
     } catch (e) {
       console.error(e);
-      // Não mostra erro — pode ser primeira visita sem sessão
+      // Not an error — may be first visit
     } finally {
       setLoading(false);
     }
   }
 
-  /* ====== LOAD CMS CONTENT (text views) ====== */
+  /* ====== LOAD CMS CONTENT ====== */
   async function loadContent() {
     try {
       var res = await app.api.content.get();
@@ -328,16 +496,80 @@
     }
   }
 
-  /* ====== STEP 1 SUBMIT ====== */
+  /* ====== STEP 1 SUBMIT — Service/Budget Data ====== */
   step1Form.addEventListener("submit", async function (event) {
     event.preventDefault();
     showError("");
     clearFieldErrors();
 
-    var username = f.username.value.trim();
-    var email = f.email.value.trim();
-    var phone = f.phone.value.trim();
-    var serviceCode = f.serviceCode.value;
+    var serviceCode = svc.serviceCode.value;
+    var amount = Number(svc.amount.value) || 0;
+    var finalityCode = svc.finalityCode.value;
+    var languageCode = svc.languageCode.value;
+
+    // Validação
+    var hasError = false;
+
+    if (!serviceCode) {
+      showFieldError("serviceCode", "Selecione um serviço");
+      hasError = true;
+    }
+    if (!amount || amount < 1) {
+      showFieldError("amount", "Informe a quantidade de minutos");
+      hasError = true;
+    }
+    if (!finalityCode) {
+      showFieldError("finalityCode", "Selecione a finalidade");
+      hasError = true;
+    }
+    if (!languageCode) {
+      showFieldError("languageCode", "Selecione o idioma");
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    var payload = {
+      serviceCode: serviceCode,
+      amount: amount,
+      finalityCode: finalityCode,
+      languageCode: languageCode,
+      participantsAmount: 1,
+      sessionCode: sessionCode || app.cookies.get("audiotext-budget-session"),
+      _csrf: csrfToken || null,
+    };
+
+    try {
+      setLoading(true);
+      var res = await app.api.budget.patch(payload);
+      var budget = res.budget || res;
+      sessionCode = budget.sessionCode || sessionCode;
+      saveSession();
+      fillStep1FromBudget(budget);
+      goToStep(2);
+    } catch (e) {
+      console.error(e);
+      showError("Erro ao salvar dados. Tente novamente.");
+    } finally {
+      setLoading(false);
+    }
+  });
+
+  /* ====== STEP 2 — PREV ====== */
+  document.getElementById("btn-prev").addEventListener("click", function () {
+    goToStep(1);
+  });
+
+  /* ====== STEP 2 SUBMIT — Personal Data + Generate Proposals ====== */
+  step2Form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    showError("");
+    clearFieldErrors();
+
+    var username = usr.username.value.trim();
+    var email = usr.email.value.trim();
+    var phone = usr.phone.value.trim();
+    var howDidMeetUs = usr.howDidMeetUs.value;
 
     // Validação
     var hasError = false;
@@ -357,71 +589,6 @@
       showFieldError("phone", "Telefone é obrigatório");
       hasError = true;
     }
-    if (!serviceCode) {
-      showFieldError("serviceCode", "Selecione um serviço");
-      hasError = true;
-    }
-
-    if (hasError) return;
-
-    var payload = {
-      username: username,
-      email: email,
-      phone: phone,
-      company: f.company.value.trim() || null,
-      serviceCode: serviceCode,
-      participantsAmount: 1,
-      isWhatsApp: true,
-      sessionCode: sessionCode || app.cookies.get("audiotext-budget-session"),
-      _csrf: csrfToken || null,
-    };
-
-    try {
-      setLoading(true);
-      var res = await app.api.budget.patch(payload);
-      var budget = res.budget || res;
-      sessionCode = budget.sessionCode || sessionCode;
-      fillStep1FromBudget(budget);
-      goToStep(2);
-    } catch (e) {
-      console.error(e);
-      showError("Erro ao salvar dados. Tente novamente.");
-    } finally {
-      setLoading(false);
-    }
-  });
-
-  /* ====== STEP 2 — PREV ====== */
-  document.getElementById("btn-prev").addEventListener("click", function () {
-    goToStep(1);
-  });
-
-  /* ====== STEP 2 SUBMIT ====== */
-  step2Form.addEventListener("submit", async function (event) {
-    event.preventDefault();
-    showError("");
-    clearFieldErrors();
-
-    var amount = Number(g.amount.value) || 0;
-    var finalityCode = g.finalityCode.value;
-    var languageCode = g.languageCode.value;
-    var howDidMeetUs = g.howDidMeetUs.value;
-
-    // Validação
-    var hasError = false;
-
-    if (!amount || amount < 1) {
-      showFieldError("amount", "Informe a quantidade de minutos");
-      hasError = true;
-    }
-    if (!finalityCode) {
-      showFieldError("finalityCode", "Selecione a finalidade");
-      hasError = true;
-    }
-    if (!languageCode) {
-      showFieldError("languageCode", "Selecione o idioma");
-      hasError = true;
-    }
     if (!howDidMeetUs) {
       showFieldError("howDidMeetUs", "Selecione como nos conheceu");
       hasError = true;
@@ -429,12 +596,14 @@
 
     if (hasError) return;
 
-    var payloadBudget = {
-      amount: amount,
-      finalityCode: finalityCode,
-      languageCode: languageCode,
+    var payloadPersonal = {
+      username: username,
+      email: email,
+      phone: phone,
+      company: usr.company.value.trim() || null,
       howDidMeetUs: howDidMeetUs,
-      observation: g.observation.value || null,
+      observation: usr.observation.value || null,
+      isWhatsApp: true,
       sessionCode: sessionCode || app.cookies.get("audiotext-budget-session"),
       _csrf: csrfToken || null,
     };
@@ -444,32 +613,44 @@
       resultsText.innerHTML = "";
       resultsTable.innerHTML = "";
 
-      // Salvar budget
-      var saved = await app.api.budget.patch(payloadBudget);
+      // Save personal data
+      var saved = await app.api.budget.patch(payloadPersonal);
       var budgetSaved = saved.budget || saved;
       sessionCode = budgetSaved.sessionCode || sessionCode;
+      saveSession();
 
-      console.log('[Budget] PATCH response (budgetSaved):', JSON.stringify(budgetSaved, null, 2));
-      console.log('[Budget] sessionCode:', sessionCode, 'csrfToken:', csrfToken);
+      console.log(
+        "[Budget] PATCH response (budgetSaved):",
+        JSON.stringify(budgetSaved, null, 2)
+      );
+      console.log(
+        "[Budget] sessionCode:",
+        sessionCode,
+        "csrfToken:",
+        csrfToken
+      );
 
-      // Ir para Step 3 mostrando spinner
+      // Go to Step 3 showing spinner
       goToStep(3);
       spinnerLoad.classList.remove("hidden");
 
-      // Sinalizar para o site pai
+      // Signal parent page
       window.parent.postMessage(
         "gerarPropostas",
         "https://www.audiotext.com.br/"
       );
 
-      // Gerar propostas — usar dados direto da resposta do PATCH (já validados pela API)
+      // Generate proposals
       var proposalPayload = {
         budget: budgetSaved,
         sessionCode: sessionCode,
         csrfToken: csrfToken,
       };
 
-      console.log('[Budget] POST /budget/proposals payload:', JSON.stringify(proposalPayload, null, 2));
+      console.log(
+        "[Budget] POST /budget/proposals payload:",
+        JSON.stringify(proposalPayload, null, 2)
+      );
 
       var proposalsResponse = await app.api.proposals.generate(proposalPayload);
 
@@ -480,7 +661,7 @@
         return;
       }
 
-      // Buscar propostas geradas (mesmo fluxo do original React saga)
+      // Fetch generated proposals
       var proposalData = await app.api.proposals.get(sessionCode);
       spinnerLoad.classList.add("hidden");
 
@@ -583,6 +764,7 @@
         app.tracking.run();
       }
 
+      setupInlineValidation();
       await loadStaticData();
       await loadBudget();
       await loadContent();
