@@ -1,29 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <script>
-  (function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    const utmSource = urlParams.get('utm_source');
-    
-    if (utmSource) {
-      const utmData = [
-        utmSource,
-        urlParams.get('utm_medium') || 'none',
-        urlParams.get('utm_campaign') || 'none',
-        urlParams.get('utm_term') || 'none',
-        urlParams.get('utm_content') || 'none'
-      ].join('|');
-
-      const date = new Date();
-      date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
-      // Grava no domínio pai para garantir
-      document.cookie = "audiotext-budget-tracking=" + utmData + "; expires=" + date.toUTCString() + "; domain=.audiotext.com.br; path=/; SameSite=Lax";
-      console.log("Cookie pai gravado:", utmData);
-    }
-  })();
-</script>
-  
   <meta name="google-site-verification" content="IxIBd0DVpeNe9aY0iUXDN63dG4-wFmAw7bnUxSiloXM" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
@@ -1166,44 +1143,139 @@ window.dataLayer = window.dataLayer || [];
       transform: scale(1.1);
     }
     
-/* Budget Modal */
-    .budget-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: rgba(0, 0, 0, 0.55);
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none;
-      transition: opacity 0.2s ease, visibility 0.2s ease;
-    }
-    
-    .budget-modal.open {
-      opacity: 1;
-      visibility: visible;
-      pointer-events: auto;
-    }
-    
-    .budget-iframe {
-      width: 768px;
-      height: 674px;
-      border: 0;
-      background-color: hsl(var(--background));
-      border-radius: calc(var(--radius) + 0.25rem);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
-    }
-    
-    @media (max-width: 768px) {
-      .budget-iframe {
-        width: 95%;
-        max-width: 768px;
-        height: 90vh;
-        max-height: 700px;
+      /* 
+        MODAL DE ORÇAMENTO - CSS
+        
+        ONDE ADICIONAR: No final do seu CSS principal ou criar arquivo separado
+      */
+      
+      /* Modal backdrop */
+      .budget-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        z-index: 9999;
+        padding: 20px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
-    }
+      
+      /* Modal visível */
+      .budget-modal.open {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: budgetModalFadeIn 0.3s ease-out;
+      }
+      
+      /* Container do modal */
+      .budget-modal-content {
+        position: relative;
+        width: 100%;
+        max-width: 1000px;
+        height: 90vh;
+        max-height: 900px;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        animation: budgetModalSlideUp 0.3s ease-out;
+      }
+      
+      /* Botão fechar */
+      .budget-modal-close {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        z-index: 10;
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      .budget-modal-close:hover {
+        background: #ffffff;
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      }
+      
+      .budget-modal-close:active {
+        transform: scale(0.95);
+      }
+      
+      .budget-modal-close svg {
+        color: #333;
+      }
+      
+      /* Iframe */
+      .budget-modal-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 16px;
+      }
+      
+      /* Animações */
+      @keyframes budgetModalFadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      
+      @keyframes budgetModalSlideUp {
+        from {
+          opacity: 0;
+          transform: translateY(40px) scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+      
+      /* Mobile responsivo */
+      @media (max-width: 768px) {
+        .budget-modal {
+          padding: 0;
+        }
+        
+        .budget-modal-content {
+          max-width: 100%;
+          height: 100vh;
+          max-height: 100vh;
+          border-radius: 0;
+        }
+        
+        .budget-modal-iframe {
+          border-radius: 0;
+        }
+        
+        .budget-modal-close {
+          top: 12px;
+          right: 12px;
+        }
+      }
+      
+      /* Prevenir scroll do body quando modal aberto */
+      body:has(.budget-modal.open) {
+        overflow: hidden;
+      }
     
     /* === CORREÇÕES MOBILE === */
     @media (max-width: 767px) {
@@ -2618,18 +2690,29 @@ window.dataLayer = window.dataLayer || [];
       </svg>
     </a>
 
-    <!-- Budget Modal -->
-    <div id="budgetModal" class="budget-modal" role="dialog" aria-modal="true">
-      <iframe
-        id="budgetIframe"
-        src=""
-        title="Calculadora de Orçamento Audiotext"
-        class="budget-iframe"
-        allow="clipboard-write"
-      ></iframe>
+    <!-- 
+      MODAL DE ORÇAMENTO - ADICIONAR NO SITE PRINCIPAL
+      
+      ONDE: Final do <body>, antes dos scripts
+    -->
+    
+    <div id="budgetModal" class="budget-modal">
+      <div class="budget-modal-content">
+        <button class="budget-modal-close" onclick="closeBudgetModal()" aria-label="Fechar">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <iframe 
+          id="budgetIframe" 
+          class="budget-modal-iframe"
+          src="about:blank"
+          title="Simulador de Orçamento Audiotext"
+          allow="clipboard-write"
+        ></iframe>
+      </div>
     </div>
-
-  </div
 
   <!-- JavaScript for interactivity -->  
   <script>
@@ -2754,32 +2837,18 @@ window.dataLayer = window.dataLayer || [];
     function openBudgetModal() {
       const modal = document.getElementById('budgetModal');
       const iframe = document.getElementById('budgetIframe');
-      
-      // 1. Pegamos as UTMs da URL onde o utilizador está agora
-      const params = new URLSearchParams(window.location.search);
-      
-      // 2. Se não houver UTMs na URL, não fazemos nada diferente
-      // 3. Se houver, montamos a URL do iframe com elas
-      let destination = 'https://budget.audiotext.com.br/';
-      
-      if (params.toString()) {
-        destination += '?' + params.toString();
-      }
-    
-      // IMPORTANTE: Definir o src ANTES de abrir a modal
-      iframe.src = destination;
-      
+      iframe.src = 'https://budget.audiotext.com.br/';
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-    
-        function closeBudgetModal() {
-          const modal = document.getElementById('budgetModal');
-          const iframe = document.getElementById('budgetIframe');
-          modal.classList.remove('open');
-          iframe.src = '';
-          document.body.style.overflow = '';
-        }
+
+    function closeBudgetModal() {
+      const modal = document.getElementById('budgetModal');
+      const iframe = document.getElementById('budgetIframe');
+      modal.classList.remove('open');
+      iframe.src = '';
+      document.body.style.overflow = '';
+    }
 
     // Handle ESC key and iframe messages
     document.addEventListener('keydown', function(e) {
@@ -2810,6 +2879,131 @@ window.dataLayer = window.dataLayer || [];
     });
     // Initialize reviews on page load
     renderReviews();
+    /**
+       * AUDIOTEXT BUDGET MODAL - SAME ORIGIN SOLUTION
+       * 
+       * Implementação final que resolve todos os problemas:
+       * - Mesma origem (audiotext.com.br → audiotext.com.br/budget/)
+       * - Sem CORS
+       * - Cookies compartilhados automaticamente
+       * - tracking.js funciona perfeitamente
+       * 
+       * ONDE COLAR: Final do index.html, antes de </body>
+       */
+      
+      (function() {
+        'use strict';
+      
+        console.log('[Audiotext Modal] Inicializando sistema de orçamento...');
+      
+        /**
+         * Abrir modal de orçamento
+         * Passa UTMs via query params na URL do iframe
+         */
+        window.openBudgetModal = function() {
+          console.log('[Audiotext Modal] Abrindo modal...');
+          
+          const modal = document.getElementById('budgetModal');
+          const iframe = document.getElementById('budgetIframe');
+          
+          if (!modal || !iframe) {
+            console.error('[Audiotext Modal] Elementos não encontrados!');
+            return;
+          }
+          
+          // Capturar UTMs da URL atual
+          const currentParams = window.location.search;
+          console.log('[Audiotext Modal] Query params atuais:', currentParams);
+          
+          // Construir URL do iframe (SAME ORIGIN!)
+          const iframeUrl = '/budget/' + currentParams;
+          console.log('[Audiotext Modal] URL do iframe:', iframeUrl);
+          
+          // Carregar iframe
+          iframe.src = iframeUrl;
+          
+          // Mostrar modal
+          modal.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          
+          console.log('[Audiotext Modal] Modal aberto!');
+        };
+      
+        /**
+         * Fechar modal de orçamento
+         */
+        window.closeBudgetModal = function() {
+          console.log('[Audiotext Modal] Fechando modal...');
+          
+          const modal = document.getElementById('budgetModal');
+          const iframe = document.getElementById('budgetIframe');
+          
+          if (modal) {
+            modal.classList.remove('open');
+            document.body.style.overflow = '';
+          }
+          
+          // Limpar iframe (economizar memória)
+          if (iframe) {
+            iframe.src = 'about:blank';
+          }
+          
+          console.log('[Audiotext Modal] Modal fechado!');
+        };
+      
+        /**
+         * Fechar modal ao clicar fora (no backdrop)
+         */
+        function setupModalClickHandlers() {
+          const modal = document.getElementById('budgetModal');
+          if (!modal) return;
+          
+          modal.addEventListener('click', function(e) {
+            // Se clicou no backdrop (não no conteúdo)
+            if (e.target === modal) {
+              closeBudgetModal();
+            }
+          });
+          
+          console.log('[Audiotext Modal] Handlers configurados');
+        }
+      
+        /**
+         * Detectar tecla ESC para fechar
+         */
+        function setupKeyboardHandlers() {
+          document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' || e.keyCode === 27) {
+              const modal = document.getElementById('budgetModal');
+              if (modal && modal.classList.contains('open')) {
+                closeBudgetModal();
+              }
+            }
+          });
+          
+          console.log('[Audiotext Modal] Keyboard handlers configurados');
+        }
+      
+        /**
+         * Inicializar quando DOM estiver pronto
+         */
+        function init() {
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+              setupModalClickHandlers();
+              setupKeyboardHandlers();
+            });
+          } else {
+            setupModalClickHandlers();
+            setupKeyboardHandlers();
+          }
+        }
+      
+        init();
+      
+        console.log('[Audiotext Modal] Sistema pronto! ✅');
+      
+      })();
   </script>  
 </body>
 </html>
