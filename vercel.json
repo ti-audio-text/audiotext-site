@@ -58,15 +58,16 @@
         }
         
         {
-      "source": "/budget/(.*)",
-      "headers": [
-        {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self'"
+          "source": "/budget/(.*)",
+          "headers": [
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self'"
+            }
+          ]
         }
       ]
     }
-  ],
   "redirects": [
     {
       "source": "/dicas-gravar-audio-celular-com-qualidade",
