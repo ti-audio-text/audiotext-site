@@ -4,152 +4,184 @@
     <meta charset="UTF-8" />
     <title>Orçamento Audiotext</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="at-container">
-      <header class="at-header">
-        <img
-          src="https://audiotext.com.br/wp-content/uploads/2022/06/logo-audiotext.png"
-          alt="Audiotext"
-          class="at-logo"
-        />
-        <h1>Simulador de Orçamento</h1>
-      </header>
+    <div class="App">
+      <div class="container">
+        <!-- HEADER: Logo + Close -->
+        <div class="head-container">
+          <button id="btn-close" class="close-button" type="button" aria-label="Fechar">&times;</button>
+          <img
+            src="https://audiotext.com.br/wp-content/uploads/2022/06/logo-audiotext.png"
+            alt="AudioText"
+            class="at-logo"
+          />
+        </div>
 
-      <main class="at-main">
-        <section class="at-steps">
-          <div class="at-steps-indicator">
-            <span id="step-indicator">Etapa 1 de 2</span>
-          </div>
+        <!-- FORM STEPS -->
+        <div class="FormStap">
 
-          <!-- ETAPA 1 - DADOS PESSOAIS -->
-          <form id="form-step-1" class="at-form-step active">
-            <h2>Dados de contato</h2>
-            <div class="at-field">
-              <label for="username">Nome*</label>
-              <input id="username" name="username" type="text" required />
+          <!-- ETAPA 1 — DADOS PESSOAIS -->
+          <div id="person-data" class="PersonData">
+            <p class="step" id="step-indicator">Etapa 1 de 2</p>
+
+            <div class="container-person-title">
+              <div class="text-budget-generate" id="text-first-step">
+                <p>Preencha os dados abaixo para gerar seu orçamento online de forma rápida e sem compromisso.</p>
+              </div>
             </div>
-            <div class="at-field">
-              <label for="email">E-mail*</label>
-              <input id="email" name="email" type="email" required />
-            </div>
-            <div class="at-field">
-              <label for="phone">Telefone*</label>
-              <input id="phone" name="phone" type="tel" required />
-            </div>
-            <div class="at-field">
-              <label for="company">Empresa</label>
-              <input id="company" name="company" type="text" />
-            </div>
-            <div class="at-field">
-              <label for="serviceCode">Serviço*</label>
-              <select id="serviceCode" name="serviceCode" required>
-                <option value="">Transcrição</option>
-              </select>
-            </div>
-            <div class="at-field">
-              <label for="participantsAmount">Qtd. participantes</label>
+
+            <form id="form-step-1" class="form">
               <input
-                id="participantsAmount"
-                name="participantsAmount"
-                type="number"
-                min="1"
-                value="1"
+                id="username"
+                name="username"
+                type="text"
+                placeholder="Nome completo*"
+                class="at-input"
               />
-            </div>
-            <div class="at-field at-checkbox">
-              <label>
-                <input id="isWhatsApp" name="isWhatsApp" type="checkbox" />
-                Número de WhatsApp
-              </label>
-            </div>
+              <div id="err-username" class="form-error hidden"></div>
 
-            <div class="at-actions">
-              <button type="submit" class="at-button primary">
+              <input
+                id="company"
+                name="company"
+                type="text"
+                placeholder="Nome da empresa"
+                class="at-input"
+              />
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="E-mail*"
+                class="at-input"
+              />
+              <div id="err-email" class="form-error hidden"></div>
+
+              <div class="form-content-phone">
+                <label class="container-form-label" for="phone">WhatsApp/Telefone</label>
+                <input
+                  id="phone"
+                  name="phone"
+                  type="tel"
+                  placeholder="DDD + Celular*"
+                  class="at-input"
+                />
+              </div>
+              <div id="err-phone" class="form-error hidden"></div>
+
+              <select id="serviceCode" name="serviceCode" class="at-select">
+                <option value="">Selecione o serviço</option>
+              </select>
+              <div id="err-serviceCode" class="form-error hidden"></div>
+
+              <select id="participantsAmount" name="participantsAmount" class="at-select hidden">
+                <option value="">Quantidade de participantes na(s) gravação(ões)</option>
+              </select>
+
+              <button type="submit" class="at-button filled button-forward">
                 Avançar
               </button>
+            </form>
+          </div>
+
+          <!-- ETAPA 2 — DADOS DO ORÇAMENTO -->
+          <div id="budget-data" class="BudgetData hidden">
+            <p class="container-person-title step" id="step-indicator-2">Etapa 2 de 2</p>
+
+            <div class="heading-text">
+              <div class="text-budget-generate" id="text-second-step">
+                <p>Informe os detalhes do áudio para que possamos gerar suas propostas de orçamento.</p>
+              </div>
             </div>
-          </form>
 
-          <!-- ETAPA 2 - DADOS DO ORÇAMENTO -->
-          <form id="form-step-2" class="at-form-step">
-            <h2>Detalhes do orçamento</h2>
-
-            <div class="at-field">
-              <label for="amount">Minutos de áudio*</label>
+            <form id="form-step-2">
               <input
                 id="amount"
                 name="amount"
                 type="number"
                 min="1"
-                placeholder="Quantidade estimada de minutos"
-                required
+                placeholder="Quantidade estimada de minutos*"
+                class="at-input"
               />
-            </div>
+              <div id="err-amount" class="form-error hidden"></div>
 
-            <div class="at-field">
-              <label for="finalityCode">Finalidade*</label>
-              <select id="finalityCode" name="finalityCode" required>
-                <option value="">Jurídica</option>
+              <select id="finalityCode" name="finalityCode" class="at-select">
+                <option value="">Selecione a Finalidade</option>
               </select>
-            </div>
+              <div id="err-finalityCode" class="form-error hidden"></div>
 
-            <div class="at-field">
-              <label for="languageCode">Idioma*</label>
-              <select id="languageCode" name="languageCode" required>
-                <option value="">Português</option>
+              <select id="languageCode" name="languageCode" class="at-select">
+                <option value="">Selecione o idioma</option>
               </select>
-            </div>
+              <div id="err-languageCode" class="form-error hidden"></div>
 
-            <div class="at-field">
-              <label for="howDidMeetUs">Como nos conheceu?*</label>
-              <select id="howDidMeetUs" name="howDidMeetUs" required>
-                <option value="">Carregando opções...</option>
+              <select id="howDidMeetUs" name="howDidMeetUs" class="at-select">
+                <option value="">Como nos conheceu?</option>
               </select>
-            </div>
+              <div id="err-howDidMeetUs" class="form-error hidden"></div>
 
-            <div class="at-field">
-              <label for="observation">Observações</label>
+              <!-- reCAPTCHA placeholder -->
+              <div id="recaptcha-div" class="recaptcha-div"></div>
+
               <textarea
                 id="observation"
                 name="observation"
                 rows="4"
-                placeholder="Escreva aqui dúvidas ou informações adicionais"
+                placeholder="Escreva aqui especificações, dúvidas ou outras informações que nos ajudarão a entender melhor suas necessidades"
+                class="at-textarea"
               ></textarea>
+
+              <div class="budgetData-container-button">
+                <button id="btn-generate" type="submit" class="at-button filled">
+                  Avançar
+                </button>
+                <button id="btn-prev" type="button" class="at-button filled">
+                  Voltar
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- ETAPA 3 — RESULTADOS -->
+          <div id="budget-result" class="BudgetResult hidden">
+            <div class="budgetResult-container-text">
+              <div id="results-text" class="budgetResult-primary-text"></div>
             </div>
 
-            <div class="at-actions">
-              <button type="button" id="btn-prev" class="at-button secondary">
-                Voltar
-              </button>
-              <button type="submit" class="at-button primary">
-                Gerar propostas
-              </button>
+            <div id="spinner-load" class="spinner-load hidden">
+              <div class="spinner"></div>
             </div>
-          </form>
-        </section>
 
-        <!-- RESULTADOS -->
-        <section id="results-section" class="at-results hidden">
-          <h2>Propostas de orçamento</h2>
-          <div id="results-text" class="at-results-text"></div>
-          <div id="results-table" class="at-results-table"></div>
-        </section>
+            <div id="results-table" class="budgetResult-table"></div>
 
-        <!-- LOADING / ERROS -->
-        <div id="loader" class="at-loader hidden">Carregando...</div>
-        <div id="error-box" class="at-error hidden"></div>
-      </main>
+            <div class="BudgetResult-link-return" id="link-return" style="display:none;">
+              Caso deseje alterar ou fazer um novo orçamento,
+              <a class="newBudget" id="btn-new-budget">clique aqui.</a>
+            </div>
+          </div>
 
-      <footer class="at-footer">
-        <span id="version-label">v1.0.0 (same-origin)</span>
-      </footer>
+        </div>
+
+        <!-- LOADING OVERLAY -->
+        <div id="loader" class="spinner-load hidden">
+          <div class="spinner"></div>
+        </div>
+
+        <!-- ERROR BOX -->
+        <div id="error-box" class="form-error form-error-global hidden"></div>
+
+        <!-- FOOTER -->
+        <footer class="container-footer">
+          <span class="content-version" id="version-label">v1.0.0</span>
+        </footer>
+      </div>
     </div>
 
     <!-- Scripts -->
-    <script src="./assets/js/api.js"></script>
-    <script src="./assets/js/tracking.js"></script>
-    <script src="./assets/js/app.js"></script>
+    <script src="./api.js"></script>
+    <script src="./tracking.js"></script>
+    <script src="./app.js"></script>
   </body>
 </html>
