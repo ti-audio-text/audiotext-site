@@ -157,3 +157,9 @@ app.api.proposals = {
   },
 };
 
+app.api.content = {
+  async get() {
+    return atApiGet("contents");
+  },
+};
+
