@@ -31,53 +31,50 @@
         },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://stats.g.doubleclick.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; frame-src 'self' https://budget.audiotext.com.br https://www.youtube.com https://www.google.com https://td.doubleclick.net https://www.googletagmanager.com; connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://stats.g.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://connect.facebook.net https://www.facebook.com https://www.google.com https://pagead2.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests;"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://*.google-analytics.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://stats.g.doubleclick.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; font-src 'self' data:; frame-src 'self' https://budget.audiotext.com.br https://www.youtube.com https://www.google.com https://td.doubleclick.net https://www.googletagmanager.com; connect-src 'self' https://api.audiotext.com.br https://www.googletagmanager.com https://www.google-analytics.com https://*.google-analytics.com https://stats.g.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://connect.facebook.net https://www.facebook.com https://www.google.com https://pagead2.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests;"
         },
         {
           "key": "Strict-Transport-Security",
           "value": "max-age=63072000; includeSubDomains; preload"
         }
-      ]
-    },
-    {
-      "source": "/budget/(.*)",
-      "headers": [
-        {
-          "key": "X-Frame-Options",
-          "value": "SAMEORIGIN"
+        
+]
         },
         {
-          "key": "Content-Security-Policy",
-          "value": "frame-ancestors 'self'"
-        }
-      ]
-    },
-    {
-      "source": "/assets/:path*",
-      "headers": [
+          "source": "/assets/:path*",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/:path*.(jpg|jpeg|png|gif|ico|svg|webp|avif)",
-      "headers": [
+          "source": "/:path*.(jpg|jpeg|png|gif|ico|svg|webp|avif)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
+          "source": "/budget/(.*)",
+          "headers": [
+            {
+              "key": "Content-Security-Policy",
+              "value": "frame-ancestors 'self'"
+            }
+          ]
         }
-      ]
-    }
-  ],
-  "redirects": [
-    {
-      "source": "/dicas-gravar-audio-celular-com-qualidade",
-      "destination": "https://wp.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
-      "permanent": true
-    },
-    {
+      ],
+      "redirects": [
+        {
+          "source": "/dicas-gravar-audio-celular-com-qualidade",
+          "destination": "https://wp.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
+          "permanent": true
+        },
+        {
       "source": "/dicas-gravar-audio-celular-com-qualidade/",
       "destination": "https://wp.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
       "permanent": true
