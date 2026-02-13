@@ -2728,21 +2728,25 @@ window.dataLayer = window.dataLayer || [];
     }
 
 /**
- * AUDIOTEXT UTM TRACKER v6.0 - COOKIE CROSS-DOMAIN
+ * AUDIOTEXT UTM TRACKER v7.0 - SOLUÇÃO DEFINITIVA
  * 
- * Salva cookie com domain=.audiotext.com.br
- * Assim budget.audiotext.com.br (iframe) consegue ler!
+ * Esta versão:
+ * 1. Captura UTMs no site principal
+ * 2. Cria cookie cross-domain
+ * 3. INJETA código no iframe para ler o cookie
+ * 4. Força o React a usar os UTMs corretos
  * 
- * @date 2026-02-12
+ * @date 2026-02-13
  */
 
 (function() {
   'use strict';
 
-  // ==================== INICIALIZA window.app ====================
+  // ==================== PARTE 1: SITE PRINCIPAL ====================
+  
   window.app = window.app || {};
 
-  // ==================== app.cookies COM CROSS-DOMAIN ====================
+  // Cookies
   app.cookies = {
     get: function(name) {
       var value = document.cookie
@@ -2758,13 +2762,8 @@ window.dataLayer = window.dataLayer || [];
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = '; expires=' + date.toUTCString();
       }
-      
-      // ✅ CROSS-DOMAIN: adiciona domain se fornecido
       var domainStr = domain ? '; domain=' + domain : '';
-      
       document.cookie = name + '=' + encodeURIComponent(value || '') + expires + domainStr + '; path=/';
-      
-      console.log('[Audiotext] Cookie criado:', name, '| Domain:', domain || 'default');
     },
     
     remove: function(name, domain) {
@@ -2773,11 +2772,9 @@ window.dataLayer = window.dataLayer || [];
     }
   };
 
-  // ==================== decoderUtm ====================
+  // Decoder
   function decoderUtm(uncodedUtm) {
-    if (typeof uncodedUtm !== 'string') {
-      return uncodedUtm;
-    }
+    if (typeof uncodedUtm !== 'string') return uncodedUtm;
     var normalized = uncodedUtm.replace(/\+/g, ' ').replace(/%20/g, ' ');
     try {
       return decodeURIComponent(normalized);
@@ -2787,10 +2784,10 @@ window.dataLayer = window.dataLayer || [];
   }
   window.decoderUtm = decoderUtm;
 
-  // ==================== app.tracking ====================
+  // Tracking
   app.tracking = {
     cookieKey: 'audiotext-budget-tracking',
-    cookieDomain: '.audiotext.com.br', // ✅ CROSS-DOMAIN!
+    cookieDomain: '.audiotext.com.br',
     queryParams: ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'],
     agent: {
       referrer: '',
@@ -2870,7 +2867,6 @@ window.dataLayer = window.dataLayer || [];
         !app.cookies.get(app.tracking.cookieKey)
       ) {
         app.cookies.remove(app.tracking.cookieKey, app.tracking.cookieDomain);
-        
         var joinUtms = function() {
           return (
             app.tracking.agent.utm_source + '|' +
@@ -2880,8 +2876,6 @@ window.dataLayer = window.dataLayer || [];
             app.tracking.agent.utm_content
           );
         };
-        
-        // ✅ SALVA COM CROSS-DOMAIN!
         app.cookies.set(app.tracking.cookieKey, joinUtms(), 7, app.tracking.cookieDomain);
       }
     },
@@ -2899,42 +2893,106 @@ window.dataLayer = window.dataLayer || [];
     }
   };
 
-  // ==================== EXECUTAR TRACKING ====================
+  // ==================== EXECUTAR NO SITE PRINCIPAL ====================
+  
   function init() {
-    console.log('[Audiotext v6] Inicializando tracking com cookie cross-domain...');
-    
-    // Executa tracking para capturar UTMs
+    console.log('[Audiotext v7] Iniciando...');
     app.tracking.run();
-    
-    console.log('[Audiotext v6] UTMs capturadas:', app.tracking.agent);
-    console.log('[Audiotext v6] Cookie salvo (cross-domain):', app.cookies.get('audiotext-budget-tracking'));
-    console.log('[Audiotext v6] Cookie domain: .audiotext.com.br');
-    
-    // API helper
-    window.AudiotextUTM = {
-      getUTMs: function() {
-        return app.tracking.agent;
-      },
-      
-      getCookie: function() {
-        return app.cookies.get('audiotext-budget-tracking');
-      },
-      
-      testCrossDomain: function() {
-        console.log('=== TESTE CROSS-DOMAIN ===');
-        console.log('Cookie no site principal:', app.cookies.get('audiotext-budget-tracking'));
-        console.log('O iframe budget.audiotext.com.br agora consegue ler este cookie!');
-        console.log('Formato:', app.tracking.agent.utm_source + '|' + app.tracking.agent.utm_medium + '|...');
-      }
-    };
+    console.log('[Audiotext v7] UTMs capturadas:', app.tracking.agent);
+    console.log('[Audiotext v7] Cookie criado:', app.cookies.get('audiotext-budget-tracking'));
   }
 
-  // Executa quando DOM carregar
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
+
+  // ==================== PARTE 2: INJEÇÃO NO IFRAME ====================
+  
+  /**
+   * Esta função INJETA código no iframe quando ele carregar
+   * para forçar o React a usar os UTMs do cookie
+   */
+  window.AudiotextIframeInjector = {
+    
+    setupIframe: function(iframeElement) {
+      console.log('[Audiotext v7] Configurando injeção no iframe...');
+      
+      iframeElement.addEventListener('load', function() {
+        console.log('[Audiotext v7] Iframe carregou, injetando código...');
+        
+        try {
+          var iframeWindow = iframeElement.contentWindow;
+          var iframeDoc = iframeElement.contentDocument || iframeWindow.document;
+          
+          // Criar script para injetar
+          var script = iframeDoc.createElement('script');
+          script.textContent = `
+            (function() {
+              console.log('[Audiotext IFRAME] Script injetado executando...');
+              
+              // Ler cookie
+              var cookie = document.cookie.split('; ').find(c => c.startsWith('audiotext-budget-tracking='));
+              
+              if (!cookie) {
+                console.log('[Audiotext IFRAME] Cookie não encontrado!');
+                return;
+              }
+              
+              var value = decodeURIComponent(cookie.split('=')[1]);
+              var parts = value.split('|');
+              
+              console.log('[Audiotext IFRAME] Cookie encontrado:', value);
+              console.log('[Audiotext IFRAME] UTMs decodificadas:', {
+                utm_source: parts[0],
+                utm_medium: parts[1],
+                utm_campaign: parts[2],
+                utm_term: parts[3],
+                utm_content: parts[4]
+              });
+              
+              // FORÇAR localStorage com UTMs corretas
+              var storageKey = 'budge-data-stap-Key';
+              var existingData = localStorage.getItem(storageKey);
+              var data = existingData ? JSON.parse(existingData) : {};
+              
+              // Sobrescrever UTMs
+              data.utmSource = parts[0] || 'Direct';
+              data.utmMedium = parts[1] || 'none';
+              data.utmCampaign = parts[2] || 'none';
+              data.utmTerm = parts[3] || 'none';
+              data.utmContent = parts[4] || 'none';
+              
+              localStorage.setItem(storageKey, JSON.stringify(data));
+              
+              console.log('[Audiotext IFRAME] localStorage atualizado:', data);
+              console.log('[Audiotext IFRAME] ✅ UTMs injetadas com sucesso!');
+            })();
+          `;
+          
+          iframeDoc.head.appendChild(script);
+          console.log('[Audiotext v7] ✅ Código injetado no iframe!');
+          
+        } catch(e) {
+          console.error('[Audiotext v7] ❌ Erro ao injetar código:', e);
+        }
+      });
+    }
+  };
+  
+  // ==================== AUTO-SETUP DO IFRAME ====================
+  
+  // Procurar iframe e configurar automaticamente
+  setTimeout(function() {
+    var iframe = document.getElementById('budgetIframe');
+    if (iframe) {
+      console.log('[Audiotext v7] Iframe encontrado, configurando...');
+      window.AudiotextIframeInjector.setupIframe(iframe);
+    } else {
+      console.log('[Audiotext v7] ⚠️ Iframe não encontrado');
+    }
+  }, 1000);
 
 })();
 
