@@ -68,7 +68,13 @@
           ]
         }
       ],
-      "redirects": [
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://api.audiotext.com.br/:path*"
+    }
+  ],
+  "redirects": [
         {
           "source": "/dicas-gravar-audio-celular-com-qualidade",
           "destination": "https://wp.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
