@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <title>Orçamento Audiotext</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./budget/assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <div class="App">
@@ -13,48 +13,121 @@
         <div class="head-container">
           <button id="btn-close" class="close-button" type="button" aria-label="Fechar">&times;</button>
           <img
-            src="https://audiotext.com.br/assets/audiotext-logo.avif"
+            src="https://audiotext.com.br/wp-content/uploads/2022/06/logo-audiotext.png"
             alt="AudioText"
             class="at-logo"
           />
         </div>
 
+        <!-- PROGRESS BAR -->
+        <div class="progress-bar" id="progress-bar">
+          <div class="progress-step active" data-step="1">
+            <div class="progress-circle">1</div>
+            <span class="progress-label">Serviço</span>
+          </div>
+          <div class="progress-line"><div class="progress-line-fill" id="progress-line-1"></div></div>
+          <div class="progress-step" data-step="2">
+            <div class="progress-circle">2</div>
+            <span class="progress-label">Seus dados</span>
+          </div>
+          <div class="progress-line"><div class="progress-line-fill" id="progress-line-2"></div></div>
+          <div class="progress-step" data-step="3">
+            <div class="progress-circle">3</div>
+            <span class="progress-label">Orçamento</span>
+          </div>
+        </div>
+
         <!-- FORM STEPS -->
         <div class="FormStap">
 
-          <!-- ETAPA 1 — DADOS PESSOAIS -->
-          <div id="person-data" class="PersonData">
-            <p class="step" id="step-indicator">Etapa 1 de 2</p>
-
+          <!-- ETAPA 1 — DADOS DO SERVIÇO (antes era step 2) -->
+          <div id="step-1-service" class="StepSection">
             <div class="container-person-title">
               <div class="text-budget-generate" id="text-first-step">
-                <p>Preencha os dados abaixo para gerar seu orçamento online de forma rápida e sem compromisso.</p>
+                <p>Selecione o serviço e informe os detalhes do áudio para gerar seu orçamento online.</p>
               </div>
             </div>
 
-            <form id="form-step-1" class="form">
+            <form id="form-step-1" class="form" novalidate>
+              <select id="serviceCode" name="serviceCode" class="at-select">
+                <option value="">Selecione o serviço*</option>
+              </select>
+              <div id="err-serviceCode" class="form-error hidden"></div>
+
+              <select id="participantsAmount" name="participantsAmount" class="at-select hidden">
+                <option value="">Quantidade de participantes na(s) gravação(ões)</option>
+              </select>
+
+              <input
+                id="amount"
+                name="amount"
+                type="number"
+                min="1"
+                inputmode="numeric"
+                placeholder="Quantidade estimada de minutos*"
+                class="at-input"
+              />
+              <div id="err-amount" class="form-error hidden"></div>
+
+              <select id="finalityCode" name="finalityCode" class="at-select">
+                <option value="">Selecione a finalidade*</option>
+              </select>
+              <div id="err-finalityCode" class="form-error hidden"></div>
+
+              <select id="languageCode" name="languageCode" class="at-select">
+                <option value="">Selecione o idioma*</option>
+              </select>
+              <div id="err-languageCode" class="form-error hidden"></div>
+
+              <button type="submit" class="at-button filled button-forward">
+                Avançar
+              </button>
+
+              <!-- SOCIAL PROOF -->
+              <div class="social-proof">
+                <span class="social-proof-item">
+                  <svg class="social-proof-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  12+ anos de mercado
+                </span>
+                <span class="social-proof-divider">•</span>
+                <span class="social-proof-item">
+                  <svg class="social-proof-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Sem compromisso
+                </span>
+                <span class="social-proof-divider">•</span>
+                <span class="social-proof-item">
+                  <svg class="social-proof-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                  Orçamento instantâneo
+                </span>
+              </div>
+            </form>
+          </div>
+
+          <!-- ETAPA 2 — DADOS PESSOAIS (antes era step 1) -->
+          <div id="step-2-personal" class="StepSection hidden">
+            <div class="container-person-title">
+              <div class="text-budget-generate" id="text-second-step">
+                <p>Quase lá! Preencha seus dados para receber o orçamento.</p>
+              </div>
+            </div>
+
+            <form id="form-step-2" class="form" novalidate>
               <input
                 id="username"
                 name="username"
                 type="text"
                 placeholder="Nome completo*"
+                autocomplete="name"
                 class="at-input"
               />
               <div id="err-username" class="form-error hidden"></div>
-
-              <input
-                id="company"
-                name="company"
-                type="text"
-                placeholder="Nome da empresa"
-                class="at-input"
-              />
 
               <input
                 id="email"
                 name="email"
                 type="email"
                 placeholder="E-mail*"
+                autocomplete="email"
                 class="at-input"
               />
               <div id="err-email" class="form-error hidden"></div>
@@ -66,59 +139,24 @@
                   name="phone"
                   type="tel"
                   placeholder="DDD + Celular*"
+                  autocomplete="tel"
                   class="at-input"
                 />
               </div>
               <div id="err-phone" class="form-error hidden"></div>
 
-              <select id="serviceCode" name="serviceCode" class="at-select">
-                <option value="">Selecione o serviço</option>
-              </select>
-              <div id="err-serviceCode" class="form-error hidden"></div>
-
-              <select id="participantsAmount" name="participantsAmount" class="at-select hidden">
-                <option value="">Quantidade de participantes na(s) gravação(ões)</option>
-              </select>
-
-              <button type="submit" class="at-button filled button-forward">
-                Avançar
-              </button>
-            </form>
-          </div>
-
-          <!-- ETAPA 2 — DADOS DO ORÇAMENTO -->
-          <div id="budget-data" class="BudgetData hidden">
-            <p class="container-person-title step" id="step-indicator-2">Etapa 2 de 2</p>
-
-            <div class="heading-text">
-              <div class="text-budget-generate" id="text-second-step">
-                <p>Informe os detalhes do áudio para que possamos gerar suas propostas de orçamento.</p>
-              </div>
-            </div>
-
-            <form id="form-step-2">
+              <!-- Campos secundários -->
               <input
-                id="amount"
-                name="amount"
-                type="number"
-                min="1"
-                placeholder="Quantidade estimada de minutos*"
-                class="at-input"
+                id="company"
+                name="company"
+                type="text"
+                placeholder="Empresa (opcional)"
+                autocomplete="organization"
+                class="at-input at-input-optional"
               />
-              <div id="err-amount" class="form-error hidden"></div>
-
-              <select id="finalityCode" name="finalityCode" class="at-select">
-                <option value="">Selecione a Finalidade</option>
-              </select>
-              <div id="err-finalityCode" class="form-error hidden"></div>
-
-              <select id="languageCode" name="languageCode" class="at-select">
-                <option value="">Selecione o idioma</option>
-              </select>
-              <div id="err-languageCode" class="form-error hidden"></div>
 
               <select id="howDidMeetUs" name="howDidMeetUs" class="at-select">
-                <option value="">Como nos conheceu?</option>
+                <option value="">Como nos conheceu?*</option>
               </select>
               <div id="err-howDidMeetUs" class="form-error hidden"></div>
 
@@ -128,16 +166,16 @@
               <textarea
                 id="observation"
                 name="observation"
-                rows="4"
-                placeholder="Escreva aqui especificações, dúvidas ou outras informações que nos ajudarão a entender melhor suas necessidades"
+                rows="3"
+                placeholder="Observações adicionais (opcional)"
                 class="at-textarea"
               ></textarea>
 
               <div class="budgetData-container-button">
                 <button id="btn-generate" type="submit" class="at-button filled">
-                  Avançar
+                  Ver meu orçamento
                 </button>
-                <button id="btn-prev" type="button" class="at-button filled">
+                <button id="btn-prev" type="button" class="at-button outline">
                   Voltar
                 </button>
               </div>
@@ -174,14 +212,14 @@
 
         <!-- FOOTER -->
         <footer class="container-footer">
-          <span class="content-version" id="version-label">v1.0.0</span>
+          <span class="content-version" id="version-label">v2.0.0</span>
         </footer>
       </div>
     </div>
 
     <!-- Scripts -->
-    <script src="./budget/assets/js/api.js"></script>
-    <script src="./budget/assets/js/tracking.js"></script>
-    <script src="./budget/assets/js/app.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/tracking.js"></script>
+    <script src="./assets/js/app.js"></script>
   </body>
 </html>
