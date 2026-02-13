@@ -1,165 +1,625 @@
-.at-container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 16px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  color: #222;
+/* ===== RESET (matches original index.css) ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
 }
 
-.at-header {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 24px;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output,
+ruby, section, summary, time, mark, audio,
+video, input, button, select, textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  outline: none;
 }
 
-.at-logo {
-  height: 40px;
-}
-
-.at-main {
-  background: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  padding: 24px;
-}
-
-.at-steps-indicator {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 12px;
-}
-
-.at-form-step {
-  display: none;
-}
-
-.at-form-step.active {
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-.at-field {
-  margin-bottom: 16px;
+body {
+  background-color: transparent !important;
+  background: transparent !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #1a202c;
+  line-height: 1.5;
+}
+
+/* ===== APP CONTAINER (matches original .App) ===== */
+.App {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  z-index: 99999;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
 }
 
-.at-field label {
-  font-size: 0.9rem;
-  margin-bottom: 4px;
+.App .container {
+  position: relative;
+  width: 100%;
+  max-width: 650px;
+  padding: 30px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
 }
 
-.at-field input,
-.at-field select,
-.at-field textarea {
-  padding: 8px 10px;
-  border-radius: 4px;
-  border: 1px solid #d0d5dd;
-  font-size: 0.95rem;
-}
-
-.at-field input:focus,
-.at-field select:focus,
-.at-field textarea:focus {
-  outline: none;
-  border-color: #2f3b6b;
-  box-shadow: 0 0 0 1px rgba(47, 59, 107, 0.08);
-}
-
-.at-field.at-checkbox {
-  flex-direction: row;
+/* ===== HEADER (matches original .head-container) ===== */
+.head-container {
+  padding: 0 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row-reverse;
   align-items: center;
-  gap: 8px;
 }
 
-.at-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-  margin-top: 8px;
+.at-logo {
+  height: 38px;
+  margin-top: 0;
 }
 
-.at-button {
-  padding: 8px 16px;
+.close-button {
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #718096;
+  padding: 4px 8px;
+  line-height: 1;
   border-radius: 4px;
+  transition: background 0.15s;
+}
+
+.close-button:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ===== FORM STAP WRAPPER (matches original .FormStap) ===== */
+.FormStap {
+  box-sizing: border-box;
+  padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== STEP INDICATOR ===== */
+.step {
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* ===== PERSON DATA (Step 1) ===== */
+.PersonData h2,
+.PersonData p {
+  text-align: center;
+}
+
+.container-person-title {
+  line-height: 2.5rem;
+}
+
+.text-budget-generate > p {
+  line-height: 1.5rem;
+  margin-top: 1%;
+  color: #2e3b6b;
+  font-size: 14px;
+  text-align: center;
+}
+
+.PersonData form,
+.BudgetData form {
+  padding-top: 20px;
+}
+
+/* ===== INPUT FIELDS (Chakra UI style) ===== */
+.at-input {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a202c;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.at-input::placeholder {
+  color: #a0aec0;
+  font-weight: 500;
+}
+
+.at-input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+/* ===== SELECT FIELDS ===== */
+.at-select {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a202c;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-bottom: 6px;
+  appearance: auto;
+  cursor: pointer;
+}
+
+.at-select:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+/* Placeholder-like color for default option */
+.at-select option[value=""] {
+  color: #a0aec0;
+}
+
+/* ===== TEXTAREA ===== */
+.at-textarea {
+  display: block;
+  width: 100%;
+  min-height: 80px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a202c;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-bottom: 6px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.at-textarea::placeholder {
+  color: #a0aec0;
+  font-weight: 500;
+}
+
+.at-textarea:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+/* ===== PHONE LABEL ===== */
+.form-content-phone {
+  margin-top: 2px;
+}
+
+.container-form-label {
+  color: #2e3b6b;
+  margin: 5px;
+  font-weight: 500;
+  font-size: 13px;
+  display: block;
+}
+
+/* ===== BUTTONS (Chakra filled variant style) ===== */
+.at-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
   border: none;
   cursor: pointer;
-  font-size: 0.95rem;
+  transition: background 0.15s ease-in-out, opacity 0.15s;
+  font-family: inherit;
 }
 
-.at-button.primary {
-  background: #2f3b6b;
+.at-button.filled {
+  background: #2e3b6b;
   color: #fff;
 }
 
-.at-button.primary:hover {
-  background: #273059;
+.at-button.filled:hover {
+  background: #253059;
 }
 
-.at-button.secondary {
-  background: #e4e7ec;
-  color: #11181c;
+.at-button.filled:active {
+  background: #1d2648;
 }
 
-.at-results {
-  margin-top: 32px;
+.at-button.filled:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
-.at-results-text {
-  margin-bottom: 16px;
+/* Step 1 button — full width */
+.button-forward {
+  width: 100%;
+  margin: 10px 0 25px;
 }
 
-.at-results-table {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 16px;
+/* Step 2 buttons container (matches original .budgetData-container-button) */
+.budgetData-container-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 10px 0 25px;
 }
 
-.at-proposal-card {
-  border-radius: 8px;
-  border: 1px solid #e4e7ec;
-  padding: 16px;
+.budgetData-container-button > button {
+  width: 48%;
 }
 
-.at-proposal-plan {
+/* ===== FORM ERRORS (matches original .form-error) ===== */
+.form-error {
+  color: #fff;
+  text-align: left;
+  display: block;
+  font-size: 11px;
+  background: rgba(142, 0, 0, 0.5);
+  padding: 5px;
+  border: solid 1px #8e0000;
+  margin-bottom: 5px;
+  border-radius: 2px;
+}
+
+.form-error-global {
+  margin: 10px 20px;
+}
+
+/* ===== BUDGET DATA (Step 2) ===== */
+.BudgetData {
+  text-align: center;
+}
+
+.BudgetData h2 {
+  font-size: 16px;
+  color: #2e3b6b;
+  font-weight: bold;
+}
+
+.heading-text .text-budget-generate > p {
+  line-height: 1.5rem;
+  margin-top: 1%;
+  color: #2e3b6b;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* reCAPTCHA */
+.recaptcha-div {
+  margin: 10px 3px;
+}
+
+.recaptcha-div > div {
+  margin: 10px 3px;
+}
+
+/* ===== BUDGET RESULT (Step 3) ===== */
+.BudgetResult {
+  display: flex;
+  flex-direction: column;
+  min-height: 419px;
+}
+
+.BudgetResult p {
+  text-align: justify;
+}
+
+.BudgetResult h1,
+.BudgetResult h2,
+.BudgetResult h3,
+.BudgetResult h4 {
+  text-align: center;
+}
+
+.budgetResult-primary-text > p {
+  text-align: justify;
+  line-height: 1.8rem;
+  font-size: 14px;
+}
+
+.budgetResult-primary-text > p strong {
+  font-weight: 700;
+}
+
+.budgetResult-table {
+  display: flex;
+  margin: 2% 0;
+  justify-content: center;
+  align-items: center;
+}
+
+.BudgetResult-link-return {
+  margin: 5px 0 0 0;
+  text-align: left;
+  font-weight: 500;
+  color: blue;
+  font-size: 14px;
+}
+
+.newBudget {
+  cursor: pointer;
+  color: #fd2217;
+  text-decoration: none;
   font-weight: 600;
-  margin-bottom: 8px;
 }
 
-.at-proposal-line {
-  font-size: 0.9rem;
+.newBudget:hover {
+  text-decoration: underline;
+}
+
+.budgetResultCenter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.budget-text-center > p {
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ===== PROPOSALS TABLE (cards matching the original Table component) ===== */
+.proposal-cards-wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: stretch;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.proposal-card {
+  flex: 1 1 180px;
+  max-width: 220px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 20px 16px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.proposal-card-plan {
+  font-size: 16px;
+  font-weight: 700;
+  color: #2e3b6b;
+  text-transform: uppercase;
   margin-bottom: 4px;
+  border-bottom: 2px solid #2e3b6b;
+  padding-bottom: 8px;
 }
 
-.at-loader {
-  margin-top: 16px;
-  font-size: 0.95rem;
+.proposal-card-line {
+  font-size: 13px;
+  color: #4a5568;
+  line-height: 1.6;
 }
 
-.at-error {
-  margin-top: 16px;
+.proposal-card-line strong {
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.proposal-card-price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2e3b6b;
+  margin: 4px 0;
+}
+
+.proposal-card-btn {
+  margin-top: auto;
   padding: 8px 12px;
+  background: #2e3b6b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+
+.proposal-card-btn:hover {
+  background: #253059;
+}
+
+/* ===== SPINNER / LOADER ===== */
+.spinner-load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding: 20px 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3182ce;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== WHATSAPP ===== */
+.BudgetResult-link-wpp {
+  padding: 0.5%;
+  color: #34af23;
+  font-weight: 500;
   border-radius: 4px;
-  background: #fef3f2;
-  color: #b42318;
-  font-size: 0.9rem;
+  cursor: pointer;
 }
 
-.at-footer {
-  margin-top: 16px;
-  font-size: 0.8rem;
-  color: #888;
-  text-align: right;
+.wpp-icon {
+  width: 35px;
+  display: inline;
 }
 
+/* ===== FOOTER ===== */
+.container-footer {
+  padding: 10px 20px 0;
+}
+
+.content-version {
+  color: #2f3b61;
+  font-size: 10px;
+  font-style: italic;
+  text-align: left;
+}
+
+/* ===== UTILITY ===== */
 .hidden {
   display: none !important;
 }
 
-@media (max-width: 600px) {
-  .at-main {
-    padding: 16px;
+.text {
+  text-align: left;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+p > strong {
+  font-weight: 500;
+}
+
+/* ===== RESPONSIVE (matches original) ===== */
+@media (max-width: 768px) {
+  .App .container {
+    padding: 0 15px;
+    overflow-x: auto;
+  }
+
+  .App .container::-webkit-scrollbar {
+    width: 0;
+  }
+
+  .head-container {
+    margin-top: 5px;
   }
 }
 
+@media (max-width: 767px) {
+  .FormStap {
+    padding: 15px 10px;
+  }
+
+  .PersonData form,
+  .BudgetData form {
+    padding-top: 5px;
+  }
+
+  .form-error {
+    font-size: 8px;
+  }
+
+  .text-budget-generate {
+    display: none;
+  }
+
+  .budgetData-container-button {
+    height: 50px;
+  }
+
+  .budgetData-container-button > button {
+    font-size: 12px;
+    width: 48%;
+    height: 35px;
+  }
+
+  .BudgetData h2 {
+    font-size: 12px;
+  }
+
+  .PersonData h2 {
+    font-size: 16px;
+  }
+
+  .PersonData p {
+    font-size: 12px;
+  }
+
+  .container-person-title {
+    line-height: 20px;
+    font-size: 12px;
+  }
+
+  .heading-text > p {
+    font-size: 12.5px;
+    line-height: 20px;
+  }
+
+  .budgetResult-container-text {
+    font-size: 12.5px;
+  }
+
+  .proposal-cards-wrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .proposal-card {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .wpp-icon {
+    display: none;
+  }
+
+  .BudgetResult-hearder-text-footer {
+    line-height: 20px;
+  }
+}
