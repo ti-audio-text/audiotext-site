@@ -370,7 +370,7 @@
       phone: phone,
       company: f.company.value.trim() || null,
       serviceCode: serviceCode,
-      participantsAmount: 0,
+      participantsAmount: 1,
       isWhatsApp: true,
       sessionCode: sessionCode || app.cookies.get("audiotext-budget-session"),
       _csrf: csrfToken || null,
