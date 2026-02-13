@@ -2751,24 +2751,27 @@ window.dataLayer = window.dataLayer || [];
     }
 
     // Budget Modal
-   function openBudgetModal() {
+    function openBudgetModal() {
       const modal = document.getElementById('budgetModal');
       const iframe = document.getElementById('budgetIframe');
       
-      // 1. Pega os parâmetros da URL atual (ex: ?utm_source=google...)
+      // 1. Pega as UTMs da URL do seu site
       const currentSearch = window.location.search;
       
-      // 2. Monta a URL do iframe INCLUINDO os parâmetros
-      // Se currentSearch estiver vazio, ele abre normal. 
-      // Se tiver UTMs, o iframe já "nasce" com elas e o tracking.js interno vai ler corretamente.
-      const targetUrl = 'https://budget.audiotext.com.br/' + currentSearch;
-      
-      console.log("Abrindo iframe com URL:", targetUrl);
-      iframe.src = targetUrl;
-      
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
+      if (currentSearch) {
+        // 2. Monta a URL do iframe passando as UTMs
+        // Adicionamos um parâmetro extra '&force=true' para garantir que o cache não interfira
+        const targetUrl = 'https://budget.audiotext.com.br/' + currentSearch + '&cache=' + Date.now();
+        
+        console.log("Forçando UTMs no iframe:", targetUrl);
+        iframe.src = targetUrl;
+      } else {
+        iframe.src = 'https://budget.audiotext.com.br/';
+      }
+  
+  modal.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
     
         function closeBudgetModal() {
           const modal = document.getElementById('budgetModal');
