@@ -2772,17 +2772,21 @@ window.dataLayer = window.dataLayer || [];
       const modal = document.getElementById('budgetModal');
       const iframe = document.getElementById('budgetIframe');
       
-      // 1. URL base do app de orçamento
+      // 1. Pegamos as UTMs da URL atual do site
+      const queryParams = window.location.search;
+      
+      // 2. Forçamos o iframe a carregar a URL com as UTMs
+      // Isso garante que o tracking.js DENTRO do iframe também veja os dados
       const baseUrl = 'https://budget.audiotext.com.br/';
-      
-      // 2. Captura os parâmetros da URL atual do navegador (ex: ?utm_source=google&...)
-      const currentParams = window.location.search;
-      
-      // 3. Define o src do iframe concatenando a base com os parâmetros
-      iframe.src = baseUrl + currentParams;
+      iframe.src = baseUrl + queryParams;
       
       modal.classList.add('open');
       document.body.style.overflow = 'hidden';
+    
+      // 3. Pequeno truque: avisar o iframe para recarregar as UTMs após carregar
+      iframe.onload = function() {
+          iframe.contentWindow.postMessage('reload_utms', 'https://budget.audiotext.com.br');
+      };
     }
 
     function closeBudgetModal() {
