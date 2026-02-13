@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Orçamento Audiotext - Projeto Puro</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <div class="at-container">
+      <header class="at-header">
+        <img
+          src="https://wp.audiotext.com.br/wp-content/themes/audiotext/img/logo.png"
+          alt="Audiotext"
+          class="at-logo"
+        />
+        <h1>Simulador de Orçamento</h1>
+      </header>
+
+      <main class="at-main">
+        <section class="at-steps">
+          <div class="at-steps-indicator">
+            <span id="step-indicator">Etapa 1 de 2</span>
+          </div>
+
+          <!-- ETAPA 1 - DADOS PESSOAIS -->
+          <form id="form-step-1" class="at-form-step active">
+            <h2>Dados de contato</h2>
+            <div class="at-field">
+              <label for="username">Nome*</label>
+              <input id="username" name="username" type="text" required />
+            </div>
+            <div class="at-field">
+              <label for="email">E-mail*</label>
+              <input id="email" name="email" type="email" required />
+            </div>
+            <div class="at-field">
+              <label for="phone">Telefone*</label>
+              <input id="phone" name="phone" type="tel" required />
+            </div>
+            <div class="at-field">
+              <label for="company">Empresa</label>
+              <input id="company" name="company" type="text" />
+            </div>
+            <div class="at-field">
+              <label for="serviceCode">Serviço*</label>
+              <select id="serviceCode" name="serviceCode" required>
+                <option value="">Carregando serviços...</option>
+              </select>
+            </div>
+            <div class="at-field">
+              <label for="participantsAmount">Qtd. participantes</label>
+              <input
+                id="participantsAmount"
+                name="participantsAmount"
+                type="number"
+                min="1"
+                value="1"
+              />
+            </div>
+            <div class="at-field at-checkbox">
+              <label>
+                <input id="isWhatsApp" name="isWhatsApp" type="checkbox" />
+                Número de WhatsApp
+              </label>
+            </div>
+
+            <div class="at-actions">
+              <button type="submit" class="at-button primary">
+                Avançar
+              </button>
+            </div>
+          </form>
+
+          <!-- ETAPA 2 - DADOS DO ORÇAMENTO -->
+          <form id="form-step-2" class="at-form-step">
+            <h2>Detalhes do orçamento</h2>
+
+            <div class="at-field">
+              <label for="amount">Minutos de áudio*</label>
+              <input
+                id="amount"
+                name="amount"
+                type="number"
+                min="1"
+                placeholder="Quantidade estimada de minutos"
+                required
+              />
+            </div>
+
+            <div class="at-field">
+              <label for="finalityCode">Finalidade*</label>
+              <select id="finalityCode" name="finalityCode" required>
+                <option value="">Carregando finalidades...</option>
+              </select>
+            </div>
+
+            <div class="at-field">
+              <label for="languageCode">Idioma*</label>
+              <select id="languageCode" name="languageCode" required>
+                <option value="">Carregando idiomas...</option>
+              </select>
+            </div>
+
+            <div class="at-field">
+              <label for="howDidMeetUs">Como nos conheceu?*</label>
+              <select id="howDidMeetUs" name="howDidMeetUs" required>
+                <option value="">Carregando opções...</option>
+              </select>
+            </div>
+
+            <div class="at-field">
+              <label for="observation">Observações</label>
+              <textarea
+                id="observation"
+                name="observation"
+                rows="4"
+                placeholder="Escreva aqui dúvidas ou informações adicionais"
+              ></textarea>
+            </div>
+
+            <div class="at-actions">
+              <button type="button" id="btn-prev" class="at-button secondary">
+                Voltar
+              </button>
+              <button type="submit" class="at-button primary">
+                Gerar propostas
+              </button>
+            </div>
+          </form>
+        </section>
+
+        <!-- RESULTADOS -->
+        <section id="results-section" class="at-results hidden">
+          <h2>Propostas de orçamento</h2>
+          <div id="results-text" class="at-results-text"></div>
+          <div id="results-table" class="at-results-table"></div>
+        </section>
+
+        <!-- LOADING / ERROS -->
+        <div id="loader" class="at-loader hidden">Carregando...</div>
+        <div id="error-box" class="at-error hidden"></div>
+      </main>
+
+      <footer class="at-footer">
+        <span id="version-label">v1.0.0 (projeto-puro)</span>
+      </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./assets/js/vendor/jquery.min.js"></script>
+    <script src="./assets/js/vendor/cookies.js"></script>
+    <script src="./assets/js/budget/api.js"></script>
+    <script src="./assets/js/budget/tracking.js"></script>
+    <script src="./assets/js/budget/app.js"></script>
+  </body>
+</html>
+
