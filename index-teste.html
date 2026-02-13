@@ -2589,8 +2589,8 @@ window.dataLayer = window.dataLayer || [];
               <li>
                 <p class="text-xs text-muted-foreground mb-0.5">Telefones</p>
                 <div class="space-y-1">
-                  <a href="mailto:falecom@audiotext.com.br" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
-                    falecom@audiotext.com.br
+                  <a href="/cdn-cgi/l/email-protection#6006010c05030f0d20011504090f140518144e030f0d4e0212" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
+                    <span class="__cf_email__" data-cfemail="4422252821272b29042531202d2b30213c306a272b296a2636">[email&#160;protected]</span>
                   </a>
               </li>
 
@@ -2715,7 +2715,7 @@ window.dataLayer = window.dataLayer || [];
     </div>
 
   <!-- JavaScript for interactivity -->  
-  <script>
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 
     // Mobile Menu Toggle
     function toggleMobileMenu() {
@@ -2833,32 +2833,9 @@ window.dataLayer = window.dataLayer || [];
       renderReviews();
     }
 
-    // Budget Modal
-    function openBudgetModal() {
-      const modal = document.getElementById('budgetModal');
-      const iframe = document.getElementById('budgetIframe');
-      iframe.src = 'https://budget.audiotext.com.br/';
-      modal.classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeBudgetModal() {
-      const modal = document.getElementById('budgetModal');
-      const iframe = document.getElementById('budgetIframe');
-      modal.classList.remove('open');
-      iframe.src = '';
-      document.body.style.overflow = '';
-    }
-
-    // Handle ESC key and iframe messages
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        closeBudgetModal();
-      }
-    });
-
+    // Handle iframe messages (same-origin)
     window.addEventListener('message', function(e) {
-      if (e.origin === 'https://budget.audiotext.com.br') {
+      if (e.origin === window.location.origin) {
         const data = e.data;
         
         if (data === 'closePopUpAppReact') {
@@ -3000,10 +2977,9 @@ window.dataLayer = window.dataLayer || [];
         }
       
         init();
-      
-        console.log('[Audiotext Modal] Sistema pronto! ✅');
-      
+        console.log('[Audiotext Modal] Sistema inicializado!');
       })();
-  </script>  
-</body>
+    </script>
+  </body>
 </html>
+     
