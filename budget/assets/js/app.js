@@ -458,26 +458,55 @@
         "https://www.audiotext.com.br/"
       );
 
-      // Gerar propostas
-      var proposalsResponse = await app.api.proposals.generate({
+      // Gerar propostas — payload idêntico ao original React saga
+      var proposalPayload = {
         budget: {
-          ...budgetSaved,
           sessionCode: sessionCode,
+          username: budgetSaved.username || null,
+          company: budgetSaved.company || null,
+          email: budgetSaved.email || null,
+          phone: budgetSaved.phone || null,
+          isWhatsApp: budgetSaved.isWhatsApp || false,
+          serviceCode: budgetSaved.serviceCode || null,
+          amount: budgetSaved.amount || 0,
+          participantsAmount: budgetSaved.participantsAmount || 0,
+          finalityCode: budgetSaved.finalityCode || null,
+          languageCode: budgetSaved.languageCode || null,
+          status: budgetSaved.status || "PENDING",
+          howDidMeetUs: budgetSaved.howDidMeetUs || null,
+          observation: budgetSaved.observation || null,
+          maxInstallment: budgetSaved.maxInstallment || 0,
+          discount: budgetSaved.discount || 0,
+          proposalChosen: budgetSaved.proposalChosen || null,
+          custom: budgetSaved.custom || false,
+          utmSource: budgetSaved.utmSource || "Direct",
+          utmMedium: budgetSaved.utmMedium || "none",
+          utmCampaign: budgetSaved.utmCampaign || "none",
+          utmTerm: budgetSaved.utmTerm || "none",
+          utmContent: budgetSaved.utmContent || "none",
+          userAgent: budgetSaved.userAgent || navigator.userAgent,
+          ip: budgetSaved.ip || "",
+          created_at: budgetSaved.created_at || null,
+          updated_at: budgetSaved.updated_at || null,
         },
         sessionCode: sessionCode,
         csrfToken: csrfToken,
-      });
+      };
 
-      spinnerLoad.classList.add("hidden");
+      var proposalsResponse = await app.api.proposals.generate(proposalPayload);
 
       if (proposalsResponse.hasErrors) {
+        spinnerLoad.classList.add("hidden");
         console.error(proposalsResponse.errors);
         showError("Ocorreram erros ao gerar propostas.");
         return;
       }
 
-      var finalBudget = proposalsResponse.budget || proposalsResponse;
-      renderResults(finalBudget);
+      // Buscar propostas geradas (mesmo fluxo do original React saga)
+      var proposalData = await app.api.proposals.get(sessionCode);
+      spinnerLoad.classList.add("hidden");
+
+      renderResults(proposalData);
     } catch (e) {
       console.error(e);
       spinnerLoad.classList.add("hidden");
