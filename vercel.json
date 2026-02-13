@@ -38,25 +38,26 @@
           "value": "max-age=63072000; includeSubDomains; preload"
         }
         
-      ]
-    },
-    {
-      "source": "/assets/:path*",
-      "headers": [
+]
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/:path*.(jpg|jpeg|png|gif|ico|svg|webp|avif)",
-      "headers": [
+          "source": "/assets/:path*",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
         {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-        
+          "source": "/:path*.(jpg|jpeg|png|gif|ico|svg|webp|avif)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public, max-age=31536000, immutable"
+            }
+          ]
+        },
         {
           "source": "/budget/(.*)",
           "headers": [
@@ -66,15 +67,14 @@
             }
           ]
         }
-      ]
-    }
-  "redirects": [
-    {
-      "source": "/dicas-gravar-audio-celular-com-qualidade",
-      "destination": "https://wp.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
-      "permanent": true
-    },
-    {
+      ],
+      "redirects": [
+        {
+          "source": "/dicas-gravar-audio-celular-com-qualidade",
+          "destination": "https://wp.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
+          "permanent": true
+        },
+        {
       "source": "/dicas-gravar-audio-celular-com-qualidade/",
       "destination": "https://wp.audiotext.com.br/dicas-gravar-audio-celular-com-qualidade/",
       "permanent": true
