@@ -1,6 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <script>
+  (function() {
+    // 1. Função simples para pegar parâmetros da URL
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    // 2. Captura as UTMs da URL atual do navegador
+    // Se não existir, define como vazio ou mantém o padrão que o sistema espera
+    const utmSource = getQueryParam('utm_source');
+    
+    // SÓ executa se houver pelo menos um utm_source, para não sobrescrever cookies válidos com vazios
+    // Se o usuário veio direto (sem UTM), deixamos o app lidar com isso.
+    // Mas se veio do Google Ads (tem utm_source), nós forçamos a gravação.
+    if (utmSource) {
+        const utmMedium = getQueryParam('utm_medium') || 'none';
+        const utmCampaign = getQueryParam('utm_campaign') || 'none';
+        const utmTerm = getQueryParam('utm_term') || 'none';
+        const utmContent = getQueryParam('utm_content') || 'none';
+
+        // 3. Monta a string no formato EXATO que o api.js espera:
+        // source|medium|campaign|term|content
+        const cookieValue = [utmSource, utmMedium, utmCampaign, utmTerm, utmContent].join('|');
+
+        // 4. Configura a expiração (7 dias, igual ao original)
+        const date = new Date();
+        date.setTime(date.getTime() + (7 * 24 * 60 * 60 * 1000));
+        const expires = "; expires=" + date.toUTCString();
+
+        // 5. GRAVA O COOKIE NO DOMÍNIO RAIZ (.audiotext.com.br)
+        // O ponto antes do domínio é crucial para que o iframe (budget.audiotext...) consiga ler o cookie criado aqui.
+        // Certifica-te que estás a testar no domínio audiotext.com.br (não funcionará em localhost ou IP direto sem ajustes de hosts)
+        document.cookie = "audiotext-budget-tracking=" + cookieValue + expires + "; domain=.audiotext.com.br; path=/";
+        
+        console.log("UTMs capturadas e gravadas no cookie: ", cookieValue);
+    }
+  })();
+</script>
+  
   <meta name="google-site-verification" content="IxIBd0DVpeNe9aY0iUXDN63dG4-wFmAw7bnUxSiloXM" />
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
