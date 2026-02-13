@@ -1,7 +1,7 @@
 // API client simples para https://api.audiotext.com.br/v1
 
 // IMPORTANTE: não usar "/" inicial no path para o new URL não descartar o /v1
-const AT_API_BASE = window.location.origin + "/api/v1/";
+const AT_API_BASE = window.location.origin + "/api/v1";
 
 async function atApiGet(path, params = {}) {
   const url = new URL(path, AT_API_BASE);
@@ -13,7 +13,7 @@ async function atApiGet(path, params = {}) {
   const res = await fetch(url.toString(), {
     method: "GET",
     headers: { "Content-Type": "application/json" },
-    credentials: "include",
+    credentials: "omit",
   });
   if (!res.ok) {
     throw new Error(`GET ${path} falhou (${res.status})`);
@@ -26,7 +26,7 @@ async function atApiPatch(path, body) {
   const res = await fetch(url.toString(), {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
-    credentials: "include",
+    credentials: "omit",
     body: JSON.stringify(body || {}),
   });
   if (!res.ok) {
@@ -41,7 +41,7 @@ async function atApiPost(path, body) {
   const res = await fetch(url.toString(), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    credentials: "include",
+    credentials: "omit",
     body: JSON.stringify(body || {}),
   });
   if (!res.ok) {
