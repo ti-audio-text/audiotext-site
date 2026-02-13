@@ -1,7 +1,7 @@
 // API client simples para https://api.audiotext.com.br/v1
 
 // IMPORTANTE: não usar "/" inicial no path para o new URL não descartar o /v1
-const AT_API_BASE = window.location.origin + "/api/v1";
+const AT_API_BASE = window.location.origin + "/api/v1/";
 
 async function atApiGet(path, params = {}) {
   const url = new URL(path, AT_API_BASE);
