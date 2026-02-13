@@ -299,6 +299,7 @@
         sessionCode = data.sessionCode || (data.budget && data.budget.sessionCode) || "";
         csrfToken = data.csrfToken || "";
         var budget = data.budget || data;
+        console.log('[Budget] GET /budget response - sessionCode:', sessionCode, 'csrfToken:', csrfToken);
         fillStep1FromBudget(budget);
         fillStep2FromBudget(budget);
       }
@@ -448,6 +449,9 @@
       var budgetSaved = saved.budget || saved;
       sessionCode = budgetSaved.sessionCode || sessionCode;
 
+      console.log('[Budget] PATCH response (budgetSaved):', JSON.stringify(budgetSaved, null, 2));
+      console.log('[Budget] sessionCode:', sessionCode, 'csrfToken:', csrfToken);
+
       // Ir para Step 3 mostrando spinner
       goToStep(3);
       spinnerLoad.classList.remove("hidden");
@@ -458,40 +462,14 @@
         "https://www.audiotext.com.br/"
       );
 
-      // Gerar propostas — payload idêntico ao original React saga
+      // Gerar propostas — usar dados direto da resposta do PATCH (já validados pela API)
       var proposalPayload = {
-        budget: {
-          sessionCode: sessionCode,
-          username: budgetSaved.username || null,
-          company: budgetSaved.company || null,
-          email: budgetSaved.email || null,
-          phone: budgetSaved.phone || null,
-          isWhatsApp: budgetSaved.isWhatsApp || false,
-          serviceCode: budgetSaved.serviceCode || null,
-          amount: budgetSaved.amount || 0,
-          participantsAmount: budgetSaved.participantsAmount || 0,
-          finalityCode: budgetSaved.finalityCode || null,
-          languageCode: budgetSaved.languageCode || null,
-          status: budgetSaved.status || "PENDING",
-          howDidMeetUs: budgetSaved.howDidMeetUs || null,
-          observation: budgetSaved.observation || null,
-          maxInstallment: budgetSaved.maxInstallment || 0,
-          discount: budgetSaved.discount || 0,
-          proposalChosen: budgetSaved.proposalChosen || null,
-          custom: budgetSaved.custom || false,
-          utmSource: budgetSaved.utmSource || "Direct",
-          utmMedium: budgetSaved.utmMedium || "none",
-          utmCampaign: budgetSaved.utmCampaign || "none",
-          utmTerm: budgetSaved.utmTerm || "none",
-          utmContent: budgetSaved.utmContent || "none",
-          userAgent: budgetSaved.userAgent || navigator.userAgent,
-          ip: budgetSaved.ip || "",
-          created_at: budgetSaved.created_at || null,
-          updated_at: budgetSaved.updated_at || null,
-        },
+        budget: budgetSaved,
         sessionCode: sessionCode,
         csrfToken: csrfToken,
       };
+
+      console.log('[Budget] POST /budget/proposals payload:', JSON.stringify(proposalPayload, null, 2));
 
       var proposalsResponse = await app.api.proposals.generate(proposalPayload);
 
