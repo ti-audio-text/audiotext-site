@@ -2825,10 +2825,11 @@ window.dataLayer = window.dataLayer || [];
       url = typeof url === 'string' ? url : '';
 
       app.tracking.agent.referrer = referrer || '';
-      app.tracking.agent.utm_source = utmSource || app.tracking.agent.utm_source || 'Direct';
 
+      // PRIMEIRO: Ler UTMs da URL (tem prioridade!)
       var query = url.replace(/^\?/, '');
       var pairs = query ? query.split('&') : [];
+      var hasUtmsInUrl = false;
 
       pairs.forEach(function(p) {
         if (!p) return;
@@ -2842,23 +2843,30 @@ window.dataLayer = window.dataLayer || [];
           var valueDecoded = decoderUtm(rawValue);
           if (typeof valueDecoded === 'string' && valueDecoded.length > 0) {
             app.tracking.agent[key] = valueDecoded;
+            if (key === 'utm_source') hasUtmsInUrl = true;
           }
         }
 
+        // Detectar Google Ads
+        if (p.indexOf('gclid') > -1) {
+          app.tracking.agent.utm_source = 'Google';
+          app.tracking.agent.utm_medium = 'Google Ads';
+          hasUtmsInUrl = true;
+        }
+      });
+
+      // DEPOIS: Se NÃO tem UTMs na URL, usar referrer
+      if (!hasUtmsInUrl) {
         if (utmSource === 'Google') {
           app.tracking.agent.utm_source = 'Google';
           if (!app.tracking.agent.utm_medium || app.tracking.agent.utm_medium === 'none') {
             app.tracking.agent.utm_medium = 'Organic';
           }
+        } else if (utmSource === 'Referrer' && referrer) {
+          app.tracking.agent.utm_source = app.tracking.extractHostname(referrer);
+        } else {
+          app.tracking.agent.utm_source = utmSource || 'Direct';
         }
-
-        if (utmSource === 'Google' && p.indexOf('gclid') > -1) {
-          app.tracking.agent.utm_medium = 'Google Ads';
-        }
-      });
-
-      if (app.tracking.agent.utm_source === 'Referrer' && referrer) {
-        app.tracking.agent.utm_source = app.tracking.extractHostname(referrer);
       }
 
       if (
