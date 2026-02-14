@@ -571,12 +571,12 @@ body {
   background: #fff;
   border: 1.5px solid #e2e8f0;
   border-radius: 10px;
-  padding: 18px 14px;
+  padding: 22px 14px 18px;
   text-align: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
   position: relative;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
@@ -623,33 +623,45 @@ body {
 
 .proposal-card-divider {
   width: 40px;
-  height: 2px;
+  height: 3px;
   background: #2e3b6b;
-  margin: 4px auto;
-  border-radius: 1px;
+  margin: 4px auto 2px;
+  border-radius: 2px;
+}
+
+/* Plan-specific divider colors */
+.proposal-card.plan-instant .proposal-card-divider {
+  background: #e53e3e;
+}
+.proposal-card.plan-fast .proposal-card-divider {
+  background: #38a169;
+}
+.proposal-card.plan-flex .proposal-card-divider {
+  background: #3182ce;
 }
 
 .proposal-card.recommended .proposal-card-divider {
-  background: #2e3b6b;
+  background: #38a169;
 }
 
 .proposal-card-price {
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
   color: #2e3b6b;
-  margin: 2px 0 0;
+  margin: 4px 0 0;
 }
 
 .proposal-card-price-label {
   font-size: 12px;
   color: #718096;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .proposal-card-installment {
-  font-size: 12px;
+  font-size: 12.5px;
   color: #4a5568;
   line-height: 1.4;
+  margin-bottom: 4px;
 }
 
 .proposal-card-btn {
