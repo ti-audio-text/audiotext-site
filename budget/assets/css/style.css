@@ -1,4 +1,4 @@
-/* ===== RESET (matches original index.css) ===== */
+/* ===== RESET ===== */
 *,
 *::before,
 *::after {
@@ -63,19 +63,21 @@ body {
   background-color: #fff;
 }
 
-/* ===== HEADER ===== */
+/* ===== HEADER — logo centered ===== */
 .head-container {
   padding: 0 20px;
   width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-direction: row-reverse;
   align-items: center;
+}
+
+.head-spacer {
+  width: 36px; /* matches close button width to balance centering */
 }
 
 .at-logo {
   height: 38px;
-  margin-top: 0;
 }
 
 .close-button {
@@ -88,6 +90,8 @@ body {
   line-height: 1;
   border-radius: 4px;
   transition: background 0.15s;
+  width: 36px;
+  text-align: center;
 }
 
 .close-button:hover {
@@ -180,7 +184,7 @@ body {
   width: 100%;
 }
 
-/* ===== FORM STAP WRAPPER ===== */
+/* ===== FORM WRAPPER ===== */
 .FormStap {
   box-sizing: border-box;
   padding: 0 20px;
@@ -204,9 +208,9 @@ body {
   }
 }
 
-/* ===== TITLES & TEXT ===== */
-.container-person-title {
-  line-height: 2.5rem;
+/* ===== TITLES — centered ===== */
+.container-step-title {
+  text-align: center;
 }
 
 .text-budget-generate > p {
@@ -248,29 +252,23 @@ body {
   box-shadow: 0 0 0 1px #3182ce;
 }
 
-/* Inline validation states */
 .at-input.valid {
   border-color: #38a169;
 }
-
 .at-input.valid:focus {
   box-shadow: 0 0 0 1px #38a169;
 }
-
 .at-input.invalid {
   border-color: #e53e3e;
 }
-
 .at-input.invalid:focus {
   box-shadow: 0 0 0 1px #e53e3e;
 }
 
-/* Optional field styling */
 .at-input-optional {
   border-style: dashed;
   border-color: #e2e8f0;
 }
-
 .at-input-optional::placeholder {
   color: #cbd5e0;
 }
@@ -297,15 +295,12 @@ body {
   border-color: #3182ce;
   box-shadow: 0 0 0 1px #3182ce;
 }
-
 .at-select.valid {
   border-color: #38a169;
 }
-
 .at-select.invalid {
   border-color: #e53e3e;
 }
-
 .at-select option[value=""] {
   color: #a0aec0;
 }
@@ -332,7 +327,6 @@ body {
   color: #cbd5e0;
   font-weight: 500;
 }
-
 .at-textarea:focus {
   border-color: #3182ce;
   box-shadow: 0 0 0 1px #3182ce;
@@ -376,15 +370,12 @@ body {
   background: #2e3b6b;
   color: #fff;
 }
-
 .at-button.filled:hover {
   background: #253059;
 }
-
 .at-button.filled:active {
   background: #1d2648;
 }
-
 .at-button.filled:disabled {
   opacity: 0.4;
   cursor: not-allowed;
@@ -395,18 +386,15 @@ body {
   color: #2e3b6b;
   border: 1.5px solid #2e3b6b;
 }
-
 .at-button.outline:hover {
   background: rgba(46, 59, 107, 0.06);
 }
 
-/* Step 1 button — full width */
 .button-forward {
   width: 100%;
   margin: 10px 0 8px;
 }
 
-/* Step 2 buttons container */
 .budgetData-container-button {
   width: 100%;
   display: flex;
@@ -452,6 +440,35 @@ body {
   margin: 0 2px;
 }
 
+/* ===== SPAM WARNING ===== */
+.spam-warning {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: #fefce8;
+  border: 1px solid #fbbf24;
+  border-radius: 6px;
+  margin-top: 4px;
+}
+
+.spam-warning-icon {
+  width: 18px;
+  height: 18px;
+  color: #d97706;
+  flex-shrink: 0;
+}
+
+.spam-warning span {
+  font-size: 12px;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+.spam-warning strong {
+  font-weight: 700;
+}
+
 /* ===== FORM ERRORS ===== */
 .form-error {
   color: #fff;
@@ -469,18 +486,25 @@ body {
   margin: 10px 20px;
 }
 
+/* ===== reCAPTCHA ===== */
+.recaptcha-div {
+  margin: 10px 3px;
+}
+.recaptcha-div > div {
+  margin: 10px 3px;
+}
+
 /* ===== BUDGET RESULT (Step 3) ===== */
 .BudgetResult {
   display: flex;
   flex-direction: column;
-  min-height: 419px;
+  min-height: 300px;
   animation: fadeInUp 0.3s ease-out;
 }
 
 .BudgetResult p {
   text-align: justify;
 }
-
 .BudgetResult h1,
 .BudgetResult h2,
 .BudgetResult h3,
@@ -493,7 +517,6 @@ body {
   line-height: 1.8rem;
   font-size: 14px;
 }
-
 .budgetResult-primary-text > p strong {
   font-weight: 700;
 }
@@ -503,6 +526,7 @@ body {
   margin: 2% 0;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .BudgetResult-link-return {
@@ -519,93 +543,135 @@ body {
   text-decoration: none;
   font-weight: 600;
 }
-
 .newBudget:hover {
   text-decoration: underline;
-}
-
-.budgetResultCenter {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.budget-text-center > p {
-  text-align: center;
 }
 
 .text-center {
   text-align: center;
 }
 
-/* ===== PROPOSALS TABLE ===== */
+/* ============================================================
+   PROPOSAL CARDS — Desktop: side by side / Mobile: carousel
+   ============================================================ */
+
+/* --- Desktop: 3 cards in a row --- */
 .proposal-cards-wrapper {
   display: flex;
   gap: 12px;
   justify-content: center;
   align-items: stretch;
-  flex-wrap: wrap;
   width: 100%;
 }
 
 .proposal-card {
-  flex: 1 1 180px;
-  max-width: 220px;
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 200px;
   background: #fff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  padding: 20px 16px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 14px;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
+  position: relative;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Recommended card highlight */
+.proposal-card.recommended {
+  border-color: #2e3b6b;
+  box-shadow: 0 2px 12px rgba(46, 59, 107, 0.18);
+}
+
+.proposal-badge {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2e3b6b;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
 }
 
 .proposal-card-plan {
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 700;
   color: #2e3b6b;
   text-transform: uppercase;
-  margin-bottom: 4px;
-  border-bottom: 2px solid #2e3b6b;
-  padding-bottom: 8px;
+  letter-spacing: 0.5px;
 }
 
-.proposal-card-line {
+.proposal-card-deadline {
   font-size: 13px;
   color: #4a5568;
-  line-height: 1.6;
+  font-weight: 500;
+  margin-bottom: 4px;
 }
-
-.proposal-card-line strong {
+.proposal-card-deadline strong {
   font-weight: 600;
   color: #1a202c;
 }
 
+.proposal-card-divider {
+  width: 40px;
+  height: 2px;
+  background: #2e3b6b;
+  margin: 4px auto;
+  border-radius: 1px;
+}
+
+.proposal-card.recommended .proposal-card-divider {
+  background: #2e3b6b;
+}
+
 .proposal-card-price {
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 700;
   color: #2e3b6b;
-  margin: 4px 0;
+  margin: 2px 0 0;
+}
+
+.proposal-card-price-label {
+  font-size: 12px;
+  color: #718096;
+  margin-bottom: 4px;
+}
+
+.proposal-card-installment {
+  font-size: 12px;
+  color: #4a5568;
+  line-height: 1.4;
 }
 
 .proposal-card-btn {
   margin-top: auto;
-  padding: 8px 12px;
+  padding: 9px 12px;
   background: #2e3b6b;
   color: #fff;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
   transition: background 0.15s;
+  width: 100%;
 }
-
 .proposal-card-btn:hover {
   background: #253059;
+}
+
+/* Carousel dots (mobile only, hidden on desktop) */
+.carousel-dots {
+  display: none;
 }
 
 /* ===== SPINNER / LOADER ===== */
@@ -641,26 +707,15 @@ body {
   border-radius: 4px;
   cursor: pointer;
 }
-
 .wpp-icon {
   width: 35px;
   display: inline;
-}
-
-/* ===== reCAPTCHA ===== */
-.recaptcha-div {
-  margin: 10px 3px;
-}
-
-.recaptcha-div > div {
-  margin: 10px 3px;
 }
 
 /* ===== FOOTER ===== */
 .container-footer {
   padding: 10px 20px 0;
 }
-
 .content-version {
   color: #2f3b61;
   font-size: 10px;
@@ -683,17 +738,17 @@ p > strong {
   font-weight: 500;
 }
 
-/* ===== RESPONSIVE ===== */
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
 @media (max-width: 768px) {
   .App .container {
     padding: 0 15px;
     overflow-x: auto;
   }
-
   .App .container::-webkit-scrollbar {
     width: 0;
   }
-
   .head-container {
     margin-top: 5px;
   }
@@ -703,63 +758,43 @@ p > strong {
   .FormStap {
     padding: 15px 10px;
   }
-
   .StepSection form {
     padding-top: 5px;
   }
-
   .form-error {
     font-size: 8px;
   }
-
   .text-budget-generate {
     display: none;
   }
-
   .budgetData-container-button {
     height: 50px;
   }
-
   .budgetData-container-button > button {
     font-size: 12px;
     width: 48%;
     height: 35px;
   }
-
-  .container-person-title {
+  .container-step-title {
     line-height: 20px;
     font-size: 12px;
   }
-
   .budgetResult-container-text {
     font-size: 12.5px;
-  }
-
-  .proposal-cards-wrapper {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .proposal-card {
-    max-width: 100%;
-    width: 100%;
   }
 
   /* Progress bar mobile */
   .progress-bar {
     padding: 14px 10px 6px;
   }
-
   .progress-circle {
     width: 28px;
     height: 28px;
     font-size: 12px;
   }
-
   .progress-label {
     font-size: 10px;
   }
-
   .progress-line {
     min-width: 24px;
   }
@@ -769,13 +804,75 @@ p > strong {
     flex-direction: column;
     gap: 2px;
   }
-
   .social-proof-divider {
     display: none;
   }
-
   .social-proof-item {
     font-size: 10.5px;
+  }
+
+  /* Spam warning mobile */
+  .spam-warning {
+    padding: 6px 10px;
+  }
+  .spam-warning span {
+    font-size: 11px;
+  }
+
+  /* ===== MOBILE CAROUSEL ===== */
+  .proposal-cards-wrapper {
+    /* Horizontal scroll snap carousel */
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px 0 8px;
+    /* Allow cards to peek */
+    margin: 0 -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  /* Hide scrollbar on mobile */
+  .proposal-cards-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .proposal-cards-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .proposal-card {
+    flex: 0 0 75%;
+    max-width: 75%;
+    scroll-snap-align: start;
+    min-width: 0;
+  }
+
+  /* Show carousel dots on mobile */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 6px 0 2px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .carousel-dot.active {
+    background: #2e3b6b;
+    transform: scale(1.25);
   }
 }
 
@@ -784,7 +881,8 @@ p > strong {
     display: none;
   }
 
-  .BudgetResult-hearder-text-footer {
-    line-height: 20px;
+  .proposal-card {
+    flex: 0 0 78%;
+    max-width: 78%;
   }
 }
