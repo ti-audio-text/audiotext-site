@@ -812,20 +812,19 @@
     resultsTable.innerHTML = "";
     resultsTable.appendChild(wrapper);
 
-    // Force carousel to start at first card (INSTANT)
-        // Disable snap temporarily, reset scroll, then re-enable
+    // Force carousel to start at first card (INSTANT) — mobile only
         (function forceFirstCard() {
-          if (window.innerWidth >= 768) return; // desktop: não mexer
+          if (window.innerWidth >= 768) return;
+          // Disable smooth scroll and snap so scrollLeft takes effect immediately
+          wrapper.style.scrollBehavior = "auto";
           wrapper.style.scrollSnapType = "none";
           wrapper.scrollLeft = 0;
-          
-          // Re-enable snap after browser has settled
+    
           requestAnimationFrame(function () {
+            wrapper.scrollLeft = 0;
             requestAnimationFrame(function () {
-              wrapper.scrollLeft = 0;
-              setTimeout(function () {
-                wrapper.style.scrollSnapType = "x mandatory";
-              }, 100);
+              wrapper.style.scrollSnapType = "x mandatory";
+              wrapper.style.scrollBehavior = "";
             });
           });
         })();
