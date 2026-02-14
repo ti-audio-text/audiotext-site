@@ -649,7 +649,7 @@ body {
   font-size: 26px;
   font-weight: 700;
   color: #2e3b6b;
-  margin: 4px 0 0;
+  margin: 1px 0 0;
 }
 
 .proposal-card-price-label {
@@ -884,8 +884,8 @@ p > strong {
     font-size: 28px;
   }
   .proposal-card-price-label {
-    font-size: 15px;
-    margin-bottom: 4px;
+    font-size: 20px;
+    margin-bottom: 2px;
   }
   .proposal-card-installment {
     font-size: 15px;
