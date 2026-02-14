@@ -685,11 +685,7 @@ body {
 
 /* Carousel dots (mobile only, hidden on desktop) */
 .carousel-dots {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  padding: 8px 0;
-  width: 100%;
+  display: none;
 }
 
 /* ===== SPINNER / LOADER ===== */
@@ -901,7 +897,8 @@ p > strong {
     display: flex;
     justify-content: center;
     gap: 8px;
-    padding: 6px 0 2px;
+    padding: 8px 0;
+    width: 100%;
   }
 
   .carousel-dot {
