@@ -1186,40 +1186,7 @@ window.dataLayer = window.dataLayer || [];
         overflow: hidden;
         animation: budgetModalSlideUp 0.3s ease-out;
       }
-      
-      /* Botão fechar */
-      .budget-modal-close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        z-index: 10;
-        background: rgba(255, 255, 255, 0.95);
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 0.2s ease;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
-      
-      .budget-modal-close:hover {
-        background: #ffffff;
-        transform: scale(1.1);
-        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-      }
-      
-      .budget-modal-close:active {
-        transform: scale(0.95);
-      }
-      
-      .budget-modal-close svg {
-        color: #333;
-      }
-      
+            
       /* Iframe */
       .budget-modal-iframe {
         width: 100%;
@@ -1253,22 +1220,22 @@ window.dataLayer = window.dataLayer || [];
       @media (max-width: 768px) {
         .budget-modal {
           padding: 0;
+          padding-top: 40px;           /* abaixa o modal */
+          align-items: flex-start;     /* alinha ao topo em vez de centralizar */
         }
         
         .budget-modal-content {
           max-width: 100%;
-          height: 100vh;
-          max-height: 100vh;
-          border-radius: 0;
+          height: auto;                /* era 100vh — agora flexível */
+          min-height: 80vh;
+          max-height: calc(100vh - 40px);
+          border-radius: 16px 16px 0 0;
+          overflow-y: auto;
         }
         
         .budget-modal-iframe {
           border-radius: 0;
-        }
-        
-        .budget-modal-close {
-          top: 12px;
-          right: 12px;
+          min-height: 70vh;
         }
       }
       
@@ -2698,12 +2665,6 @@ window.dataLayer = window.dataLayer || [];
     
     <div id="budgetModal" class="budget-modal">
       <div class="budget-modal-content">
-        <button class="budget-modal-close" onclick="closeBudgetModal()" aria-label="Fechar">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
         <iframe 
           id="budgetIframe" 
           class="budget-modal-iframe"
@@ -2852,8 +2813,17 @@ window.dataLayer = window.dataLayer || [];
         if (data === 'openTransfer') {
           window.open('https://audiotext.wetransfer.com', '_blank');
         }
+    
+        // AUTO-RESIZE IFRAME — adicionar aqui
+        if (data && data.type === 'budgetResize') {
+          var iframe = document.getElementById('budgetIframe');
+          if (iframe) {
+            iframe.style.height = data.height + 'px';
+          }
+        }
       }
     });
+    
     // Initialize reviews on page load
     renderReviews();
     /**
