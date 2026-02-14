@@ -213,7 +213,8 @@
       if (stepNum < currentStep) {
         stepEl.classList.add("completed");
       } else if (stepNum === currentStep) {
-        stepEl.classList.add("active");
+        // Step 3 (results) shows as completed/green since it's the final state
+        stepEl.classList.add(currentStep === 3 ? "completed" : "active");
       }
     });
 
@@ -664,24 +665,24 @@
   /* ====== RENDER RESULTS — v2.1 redesigned cards + carousel ====== */
 
   /**
-   * Parse installment info from API fields.
-   * installmentValue: "2x de R$138,00" → { count: "2", perInstallment: "R$138,00" }
-   * installmentPrice: "R$276,00" (total if paying in installments)
+   * Extract installment count from installmentValue string.
+   * installmentValue: "2x de R$138,00" → count: "2"
+   * installmentPrice: "R$276,00" (total to pay in installments)
    *
-   * Display format: "ou R$138,00 em 2x" (simplified, no total line)
+   * Display: "ou R$276,00 em 2x" (total, not per-installment)
    */
-  function parseInstallment(installmentValue) {
-    if (!installmentValue) return null;
-    // Match patterns like "2x de R$138,00" or "3x de R$ 414,00"
-    var match = installmentValue.match(/(\d+)x\s+de\s+(R\$\s*[\d.,]+)/i);
-    if (match) {
-      return {
-        count: match[1],
-        perInstallment: match[2].replace(/\s/g, ""),
-      };
+  function parseInstallment(installmentValue, installmentPrice) {
+    if (!installmentPrice) return null;
+    // Extract count from installmentValue (e.g. "3x de R$331,00" → "3")
+    var count = "3"; // default
+    if (installmentValue) {
+      var match = installmentValue.match(/(\d+)x/i);
+      if (match) count = match[1];
     }
-    // Fallback: show raw value
-    return { raw: installmentValue };
+    return {
+      count: count,
+      totalPrice: installmentPrice,
+    };
   }
 
   /**
@@ -739,8 +740,12 @@
         card.classList.add("recommended");
       }
 
-      // Parse installment
-      var inst = parseInstallment(p.installmentValue);
+      // Add plan-specific class for colored divider
+      var planLower = (p.plan || "").toLowerCase();
+      card.classList.add("plan-" + planLower);
+
+      // Parse installment (total price + count)
+      var inst = parseInstallment(p.installmentValue, p.installmentPrice);
 
       // Build card HTML
       var html = "";
@@ -764,7 +769,7 @@
         escapeHtml(String(p.deadline || "")) +
         " dias úteis</div>";
 
-      // Divider
+      // Divider (colored per plan via CSS)
       html += '<div class="proposal-card-divider"></div>';
 
       // Cash price (main highlight)
@@ -776,21 +781,14 @@
       // "à vista" label
       html += '<div class="proposal-card-price-label">à vista</div>';
 
-      // Simplified installment: "ou R$138,00 em 2x"
+      // Installment: "ou R$1.215,00 em 3x" (total, not per-installment)
       if (inst) {
-        if (inst.raw) {
-          html +=
-            '<div class="proposal-card-installment">ou ' +
-            escapeHtml(inst.raw) +
-            "</div>";
-        } else {
-          html +=
-            '<div class="proposal-card-installment">ou ' +
-            escapeHtml(inst.perInstallment) +
-            " em " +
-            escapeHtml(inst.count) +
-            "x</div>";
-        }
+        html +=
+          '<div class="proposal-card-installment">ou ' +
+          escapeHtml(inst.totalPrice) +
+          " em " +
+          escapeHtml(inst.count) +
+          "x</div>";
       }
 
       // CTA button
