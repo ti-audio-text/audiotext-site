@@ -4,19 +4,20 @@
     <meta charset="UTF-8" />
     <title>Orçamento Audiotext</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="stylesheet" href="./budget/assets/css/style.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
   </head>
   <body>
     <div class="App">
       <div class="container">
-        <!-- HEADER: Logo + Close -->
+        <!-- HEADER: Logo centered + Close -->
         <div class="head-container">
-          <button id="btn-close" class="close-button" type="button" aria-label="Fechar">&times;</button>
+          <div class="head-spacer"></div>
           <img
-            src="https://audiotext.com.br/assets/audiotext-logo.avif"
+            src="https://audiotext.com.br/wp-content/uploads/2022/06/logo-audiotext.png"
             alt="AudioText"
             class="at-logo"
           />
+          <button id="btn-close" class="close-button" type="button" aria-label="Fechar">&times;</button>
         </div>
 
         <!-- PROGRESS BAR -->
@@ -40,9 +41,9 @@
         <!-- FORM STEPS -->
         <div class="FormStap">
 
-          <!-- ETAPA 1 — DADOS DO SERVIÇO (antes era step 2) -->
+          <!-- ETAPA 1 — DADOS DO SERVIÇO -->
           <div id="step-1-service" class="StepSection">
-            <div class="container-person-title">
+            <div class="container-step-title">
               <div class="text-budget-generate" id="text-first-step">
                 <p>Selecione o serviço e informe os detalhes do áudio para gerar seu orçamento online.</p>
               </div>
@@ -103,9 +104,9 @@
             </form>
           </div>
 
-          <!-- ETAPA 2 — DADOS PESSOAIS (antes era step 1) -->
+          <!-- ETAPA 2 — DADOS PESSOAIS -->
           <div id="step-2-personal" class="StepSection hidden">
-            <div class="container-person-title">
+            <div class="container-step-title">
               <div class="text-budget-generate" id="text-second-step">
                 <p>Quase lá! Preencha seus dados para receber o orçamento.</p>
               </div>
@@ -145,7 +146,6 @@
               </div>
               <div id="err-phone" class="form-error hidden"></div>
 
-              <!-- Campos secundários -->
               <input
                 id="company"
                 name="company"
@@ -178,6 +178,12 @@
                 <button id="btn-prev" type="button" class="at-button outline">
                   Voltar
                 </button>
+              </div>
+
+              <!-- SPAM WARNING — always visible -->
+              <div class="spam-warning">
+                <svg class="spam-warning-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                <span>Se não receber o orçamento no e-mail, verifique também a <strong>caixa de spam</strong>.</span>
               </div>
             </form>
           </div>
@@ -212,14 +218,14 @@
 
         <!-- FOOTER -->
         <footer class="container-footer">
-          <span class="content-version" id="version-label">v2.0.0</span>
+          <span class="content-version" id="version-label">v2.1.0</span>
         </footer>
       </div>
     </div>
 
     <!-- Scripts -->
-    <script src="./budget/assets/js/api.js"></script>
-    <script src="./budget/assets/js/tracking.js"></script>
-    <script src="./budget/assets/js/app.js"></script>
+    <script src="./assets/js/api.js"></script>
+    <script src="./assets/js/tracking.js"></script>
+    <script src="./assets/js/app.js"></script>
   </body>
 </html>
