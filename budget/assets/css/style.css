@@ -848,6 +848,7 @@ p > strong {
     margin: 0 -10px;
     padding-left: 10px;
     padding-right: 10px;
+    justify-content: flex-start;
   }
 
   /* Hide scrollbar on mobile */
