@@ -815,6 +815,7 @@
     // Force carousel to start at first card (INSTANT)
         // Disable snap temporarily, reset scroll, then re-enable
         (function forceFirstCard() {
+          if (window.innerWidth >= 768) return; // desktop: não mexer
           wrapper.style.scrollSnapType = "none";
           wrapper.scrollLeft = 0;
           
