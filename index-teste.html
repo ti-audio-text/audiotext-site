@@ -2906,15 +2906,7 @@ window.dataLayer = window.dataLayer || [];
          */
         function setupModalClickHandlers() {
           const modal = document.getElementById('budgetModal');
-          if (!modal) return;
-          
-          modal.addEventListener('click', function(e) {
-            // Se clicou no backdrop (não no conteúdo)
-            if (e.target === modal) {
-              closeBudgetModal();
-            }
-          });
-          
+          if (!modal) return;          
           console.log('[Audiotext Modal] Handlers configurados');
         }
       
