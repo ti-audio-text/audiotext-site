@@ -3,7 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
-  
 
     <!-- CSS do Cookie Consent -->
 <link rel="stylesheet" href="/assets/css/cookieConsent.css">
@@ -455,9 +454,7 @@ window.dataLayer = window.dataLayer || [];
         width: max-content; /* CORREÇÃO CRUCIAL: Garante que o loop seja infinito e contenha todos os 17 logos */
       }
 
-  /* Modal Styles */
-    .modal-overlay { opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.2s ease, visibility 0.2s ease; }
-    .modal-overlay.open { opacity: 1; visibility: visible; pointer-events: auto; }
+  /* Modal Styles - removed, replaced by budget-modal below */
     
     /* FAQ Styles */
     .faq-content { transition: max-height 0.3s ease-out; }
@@ -471,9 +468,75 @@ window.dataLayer = window.dataLayer || [];
     .whatsapp-tooltip { right: 72px; background-color: hsl(var(--foreground)); color: hsl(var(--background)); opacity: 0; pointer-events: none; white-space: nowrap; }
     .group:hover .whatsapp-tooltip { opacity: 1; }
     
-    /* Modal Iframe Styles (React-matching) */
-    .modal-iframe { width: 768px; height: 674px; border: 0; background-color: hsl(var(--background)); border-radius: 0.75rem; box-shadow: 0 20px 60px rgba(0,0,0,0.4); }
-    @media (max-width: 768px) { .modal-iframe { width: 95%; max-width: 768px; height: 90vh; max-height: 700px; } }
+      /* MODAL DE ORÇAMENTO - CSS */
+      .budget-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        z-index: 9999;
+        padding: 20px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .budget-modal.open {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: budgetModalFadeIn 0.3s ease-out;
+      }
+      .budget-modal-content {
+        position: relative;
+        width: 100%;
+        max-width: 780px;
+        height: auto;
+        max-height: 90vh;
+        background: #ffffff;
+        border-radius: 16px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+        animation: budgetModalSlideUp 0.3s ease-out;
+      }
+      .budget-modal-iframe {
+        width: 100%;
+        height: 600px;
+        border: none;
+        border-radius: 16px;
+      }
+      @keyframes budgetModalFadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes budgetModalSlideUp {
+        from { opacity: 0; transform: translateY(40px) scale(0.95); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+      @media (max-width: 768px) {
+        .budget-modal {
+          padding: 0;
+          padding-top: 40px;
+          align-items: flex-start;
+        }
+        .budget-modal-content {
+          max-width: 100%;
+          height: auto;
+          min-height: 80vh;
+          max-height: calc(100vh - 40px);
+          border-radius: 16px 16px 0 0;
+          overflow-y: auto;
+        }
+        .budget-modal-iframe {
+          border-radius: 0;
+          min-height: 70vh;
+        }
+      }
+      body:has(.budget-modal.open) {
+        overflow: hidden;
+      }
 
     </style>
   
@@ -934,7 +997,7 @@ window.dataLayer = window.dataLayer || [];
         <img src="/assets/audiotext-logo.avif" alt="Audiotext - Transcrição de Áudio Profissional" width="226" height="56" loading="eager" class="h-8 w-auto flex-shrink-0" decoding="async">
       </div>
       <nav class="flex items-center gap-4" aria-label="Navegação principal">
-        <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header-transcricao-profissional" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+        <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header-transcricao-profissional" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
           Ver meu orçamento
         </button>
       </nav>
@@ -958,7 +1021,7 @@ window.dataLayer = window.dataLayer || [];
 
           <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-hero-transcricao-profissional" class="w-full sm:w-auto text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
+            <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-hero-transcricao-profissional" class="w-full sm:w-auto text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
               Ver meu orçamento
             </button>
           </div>
@@ -1325,7 +1388,7 @@ window.dataLayer = window.dataLayer || [];
         </div>
 
         <div class="text-center mt-8">
-          <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-comparison-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
+          <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-comparison-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
             Ver meu orçamento
           </button>
         </div>
@@ -1435,7 +1498,7 @@ window.dataLayer = window.dataLayer || [];
         </div>
 
         <div class="text-center mt-12">
-          <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-how-it-works-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
+          <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-how-it-works-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
             Ver meu orçamento
           </button>
           <p class="text-sm text-muted-foreground mt-4">Orçamento instantâneo • Pagamento só após aprovação</p>
@@ -1732,7 +1795,7 @@ window.dataLayer = window.dataLayer || [];
         </div>
 
         <div class="text-center mt-12">
-          <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-authority-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
+          <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-authority-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
             Ver meu orçamento
           </button>
         </div>
@@ -1831,7 +1894,7 @@ window.dataLayer = window.dataLayer || [];
         </div>
 
         <div class="text-center mt-12">
-          <button onclick="openModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-pillars-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
+          <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-pillars-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
             Ver meu orçamento
           </button>
         </div>
@@ -2243,7 +2306,7 @@ window.dataLayer = window.dataLayer || [];
             data-gtm-category="cta"
             data-gtm-action="click"
             data-gtm-label="cta-why-audiotext-transcricao-profissional"
-            onclick="openModal()"
+            onclick="openBudgetModal()"
           >
             Ver meu orçamento
           </button>
@@ -2574,7 +2637,7 @@ window.dataLayer = window.dataLayer || [];
           <p class="text-lg opacity-90">Não há mais necessidade de passar horas ouvindo gravações para encontrar informações importantes. Nós fazemos isso para você, com precisão, sigilo e entrega no prazo escolhido.</p>
           <p class="text-lg font-semibold">Se o seu áudio é importante, confie em quem leva seu projeto tão a sério quanto você.</p>
           <div class="flex justify-center pt-8">
-            <button onclick="openModal()" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black border-2 border-black hover:bg-gray-50 text-lg px-8 py-6 min-h-[56px] touch-manipulation" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-final-transcricao-profissional">Ver meu orçamento</button>
+            <button onclick="openBudgetModal()" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black border-2 border-black hover:bg-gray-50 text-lg px-8 py-6 min-h-[56px] touch-manipulation" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-final-transcricao-profissional">Ver meu orçamento</button>
           </div>
           <p class="text-sm opacity-80 mt-4">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
         </div>
@@ -2618,45 +2681,56 @@ window.dataLayer = window.dataLayer || [];
   </a>
 
   <!-- Budget Modal - Simple structure matching React -->
-  <div id="budget-modal" class="modal-overlay fixed inset-0 flex justify-center items-center bg-black/55" style="z-index: 9999;" role="dialog" aria-modal="true">
-    <iframe
-      id="budget-iframe"
-      src=""
-      title="Calculadora de Orçamento Audiotext"
-      class="modal-iframe"
-      allow="clipboard-write"
-    ></iframe>
-  </div>
+    <div id="budgetModal" class="budget-modal">
+      <div class="budget-modal-content">
+        <iframe 
+          id="budgetIframe" 
+          class="budget-modal-iframe"
+          src="about:blank"
+          title="Simulador de Orçamento Audiotext"
+          allow="clipboard-write"
+        ></iframe>
+      </div>
+    </div>
 
   <script>
-    // Modal functions
-    function openModal() {
-      var iframe = document.getElementById('budget-iframe');
-      iframe.src = 'https://budget.audiotext.com.br/';
-      document.getElementById('budget-modal').classList.add('open');
-      document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-      var iframe = document.getElementById('budget-iframe');
-      document.getElementById('budget-modal').classList.remove('open');
-      iframe.src = '';
-      document.body.style.overflow = '';
-    }
-
-    // ESC key to close modal
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeModal();
-    });
-
-    // Handle iframe messages
+    // Handle iframe messages (same-origin)
     window.addEventListener('message', function(e) {
-      if (e.origin === 'https://budget.audiotext.com.br') {
-        if (e.data === 'closePopUpAppReact') closeModal();
-        if (e.data === 'openWhatsApp') window.open('https://api.whatsapp.com/send?phone=5541997990622&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20meu%20or%C3%A7amento%2C%20voc%C3%AA%20pode%20me%20ajudar%3F', '_blank');
-        if (e.data === 'openTransfer') window.open('https://audiotext.wetransfer.com', '_blank');
+      if (e.origin === window.location.origin) {
+        const data = e.data;
+        if (data === 'closePopUpAppReact') closeBudgetModal();
+        if (data === 'openWhatsApp') window.open('https://api.whatsapp.com/send?phone=5541997990622&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20meu%20or%C3%A7amento%2C%20voc%C3%AA%20pode%20me%20ajudar%3F%20', '_blank');
+        if (data === 'openTransfer') window.open('https://audiotext.wetransfer.com', '_blank');
+        if (data && data.type === 'budgetResize') {
+          var iframe = document.getElementById('budgetIframe');
+          if (iframe) iframe.style.height = data.height + 'px';
+        }
       }
     });
+
+    (function() {
+      'use strict';
+      window.openBudgetModal = function() {
+        const modal = document.getElementById('budgetModal');
+        const iframe = document.getElementById('budgetIframe');
+        if (!modal || !iframe) return;
+        iframe.src = '/budget/' + window.location.search;
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      };
+      window.closeBudgetModal = function() {
+        const modal = document.getElementById('budgetModal');
+        const iframe = document.getElementById('budgetIframe');
+        if (modal) { modal.classList.remove('open'); document.body.style.overflow = ''; }
+        if (iframe) iframe.src = 'about:blank';
+      };
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' || e.keyCode === 27) {
+          const modal = document.getElementById('budgetModal');
+          if (modal && modal.classList.contains('open')) closeBudgetModal();
+        }
+      });
+    })();
 
     // Show all reviews on mobile
     function showAllReviews() {
