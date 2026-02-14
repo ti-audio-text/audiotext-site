@@ -1,12 +1,13 @@
-// Controle da UI e fluxo do orçamento — v2.0
-// Etapas invertidas: 1) Serviço → 2) Dados pessoais → 3) Resultado
-// Inclui: progress bar, validação inline, save & resume
+// Controle da UI e fluxo do orçamento — versão HTML pura v2.1
+// Etapa 1: Dados do serviço | Etapa 2: Dados pessoais | Etapa 3: Resultado
+// v2.1: Carousel mobile, cards redesenhados, aviso spam, logo centralizada
 
 (function () {
   /* ====== DOM REFS ====== */
   var step1Section = document.getElementById("step-1-service");
   var step2Section = document.getElementById("step-2-personal");
   var budgetResultSection = document.getElementById("budget-result");
+  var progressBar = document.getElementById("progress-bar");
   var loader = document.getElementById("loader");
   var errorBox = document.getElementById("error-box");
   var resultsText = document.getElementById("results-text");
@@ -19,13 +20,8 @@
   var step1Form = document.getElementById("form-step-1");
   var step2Form = document.getElementById("form-step-2");
 
-  /* Progress bar refs */
-  var progressSteps = document.querySelectorAll(".progress-step");
-  var progressLine1 = document.getElementById("progress-line-1");
-  var progressLine2 = document.getElementById("progress-line-2");
-
-  /* Step 1 fields — service/budget data */
-  var svc = {
+  /* Step 1 fields (service data) */
+  var pf = {
     serviceCode: document.getElementById("serviceCode"),
     participantsAmount: document.getElementById("participantsAmount"),
     amount: document.getElementById("amount"),
@@ -33,8 +29,8 @@
     languageCode: document.getElementById("languageCode"),
   };
 
-  /* Step 2 fields — personal data */
-  var usr = {
+  /* Step 2 fields (personal data) */
+  var uf = {
     username: document.getElementById("username"),
     email: document.getElementById("email"),
     phone: document.getElementById("phone"),
@@ -71,11 +67,10 @@
     if (msg) {
       el.textContent = msg;
       el.classList.remove("hidden");
-      // Also mark the field as invalid
       var field = document.getElementById(fieldId);
       if (field) {
-        field.classList.add("invalid");
         field.classList.remove("valid");
+        field.classList.add("invalid");
       }
     } else {
       el.textContent = "";
@@ -90,30 +85,21 @@
         el.textContent = "";
       }
     });
-    // Clear all validation states
-    document.querySelectorAll(".valid, .invalid").forEach(function (el) {
+    document.querySelectorAll(".at-input, .at-select").forEach(function (el) {
       el.classList.remove("valid", "invalid");
     });
   }
 
-  function markValid(field) {
-    field.classList.add("valid");
+  function markFieldValid(fieldId) {
+    var field = document.getElementById(fieldId);
+    if (!field) return;
     field.classList.remove("invalid");
-    // Clear error message if exists
-    var errEl = document.getElementById("err-" + field.id);
-    if (errEl) {
-      errEl.classList.add("hidden");
-      errEl.textContent = "";
-    }
+    field.classList.add("valid");
+    showFieldError(fieldId, null);
   }
 
-  function markInvalid(field) {
-    field.classList.add("invalid");
-    field.classList.remove("valid");
-  }
-
-  function markNeutral(field) {
-    field.classList.remove("valid", "invalid");
+  function markFieldInvalid(fieldId, msg) {
+    showFieldError(fieldId, msg);
   }
 
   /* ====== PHONE FORMATTING ====== */
@@ -142,7 +128,7 @@
     );
   }
 
-  usr.phone.addEventListener("input", function () {
+  uf.phone.addEventListener("input", function () {
     var cursorPos = this.selectionStart;
     var oldLen = this.value.length;
     this.value = formatPhone(this.value);
@@ -152,82 +138,95 @@
   });
 
   /* ====== INLINE VALIDATION ====== */
+  var blurredFields = {};
+
   function setupInlineValidation() {
-    // --- Step 1 fields ---
-    svc.serviceCode.addEventListener("change", function () {
-      if (this.value) markValid(this);
-      else markNeutral(this);
-    });
+    var step1Required = [
+      { id: "serviceCode", msg: "Selecione um serviço", type: "select" },
+      { id: "amount", msg: "Informe a quantidade de minutos", type: "number" },
+      { id: "finalityCode", msg: "Selecione a finalidade", type: "select" },
+      { id: "languageCode", msg: "Selecione o idioma", type: "select" },
+    ];
 
-    svc.amount.addEventListener("blur", function () {
-      var val = Number(this.value);
-      if (val >= 1) markValid(this);
-      else if (this.value !== "") markInvalid(this);
-      else markNeutral(this);
-    });
+    var step2Required = [
+      { id: "username", msg: "Nome completo é obrigatório", type: "text" },
+      { id: "email", msg: "E-mail é obrigatório", type: "email" },
+      { id: "phone", msg: "Telefone é obrigatório", type: "tel" },
+    ];
 
-    svc.finalityCode.addEventListener("change", function () {
-      if (this.value) markValid(this);
-      else markNeutral(this);
-    });
+    var allFields = step1Required.concat(step2Required);
 
-    svc.languageCode.addEventListener("change", function () {
-      if (this.value) markValid(this);
-      else markNeutral(this);
-    });
+    allFields.forEach(function (fieldDef) {
+      var el = document.getElementById(fieldDef.id);
+      if (!el) return;
 
-    // --- Step 2 fields ---
-    usr.username.addEventListener("blur", function () {
-      var val = this.value.trim();
-      if (val.length >= 2) markValid(this);
-      else if (val.length > 0) markInvalid(this);
-      else markNeutral(this);
-    });
+      el.addEventListener("blur", function () {
+        blurredFields[fieldDef.id] = true;
+        validateSingleField(fieldDef);
+      });
 
-    usr.email.addEventListener("blur", function () {
-      var val = this.value.trim();
-      if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) markValid(this);
-      else if (val.length > 0) markInvalid(this);
-      else markNeutral(this);
+      var eventType = fieldDef.type === "select" ? "change" : "input";
+      el.addEventListener(eventType, function () {
+        if (blurredFields[fieldDef.id]) {
+          validateSingleField(fieldDef);
+        }
+      });
     });
+  }
 
-    usr.phone.addEventListener("blur", function () {
-      var digits = this.value.replace(/\D/g, "");
-      if (digits.length >= 10) markValid(this);
-      else if (digits.length > 0) markInvalid(this);
-      else markNeutral(this);
-    });
+  function validateSingleField(fieldDef) {
+    var el = document.getElementById(fieldDef.id);
+    if (!el) return true;
 
-    usr.howDidMeetUs.addEventListener("change", function () {
-      if (this.value) markValid(this);
-      else markNeutral(this);
-    });
+    var value = el.value.trim();
+
+    if (
+      !value ||
+      (fieldDef.type === "number" && (Number(value) < 1 || isNaN(Number(value))))
+    ) {
+      markFieldInvalid(fieldDef.id, fieldDef.msg);
+      return false;
+    }
+
+    if (
+      fieldDef.type === "email" &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)
+    ) {
+      markFieldInvalid(fieldDef.id, "E-mail inválido");
+      return false;
+    }
+
+    markFieldValid(fieldDef.id);
+    return true;
   }
 
   /* ====== PROGRESS BAR ====== */
   function updateProgressBar(currentStep) {
-    progressSteps.forEach(function (step, index) {
-      var stepNum = index + 1;
-      step.classList.remove("active", "completed");
+    var steps = progressBar.querySelectorAll(".progress-step");
+    var line1 = document.getElementById("progress-line-1");
+    var line2 = document.getElementById("progress-line-2");
+
+    steps.forEach(function (stepEl) {
+      var stepNum = parseInt(stepEl.getAttribute("data-step"));
+      stepEl.classList.remove("active", "completed");
 
       if (stepNum < currentStep) {
-        step.classList.add("completed");
+        stepEl.classList.add("completed");
       } else if (stepNum === currentStep) {
-        step.classList.add("active");
+        stepEl.classList.add("active");
       }
     });
 
-    // Line fills
-    if (currentStep > 1) {
-      progressLine1.classList.add("filled");
+    if (currentStep >= 2) {
+      line1.classList.add("filled");
     } else {
-      progressLine1.classList.remove("filled");
+      line1.classList.remove("filled");
     }
 
-    if (currentStep > 2) {
-      progressLine2.classList.add("filled");
+    if (currentStep >= 3) {
+      line2.classList.add("filled");
     } else {
-      progressLine2.classList.remove("filled");
+      line2.classList.remove("filled");
     }
   }
 
@@ -249,35 +248,6 @@
     showError("");
   }
 
-  /* ====== SAVE & RESUME ====== */
-  var STORAGE_KEY = "at_budget_session";
-
-  function saveSession() {
-    if (sessionCode) {
-      try {
-        localStorage.setItem(STORAGE_KEY, sessionCode);
-      } catch (e) {
-        // localStorage not available — silently ignore
-      }
-    }
-  }
-
-  function getSavedSession() {
-    try {
-      return localStorage.getItem(STORAGE_KEY) || "";
-    } catch (e) {
-      return "";
-    }
-  }
-
-  function clearSavedSession() {
-    try {
-      localStorage.removeItem(STORAGE_KEY);
-    } catch (e) {
-      // ignore
-    }
-  }
-
   /* ====== CLOSE BUTTON ====== */
   document.getElementById("btn-close").addEventListener("click", function () {
     goToStep(1);
@@ -291,33 +261,47 @@
   document
     .getElementById("btn-new-budget")
     .addEventListener("click", function () {
-      clearSavedSession();
-      sessionCode = "";
-      csrfToken = "";
-      clearFieldErrors();
-      // Clear all form fields
-      step1Form.reset();
-      step2Form.reset();
       goToStep(1);
     });
 
-  /* ====== FILL FORM FROM BUDGET DATA ====== */
-  function fillStep1FromBudget(budget) {
-    if (!budget) return;
-    if (budget.serviceCode) svc.serviceCode.value = budget.serviceCode;
-    if (budget.amount) svc.amount.value = budget.amount;
-    if (budget.finalityCode) svc.finalityCode.value = budget.finalityCode;
-    if (budget.languageCode) svc.languageCode.value = budget.languageCode;
+  /* ====== SAVE & RESUME (localStorage) ====== */
+  var STORAGE_KEY = "at-budget-session";
+
+  function saveSession() {
+    if (sessionCode) {
+      try {
+        localStorage.setItem(STORAGE_KEY, sessionCode);
+      } catch (e) {
+        // localStorage not available
+      }
+    }
   }
 
-  function fillStep2FromBudget(budget) {
+  function getSavedSession() {
+    try {
+      return localStorage.getItem(STORAGE_KEY) || "";
+    } catch (e) {
+      return "";
+    }
+  }
+
+  /* ====== FILL FORM FROM BUDGET DATA ====== */
+  function fillProjectFromBudget(budget) {
     if (!budget) return;
-    usr.username.value = budget.username || "";
-    usr.email.value = budget.email || "";
-    usr.phone.value = budget.phone || "";
-    usr.company.value = budget.company || "";
-    if (budget.howDidMeetUs) usr.howDidMeetUs.value = budget.howDidMeetUs;
-    usr.observation.value = budget.observation || "";
+    if (budget.serviceCode) pf.serviceCode.value = budget.serviceCode;
+    if (budget.amount) pf.amount.value = budget.amount;
+    if (budget.finalityCode) pf.finalityCode.value = budget.finalityCode;
+    if (budget.languageCode) pf.languageCode.value = budget.languageCode;
+  }
+
+  function fillPersonalFromBudget(budget) {
+    if (!budget) return;
+    uf.username.value = budget.username || "";
+    uf.email.value = budget.email || "";
+    uf.phone.value = budget.phone || "";
+    uf.company.value = budget.company || "";
+    if (budget.howDidMeetUs) uf.howDidMeetUs.value = budget.howDidMeetUs;
+    uf.observation.value = budget.observation || "";
   }
 
   /* ====== LOAD STATIC DATA ====== */
@@ -338,7 +322,7 @@
       var meetingChannelsRes = results[3];
 
       // Serviços
-      svc.serviceCode.innerHTML =
+      pf.serviceCode.innerHTML =
         '<option value="">Selecione o serviço*</option>';
       var services =
         servicesRes.status === "fulfilled" ? servicesRes.value : null;
@@ -347,17 +331,17 @@
           var opt = document.createElement("option");
           opt.value = s.code;
           opt.textContent = s.name;
-          svc.serviceCode.appendChild(opt);
+          pf.serviceCode.appendChild(opt);
         });
       } else {
         var opt = document.createElement("option");
         opt.value = "transcricao";
         opt.textContent = "Transcrição";
-        svc.serviceCode.appendChild(opt);
+        pf.serviceCode.appendChild(opt);
       }
 
       // Finalidades
-      svc.finalityCode.innerHTML =
+      pf.finalityCode.innerHTML =
         '<option value="">Selecione a finalidade*</option>';
       var finalities =
         finalitiesRes.status === "fulfilled" ? finalitiesRes.value : null;
@@ -366,7 +350,7 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          svc.finalityCode.appendChild(opt);
+          pf.finalityCode.appendChild(opt);
         });
       } else {
         [
@@ -381,12 +365,12 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          svc.finalityCode.appendChild(opt);
+          pf.finalityCode.appendChild(opt);
         });
       }
 
       // Idiomas
-      svc.languageCode.innerHTML =
+      pf.languageCode.innerHTML =
         '<option value="">Selecione o idioma*</option>';
       var languages =
         languagesRes.status === "fulfilled" ? languagesRes.value : null;
@@ -395,7 +379,7 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          svc.languageCode.appendChild(opt);
+          pf.languageCode.appendChild(opt);
         });
       } else {
         [
@@ -407,13 +391,13 @@
           var opt = document.createElement("option");
           opt.value = item.code;
           opt.textContent = item.name;
-          svc.languageCode.appendChild(opt);
+          pf.languageCode.appendChild(opt);
         });
       }
 
-      // Canais — Como nos conheceu
-      usr.howDidMeetUs.innerHTML =
-        '<option value="">Como nos conheceu?*</option>';
+      // Canais
+      uf.howDidMeetUs.innerHTML =
+        '<option value="">Como nos conheceu? (opcional)</option>';
       var channels =
         meetingChannelsRes.status === "fulfilled"
           ? meetingChannelsRes.value
@@ -423,7 +407,7 @@
           var opt = document.createElement("option");
           opt.value = typeof m === "string" ? m : m.code || m.name || m;
           opt.textContent = typeof m === "string" ? m : m.name || m;
-          usr.howDidMeetUs.appendChild(opt);
+          uf.howDidMeetUs.appendChild(opt);
         });
       } else {
         ["Já sou cliente", "Indicação", "Google", "Outro"].forEach(function (
@@ -432,7 +416,7 @@
           var opt = document.createElement("option");
           opt.value = m;
           opt.textContent = m;
-          usr.howDidMeetUs.appendChild(opt);
+          uf.howDidMeetUs.appendChild(opt);
         });
       }
     } catch (e) {
@@ -443,22 +427,16 @@
     }
   }
 
-  /* ====== LOAD BUDGET (session restore) ====== */
+  /* ====== LOAD BUDGET (session) ====== */
   async function loadBudget() {
     try {
-      // Try to restore sessionCode from localStorage
-      var savedSession = getSavedSession();
-      if (savedSession) {
-        sessionCode = savedSession;
-      }
-
       setLoading(true);
       var data = await app.api.budget.get();
       if (data) {
         sessionCode =
           data.sessionCode ||
           (data.budget && data.budget.sessionCode) ||
-          sessionCode;
+          "";
         csrfToken = data.csrfToken || "";
         var budget = data.budget || data;
         console.log(
@@ -467,13 +445,12 @@
           "csrfToken:",
           csrfToken
         );
-        fillStep1FromBudget(budget);
-        fillStep2FromBudget(budget);
+        fillProjectFromBudget(budget);
+        fillPersonalFromBudget(budget);
         saveSession();
       }
     } catch (e) {
       console.error(e);
-      // Not an error — may be first visit
     } finally {
       setLoading(false);
     }
@@ -496,18 +473,37 @@
     }
   }
 
-  /* ====== STEP 1 SUBMIT — Service/Budget Data ====== */
+  /* ====== FALLBACK howDidMeetUs ====== */
+  function getHowDidMeetUsFallback() {
+    var utms = app.cookies.get("audiotext-budget-tracking");
+    if (utms) {
+      var parts = utms.split("|");
+      var source = (parts[0] || "").toLowerCase();
+      if (source && source !== "direct") {
+        if (source.indexOf("google") >= 0) return "Google";
+        if (
+          source.indexOf("facebook") >= 0 ||
+          source.indexOf("instagram") >= 0
+        )
+          return "Redes sociais";
+        if (source.indexOf("linkedin") >= 0) return "LinkedIn";
+        return "Outro";
+      }
+    }
+    return "Outro";
+  }
+
+  /* ====== STEP 1 SUBMIT — SERVICE DATA ====== */
   step1Form.addEventListener("submit", async function (event) {
     event.preventDefault();
     showError("");
     clearFieldErrors();
 
-    var serviceCode = svc.serviceCode.value;
-    var amount = Number(svc.amount.value) || 0;
-    var finalityCode = svc.finalityCode.value;
-    var languageCode = svc.languageCode.value;
+    var serviceCode = pf.serviceCode.value;
+    var amount = Number(pf.amount.value) || 0;
+    var finalityCode = pf.finalityCode.value;
+    var languageCode = pf.languageCode.value;
 
-    // Validação
     var hasError = false;
 
     if (!serviceCode) {
@@ -529,13 +525,18 @@
 
     if (hasError) return;
 
+    var participantsVal = pf.participantsAmount.value;
+
     var payload = {
       serviceCode: serviceCode,
+      participantsAmount: participantsVal ? Number(participantsVal) : 1,
       amount: amount,
       finalityCode: finalityCode,
       languageCode: languageCode,
-      participantsAmount: 1,
-      sessionCode: sessionCode || app.cookies.get("audiotext-budget-session"),
+      sessionCode:
+        sessionCode ||
+        app.cookies.get("audiotext-budget-session") ||
+        getSavedSession(),
       _csrf: csrfToken || null,
     };
 
@@ -545,7 +546,7 @@
       var budget = res.budget || res;
       sessionCode = budget.sessionCode || sessionCode;
       saveSession();
-      fillStep1FromBudget(budget);
+      fillProjectFromBudget(budget);
       goToStep(2);
     } catch (e) {
       console.error(e);
@@ -560,18 +561,16 @@
     goToStep(1);
   });
 
-  /* ====== STEP 2 SUBMIT — Personal Data + Generate Proposals ====== */
+  /* ====== STEP 2 SUBMIT — PERSONAL DATA + GENERATE PROPOSALS ====== */
   step2Form.addEventListener("submit", async function (event) {
     event.preventDefault();
     showError("");
     clearFieldErrors();
 
-    var username = usr.username.value.trim();
-    var email = usr.email.value.trim();
-    var phone = usr.phone.value.trim();
-    var howDidMeetUs = usr.howDidMeetUs.value;
+    var username = uf.username.value.trim();
+    var email = uf.email.value.trim();
+    var phone = uf.phone.value.trim();
 
-    // Validação
     var hasError = false;
 
     if (!username) {
@@ -589,22 +588,23 @@
       showFieldError("phone", "Telefone é obrigatório");
       hasError = true;
     }
-    if (!howDidMeetUs) {
-      showFieldError("howDidMeetUs", "Selecione como nos conheceu");
-      hasError = true;
-    }
 
     if (hasError) return;
+
+    var howDidMeetUs = uf.howDidMeetUs.value || getHowDidMeetUsFallback();
 
     var payloadPersonal = {
       username: username,
       email: email,
       phone: phone,
-      company: usr.company.value.trim() || null,
+      company: uf.company.value.trim() || null,
       howDidMeetUs: howDidMeetUs,
-      observation: usr.observation.value || null,
+      observation: uf.observation.value || null,
       isWhatsApp: true,
-      sessionCode: sessionCode || app.cookies.get("audiotext-budget-session"),
+      sessionCode:
+        sessionCode ||
+        app.cookies.get("audiotext-budget-session") ||
+        getSavedSession(),
       _csrf: csrfToken || null,
     };
 
@@ -613,7 +613,6 @@
       resultsText.innerHTML = "";
       resultsTable.innerHTML = "";
 
-      // Save personal data
       var saved = await app.api.budget.patch(payloadPersonal);
       var budgetSaved = saved.budget || saved;
       sessionCode = budgetSaved.sessionCode || sessionCode;
@@ -623,36 +622,24 @@
         "[Budget] PATCH response (budgetSaved):",
         JSON.stringify(budgetSaved, null, 2)
       );
-      console.log(
-        "[Budget] sessionCode:",
-        sessionCode,
-        "csrfToken:",
-        csrfToken
-      );
 
-      // Go to Step 3 showing spinner
       goToStep(3);
       spinnerLoad.classList.remove("hidden");
 
-      // Signal parent page
       window.parent.postMessage(
         "gerarPropostas",
         "https://www.audiotext.com.br/"
       );
 
-      // Generate proposals
       var proposalPayload = {
         budget: budgetSaved,
         sessionCode: sessionCode,
         csrfToken: csrfToken,
       };
 
-      console.log(
-        "[Budget] POST /budget/proposals payload:",
-        JSON.stringify(proposalPayload, null, 2)
+      var proposalsResponse = await app.api.proposals.generate(
+        proposalPayload
       );
-
-      var proposalsResponse = await app.api.proposals.generate(proposalPayload);
 
       if (proposalsResponse.hasErrors) {
         spinnerLoad.classList.add("hidden");
@@ -661,7 +648,6 @@
         return;
       }
 
-      // Fetch generated proposals
       var proposalData = await app.api.proposals.get(sessionCode);
       spinnerLoad.classList.add("hidden");
 
@@ -675,7 +661,44 @@
     }
   });
 
-  /* ====== RENDER RESULTS ====== */
+  /* ====== RENDER RESULTS — v2.1 redesigned cards + carousel ====== */
+
+  /**
+   * Parse installment info from API fields.
+   * installmentValue: "2x de R$138,00" → { count: "2", perInstallment: "R$138,00" }
+   * installmentPrice: "R$276,00" (total if paying in installments)
+   *
+   * Display format: "ou R$138,00 em 2x" (simplified, no total line)
+   */
+  function parseInstallment(installmentValue) {
+    if (!installmentValue) return null;
+    // Match patterns like "2x de R$138,00" or "3x de R$ 414,00"
+    var match = installmentValue.match(/(\d+)x\s+de\s+(R\$\s*[\d.,]+)/i);
+    if (match) {
+      return {
+        count: match[1],
+        perInstallment: match[2].replace(/\s/g, ""),
+      };
+    }
+    // Fallback: show raw value
+    return { raw: installmentValue };
+  }
+
+  /**
+   * Sort proposals: INSTANT first (lowest deadline), then FAST, then FLEX.
+   * This ensures the anchoring effect (highest price first).
+   */
+  function sortProposals(proposals) {
+    var planOrder = { INSTANT: 0, FAST: 1, FLEX: 2 };
+    return proposals.slice().sort(function (a, b) {
+      var orderA =
+        planOrder[a.plan] !== undefined ? planOrder[a.plan] : 99;
+      var orderB =
+        planOrder[b.plan] !== undefined ? planOrder[b.plan] : 99;
+      return orderA - orderB;
+    });
+  }
+
   function renderResults(budget) {
     if (!budget) return;
 
@@ -699,33 +722,84 @@
       return;
     }
 
-    // Build proposal cards
+    // Sort: INSTANT → FAST → FLEX
+    proposals = sortProposals(proposals);
+
+    // Build cards wrapper
     var wrapper = document.createElement("div");
     wrapper.className = "proposal-cards-wrapper";
 
-    proposals.forEach(function (p) {
+    proposals.forEach(function (p, index) {
       var card = document.createElement("div");
       card.className = "proposal-card";
 
-      card.innerHTML =
+      // FAST gets recommended badge
+      var isFast = (p.plan || "").toUpperCase() === "FAST";
+      if (isFast) {
+        card.classList.add("recommended");
+      }
+
+      // Parse installment
+      var inst = parseInstallment(p.installmentValue);
+
+      // Build card HTML
+      var html = "";
+
+      // Badge for FAST
+      if (isFast) {
+        html +=
+          '<span class="proposal-badge">⭐ Melhor custo-benefício</span>';
+      }
+
+      // Plan name
+      html +=
         '<div class="proposal-card-plan">' +
         escapeHtml(p.plan) +
-        "</div>" +
-        '<div class="proposal-card-line"><strong>Prazo:</strong> ' +
+        "</div>";
+
+      // Deadline
+      html +=
+        '<div class="proposal-card-deadline">' +
+        "<strong>Prazo:</strong> " +
         escapeHtml(String(p.deadline || "")) +
-        " dias úteis</div>" +
+        " dias úteis</div>";
+
+      // Divider
+      html += '<div class="proposal-card-divider"></div>';
+
+      // Cash price (main highlight)
+      html +=
         '<div class="proposal-card-price">' +
         escapeHtml(p.cashPirce || p.cashPrice || "") +
-        "</div>" +
-        '<div class="proposal-card-line">à vista</div>' +
-        '<div class="proposal-card-line"><strong>Parcelado:</strong> ' +
-        escapeHtml(p.installmentValue || "") +
-        "</div>" +
-        '<div class="proposal-card-line">' +
-        escapeHtml(p.installmentPrice || "") +
-        "</div>" +
+        "</div>";
+
+      // "à vista" label
+      html += '<div class="proposal-card-price-label">à vista</div>';
+
+      // Simplified installment: "ou R$138,00 em 2x"
+      if (inst) {
+        if (inst.raw) {
+          html +=
+            '<div class="proposal-card-installment">ou ' +
+            escapeHtml(inst.raw) +
+            "</div>";
+        } else {
+          html +=
+            '<div class="proposal-card-installment">ou ' +
+            escapeHtml(inst.perInstallment) +
+            " em " +
+            escapeHtml(inst.count) +
+            "x</div>";
+        }
+      }
+
+      // CTA button
+      html +=
         '<button class="proposal-card-btn" type="button">Enviar arquivos</button>';
 
+      card.innerHTML = html;
+
+      // Button click → open transfer
       var btn = card.querySelector(".proposal-card-btn");
       btn.addEventListener("click", function () {
         window.parent.postMessage(
@@ -739,6 +813,61 @@
 
     resultsTable.innerHTML = "";
     resultsTable.appendChild(wrapper);
+
+    // Carousel dots (for mobile)
+    if (proposals.length > 1) {
+      var dotsContainer = document.createElement("div");
+      dotsContainer.className = "carousel-dots";
+
+      proposals.forEach(function (p, i) {
+        var dot = document.createElement("button");
+        dot.className = "carousel-dot" + (i === 0 ? " active" : "");
+        dot.type = "button";
+        dot.setAttribute("aria-label", "Ver plano " + (i + 1));
+        dot.addEventListener("click", function () {
+          var cards = wrapper.querySelectorAll(".proposal-card");
+          if (cards[i]) {
+            cards[i].scrollIntoView({
+              behavior: "smooth",
+              inline: "start",
+              block: "nearest",
+            });
+          }
+        });
+        dotsContainer.appendChild(dot);
+      });
+
+      resultsTable.appendChild(dotsContainer);
+
+      // Update active dot on scroll
+      var scrollTimeout;
+      wrapper.addEventListener("scroll", function () {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(function () {
+          var cards = wrapper.querySelectorAll(".proposal-card");
+          var wrapperRect = wrapper.getBoundingClientRect();
+          var wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
+
+          var closestIndex = 0;
+          var closestDist = Infinity;
+
+          cards.forEach(function (card, idx) {
+            var cardRect = card.getBoundingClientRect();
+            var cardCenter = cardRect.left + cardRect.width / 2;
+            var dist = Math.abs(cardCenter - wrapperCenter);
+            if (dist < closestDist) {
+              closestDist = dist;
+              closestIndex = idx;
+            }
+          });
+
+          var dots = dotsContainer.querySelectorAll(".carousel-dot");
+          dots.forEach(function (d, di) {
+            d.classList.toggle("active", di === closestIndex);
+          });
+        }, 80);
+      });
+    }
 
     // Show return link
     linkReturn.style.display = "block";
@@ -765,6 +894,7 @@
       }
 
       setupInlineValidation();
+
       await loadStaticData();
       await loadBudget();
       await loadContent();
