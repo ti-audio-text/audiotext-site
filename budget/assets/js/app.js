@@ -884,6 +884,29 @@
     return div.innerHTML;
   }
 
+  /* ====== AUTO-RESIZE IFRAME ====== */
+function notifyParentHeight() {
+  var height = document.querySelector(".App .container").scrollHeight;
+  window.parent.postMessage(
+    { type: "budgetResize", height: height },
+    "https://www.audiotext.com.br/"
+  );
+}
+
+// Notificar ao trocar de step, ao carregar, e ao redimensionar
+  var _originalGoToStep = goToStep;
+  goToStep = function (step) {
+    _originalGoToStep(step);
+    setTimeout(notifyParentHeight, 100);
+  };
+  
+  window.addEventListener("resize", notifyParentHeight);
+  new MutationObserver(notifyParentHeight).observe(
+    document.querySelector(".App .container"),
+    { childList: true, subtree: true, attributes: true }
+  );
+  setTimeout(notifyParentHeight, 500);
+
   /* ====== INIT ====== */
   (async function init() {
     try {
