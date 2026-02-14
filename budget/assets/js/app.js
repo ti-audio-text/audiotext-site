@@ -812,6 +812,11 @@
     resultsTable.innerHTML = "";
     resultsTable.appendChild(wrapper);
 
+    // Force carousel to start at first card (INSTANT)
+    setTimeout(function () {
+      wrapper.scrollLeft = 0;
+    }, 50);
+
     // Carousel dots (for mobile)
     if (proposals.length > 1) {
       var dotsContainer = document.createElement("div");
@@ -867,8 +872,10 @@
       });
     }
 
-    // Show return link
+    // Show return link and spam warning
     linkReturn.style.display = "block";
+    var spamWarning = document.getElementById("spam-warning");
+    if (spamWarning) spamWarning.style.display = "";
   }
 
   function escapeHtml(str) {
