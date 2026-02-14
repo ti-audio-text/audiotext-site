@@ -813,9 +813,21 @@
     resultsTable.appendChild(wrapper);
 
     // Force carousel to start at first card (INSTANT)
-    setTimeout(function () {
-      wrapper.scrollLeft = 0;
-    }, 50);
+        // Disable snap temporarily, reset scroll, then re-enable
+        (function forceFirstCard() {
+          wrapper.style.scrollSnapType = "none";
+          wrapper.scrollLeft = 0;
+          
+          // Re-enable snap after browser has settled
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              wrapper.scrollLeft = 0;
+              setTimeout(function () {
+                wrapper.style.scrollSnapType = "x mandatory";
+              }, 100);
+            });
+          });
+        })();
 
     // Carousel dots (for mobile)
     if (proposals.length > 1) {
