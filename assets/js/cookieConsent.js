@@ -1,22 +1,16 @@
 /**
  * Cookie Consent System - Audiotext (audiotext.com.br)
- * Versão: 2.0 — Consent Mode v2 + GTM como controlador único
+ * Versão: 3.0 — Consent Mode v2 + GTM carrega IMEDIATAMENTE
  * Data: 2026-02-16
  * 
  * ARQUITETURA:
- * 1. Este script define o Consent Mode v2 ANTES de qualquer tag Google
- * 2. O GTM é carregado SEMPRE (com consent mode restritivo por padrão)
- * 3. O GTM controla GA4, Google Ads, Meta Pixel — tudo via suas tags internas
- * 4. Quando o usuário consente, atualizamos o consent mode e o GTM reage automaticamente
- * 5. NÃO carregamos Meta Pixel nem Google Ads fora do GTM
+ * 1. Consent default + GTM carregam IMEDIATAMENTE (sync, no <head>)
+ * 2. O banner/modal só renderiza no DOMContentLoaded
+ * 3. GTM controla GA4, Google Ads, Meta Pixel via consent mode
  */
 
 (function() {
   'use strict';
-
-  // ============================================================================
-  // CONFIGURAÇÃO
-  // ============================================================================
 
   const CONFIG = {
     storageKey: 'audiotext_cookie_preferences',
@@ -26,34 +20,26 @@
   };
 
   // ============================================================================
-  // CONSENT MODE v2 — DEVE RODAR ANTES DE QUALQUER TAG GOOGLE
+  // CONSENT MODE v2 — RODA IMEDIATAMENTE (antes do GTM)
   // ============================================================================
 
-  // Inicializa dataLayer e gtag
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
 
-  // Define consent padrão RESTRITIVO (antes do GTM carregar)
-  // Isso garante que nenhuma tag Google dispare sem consentimento
   function setDefaultConsent() {
     gtag('consent', 'default', {
       'ad_storage': 'denied',
       'ad_user_data': 'denied',
       'ad_personalization': 'denied',
       'analytics_storage': 'denied',
-      'functionality_storage': 'granted',  // Essenciais sempre permitidos
-      'security_storage': 'granted',       // Segurança sempre permitida
-      'wait_for_update': 500               // Espera 500ms por atualização do consent
+      'functionality_storage': 'granted',
+      'security_storage': 'granted',
+      'wait_for_update': 500
     });
-
-    // Ativa URL passthrough para manter atribuição mesmo sem cookies
     gtag('set', 'url_passthrough', true);
-    
-    // Ativa redação de dados de anúncios
     gtag('set', 'ads_data_redaction', true);
   }
 
-  // Atualiza consent com base nas preferências do usuário
   function updateConsent(prefs) {
     gtag('consent', 'update', {
       'ad_storage': prefs.marketing ? 'granted' : 'denied',
@@ -68,32 +54,31 @@
   }
 
   // ============================================================================
-  // CARREGAMENTO DO GTM — SEMPRE CARREGA (consent mode controla as tags)
+  // GTM — CARREGA IMEDIATAMENTE (não espera DOMContentLoaded)
   // ============================================================================
 
   function loadGTM() {
-    // Não duplicar se já existe no HTML
     if (document.querySelector('script[src*="googletagmanager.com/gtm.js"]')) {
-      console.log('[CookieConsent] GTM já presente no HTML');
+      console.log('[CookieConsent] GTM já presente');
       return;
     }
 
     (function(w,d,s,l,i){
       w[l]=w[l]||[];
       w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),
+      var j=d.createElement(s),
           dl=l!='dataLayer'?'&l='+l:'';
       j.async=true;
       j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
+      // Inserir no <head> diretamente (não depende de ter outro script já no DOM)
+      d.head.appendChild(j);
     })(window,document,'script','dataLayer',CONFIG.gtmId);
 
     console.log('[CookieConsent] GTM carregado:', CONFIG.gtmId);
   }
 
   // ============================================================================
-  // FUNÇÕES DE STORAGE
+  // STORAGE
   // ============================================================================
 
   function getStoredPreferences() {
@@ -114,7 +99,6 @@
       marketing: prefs.marketing,
       timestamp: new Date().toISOString()
     };
-    
     try {
       localStorage.setItem(CONFIG.storageKey, JSON.stringify(data));
       console.log('[CookieConsent] Preferências salvas:', data);
@@ -142,7 +126,7 @@
   }
 
   // ============================================================================
-  // CRIAÇÃO DO HTML - BANNER
+  // BANNER HTML
   // ============================================================================
 
   function createBannerHTML() {
@@ -164,7 +148,6 @@
               </div>
             </div>
           </div>
-          
           <div class="cookie-banner-buttons">
             <button id="cookie-accept" class="cookie-btn cookie-btn-primary" aria-label="Aceitar todos os cookies">
               Aceitar
@@ -183,7 +166,6 @@
 
   function createModalHTML() {
     const prefs = getStoredPreferences() || { analytics: false, marketing: false };
-    
     return `
       <div id="cookie-modal" class="cookie-modal" style="display:none;">
         <div id="modal-overlay" class="cookie-modal-overlay"></div>
@@ -194,9 +176,7 @@
               Escolha quais cookies deseja aceitar. Cookies essenciais são necessários para o funcionamento do site.
             </p>
           </div>
-
           <div class="cookie-preferences">
-            <!-- Essential Cookies -->
             <div class="cookie-preference-item">
               <div class="cookie-preference-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-essential"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -209,18 +189,11 @@
                     <span class="cookie-toggle-slider"></span>
                   </label>
                 </div>
-                <p class="cookie-preference-description">
-                  Necessários para o funcionamento básico do site. Não podem ser desativados.
-                </p>
-                <p class="cookie-preference-examples">
-                  Exemplos: sessão, preferências de cookies
-                </p>
+                <p class="cookie-preference-description">Necessários para o funcionamento básico do site. Não podem ser desativados.</p>
+                <p class="cookie-preference-examples">Exemplos: sessão, preferências de cookies</p>
               </div>
             </div>
-
             <div class="cookie-divider"></div>
-
-            <!-- Analytics Cookies -->
             <div class="cookie-preference-item">
               <div class="cookie-preference-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-analytics"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>
@@ -233,18 +206,11 @@
                     <span class="cookie-toggle-slider"></span>
                   </label>
                 </div>
-                <p class="cookie-preference-description">
-                  Nos ajudam a entender como você usa a plataforma para melhorarmos a experiência.
-                </p>
-                <p class="cookie-preference-examples">
-                  Exemplos: Google Analytics (GA4), análise de uso
-                </p>
+                <p class="cookie-preference-description">Nos ajudam a entender como você usa a plataforma para melhorarmos a experiência.</p>
+                <p class="cookie-preference-examples">Exemplos: Google Analytics (GA4), análise de uso</p>
               </div>
             </div>
-
             <div class="cookie-divider"></div>
-
-            <!-- Marketing Cookies -->
             <div class="cookie-preference-item">
               <div class="cookie-preference-icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-marketing"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
@@ -257,34 +223,23 @@
                     <span class="cookie-toggle-slider"></span>
                   </label>
                 </div>
-                <p class="cookie-preference-description">
-                  Permitem exibir anúncios personalizados e rastrear conversões.
-                </p>
-                <p class="cookie-preference-examples">
-                  Exemplos: Meta Pixel (Facebook Ads), Google Ads Tag
-                </p>
+                <p class="cookie-preference-description">Permitem exibir anúncios personalizados e rastrear conversões.</p>
+                <p class="cookie-preference-examples">Exemplos: Meta Pixel (Facebook Ads), Google Ads Tag</p>
                 <div class="cookie-warning">
                   <span class="cookie-warning-icon">⚠️</span>
-                  <p class="cookie-warning-text">
-                    Se desabilitado, você ainda verá anúncios, mas eles não serão personalizados.
-                  </p>
+                  <p class="cookie-warning-text">Se desabilitado, você ainda verá anúncios, mas eles não serão personalizados.</p>
                 </div>
               </div>
             </div>
           </div>
-
           <div class="cookie-modal-footer">
             <a href="${CONFIG.privacyPolicyUrl}" target="_blank" rel="noopener noreferrer" class="cookie-privacy-link">
               Política de Privacidade
               <svg class="cookie-link-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
             <div class="cookie-modal-actions">
-              <button id="modal-accept-all" class="cookie-btn cookie-btn-secondary">
-                Aceitar Todos
-              </button>
-              <button id="modal-save" class="cookie-btn cookie-btn-primary">
-                Salvar Preferências
-              </button>
+              <button id="modal-accept-all" class="cookie-btn cookie-btn-secondary">Aceitar Todos</button>
+              <button id="modal-save" class="cookie-btn cookie-btn-primary">Salvar Preferências</button>
             </div>
           </div>
         </div>
@@ -293,40 +248,26 @@
   }
 
   // ============================================================================
-  // FUNÇÕES DE UI
+  // UI
   // ============================================================================
 
   function showBanner() {
     const banner = document.getElementById('cookie-banner');
-    if (banner) {
-      banner.classList.add('cookie-banner-visible');
-    }
-    // Mostra backdrop sutil para chamar atenção ao banner
+    if (banner) banner.classList.add('cookie-banner-visible');
     const backdrop = document.getElementById('cookie-backdrop');
-    if (backdrop) {
-      backdrop.classList.add('cookie-backdrop-visible');
-    }
+    if (backdrop) backdrop.classList.add('cookie-backdrop-visible');
   }
 
   function hideBanner() {
     const banner = document.getElementById('cookie-banner');
     if (banner) {
       banner.classList.remove('cookie-banner-visible');
-      setTimeout(() => {
-        if (banner.parentNode) {
-          banner.parentNode.removeChild(banner);
-        }
-      }, 500);
+      setTimeout(() => { if (banner.parentNode) banner.parentNode.removeChild(banner); }, 500);
     }
-    // Remove backdrop
     const backdrop = document.getElementById('cookie-backdrop');
     if (backdrop) {
       backdrop.classList.remove('cookie-backdrop-visible');
-      setTimeout(() => {
-        if (backdrop.parentNode) {
-          backdrop.parentNode.removeChild(backdrop);
-        }
-      }, 500);
+      setTimeout(() => { if (backdrop.parentNode) backdrop.parentNode.removeChild(backdrop); }, 500);
     }
   }
 
@@ -345,9 +286,7 @@
     if (modal) {
       modal.classList.remove('cookie-modal-visible');
       document.body.style.overflow = '';
-      setTimeout(() => {
-        modal.style.display = 'none';
-      }, 300);
+      setTimeout(() => { modal.style.display = 'none'; }, 300);
     }
   }
 
@@ -359,73 +298,47 @@
     acceptAll();
     hideBanner();
     hideModal();
-    // Não precisa de reload — o Consent Mode atualiza as tags em tempo real
   }
 
   function handleRejectNonEssential() {
     rejectNonEssential();
-    hideBanner();
-    // Não precisa de reload
-  }
-
-  function handleCustomize() {
-    showModal();
-  }
-
-  function handleModalAcceptAll() {
-    acceptAll();
-    hideModal();
     hideBanner();
   }
 
   function handleModalSave() {
     const analyticsToggle = document.getElementById('analytics-toggle');
     const marketingToggle = document.getElementById('marketing-toggle');
-    
     const prefs = {
       analytics: analyticsToggle ? analyticsToggle.checked : false,
       marketing: marketingToggle ? marketingToggle.checked : false
     };
-    
     savePreferences(prefs);
     updateConsent(prefs);
     hideModal();
     hideBanner();
   }
 
-  function handleModalClose() {
-    hideModal();
-  }
-
-  // ============================================================================
-  // INICIALIZAÇÃO
-  // ============================================================================
-
   function attachEventListeners() {
     const acceptBtn = document.getElementById('cookie-accept');
     const rejectBtn = document.getElementById('cookie-reject');
     const customizeBtn = document.getElementById('cookie-customize');
-    
     if (acceptBtn) acceptBtn.addEventListener('click', handleAcceptAll);
     if (rejectBtn) rejectBtn.addEventListener('click', handleRejectNonEssential);
-    if (customizeBtn) customizeBtn.addEventListener('click', handleCustomize);
-    
+    if (customizeBtn) customizeBtn.addEventListener('click', function() { showModal(); });
+
     const modalAcceptBtn = document.getElementById('modal-accept-all');
     const modalSaveBtn = document.getElementById('modal-save');
     const modalOverlay = document.getElementById('modal-overlay');
-    
-    if (modalAcceptBtn) modalAcceptBtn.addEventListener('click', handleModalAcceptAll);
+    if (modalAcceptBtn) modalAcceptBtn.addEventListener('click', handleAcceptAll);
     if (modalSaveBtn) modalSaveBtn.addEventListener('click', handleModalSave);
-    if (modalOverlay) modalOverlay.addEventListener('click', handleModalClose);
-    
+    if (modalOverlay) modalOverlay.addEventListener('click', function() { hideModal(); });
+
     document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        hideModal();
-      }
+      if (e.key === 'Escape') hideModal();
     });
   }
 
-  function injectHTML() {
+  function injectBannerUI() {
     const container = document.createElement('div');
     container.id = 'cookie-consent-container';
     container.innerHTML = '<div id="cookie-backdrop" class="cookie-backdrop"></div>' + createBannerHTML() + createModalHTML();
@@ -433,60 +346,53 @@
     attachEventListeners();
   }
 
-  function init() {
-    console.log('[CookieConsent] Inicializando v2.0...');
-    
-    // PASSO 1: Definir consent padrão RESTRITIVO (sempre, antes de tudo)
-    setDefaultConsent();
-    
-    // PASSO 2: Se já tem consentimento salvo, atualizar o consent mode
-    const storedPrefs = getStoredPreferences();
-    if (storedPrefs) {
-      console.log('[CookieConsent] Consentimento encontrado, aplicando...');
-      updateConsent(storedPrefs);
-    }
-    
-    // PASSO 3: Carregar GTM SEMPRE (consent mode controla o que dispara)
-    loadGTM();
-    
-    // PASSO 4: Se NÃO tem consentimento, mostrar banner
-    if (!storedPrefs) {
-      injectHTML();
-      setTimeout(() => {
-        showBanner();
-      }, CONFIG.bannerDelay);
+  // ============================================================================
+  // INICIALIZAÇÃO — DIVIDIDA EM 2 FASES
+  // ============================================================================
+
+  // FASE 1: IMEDIATA (roda sync no <head>, antes de qualquer coisa)
+  // Consent default + GTM precisam estar no DOM o mais cedo possível
+  console.log('[CookieConsent] v3.0 — Fase 1: Consent + GTM (imediato)');
+  
+  setDefaultConsent();
+
+  const storedPrefs = getStoredPreferences();
+  if (storedPrefs) {
+    updateConsent(storedPrefs);
+  }
+
+  loadGTM();
+
+  // FASE 2: DIFERIDA (roda quando o DOM está pronto)
+  // Banner/modal só podem ser injetados quando o <body> existe
+  function initUI() {
+    if (!hasConsent()) {
+      console.log('[CookieConsent] Fase 2: Exibindo banner');
+      injectBannerUI();
+      setTimeout(() => { showBanner(); }, CONFIG.bannerDelay);
+    } else {
+      console.log('[CookieConsent] Fase 2: Consentimento já existe, sem banner');
     }
   }
 
-  // Executar o mais cedo possível
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', initUI);
   } else {
-    init();
+    initUI();
   }
 
   // API pública
   window.AudiotextCookieConsent = {
     hasConsent,
-    hasMarketingConsent: function() {
-      const prefs = getStoredPreferences();
-      return prefs?.marketing ?? false;
-    },
-    hasAnalyticsConsent: function() {
-      const prefs = getStoredPreferences();
-      return prefs?.analytics ?? false;
-    },
+    hasMarketingConsent: function() { return getStoredPreferences()?.marketing ?? false; },
+    hasAnalyticsConsent: function() { return getStoredPreferences()?.analytics ?? false; },
     acceptAll,
     rejectNonEssential,
     getStoredPreferences,
-    // Permite reabrir o modal de preferências (ex: link no footer)
     showPreferences: function() {
-      if (!document.getElementById('cookie-consent-container')) {
-        injectHTML();
-      }
+      if (!document.getElementById('cookie-consent-container')) injectBannerUI();
       showModal();
     },
-    // Permite resetar consentimento (útil para testes)
     reset: function() {
       localStorage.removeItem(CONFIG.storageKey);
       console.log('[CookieConsent] Consentimento resetado. Recarregue a página.');
