@@ -1,8 +1,14 @@
 /**
  * Cookie Consent System - Audiotext (audiotext.com.br)
- * Baseado no sistema React do app.audiotext.com.br
- * Versão: HTML/JS Puro para Vercel
- * Data: 2026-02-04
+ * Versão: 2.0 — Consent Mode v2 + GTM como controlador único
+ * Data: 2026-02-16
+ * 
+ * ARQUITETURA:
+ * 1. Este script define o Consent Mode v2 ANTES de qualquer tag Google
+ * 2. O GTM é carregado SEMPRE (com consent mode restritivo por padrão)
+ * 3. O GTM controla GA4, Google Ads, Meta Pixel — tudo via suas tags internas
+ * 4. Quando o usuário consente, atualizamos o consent mode e o GTM reage automaticamente
+ * 5. NÃO carregamos Meta Pixel nem Google Ads fora do GTM
  */
 
 (function() {
@@ -14,21 +20,80 @@
 
   const CONFIG = {
     storageKey: 'audiotext_cookie_preferences',
-    
-    // IDs de tracking - SUBSTITUIR PELOS REAIS
-    metaPixelId: 'METAADS_PIXEL_ID',
-    googleAdsId: 'GOOGLEADS_TAG_ID',
-    gtmId: 'GTM_CONTAINER_ID',
-    
-    // URLs
+    gtmId: 'GTM-K8PJKT6',
     privacyPolicyUrl: '/legal#cookies',
-    
-    // Delay inicial do banner (ms)
     bannerDelay: 500,
   };
 
   // ============================================================================
-  // FUNÇÕES DE STORAGE (mesmas do React)
+  // CONSENT MODE v2 — DEVE RODAR ANTES DE QUALQUER TAG GOOGLE
+  // ============================================================================
+
+  // Inicializa dataLayer e gtag
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  // Define consent padrão RESTRITIVO (antes do GTM carregar)
+  // Isso garante que nenhuma tag Google dispare sem consentimento
+  function setDefaultConsent() {
+    gtag('consent', 'default', {
+      'ad_storage': 'denied',
+      'ad_user_data': 'denied',
+      'ad_personalization': 'denied',
+      'analytics_storage': 'denied',
+      'functionality_storage': 'granted',  // Essenciais sempre permitidos
+      'security_storage': 'granted',       // Segurança sempre permitida
+      'wait_for_update': 500               // Espera 500ms por atualização do consent
+    });
+
+    // Ativa URL passthrough para manter atribuição mesmo sem cookies
+    gtag('set', 'url_passthrough', true);
+    
+    // Ativa redação de dados de anúncios
+    gtag('set', 'ads_data_redaction', true);
+  }
+
+  // Atualiza consent com base nas preferências do usuário
+  function updateConsent(prefs) {
+    gtag('consent', 'update', {
+      'ad_storage': prefs.marketing ? 'granted' : 'denied',
+      'ad_user_data': prefs.marketing ? 'granted' : 'denied',
+      'ad_personalization': prefs.marketing ? 'granted' : 'denied',
+      'analytics_storage': prefs.analytics ? 'granted' : 'denied',
+    });
+    console.log('[CookieConsent] Consent Mode atualizado:', {
+      analytics: prefs.analytics ? 'granted' : 'denied',
+      marketing: prefs.marketing ? 'granted' : 'denied'
+    });
+  }
+
+  // ============================================================================
+  // CARREGAMENTO DO GTM — SEMPRE CARREGA (consent mode controla as tags)
+  // ============================================================================
+
+  function loadGTM() {
+    // Não duplicar se já existe no HTML
+    if (document.querySelector('script[src*="googletagmanager.com/gtm.js"]')) {
+      console.log('[CookieConsent] GTM já presente no HTML');
+      return;
+    }
+
+    (function(w,d,s,l,i){
+      w[l]=w[l]||[];
+      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+      var f=d.getElementsByTagName(s)[0],
+          j=d.createElement(s),
+          dl=l!='dataLayer'?'&l='+l:'';
+      j.async=true;
+      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+      f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',CONFIG.gtmId);
+
+    console.log('[CookieConsent] GTM carregado:', CONFIG.gtmId);
+  }
+
+  // ============================================================================
+  // FUNÇÕES DE STORAGE
   // ============================================================================
 
   function getStoredPreferences() {
@@ -64,133 +129,16 @@
     return getStoredPreferences() !== null;
   }
 
-  function hasMarketingConsent() {
-    const prefs = getStoredPreferences();
-    return prefs?.marketing ?? false;
-  }
-
-  function hasAnalyticsConsent() {
-    const prefs = getStoredPreferences();
-    return prefs?.analytics ?? false;
-  }
-
   function acceptAll() {
-    savePreferences({
-      analytics: true,
-      marketing: true
-    });
+    const prefs = { analytics: true, marketing: true };
+    savePreferences(prefs);
+    updateConsent(prefs);
   }
 
   function rejectNonEssential() {
-    savePreferences({
-      analytics: false,
-      marketing: false
-    });
-  }
-
-  // ============================================================================
-  // CARREGAMENTO DE SCRIPTS DE TRACKING
-  // ============================================================================
-
-  function loadMetaPixel() {
-    if (window.fbq) {
-      console.log('[CookieConsent] Meta Pixel já carregado');
-      return;
-    }
-
-    const pixelId = CONFIG.metaPixelId;
-    if (!pixelId || pixelId === 'METAADS_PIXEL_ID') {
-      console.warn('[CookieConsent] Meta Pixel ID não configurado');
-      return;
-    }
-
-    // Código oficial do Meta Pixel
-    !function(f,b,e,v,n,t,s) {
-      if(f.fbq) return;
-      n=f.fbq=function(){
-        n.callMethod ? n.callMethod.apply(n,arguments) : n.queue.push(arguments)
-      };
-      if(!f._fbq) f._fbq=n;
-      n.push=n;
-      n.loaded=!0;
-      n.version='2.0';
-      n.queue=[];
-      t=b.createElement(e);
-      t.async=!0;
-      t.src=v;
-      s=b.getElementsByTagName(e)[0];
-      s.parentNode.insertBefore(t,s)
-    }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
-
-    window.fbq('init', pixelId);
-    window.fbq('track', 'PageView');
-
-    console.log('[CookieConsent] Meta Pixel carregado');
-  }
-
-  function loadGoogleAds() {
-    if (document.querySelector('script[src*="googletagmanager.com/gtag"]')) {
-      console.log('[CookieConsent] Google Ads já carregado');
-      return;
-    }
-
-    const adsId = CONFIG.googleAdsId;
-    if (!adsId || adsId === 'GOOGLEADS_TAG_ID') {
-      console.warn('[CookieConsent] Google Ads ID não configurado');
-      return;
-    }
-
-    const script = document.createElement('script');
-    script.src = `https://www.googletagmanager.com/gtag/js?id=${adsId}`;
-    script.async = true;
-    document.head.appendChild(script);
-
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    window.gtag = gtag;
-    gtag('js', new Date());
-    gtag('config', adsId);
-
-    console.log('[CookieConsent] Google Ads carregado');
-  }
-
-  function loadGTM() {
-    if (document.querySelector('script[src*="googletagmanager.com/gtm"]')) {
-      console.log('[CookieConsent] GTM já carregado');
-      return;
-    }
-
-    const gtmId = CONFIG.gtmId;
-    if (!gtmId || gtmId === 'GTM_CONTAINER_ID') {
-      console.warn('[CookieConsent] GTM ID não configurado');
-      return;
-    }
-
-    (function(w,d,s,l,i){
-      w[l]=w[l]||[];
-      w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),
-          dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true;
-      j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer',gtmId);
-
-    console.log('[CookieConsent] GTM carregado');
-  }
-
-  function loadConsentedScripts() {
-    console.log('[CookieConsent] Carregando scripts consentidos...');
-    
-    if (hasMarketingConsent()) {
-      loadMetaPixel();
-      loadGoogleAds();
-    }
-
-    if (hasAnalyticsConsent()) {
-      loadGTM();
-    }
+    const prefs = { analytics: false, marketing: false };
+    savePreferences(prefs);
+    updateConsent(prefs);
   }
 
   // ============================================================================
@@ -233,43 +181,39 @@
     `;
   }
 
-  // ============================================================================
-  // CRIAÇÃO DO HTML - MODAL DE PREFERÊNCIAS
-  // ============================================================================
-
   function createModalHTML() {
     const prefs = getStoredPreferences() || { analytics: false, marketing: false };
     
     return `
-      <div id="cookie-modal" class="cookie-modal" role="dialog" aria-labelledby="modal-title" aria-modal="true" style="display: none;">
-        <div class="cookie-modal-overlay" id="modal-overlay"></div>
-        <div class="cookie-modal-content">
+      <div id="cookie-modal" class="cookie-modal" style="display:none;">
+        <div id="modal-overlay" class="cookie-modal-overlay"></div>
+        <div class="cookie-modal-container" role="dialog" aria-label="Preferências de cookies" aria-modal="true">
           <div class="cookie-modal-header">
-            <h2 id="modal-title" class="cookie-modal-title">Preferências de Cookies</h2>
-            <p class="cookie-modal-description">
-              Personalize quais cookies você deseja permitir. Suas preferências serão salvas e respeitadas.
+            <h2 class="cookie-modal-title">Preferências de Cookies</h2>
+            <p class="cookie-modal-subtitle">
+              Escolha quais cookies deseja aceitar. Cookies essenciais são necessários para o funcionamento do site.
             </p>
           </div>
 
-          <div class="cookie-modal-body">
+          <div class="cookie-preferences">
             <!-- Essential Cookies -->
             <div class="cookie-preference-item">
               <div class="cookie-preference-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-shield"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-essential"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
               </div>
               <div class="cookie-preference-content">
                 <div class="cookie-preference-header">
-                  <label class="cookie-preference-label">Cookies Essenciais</label>
+                  <label class="cookie-preference-label">Essenciais</label>
                   <label class="cookie-toggle cookie-toggle-disabled">
                     <input type="checkbox" checked disabled>
                     <span class="cookie-toggle-slider"></span>
                   </label>
                 </div>
                 <p class="cookie-preference-description">
-                  Necessários para o funcionamento básico da plataforma (autenticação, segurança, preferências). Não podem ser desativados.
+                  Necessários para o funcionamento básico do site. Não podem ser desativados.
                 </p>
                 <p class="cookie-preference-examples">
-                  Exemplos: Sessão de login, proteção CSRF, idioma
+                  Exemplos: sessão, preferências de cookies
                 </p>
               </div>
             </div>
@@ -293,7 +237,7 @@
                   Nos ajudam a entender como você usa a plataforma para melhorarmos a experiência.
                 </p>
                 <p class="cookie-preference-examples">
-                  Exemplos: Google Tag Manager, análise de uso
+                  Exemplos: Google Analytics (GA4), análise de uso
                 </p>
               </div>
             </div>
@@ -399,12 +343,14 @@
   function handleAcceptAll() {
     acceptAll();
     hideBanner();
-    window.location.reload();
+    hideModal();
+    // Não precisa de reload — o Consent Mode atualiza as tags em tempo real
   }
 
   function handleRejectNonEssential() {
     rejectNonEssential();
     hideBanner();
+    // Não precisa de reload
   }
 
   function handleCustomize() {
@@ -415,21 +361,21 @@
     acceptAll();
     hideModal();
     hideBanner();
-    window.location.reload();
   }
 
   function handleModalSave() {
     const analyticsToggle = document.getElementById('analytics-toggle');
     const marketingToggle = document.getElementById('marketing-toggle');
     
-    savePreferences({
+    const prefs = {
       analytics: analyticsToggle ? analyticsToggle.checked : false,
       marketing: marketingToggle ? marketingToggle.checked : false
-    });
+    };
     
+    savePreferences(prefs);
+    updateConsent(prefs);
     hideModal();
     hideBanner();
-    window.location.reload();
   }
 
   function handleModalClose() {
@@ -473,39 +419,62 @@
   }
 
   function init() {
-    console.log('[CookieConsent] Inicializando...');
+    console.log('[CookieConsent] Inicializando v2.0...');
     
-    if (hasConsent()) {
-      console.log('[CookieConsent] Consentimento já existe, carregando scripts...');
-      loadConsentedScripts();
-      return;
+    // PASSO 1: Definir consent padrão RESTRITIVO (sempre, antes de tudo)
+    setDefaultConsent();
+    
+    // PASSO 2: Se já tem consentimento salvo, atualizar o consent mode
+    const storedPrefs = getStoredPreferences();
+    if (storedPrefs) {
+      console.log('[CookieConsent] Consentimento encontrado, aplicando...');
+      updateConsent(storedPrefs);
     }
     
-    injectHTML();
+    // PASSO 3: Carregar GTM SEMPRE (consent mode controla o que dispara)
+    loadGTM();
     
-    setTimeout(() => {
-      showBanner();
-    }, CONFIG.bannerDelay);
+    // PASSO 4: Se NÃO tem consentimento, mostrar banner
+    if (!storedPrefs) {
+      injectHTML();
+      setTimeout(() => {
+        showBanner();
+      }, CONFIG.bannerDelay);
+    }
   }
 
+  // Executar o mais cedo possível
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
 
+  // API pública
   window.AudiotextCookieConsent = {
     hasConsent,
-    hasMarketingConsent,
-    hasAnalyticsConsent,
+    hasMarketingConsent: function() {
+      const prefs = getStoredPreferences();
+      return prefs?.marketing ?? false;
+    },
+    hasAnalyticsConsent: function() {
+      const prefs = getStoredPreferences();
+      return prefs?.analytics ?? false;
+    },
     acceptAll,
     rejectNonEssential,
     getStoredPreferences,
-    showModal: function() {
+    // Permite reabrir o modal de preferências (ex: link no footer)
+    showPreferences: function() {
       if (!document.getElementById('cookie-consent-container')) {
         injectHTML();
       }
       showModal();
+    },
+    // Permite resetar consentimento (útil para testes)
+    reset: function() {
+      localStorage.removeItem(CONFIG.storageKey);
+      console.log('[CookieConsent] Consentimento resetado. Recarregue a página.');
     }
   };
 
