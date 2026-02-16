@@ -301,6 +301,11 @@
     if (banner) {
       banner.classList.add('cookie-banner-visible');
     }
+    // Mostra backdrop sutil para chamar atenção ao banner
+    const backdrop = document.getElementById('cookie-backdrop');
+    if (backdrop) {
+      backdrop.classList.add('cookie-backdrop-visible');
+    }
   }
 
   function hideBanner() {
@@ -310,6 +315,16 @@
       setTimeout(() => {
         if (banner.parentNode) {
           banner.parentNode.removeChild(banner);
+        }
+      }, 500);
+    }
+    // Remove backdrop
+    const backdrop = document.getElementById('cookie-backdrop');
+    if (backdrop) {
+      backdrop.classList.remove('cookie-backdrop-visible');
+      setTimeout(() => {
+        if (backdrop.parentNode) {
+          backdrop.parentNode.removeChild(backdrop);
         }
       }, 500);
     }
@@ -413,7 +428,7 @@
   function injectHTML() {
     const container = document.createElement('div');
     container.id = 'cookie-consent-container';
-    container.innerHTML = createBannerHTML() + createModalHTML();
+    container.innerHTML = '<div id="cookie-backdrop" class="cookie-backdrop"></div>' + createBannerHTML() + createModalHTML();
     document.body.appendChild(container);
     attachEventListeners();
   }
