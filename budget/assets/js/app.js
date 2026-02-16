@@ -549,6 +549,12 @@
       saveSession();
       fillProjectFromBudget(budget);
       goToStep(2);
+
+      // Notificar página pai que step 1 foi concluído (para GTM)
+      window.parent.postMessage(
+        { type: 'budget_step1_complete', service: payload.serviceCode },
+        "https://www.audiotext.com.br/"
+      );
     } catch (e) {
       console.error(e);
       showError("Erro ao salvar dados. Tente novamente.");
@@ -627,6 +633,19 @@
       goToStep(3);
       spinnerLoad.classList.remove("hidden");
 
+      // Enviar dados ricos para GTM (Enhanced Conversions + tracking)
+      window.parent.postMessage(
+        {
+          type: 'budget_submitted',
+          email: email,
+          phone: phone,
+          name: username,
+          service: budgetSaved.serviceCode || ''
+        },
+        "https://www.audiotext.com.br/"
+      );
+
+      // Legado (manter para compatibilidade com handlers existentes)
       window.parent.postMessage(
         "gerarPropostas",
         "https://www.audiotext.com.br/"
