@@ -870,7 +870,7 @@
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-            <a href="https://api.whatsapp.com/send?phone=5541997990622&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20legendagem%20profissional" target="_blank" class="w-full sm:w-auto text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+            <a href="#" onclick="abrirFormLegendagem(); return false;" ...>
               Fale Conosco pelo WhatsApp
             </a>
           </div>
@@ -1000,7 +1000,7 @@
         </div>
 
         <div class="text-center mt-12">
-          <a href="https://api.whatsapp.com/send?phone=5541997990622&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20legendagem%20profissional" target="_blank" class="inline-block text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          <a href="#" onclick="abrirFormLegendagem(); return false;" ...>
             Fale Conosco
           </a>
         </div>
@@ -1070,7 +1070,7 @@
         </div>
 
         <div class="text-center mt-12">
-          <a href="https://api.whatsapp.com/send?phone=5541997990622&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20legendagem%20profissional" target="_blank" class="inline-block text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          <a href="#" onclick="abrirFormLegendagem(); return false;" ...>
             Fale Conosco
           </a>
         </div>
@@ -1160,7 +1160,7 @@
         </div>
 
         <div class="text-center mt-12">
-          <a href="https://api.whatsapp.com/send?phone=5541997990622&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20legendagem%20profissional" target="_blank" class="inline-block text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          <a href="#" onclick="abrirFormLegendagem(); return false;" ...>
             Fale Conosco
           </a>
         </div>
@@ -1294,7 +1294,7 @@
         </div>
 
         <div class="text-center mt-12">
-          <a href="https://api.whatsapp.com/send?phone=5541997990622&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20legendagem%20profissional" target="_blank" class="inline-block text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          <a href="#" onclick="abrirFormLegendagem(); return false;" ...>
             Fale Conosco
           </a>
         </div>
@@ -1517,7 +1517,7 @@
         </div>
 
         <div class="text-center mt-12">
-          <a href="https://api.whatsapp.com/send?phone=5541997990622&text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20legendagem%20profissional" target="_blank" class="inline-block text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
+          <a href="#" onclick="abrirFormLegendagem(); return false;" ...>
             Fale Conosco
           </a>
         </div>
@@ -1883,6 +1883,340 @@
       Dúvidas? Fale conosco
     </span>
   </a>
+  
+<!-- ============================================== -->
+<!-- MODAL ORÇAMENTO LEGENDAGEM                     -->
+<!-- Cole ANTES do </body> na /legendagem            -->
+<!--                                                -->
+<!-- Depois, altere os links "Fale Conosco" para:   -->
+<!--   onclick="abrirFormLegendagem()" href="#"      -->
+<!-- ============================================== -->
+
+<!-- Overlay + Modal -->
+<div id="leg-modal-overlay" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.6); backdrop-filter:blur(4px); overflow-y:auto; padding:1rem;" onclick="if(event.target===this)fecharFormLegendagem()">
+  <div style="max-width:620px; margin:2rem auto; background:white; border-radius:1rem; box-shadow:0 24px 64px rgba(0,0,0,0.2); position:relative; animation:leg-modal-in 0.25s ease-out;">
+    
+    <!-- Botão fechar -->
+    <button onclick="fecharFormLegendagem()" style="position:absolute; top:1rem; right:1rem; background:none; border:none; cursor:pointer; padding:0.5rem; border-radius:50%; z-index:1;" onmouseover="this.style.background='hsl(220,13%,95%)'" onmouseout="this.style.background='none'">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="hsl(220,9%,46%)" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+
+    <!-- Header -->
+    <div style="text-align:center; padding:2rem 2rem 0 2rem;">
+      <span style="display:inline-block; background:hsl(218,40%,29%); color:white; font-size:0.75rem; font-weight:600; padding:0.25rem 0.75rem; border-radius:9999px; letter-spacing:0.05em; text-transform:uppercase; margin-bottom:0.75rem;">Orçamento em 1 minuto</span>
+      <h2 style="font-size:1.5rem; font-weight:700; color:hsl(222,47%,11%); line-height:1.2; margin:0 0 0.25rem 0;">Solicite seu Orçamento de Legendagem</h2>
+      <p style="color:hsl(220,9%,46%); font-size:0.9375rem; margin:0;">Preencha e fale direto no WhatsApp com os dados do projeto</p>
+    </div>
+
+    <!-- Form -->
+    <div style="padding:1.5rem 2rem 2rem 2rem;">
+
+      <!-- Nome e Email -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-bottom:1rem;">
+        <div>
+          <label for="leg-nome" style="display:block; font-size:0.8125rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:0.25rem;">Seu nome *</label>
+          <input type="text" id="leg-nome" placeholder="Nome completo" required
+            style="width:100%; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; font-size:0.9375rem; color:hsl(222,47%,11%); background:white; outline:none; transition:border-color 0.2s; box-sizing:border-box;"
+            onfocus="this.style.borderColor='hsl(217,91%,60%)'" onblur="this.style.borderColor='hsl(220,13%,91%)'">
+        </div>
+        <div>
+          <label for="leg-email" style="display:block; font-size:0.8125rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:0.25rem;">E-mail *</label>
+          <input type="email" id="leg-email" placeholder="seu@email.com" required
+            style="width:100%; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; font-size:0.9375rem; color:hsl(222,47%,11%); background:white; outline:none; transition:border-color 0.2s; box-sizing:border-box;"
+            onfocus="this.style.borderColor='hsl(217,91%,60%)'" onblur="this.style.borderColor='hsl(220,13%,91%)'">
+        </div>
+      </div>
+
+      <!-- Duração -->
+      <div style="margin-bottom:1rem;">
+        <label for="leg-duracao" style="display:block; font-size:0.8125rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:0.25rem;">Duração do vídeo (minutos) *</label>
+        <input type="number" id="leg-duracao" placeholder="Ex: 30" min="1" required
+          style="width:100%; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; font-size:0.9375rem; color:hsl(222,47%,11%); background:white; outline:none; transition:border-color 0.2s; box-sizing:border-box;"
+          onfocus="this.style.borderColor='hsl(217,91%,60%)'" onblur="this.style.borderColor='hsl(220,13%,91%)'">
+      </div>
+
+      <!-- Tipo -->
+      <div style="margin-bottom:1rem;">
+        <label style="display:block; font-size:0.8125rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:0.375rem;">Tipo de legendagem *</label>
+        <div style="display:flex; flex-direction:column; gap:0.375rem;">
+
+          <label class="leg-radio-label" style="display:flex; align-items:center; gap:0.5rem; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; cursor:pointer; transition:all 0.2s;">
+            <input type="radio" name="leg-tipo" value="Legenda em Português" data-preco-min="6" data-preco-max="6" required style="width:1rem; height:1rem; accent-color:hsl(218,40%,29%);">
+            <div>
+              <div style="font-size:0.875rem; font-weight:500; color:hsl(222,47%,11%);">Legenda em Português</div>
+              <div style="font-size:0.75rem; color:hsl(220,9%,46%);">R$ 6,00/min · Transcrição + sincronização</div>
+            </div>
+          </label>
+
+          <label class="leg-radio-label" style="display:flex; align-items:center; gap:0.5rem; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; cursor:pointer; transition:all 0.2s;">
+            <input type="radio" name="leg-tipo" value="Legenda + Tradução para Inglês" data-preco-min="9" data-preco-max="12" style="width:1rem; height:1rem; accent-color:hsl(218,40%,29%);">
+            <div>
+              <div style="font-size:0.875rem; font-weight:500; color:hsl(222,47%,11%);">Legenda + Tradução para Inglês</div>
+              <div style="font-size:0.75rem; color:hsl(220,9%,46%);">R$ 9,00–12,00/min · PT → EN por tradutores profissionais</div>
+            </div>
+          </label>
+
+          <label class="leg-radio-label" style="display:flex; align-items:center; gap:0.5rem; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; cursor:pointer; transition:all 0.2s;">
+            <input type="radio" name="leg-tipo" value="Legenda + Tradução para Espanhol" data-preco-min="9" data-preco-max="12" style="width:1rem; height:1rem; accent-color:hsl(218,40%,29%);">
+            <div>
+              <div style="font-size:0.875rem; font-weight:500; color:hsl(222,47%,11%);">Legenda + Tradução para Espanhol</div>
+              <div style="font-size:0.75rem; color:hsl(220,9%,46%);">R$ 9,00–12,00/min · PT → ES por tradutores profissionais</div>
+            </div>
+          </label>
+
+          <label class="leg-radio-label" style="display:flex; align-items:center; gap:0.5rem; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; cursor:pointer; transition:all 0.2s;">
+            <input type="radio" name="leg-tipo" value="Não sei / Preciso de orientação" data-preco-min="0" data-preco-max="0" style="width:1rem; height:1rem; accent-color:hsl(218,40%,29%);">
+            <div>
+              <div style="font-size:0.875rem; font-weight:500; color:hsl(222,47%,11%);">Não sei / Preciso de orientação</div>
+              <div style="font-size:0.75rem; color:hsl(220,9%,46%);">Fale com nosso time para a melhor opção</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+
+      <!-- Formato -->
+      <div style="margin-bottom:1rem;">
+        <label for="leg-formato" style="display:block; font-size:0.8125rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:0.25rem;">Formato de entrega</label>
+        <select id="leg-formato"
+          style="width:100%; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; font-size:0.9375rem; color:hsl(222,47%,11%); background:white; outline:none; cursor:pointer; box-sizing:border-box;">
+          <option value="Arquivo de legenda (SRT/VTT)">Arquivo de legenda (SRT/VTT)</option>
+          <option value="Legenda embutida no vídeo">Legenda embutida (hardcoded) no vídeo</option>
+          <option value="Ambos (arquivo + embutida)">Ambos (arquivo + embutida no vídeo)</option>
+          <option value="Não sei ainda">Não sei ainda</option>
+        </select>
+      </div>
+
+      <!-- Observações -->
+      <div style="margin-bottom:1.25rem;">
+        <label for="leg-obs" style="display:block; font-size:0.8125rem; font-weight:600; color:hsl(222,47%,11%); margin-bottom:0.25rem;">Observações <span style="font-weight:400; color:hsl(220,9%,46%);">(opcional)</span></label>
+        <textarea id="leg-obs" rows="2" placeholder="Link do vídeo, prazo desejado, nº de falantes..."
+          style="width:100%; padding:0.625rem 0.75rem; border:1px solid hsl(220,13%,91%); border-radius:0.5rem; font-size:0.9375rem; color:hsl(222,47%,11%); background:white; outline:none; resize:vertical; font-family:inherit; transition:border-color 0.2s; box-sizing:border-box;"
+          onfocus="this.style.borderColor='hsl(217,91%,60%)'" onblur="this.style.borderColor='hsl(220,13%,91%)'"></textarea>
+      </div>
+
+      <!-- Estimativa -->
+      <div id="leg-estimativa" style="display:none; background:hsl(218,40%,97%); border:1px solid hsl(218,40%,85%); border-radius:0.5rem; padding:0.75rem; margin-bottom:1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.375rem;">
+          <div>
+            <div style="font-size:0.6875rem; font-weight:600; color:hsl(218,40%,29%); text-transform:uppercase; letter-spacing:0.05em;">Estimativa de valor</div>
+            <div id="leg-estimativa-valor" style="font-size:1.375rem; font-weight:700; color:hsl(218,40%,29%); margin-top:0.125rem;"></div>
+          </div>
+          <div id="leg-estimativa-calculo" style="font-size:0.8125rem; color:hsl(220,9%,46%); text-align:right;"></div>
+        </div>
+        <div style="font-size:0.6875rem; color:hsl(220,9%,56%); margin-top:0.375rem; padding-top:0.375rem; border-top:1px solid hsl(218,40%,90%);">
+          ⚠️ Valor estimado para referência. O orçamento final pode variar conforme complexidade do áudio, número de falantes e necessidade de revisão técnica.
+        </div>
+      </div>
+
+      <!-- Botão -->
+      <button type="button" id="leg-submit-btn" onclick="enviarOrcamentoLegendagem()"
+        style="width:100%; display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.875rem; background:#25D366; color:white; font-size:1rem; font-weight:600; border:none; border-radius:0.625rem; cursor:pointer; transition:background 0.2s, transform 0.1s;"
+        onmouseover="this.style.background='#20bd5a'" onmouseout="this.style.background='#25D366'"
+        onmousedown="this.style.transform='scale(0.98)'" onmouseup="this.style.transform='scale(1)'">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Solicitar Orçamento pelo WhatsApp
+      </button>
+
+      <!-- Trust -->
+      <div style="display:flex; justify-content:center; gap:1.25rem; margin-top:0.75rem; flex-wrap:wrap;">
+        <span style="font-size:0.6875rem; color:hsl(220,9%,46%); display:flex; align-items:center; gap:0.25rem;">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          Sigilo garantido
+        </span>
+        <span style="font-size:0.6875rem; color:hsl(220,9%,46%); display:flex; align-items:center; gap:0.25rem;">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Resposta em minutos
+        </span>
+        <span style="font-size:0.6875rem; color:hsl(220,9%,46%); display:flex; align-items:center; gap:0.25rem;">
+          <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Sem compromisso
+        </span>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal styles -->
+<style>
+  @keyframes leg-modal-in {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  @media (max-width: 540px) {
+    #leg-modal-overlay > div > div:first-of-type [style*="grid-template-columns"] {
+      grid-template-columns: 1fr !important;
+    }
+  }
+  body.leg-modal-open {
+    overflow: hidden;
+  }
+</style>
+
+<!-- Script do formulário modal -->
+<script>
+(function() {
+  // =============================================
+  // Cole aqui a URL do Google Apps Script
+  // =============================================
+  var SHEET_URL = 'https://script.google.com/macros/s/AKfycbwkGVDBk0DBXehnpM54tWvWYN7nADsB4sk4Hnf9_EdyinX8-y5XyG-0aRRJEU8lvyGa/exec';
+  // =============================================
+
+  // --- Abrir / Fechar modal ---
+  window.abrirFormLegendagem = function() {
+    document.getElementById('leg-modal-overlay').style.display = 'block';
+    document.body.classList.add('leg-modal-open');
+  };
+
+  window.fecharFormLegendagem = function() {
+    document.getElementById('leg-modal-overlay').style.display = 'none';
+    document.body.classList.remove('leg-modal-open');
+  };
+
+  // Fechar com ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') fecharFormLegendagem();
+  });
+
+  // --- Radio buttons visual ---
+  var radios = document.querySelectorAll('input[name="leg-tipo"]');
+  radios.forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      document.querySelectorAll('.leg-radio-label').forEach(function(lbl) {
+        lbl.style.borderColor = 'hsl(220,13%,91%)';
+        lbl.style.background = 'white';
+      });
+      this.closest('label').style.borderColor = 'hsl(218,40%,29%)';
+      this.closest('label').style.background = 'hsl(218,40%,97%)';
+      calcularEstimativa();
+    });
+  });
+
+  // --- Cálculo de estimativa ---
+  var inputDuracao = document.getElementById('leg-duracao');
+  inputDuracao.addEventListener('input', calcularEstimativa);
+
+  function calcularEstimativa() {
+    var div = document.getElementById('leg-estimativa');
+    var spanValor = document.getElementById('leg-estimativa-valor');
+    var spanCalculo = document.getElementById('leg-estimativa-calculo');
+    var min = parseInt(inputDuracao.value);
+    var tipoEl = document.querySelector('input[name="leg-tipo"]:checked');
+
+    if (!min || min <= 0 || !tipoEl) { div.style.display = 'none'; return; }
+
+    var pMin = parseFloat(tipoEl.getAttribute('data-preco-min'));
+    var pMax = parseFloat(tipoEl.getAttribute('data-preco-max'));
+    if (pMin === 0) { div.style.display = 'none'; return; }
+
+    var tMin = min * pMin;
+    var tMax = min * pMax;
+    function fmt(v) { return 'R$ ' + v.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+
+    if (tMin === tMax) {
+      spanValor.textContent = fmt(tMin);
+      spanCalculo.textContent = min + ' min × R$ ' + pMin.toFixed(2).replace('.', ',') + '/min';
+    } else {
+      spanValor.textContent = fmt(tMin) + ' a ' + fmt(tMax);
+      spanCalculo.textContent = min + ' min × R$ ' + pMin.toFixed(2).replace('.', ',') + '–' + pMax.toFixed(2).replace('.', ',') + '/min';
+    }
+    div.style.display = 'block';
+  }
+
+  // --- Enviar ---
+  window.enviarOrcamentoLegendagem = function() {
+    var nome = document.getElementById('leg-nome').value.trim();
+    var email = document.getElementById('leg-email').value.trim();
+    var duracao = document.getElementById('leg-duracao').value.trim();
+    var tipoEl = document.querySelector('input[name="leg-tipo"]:checked');
+    var formato = document.getElementById('leg-formato').value;
+    var obs = document.getElementById('leg-obs').value.trim();
+
+    // Reset borders
+    ['leg-nome','leg-email','leg-duracao'].forEach(function(id) {
+      document.getElementById(id).style.borderColor = 'hsl(220,13%,91%)';
+    });
+
+    // Validação
+    var ok = true;
+    if (!nome) { document.getElementById('leg-nome').style.borderColor = '#e53e3e'; if (ok) document.getElementById('leg-nome').focus(); ok = false; }
+    if (!email || !email.includes('@') || !email.includes('.')) { document.getElementById('leg-email').style.borderColor = '#e53e3e'; if (ok) document.getElementById('leg-email').focus(); ok = false; }
+    if (!duracao || parseInt(duracao) <= 0) { document.getElementById('leg-duracao').style.borderColor = '#e53e3e'; if (ok) document.getElementById('leg-duracao').focus(); ok = false; }
+    if (!tipoEl) { alert('Selecione o tipo de legendagem.'); ok = false; }
+    if (!ok) return;
+
+    var tipo = tipoEl.value;
+    var min = parseInt(duracao);
+
+    // Estimativa
+    var pMin = parseFloat(tipoEl.getAttribute('data-preco-min'));
+    var pMax = parseFloat(tipoEl.getAttribute('data-preco-max'));
+    var estimativa = '';
+    function fmt(v) { return 'R$ ' + v.toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+    if (pMin > 0) {
+      var tMin = min * pMin, tMax = min * pMax;
+      estimativa = tMin === tMax ? fmt(tMin) : fmt(tMin) + ' a ' + fmt(tMax);
+    }
+
+    // Botão loading
+    var btn = document.getElementById('leg-submit-btn');
+    var btnOrig = btn.innerHTML;
+    btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" style="animation:leg-spin 1s linear infinite"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Enviando...';
+    btn.style.pointerEvents = 'none'; btn.style.opacity = '0.7';
+
+    // UTMs
+    var p = new URLSearchParams(window.location.search);
+
+    // Google Sheets
+    if (SHEET_URL && SHEET_URL !== 'https://script.google.com/macros/s/AKfycbwkGVDBk0DBXehnpM54tWvWYN7nADsB4sk4Hnf9_EdyinX8-y5XyG-0aRRJEU8lvyGa/exec') {
+      fetch(SHEET_URL, {
+        method: 'POST', mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nome: nome, email: email, duracao: min, tipo: tipo,
+          formato: formato, estimativa: estimativa, observacoes: obs,
+          pagina: window.location.pathname,
+          utm_source: p.get('utm_source') || 'direto',
+          utm_medium: p.get('utm_medium') || '',
+          utm_campaign: p.get('utm_campaign') || '',
+          utm_term: p.get('utm_term') || ''
+        })
+      }).catch(function() {});
+    }
+
+    // GTM
+    if (typeof dataLayer !== 'undefined') {
+      dataLayer.push({
+        event: 'form_submit_legendagem', form_name: 'orcamento_legendagem',
+        leg_duracao: min, leg_tipo: tipo, leg_formato: formato, leg_estimativa: estimativa
+      });
+    }
+
+    // WhatsApp
+    var msg = 'Olá! Gostaria de solicitar um orçamento de legendagem.\n\n';
+    msg += '📋 *Dados do projeto:*\n';
+    msg += '• Nome: ' + nome + '\n';
+    msg += '• E-mail: ' + email + '\n';
+    msg += '• Duração: ' + min + ' minutos\n';
+    msg += '• Tipo: ' + tipo + '\n';
+    msg += '• Formato: ' + formato + '\n';
+    if (estimativa) msg += '• Estimativa: ' + estimativa + ' (valor estimado, sujeito a confirmação)\n';
+    if (obs) msg += '• Obs: ' + obs + '\n';
+    msg += '\nAguardo o orçamento!';
+
+    setTimeout(function() {
+      window.open('https://api.whatsapp.com/send?phone=5541997990622&text=' + encodeURIComponent(msg), '_blank');
+      btn.innerHTML = btnOrig; btn.style.pointerEvents = 'auto'; btn.style.opacity = '1';
+      fecharFormLegendagem();
+    }, 400);
+  };
+})();
+</script>
+
+<style>
+  @keyframes leg-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+</style>
 
 </body>
 </html>
