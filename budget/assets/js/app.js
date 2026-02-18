@@ -345,8 +345,6 @@
       degOpt.value = "degravacao";
       degOpt.textContent = "Degravação (Transcrição Jurídica)";
       pf.serviceCode.appendChild(degOpt);
-        });
-      }
 
       // Finalidades
       pf.finalityCode.innerHTML =
