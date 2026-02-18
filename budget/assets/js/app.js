@@ -340,7 +340,7 @@
         opt.textContent = "Transcrição";
         pf.serviceCode.appendChild(opt);
       }
-      // Sempre adicionar Degravação (front-only, mapeia para transcricao + juridica)
+      // Sempre adicionar Degravação (front-only)
       var degOpt = document.createElement("option");
       degOpt.value = "degravacao";
       degOpt.textContent = "Degravação (Transcrição Jurídica)";
