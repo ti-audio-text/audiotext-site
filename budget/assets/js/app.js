@@ -335,10 +335,15 @@
           pf.serviceCode.appendChild(opt);
         });
       } else {
-        var opt = document.createElement("option");
-        opt.value = "transcricao";
-        opt.textContent = "Transcrição";
-        pf.serviceCode.appendChild(opt);
+        [
+          { code: "transcricao", name: "Transcrição" },
+          { code: "degravacao", name: "Degravação (Transcrição Jurídica)" },
+        ].forEach(function (s) {
+          var opt = document.createElement("option");
+          opt.value = s.code;
+          opt.textContent = s.name;
+          pf.serviceCode.appendChild(opt);
+        });
       }
 
       // Finalidades
@@ -426,6 +431,19 @@
     } finally {
       setLoading(false);
     }
+    
+      // Degravação: auto-setar finalidade jurídica e travar campo
+    pf.serviceCode.addEventListener("change", function () {
+      var isDegravacao = pf.serviceCode.value === "degravacao";
+      if (isDegravacao) {
+        pf.finalityCode.value = "juridica";
+        pf.finalityCode.disabled = true;
+        pf.finalityCode.style.opacity = "0.6";
+      } else {
+        pf.finalityCode.disabled = false;
+        pf.finalityCode.style.opacity = "1";
+      }
+    });
   }
 
   /* ====== LOAD BUDGET (session) ====== */
@@ -500,9 +518,10 @@
     showError("");
     clearFieldErrors();
 
-    var serviceCode = pf.serviceCode.value;
+    var serviceCodeRaw = pf.serviceCode.value;
+    var serviceCode = serviceCodeRaw === "degravacao" ? "transcricao" : serviceCodeRaw;
     var amount = Number(pf.amount.value) || 0;
-    var finalityCode = pf.finalityCode.value;
+    var finalityCode = serviceCodeRaw === "degravacao" ? "juridica" : pf.finalityCode.value;
     var languageCode = pf.languageCode.value;
 
     var hasError = false;
