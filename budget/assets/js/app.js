@@ -335,14 +335,16 @@
           pf.serviceCode.appendChild(opt);
         });
       } else {
-        [
-          { code: "transcricao", name: "Transcrição" },
-          { code: "degravacao", name: "Degravação (Transcrição Jurídica)" },
-        ].forEach(function (s) {
-          var opt = document.createElement("option");
-          opt.value = s.code;
-          opt.textContent = s.name;
-          pf.serviceCode.appendChild(opt);
+        var opt = document.createElement("option");
+        opt.value = "transcricao";
+        opt.textContent = "Transcrição";
+        pf.serviceCode.appendChild(opt);
+      }
+      // Sempre adicionar Degravação (front-only, mapeia para transcricao + juridica)
+      var degOpt = document.createElement("option");
+      degOpt.value = "degravacao";
+      degOpt.textContent = "Degravação (Transcrição Jurídica)";
+      pf.serviceCode.appendChild(degOpt);
         });
       }
 
