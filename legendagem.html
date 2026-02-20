@@ -454,6 +454,18 @@
         flex-wrap: nowrap !important;
         width: max-content; /* CORREÇÃO CRUCIAL: Garante que o loop seja infinito e contenha todos os 17 logos */
       }
+
+    /* === Footer fix === */
+      .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+      .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .lg\:gap-12 { gap: 3rem; }
+      .space-y-1 > * + * { margin-top: 0.25rem; }
+      .space-y-2 > * + * { margin-top: 0.5rem; }
+      .space-y-3 > * + * { margin-top: 0.75rem; }
+      .mb-0\.5 { margin-bottom: 0.125rem; }
+      .mt-2 { margin-top: 0.5rem; }
+      .pt-8 { padding-top: 2rem; }
+      .hover\:text-foreground:hover { color: hsl(var(--foreground)); }
     
   </style>
  <!-- JSON-LD Schemas -->
