@@ -600,6 +600,7 @@
       </section>
 
       <!-- How It Works -->
+      <section id="como-funciona">
       <section class="py-20" aria-labelledby="how-it-works-heading">
         <div class="container mx-auto px-4">
           <div class="text-center mb-16">
@@ -1386,31 +1387,160 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t py-12 bg-background">
-      <div class="container mx-auto px-4">
-        <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-          <div class="flex items-center gap-2">
-            <img 
-              src="/assets/audiotext-logo.avif" 
-              alt="Audiotext - Transcrição Automática de Áudio para Texto" 
-              class="h-8 w-auto"
-              loading="lazy"
-              width="226"
-              height="56"
-              decoding="async"
-            >
+    <footer class="border-t mt-8" style="background-color: hsl(var(--muted) / 0.3);">
+      <div class="container mx-auto px-4 py-16">
+        <!-- 4 Columns Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+          <!-- Column 1: Empresa -->
+          <div>
+            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
+              Empresa
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="/sobre" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Sobre a Audiotext
+                </a>
+              </li>
+              <li>
+                <a href="/#como-funciona" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Como Funciona
+                </a>
+              </li>
+              <li>
+                <a href="https://www.audiotext.com.br/vagas/transcritor/" target="_blank" rel="noopener noreferrer" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Trabalhe Conosco
+                </a>
+              </li>
+            </ul>
           </div>
-          <nav class="flex gap-6 text-sm text-muted-foreground" aria-label="Links do rodapé">
-            <a href="/termos-e-condicoes-app" class="hover:text-foreground transition-colors">Termos de Uso App</a>
-            <a href="/transcricao-de-audio" class="hover:text-foreground transition-colors">Transcrição Profissional</a>
-          </nav>
-          <p class="text-sm text-muted-foreground text-center">
-            © 2025 Audiotext. Todos os direitos reservados.
+
+          <!-- Column 2: Serviços -->
+          <div>
+            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
+              Serviços
+            </h3>
+            <ul class="space-y-2">
+              <li>
+                <a href="/transcricao-automatica" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Transcrição Automática por IA
+                </a>
+              </li>
+              <li>
+                <a href="/transcricao-de-audio" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Transcrição de Áudio Profissional
+                </a>
+              </li>
+              <li>
+                <a href="/degravacao" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Degravação (Transcrição Jurídica)
+                </a>
+              </li>
+              <li>
+                <a href="/legendagem" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Legendagem de Vídeos
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 3: Contato -->
+          <div>
+            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
+              Contato
+            </h3>
+            <ul class="space-y-3">
+              <!-- Email -->
+              <li>
+                <p class="text-xs text-muted-foreground mb-0.5">Telefones</p>
+                <div class="space-y-1">
+                  <a href="mailto:falecom@audiotext.com.br" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
+                    falecom@audiotext.com.br
+                  </a>
+              </li>
+
+              <!-- Phones -->
+              <li>
+                <p class="text-xs text-muted-foreground mb-0.5">Telefones</p>
+                <div class="space-y-1">
+                  <a href="tel:+554133633220" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
+                    (41) 3363-3220 - Curitiba
+                  </a>
+                  <a href="tel:+551145024489" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
+                    (11) 4502-4489 - São Paulo
+                  </a>
+                </div>
+              </li>
+
+              <!-- WhatsApp -->
+              <li>
+                <p class="text-xs text-muted-foreground mb-0.5">WhatsApp</p>
+                <a href="https://wa.me/5541997990622?text=Ol%C3%A1!%20Vi%20o%20site%20da%20Audiotext%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os." target="_blank" rel="noopener noreferrer" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  (41) 99799-0622
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Column 4: Legal -->
+          <div>
+            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
+              Legal
+            </h3>
+            <ul class="space-y-2">
+
+              <li>
+                <a href="https://app.audiotext.com.br/termos-e-condicoes-app" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Política de Privacidade e LGPD
+                </a>
+              </li>
+              <li>
+                <a href="https://app.audiotext.com.br/termos-e-condicoes-app" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Política de Cookies
+                </a>
+              </li>
+              <li>
+                <a href="https://app.audiotext.com.br/termos-e-condicoes-app" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
+                  Termos de Serviço
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Legal Section -->
+        <div class="border-t mt-12 pt-8 text-center max-w-4xl mx-auto">
+          <!-- Logo -->
+          <div class="flex justify-center mb-4">
+            <img src="/assets/audiotext-logo.avif" alt="Audiotext" class="h-8" loading="lazy" decoding="async">
+          </div>
+
+          <!-- Company Info -->
+          <div class="space-y-1">
+            <p class="text-base font-semibold text-foreground">
+              Audiotext Serviços e Cia Ltda
+            </p>
+            <p class="text-sm text-foreground">CNPJ: 17.429.373/0001-85</p>
+            <p class="text-sm text-foreground mt-2">Atendimento 100% online</p>
+          </div>
+
+          <!-- Addresses -->
+          <div class="mt-4 space-y-3">
+            <!-- Sede - Normal size -->
+            <div>
+              <p class="text-sm font-medium text-foreground">Sede:</p>
+              <p class="text-sm text-muted-foreground">Rua Buenos Aires, 73, Batel</p>
+              <p class="text-sm text-muted-foreground">Curitiba/PR - CEP 80250-070</p>
+            </div>
+          </div>
+
+          <!-- Copyright -->
+          <p class="text-sm text-muted-foreground mt-6">
+            © 2026 Audiotext. Todos os direitos reservados.
           </p>
         </div>
       </div>
     </footer>
-  </div>
 
   <!-- Schema Markup - JSON-LD -->
 
