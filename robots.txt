@@ -9,4 +9,4 @@ Disallow: /legal
 Disallow: /termos-e-condicoes-app
 
 # Sitemap
-Sitemap: https://audiotext.com.br/sitemap.xml
+Sitemap: https://www.audiotext.com.br/sitemap.xml
