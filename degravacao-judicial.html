@@ -282,7 +282,7 @@
     .comparison-table td:not(:first-child) { text-align: center; }
     .badge-yes { display: inline-flex; align-items: center; gap: 0.35rem; color: hsl(150,60%,30%); font-weight: 600; font-size: 0.875rem; }
     .badge-no { display: inline-flex; align-items: center; gap: 0.35rem; color: hsl(0,70%,50%); font-weight: 600; font-size: 0.875rem; }
-    .badge-partial { display: inline-flex; align-items: center; gap: 0.35rem; color: hsl(35,90%,40%); font-weight: 600; font-size: 0.875rem; }
+    .badge-partial { display: inline-flex; align-items: center; gap: 0.35rem; color: hsl(35,85%,25%); font-weight: 600; font-size: 0.875rem; }
 
     .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); gap: 1.25rem; margin-top: 2rem; }
     .card { background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; padding: 1.5rem; transition: box-shadow 0.2s, transform 0.2s; }
@@ -294,6 +294,7 @@
     .card ul li { font-size: 0.875rem; color: var(--muted-fg); display: flex; align-items: flex-start; gap: 0.4rem; }
     .card-highlight { background: var(--primary-light); border: 1.5px solid var(--primary); }
     .card-highlight h3 { color: var(--primary); }
+    .card-highlight p, .card-highlight li { color: hsl(220, 15%, 30%); }
 
     .highlight-box { background: var(--primary-light); border-left: 4px solid var(--primary); border-radius: 0 0.5rem 0.5rem 0; padding: 1.25rem 1.5rem; margin: 1.5rem 0; }
     .highlight-box p { font-size: 0.9375rem; line-height: 1.65; color: var(--fg); }
@@ -339,10 +340,10 @@
 
     footer { background: hsl(222,47%,8%); color: rgba(255,255,255,0.7); padding: 3rem 0 1.5rem; margin-top: 0; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2.5rem; margin-bottom: 2.5rem; }
-    .footer-col h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 1rem; }
+    .footer-col-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 1rem; }
     .footer-col a { display: block; font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; transition: color 0.15s; }
     .footer-col a:hover { color: #fff; }
-    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.8125rem; color: rgba(255,255,255,0.4); text-align: center; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.8125rem; color: rgba(255,255,255,0.65); text-align: center; }
 
     .budget-modal { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(4px); z-index: 9999; padding: 20px; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .budget-modal.open { display: flex; align-items: center; justify-content: center; animation: budgetModalFadeIn 0.3s ease-out; }
@@ -773,24 +774,24 @@
         <div class="footer-col">
           <img src="/assets/audiotext-logo.avif" alt="Audiotext" width="140" height="35" style="height:1.75rem; width:auto; filter:brightness(0) invert(1); opacity:0.85; margin-bottom:1rem;">
           <p style="font-size:0.8125rem; line-height:1.6; margin-bottom:0.75rem;">Transcrição e degravação de áudio profissional desde 2012.</p>
-          <p style="font-size:0.75rem; opacity:0.5;">CNPJ: 17.429.373/0001-85</p>
+          <p style="font-size:0.75rem; color:rgba(255,255,255,0.6);">CNPJ: 17.429.373/0001-85</p>
         </div>
         <div class="footer-col">
-          <h4>Serviços</h4>
+          <p class="footer-col-label">Serviços</p>
           <a href="/degravacao">Degravação</a>
           <a href="/transcricao-de-audio">Transcrição de Áudio</a>
           <a href="/transcricao-automatica">Transcrição por IA</a>
           <a href="/legendagem">Legendagem</a>
         </div>
         <div class="footer-col">
-          <h4>Degravação</h4>
+          <p class="footer-col-label">Degravação</p>
           <a href="/o-que-e-degravacao">O que é degravação?</a>
           <a href="/degravacao-de-video">Degravação de Vídeo</a>
           <a href="/degravacao-judicial">Degravação Judicial</a>
           <a href="/degravacao-ipsis-litteris">Ipsis Litteris</a>
         </div>
         <div class="footer-col">
-          <h4>Contato</h4>
+          <p class="footer-col-label">Contato</p>
           <a href="tel:+554133633220">(41) 3363-3220, Curitiba</a>
           <a href="tel:+551145024489">(11) 4502-4489, São Paulo</a>
           <a href="https://wa.me/5541997990622" target="_blank" rel="noopener">(41) 99799-0622, WhatsApp</a>
@@ -800,9 +801,9 @@
       <div class="footer-bottom">
         <p>© 2026 Audiotext Serviços e Cia Ltda. Todos os direitos reservados.</p>
         <div style="display:flex; gap:1.5rem; justify-content:center; margin-top:0.5rem;">
-          <a href="/legal#privacidade" style="color:rgba(255,255,255,0.4);">Privacidade</a>
-          <a href="/legal#cookies" style="color:rgba(255,255,255,0.4);">Cookies</a>
-          <a href="/legal#servicos" style="color:rgba(255,255,255,0.4);">Termos</a>
+          <a href="/legal#privacidade" style="color:rgba(255,255,255,0.65);">Privacidade</a>
+          <a href="/legal#cookies" style="color:rgba(255,255,255,0.65);">Cookies</a>
+          <a href="/legal#servicos" style="color:rgba(255,255,255,0.65);">Termos</a>
         </div>
       </div>
     </div>
