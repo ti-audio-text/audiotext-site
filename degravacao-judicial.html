@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
 
-  <script src="/assets/js/gtm-bridge.js"></script>
+  <script defer src="/assets/js/gtm-bridge.js"></script>
   <link rel="stylesheet" href="/assets/css/cookieConsent.css">
-  <script src="/assets/js/cookieConsent.js"></script>
+  <script defer src="/assets/js/cookieConsent.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 
@@ -45,6 +45,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
   <link rel="manifest" href="/manifest.json">
+  <link rel="preload" as="image" href="/assets/info/degravacao-judicial-1.avif" type="image/avif">
 
   <!-- ① Article Schema -->
   <script type="application/ld+json">
@@ -439,7 +440,7 @@
         <figure style="margin: 1.75rem 0;">
           <img src="/assets/info/degravacao-judicial-1.avif"
                alt="Fluxo da degravação judicial: gravação de áudio ou vídeo convertida em documento de texto com marcação de tempo e identificação de falantes, pronto para juntada ao processo"
-               width="800" height="420" loading="lazy"
+               width="800" height="420" loading="eager" fetchpriority="high"
                style="width:100%; height:auto; border-radius:0.75rem; border:1px solid var(--border);">
           <figcaption style="font-size:0.8125rem; color:var(--muted-fg); text-align:center; margin-top:0.5rem;">
             Da gravação ao documento de texto: o processo de degravação judicial
