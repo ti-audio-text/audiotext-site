@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
 
-  <script src="/assets/js/gtm-bridge.js"></script>
+  <script defer src="/assets/js/gtm-bridge.js"></script>
   <link rel="stylesheet" href="/assets/css/cookieConsent.css">
-  <script src="/assets/js/cookieConsent.js"></script>
+  <script defer src="/assets/js/cookieConsent.js"></script>
   <script defer src="/_vercel/insights/script.js"></script>
   <script defer src="/_vercel/speed-insights/script.js"></script>
 
@@ -45,6 +45,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
   <link rel="manifest" href="/manifest.json">
+  <link rel="preload" as="image" href="/assets/info/degravacao-de-video-1.avif" type="image/avif">
 
   <!-- ① Article Schema -->
   <script type="application/ld+json">
@@ -341,7 +342,7 @@
 
     footer { background: hsl(222,47%,8%); color: rgba(255,255,255,0.7); padding: 3rem 0 1.5rem; margin-top: 0; }
     .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2.5rem; margin-bottom: 2.5rem; }
-    .footer-col h4 { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 1rem; }
+    .footer-col-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.75); margin-bottom: 1rem; }
     .footer-col a { display: block; font-size: 0.875rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem; transition: color 0.15s; }
     .footer-col a:hover { color: #fff; }
     .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem; font-size: 0.8125rem; color: rgba(255,255,255,0.65); text-align: center; }
@@ -444,7 +445,7 @@
         <figure style="margin: 1.75rem 0;">
           <img src="/assets/info/degravacao-de-video-1.avif"
                alt="Comparação entre arquivo de vídeo sendo processado para degravação e o documento de texto resultante com identificação de falantes e marcação de tempo"
-               width="800" height="450" loading="lazy"
+               width="800" height="450" loading="eager" fetchpriority="high"
                style="width:100%; height:auto; border-radius:0.75rem; border:1px solid var(--border);">
           <figcaption style="font-size:0.8125rem; color:var(--muted-fg); text-align:center; margin-top:0.5rem;">
             Do arquivo de vídeo ao documento de texto: o processo de degravação
