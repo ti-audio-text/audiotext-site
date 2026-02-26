@@ -112,16 +112,6 @@
       "permanent": true
     },
     {
-      "source": "/transcricao-de-audio-por-ia",
-      "destination": "https://wp.audiotext.com.br/transcricao-de-audio-por-ia/",
-      "permanent": true
-    },
-    {
-      "source": "/transcricao-de-audio-por-ia/",
-      "destination": "https://wp.audiotext.com.br/transcricao-de-audio-por-ia/",
-      "permanent": true
-    },
-    {
       "source": "/modelos-de-transcricao-de-audio-em-texto",
       "destination": "https://wp.audiotext.com.br/modelos-de-transcricao-de-audio-em-texto/",
       "permanent": true
