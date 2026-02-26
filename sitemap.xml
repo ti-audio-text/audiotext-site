@@ -54,10 +54,16 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-    <url>
+  <url>
     <loc>https://www.audiotext.com.br/degravacao-ipsis-litteris</loc>
     <lastmod>2026-02-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url> 
+  <url>
+    <loc>https://www.audiotext.com.br/transcricao-de-audio-por-ia</loc>
+    <lastmod>2026-02-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>  
 </urlset>
