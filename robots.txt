@@ -1,5 +1,5 @@
 # Robots.txt - Audiotext (audiotext.com.br)
-# Atualizado: 2026-02-05
+# Atualizado: 2026-04-23
 
 User-agent: *
 Allow: /
@@ -7,6 +7,29 @@ Allow: /
 # Páginas não indexáveis
 Disallow: /legal
 Disallow: /termos-e-condicoes-app
+Disallow: /selecao-temp
+
+# Bots de IA — acesso explicitamente permitido
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
 
 # Sitemap
 Sitemap: https://www.audiotext.com.br/sitemap.xml
