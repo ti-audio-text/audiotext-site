@@ -71,7 +71,7 @@
     }
   ],
   "redirects": [
-       { "source": "/vagas/:path*", "destination": "/selecao-temp", "permanent": false },
+    { "source": "/vagas/:path*", "destination": "/selecao-temp", "permanent": false },
     { "source": "/vagas", "destination": "/selecao-temp", "permanent": false },
 
     { "source": "/o-que-e-degravacacao-ipsis-litteris/", "destination": "/degravacao-ipsis-litteris", "permanent": true },
