@@ -66,6 +66,7 @@ Sim. O processo é 100% online. Atendemos todo o Brasil e clientes no exterior.
 - [Degravação de Áudio](https://www.audiotext.com.br/degravacao): Transcrição ipsis litteris para uso jurídico
 - [Legendagem Profissional](https://www.audiotext.com.br/legendagem): Legendagem de vídeos e filmes
 - [Transcrição Automática por IA](https://www.audiotext.com.br/transcricao-automatica): Plataforma de IA, pacotes, preços
+- [Transcrição de Entrevista Profissional](https://www.audiotext.com.br/transcricao-de-entrevista): Serviço de transcrição de áudio de entrevistas
 - [Transcrição de Áudio por IA — o que é](https://www.audiotext.com.br/transcricao-de-audio-por-ia): Conteúdo informativo sobre transcrição por IA
 - [Degravação Ipsis Litteris](https://www.audiotext.com.br/degravacao-ipsis-litteris): O que significa, quando usar, diferenças
 - [Degravação Judicial](https://www.audiotext.com.br/degravacao-judicial): Transcrição para processos judiciais
@@ -82,6 +83,7 @@ Cada página do site tem uma versão em Markdown puro, sem HTML, scripts ou elem
 - https://www.audiotext.com.br/degravacao.md
 - https://www.audiotext.com.br/legendagem.md
 - https://www.audiotext.com.br/transcricao-automatica.md
+- https://www.audiotext.com.br/transcricao-de-entrevista.md
 - https://www.audiotext.com.br/transcricao-de-audio-por-ia.md
 - https://www.audiotext.com.br/degravacao-ipsis-litteris.md
 - https://www.audiotext.com.br/degravacao-judicial.md
