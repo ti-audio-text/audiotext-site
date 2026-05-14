@@ -1,4 +1,4 @@
----
+--- 
 title: "Degravação Judicial: transcrição ipsis litteris para processos"
 description: "Degravação judicial é a transcrição ipsis litteris de audiências, depoimentos e escutas para uso como prova em processos. Saiba quando usar, quais áudios aceitar e como funciona o valor legal do documento."
 url: "https://www.audiotext.com.br/degravacao-judicial"
