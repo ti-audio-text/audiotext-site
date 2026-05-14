@@ -1,4 +1,4 @@
----
+--- 
 title: "Legendagem Profissional para Vídeos e Filmes"
 description: "Legendagem profissional para vídeos, filmes e produções audiovisuais. Sincronização precisa, tradução PT/EN/ES. +14 anos de experiência. Fale conosco."
 url: "https://www.audiotext.com.br/legendagem"
