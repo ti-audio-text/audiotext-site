@@ -1,4 +1,4 @@
----
+--- 
 title: "Degravação de Vídeo Profissional: o que é e quando usar"
 description: "Degravação de vídeo transcreve ipsis litteris o conteúdo falado em arquivos MP4, MOV e gravações de audiências. Entenda quando usar, quais formatos aceitamos e como funciona o processo."
 url: "https://www.audiotext.com.br/degravacao-de-video"
