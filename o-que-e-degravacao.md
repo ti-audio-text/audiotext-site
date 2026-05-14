@@ -1,4 +1,4 @@
----
+--- 
 title: "O que é Degravação? Significado, Diferenças e Quando Usar [2026]"
 description: "Degravação é a transcrição literal de áudio para texto, usada em processos judiciais. Inclui hesitações, pausas e vícios de linguagem. Entenda o significado, quando usar e por que advogados precisam."
 url: "https://www.audiotext.com.br/o-que-e-degravacao"
