@@ -1,4 +1,4 @@
----
+--- 
 title: "Transcrição de Áudio Profissional · 99% Precisão"
 description: "Transcrição de áudio para texto com 99%+ de precisão. Transcritores especializados + revisão. 14 anos, +15.000 clientes, sigilo total. Orçamento em 1 minuto."
 url: "https://www.audiotext.com.br/transcricao-de-audio"
