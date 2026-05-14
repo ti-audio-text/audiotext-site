@@ -1,4 +1,4 @@
----
+--- 
 title: "Transcrição de Áudio por IA: o que é e como funciona"
 description: "Entenda o que é transcrição de áudio por inteligência artificial, como funciona, vantagens, limitações e quando usar. 93% de precisão, pacotes a partir de R$ 0,26/min, entrega em minutos."
 url: "https://www.audiotext.com.br/transcricao-de-audio-por-ia"
