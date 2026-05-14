@@ -1,4 +1,4 @@
----
+--- 
 title: "Sobre a Audiotext"
 description: "Conheça a Audiotext: desde 2012, em Curitiba, transformando áudio em texto no Brasil. Transcrição humana com revisão obrigatória, sigilo e entrega no prazo."
 url: "https://www.audiotext.com.br/sobre"
