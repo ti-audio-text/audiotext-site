@@ -1,4 +1,4 @@
----
+--- 
 title: "Degravação Ipsis Litteris: o que é e por que advogados usam"
 description: "Degravação ipsis litteris transcreve o áudio nas próprias letras, sem edição alguma. Entenda o que significa, por que é exigida em processos judiciais e como se diferencia de outras modalidades."
 url: "https://www.audiotext.com.br/degravacao-ipsis-litteris"
