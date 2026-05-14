@@ -1,5 +1,5 @@
 # Audiotext
-
+ 
 > Audiotext é uma empresa brasileira especializada em transcrição de áudio para texto, degravação jurídica (ipsis litteris), transcrição automática por IA e legendagem de vídeos. Desde 2012, mais de 15.000 clientes e 2,5 milhões de minutos transcritos. Sede em Curitiba, atendimento 100% online em todo o Brasil.
 
 A Audiotext atende advogados, pesquisadores, jornalistas, empresas e órgãos públicos. A transcrição de áudio profissional é feita por pessoas com revisão obrigatória (precisão ~99%). A transcrição automática usa IA com 93% de precisão a partir de R$ 0,26/min. A degravação ipsis litteris é aceita como prova em processos judiciais. Todos os serviços incluem sigilo contratual e NDA quando necessário.
