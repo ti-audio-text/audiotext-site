@@ -1,4 +1,4 @@
----
+--- 
 title: "Transcrição de Áudio Automática por IA"
 description: "Transcrição de áudio automática por IA. 93% de precisão real, 50+ idiomas, identificação de falantes, timestamps. Planos a partir de R$ 0,26/min. 10 min grátis."
 url: "https://www.audiotext.com.br/transcricao-automatica"
