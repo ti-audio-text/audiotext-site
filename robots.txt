@@ -1,6 +1,6 @@
 # Robots.txt - Audiotext (audiotext.com.br)
 # Atualizado: 2026-04-23
-
+ 
 User-agent: *
 Allow: /
 
