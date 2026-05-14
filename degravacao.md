@@ -1,4 +1,4 @@
----
+--- 
 title: "Degravação de Áudio Profissional · Sigilo Absoluto"
 description: "Degravação ipsis litteris aceita em processos judiciais. 14 anos, +15.000 clientes. NDA disponível, entrega em até 48h. Simule o orçamento em 1 minuto."
 url: "https://www.audiotext.com.br/degravacao"
