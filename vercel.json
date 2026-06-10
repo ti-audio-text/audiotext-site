@@ -24,8 +24,7 @@
         {
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), magnetometer=(), gyroscope=(), accelerometer=()"
-        }, 
-        
+        },
         {
           "key": "Content-Security-Policy",
           "value": "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://googletagmanager.com https://tagmanager.google.com https://tagassistant.google.com https://www.google-analytics.com https://ssl.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://connect.facebook.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://pagead2.googlesyndication.com https://tpc.googlesyndication.com https://stats.g.doubleclick.net; style-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://googletagmanager.com https://tagmanager.google.com https://tagassistant.google.com https://fonts.googleapis.com; img-src 'self' data: https: blob:; font-src 'self' data: https://fonts.gstatic.com https://fonts.googleapis.com https://www.googletagmanager.com https://tagassistant.google.com; frame-src 'self' https://budget.audiotext.com.br https://www.youtube.com https://www.google.com https://td.doubleclick.net https://www.googletagmanager.com https://tagmanager.google.com https://tagassistant.google.com https://bid.g.doubleclick.net; connect-src 'self' https://api.audiotext.com.br https://www.googletagmanager.com https://tagassistant.google.com https://www.google-analytics.com https://*.google-analytics.com https://analytics.google.com https://region1.google-analytics.com https://stats.g.doubleclick.net https://googleads.g.doubleclick.net https://www.googleadservices.com https://connect.facebook.net https://www.facebook.com https://www.google.com https://pagead2.googlesyndication.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; upgrade-insecure-requests;"
@@ -89,6 +88,17 @@
   ],
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "wp.audiotext.com.br"
+        }
+      ],
+      "destination": "https://www.audiotext.com.br/:path*",
+      "permanent": true
+    },
+    {
       "source": "/vagas/:path*",
       "destination": "/selecao-temp",
       "permanent": false
@@ -114,7 +124,17 @@
       "permanent": true
     },
     {
+      "source": "/analisar-degravacao-de-audio-em-texto",
+      "destination": "/degravacao",
+      "permanent": true
+    },
+    {
       "source": "/degravacao-de-audio-em-texto/",
+      "destination": "/degravacao",
+      "permanent": true
+    },
+    {
+      "source": "/degravacao-de-audio-em-texto",
       "destination": "/degravacao",
       "permanent": true
     },
@@ -124,7 +144,17 @@
       "permanent": true
     },
     {
+      "source": "/degravacao-de-audio-em-texto-2",
+      "destination": "/degravacao",
+      "permanent": true
+    },
+    {
       "source": "/degravacao-de-audio-em-texto-advogados/",
+      "destination": "/degravacao-judicial",
+      "permanent": true
+    },
+    {
+      "source": "/degravacao-de-audio-em-texto-advogados",
       "destination": "/degravacao-judicial",
       "permanent": true
     },
@@ -154,7 +184,17 @@
       "permanent": true
     },
     {
+      "source": "/canal-do-texter/como-revisar-formatar-transcricao-de-audio",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
       "source": "/canal-do-texter/modalidades-de-transcricao-de-audio/",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter/modalidades-de-transcricao-de-audio",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -184,7 +224,17 @@
       "permanent": true
     },
     {
+      "source": "/transcricao-de-audio-em-texto",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
       "source": "/transcricao-de-audio-para-texto/",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
+      "source": "/transcricao-de-audio-para-texto",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -194,7 +244,17 @@
       "permanent": true
     },
     {
+      "source": "/transcricao-de-audio-por-voz",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
       "source": "/transcricao-de-audio/transcricao-automatica/",
+      "destination": "/transcricao-automatica",
+      "permanent": true
+    },
+    {
+      "source": "/transcricao-de-audio/transcricao-automatica",
       "destination": "/transcricao-automatica",
       "permanent": true
     },
@@ -204,12 +264,27 @@
       "permanent": true
     },
     {
+      "source": "/transcricao-automatica-2",
+      "destination": "/transcricao-automatica",
+      "permanent": true
+    },
+    {
       "source": "/servicos/transcricao-empresarial/",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
     {
+      "source": "/servicos/transcricao-empresarial",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
       "source": "/servicos/transcricao-academica/",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
+      "source": "/servicos/transcricao-academica",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -239,7 +314,17 @@
       "permanent": true
     },
     {
+      "source": "/dicas-para-digitar-mais-rapido",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/legendagem-filmes-propagandas-videos-youtube/",
+      "destination": "/legendagem",
+      "permanent": true
+    },
+    {
+      "source": "/legendagem-filmes-propagandas-videos-youtube",
       "destination": "/legendagem",
       "permanent": true
     },
@@ -259,7 +344,17 @@
       "permanent": true
     },
     {
+      "source": "/__trashed",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/lava-jato-case-de-sucesso-audiotext/",
+      "destination": "/sobre",
+      "permanent": true
+    },
+    {
+      "source": "/lava-jato-case-de-sucesso-audiotext",
       "destination": "/sobre",
       "permanent": true
     },
@@ -269,7 +364,17 @@
       "permanent": true
     },
     {
+      "source": "/contato",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/como-funciona/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/como-funciona",
       "destination": "/",
       "permanent": true
     },
@@ -289,6 +394,11 @@
       "permanent": true
     },
     {
+      "source": "/equipe",
+      "destination": "/sobre",
+      "permanent": true
+    },
+    {
       "source": "/category/:path*",
       "destination": "/",
       "permanent": true
@@ -300,6 +410,11 @@
     },
     {
       "source": "/canal-do-texter/",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/canal-do-texter",
       "destination": "/",
       "permanent": true
     },
