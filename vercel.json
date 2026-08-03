@@ -100,13 +100,13 @@
     },
     {
       "source": "/vagas/:path*",
-      "destination": "/selecao-temp",
-      "permanent": false
+      "destination": "/texter",
+      "permanent": true
     },
     {
       "source": "/vagas",
-      "destination": "/selecao-temp",
-      "permanent": false
+      "destination": "/texter",
+      "permanent": true
     },
     {
       "source": "/o-que-e-degravacacao-ipsis-litteris/",
@@ -455,17 +455,7 @@
     },
     {
       "source": "/canal-do-texter/:path*",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
-      "source": "/texter/",
-      "destination": "/selecao-temp",
-      "permanent": true
-    },
-    {
-      "source": "/texter",
-      "destination": "/selecao-temp",
+      "destination": "/texter",
       "permanent": true
     }
   ]
