@@ -151,7 +151,7 @@
 
   function createBannerHTML() {
     return `
-      <div id="cookie-banner" class="cookie-banner" role="dialog" aria-label="Consentimento de cookies" aria-modal="true">
+      <div id="cookie-banner" class="cookie-banner" role="region" aria-label="Consentimento de cookies">
         <div class="cookie-banner-content">
           <div class="cookie-banner-text">
             <div class="cookie-banner-header">
