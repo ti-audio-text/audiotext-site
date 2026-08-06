@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
 
-  <script src="/assets/js/gtm-bridge.js"></script>
-
     <!-- CSS do Cookie Consent -->
 <link rel="stylesheet" href="/assets/css/cookieConsent.css">
 
 <!-- JS do Cookie Consent -->
-<script src="/assets/js/cookieConsent.js"></script>
+<script defer src="/assets/js/cookieConsent.js"></script>
+
+<!-- GTM Bridge (postMessages do iframe do budget) — depois do cookieConsent -->
+<script defer src="/assets/js/gtm-bridge.js"></script>
 
   <!-- Vercel Analytics -->
 <script defer src="/_vercel/insights/script.js"></script>
