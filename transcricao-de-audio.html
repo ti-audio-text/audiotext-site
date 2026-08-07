@@ -17,6 +17,8 @@
                 prova social antes da comparação.
     [REMOVIDO]  CC1: card "Transcrição Automática por IA" (Serviços relacionados) que
                 vazava tráfego pago para app.audiotext.com.br.
+    [POLIMENTO] Comparação (movida) recebe bg-muted/30 para restaurar a alternância
+                de fundos após o move (muted → branco → muted).
 
     A2 — dependências verificadas: sem href="#" internos; #como-funciona preservado;
     scripts inline (reviews-grid, load-more-reviews, .faq-trigger, modal) são por ID/classe
@@ -1988,7 +1990,7 @@
     </section>
 
     <!-- SECTION 2: AI vs Human Comparison -->
-    <section class="py-20" aria-labelledby="comparison-heading">
+    <section class="py-20 bg-muted/30" aria-labelledby="comparison-heading">
       <div class="container mx-auto px-4">
         <div class="text-center mb-12">
           <h2 id="comparison-heading" class="text-3xl md:text-4xl font-bold mb-4">
