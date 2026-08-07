@@ -1,6 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!--
+    ============================================================
+    VARIANTE B — /degravacao  (teste A/B, onda 2)
+    Base: fix/correcoes-fatuais (PAS já corrigido, preços/fatos/prazos ok). SEM deploy até 20/08.
+
+    Mudanças vs. controle:
+    [REESCRITO] Hero #7: subheads com vocabulário jurídico (audiências, depoimentos,
+                oitivas, prazo, sigilo/NDA) + âncora "a partir de R$ 3,20/min".
+    [REESCRITO] CTA "Simular orçamento" -> "Ver meu preço" (CC4).
+    [ADICIONADO] Banda de preço (A1) após o hero: "a partir de R$ 3,20/min" (piso da
+                 degravação — NUNCA R$ 2,00) + botão ao simulador.
+    [ADICIONADO] FAQ LGPD/segurança (aprovada). A FAQ de contestação/parte contrária: VETADA.
+    [ADICIONADO] Slot [DEPOIMENTO JURÍDICO REAL — pendente captação] no array googleReviews.
+    [REMOVIDO]  CC1: card "Transcrição Automática por IA" (~93%) do array de serviços —
+                numa LP jurídica mina a promessa ipsis litteris e vaza tráfego.
+
+    Sem movimentação de seções nesta variante (A2 não se aplica). Parse validado.
+    ============================================================
+  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
 
@@ -745,7 +764,7 @@
         "name": "Como faço o orçamento?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Clique no botão Simular orçamento, informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente."
+          "text": "Clique no botão Ver meu preço, informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente."
         }
       }
     ]
@@ -945,7 +964,7 @@
         <img src="/assets/audiotext-logo.avif" alt="Audiotext Degravação" width="226" height="56" loading="eager"  class="h-8 w-auto flex-shrink-0">
       </a>
       <button onclick="openBudgetModal()" class="bg-primary text-white px-5 py-3 min-h-[48px] inline-flex items-center justify-center rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
-        Simular orçamento
+        Ver meu preço
       </button>
     </div>
   </header>
@@ -959,19 +978,19 @@
             Degravação de Áudio Profissional
           </h1>
           <p class="text-xl md:text-2xl font-semibold max-w-3xl mx-auto">
-            Degravação de áudio e vídeo, ipsis litteris, aceita em processos judiciais
+            Degravação de audiências, depoimentos e oitivas — ipsis litteris, com marcação de tempo, aceita como prova em processos judiciais.
           </p>
           <p class="text-lg md:text-xl text-[hsl(220,9%,46%)] max-w-3xl mx-auto">
-            Para advogados, escritórios de advocacia, empresas e cartórios
+            Para advogados, escritórios e cartórios. Sigilo por NDA e entrega no prazo do seu andamento. A partir de R$ 3,20/min.
           </p>
 
           <!-- CTA -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button onclick="openBudgetModal()" class="w-full sm:w-auto text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-              Simular orçamento
+              Ver meu preço
             </button>
           </div>
-          <p class="text-sm text-[hsl(220,9%,46%)]">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
+          <p class="text-sm text-[hsl(220,9%,46%)]">A partir de R$ 3,20/min • orçamento em segundos • sem cadastro</p>
 
           <!-- 3 Bullets -->
           <div class="flex flex-col gap-4 max-w-2xl mx-auto text-left">
@@ -1011,6 +1030,18 @@
               Termo de Sigilo (NDA) disponível quando necessário.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- [VARIANTE B] Banda de preço (A1) — degravação (piso R$ 3,20/min) -->
+    <section class="py-10" aria-label="Preço da degravação">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto rounded-lg border border-[hsl(220,13%,91%)] bg-[hsl(220,13%,95%)]/40 p-6 text-center">
+          <p class="text-sm text-[hsl(220,9%,46%)] mb-1">Degravação jurídica (ipsis litteris + revisão)</p>
+          <p class="text-2xl md:text-3xl font-bold">A partir de R$ 3,20/min</p>
+          <p class="text-sm text-[hsl(220,9%,46%)] mt-2">O valor final depende da duração, do prazo (dias úteis) e das características do áudio. Veja o preço exato em segundos.</p>
+          <button onclick="openBudgetModal()" class="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white font-medium min-h-[48px] px-6 hover:bg-primary/90 transition-colors">Ver meu preço</button>
         </div>
       </div>
     </section>
@@ -1214,7 +1245,7 @@
 
         <div class="text-center mt-8">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -1343,7 +1374,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -1367,7 +1398,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -1445,7 +1476,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -1469,7 +1500,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -1585,7 +1616,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -1641,7 +1672,7 @@
           </div>
           <div class="pt-4">
             <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-white text-primary rounded-lg font-medium hover:bg-gray-100 transition-colors">
-              Simular orçamento
+              Ver meu preço
             </button>
             <p class="text-sm opacity-70 mt-4">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
           </div>
@@ -1863,7 +1894,7 @@
     var services = [
       { icon: 'scale', title: 'Degravação (Transcrição Jurídica)', desc: 'Transcrição ipsis litteris (na íntegra), aceita em processos judiciais. Possibilidade de ata notarial para dar fé pública ao documento.', current: true },
       { icon: 'fileText', title: 'Transcrição de Áudio Profissional', desc: 'Transcrição revisada por transcritores e revisores especializados. Para qualquer tipo de gravação que exige texto confiável.', link: '/transcricao-de-audio' },
-      { icon: 'bot', title: 'Transcrição Automática por IA', desc: '~R$ 0,30/min • Pronta em minutos • Acurácia média: 93%', link: '/transcricao-automatica' },
+      // [VARIANTE B] Card "Transcrição Automática por IA" (~93%) removido (CC1): numa LP jurídica que vende ipsis litteris, oferecer 93% mina a própria promessa e vaza tráfego.
       { icon: 'clipboardList', title: 'Transcrição para Ata de Reuniões', desc: 'Transcrição formatada para elaboração de atas formais.', link: '/transcricao-de-audio' },
       { icon: 'graduationCap', title: 'Transcrição para Pesquisa Acadêmica', desc: 'Para mestrandos, doutorandos e pesquisadores.', link: '/transcricao-de-audio' },
       { icon: 'messageCircle', title: 'Legendagem de Vídeos', desc: 'SRT, VTT, embedded. Para acessibilidade.', link: '/legendagem' }
@@ -1871,6 +1902,7 @@
 
     // Google Reviews data
     var googleReviews = [
+      // [DEPOIMENTO JURÍDICO REAL — pendente captação] inserir aqui 1 quote de advogado/escritório (nome + OAB/escritório) citando uso da degravação em processo. Ex.: { name: "Dr(a). Nome — Escritório/OAB", content: "..." },
       { name: "Vinicius Castilho", content: "Ótima empresa!!! Excelente serviço prestado por profissionais extramente competentes e atenciosos. Os serviços são sempre prestados de forma descomplicada e muito prática, facilitando muito o desenvolvimento do trabalho. Funcionários sempre muito educados e prontos a lhe atender no que de fato é necessário! Parabéns!!!" },
       { name: "Milton Marcelo", content: "Recomendo muito. Estou fazendo Mestrado na Irlanda e eles me ajudaram muito com minhas transcrições. Serviço de primeira linha, atendimento super rápido e preço justo! Quando merece a gente espalha a notícia!" },
       { name: "Eduardo Shor", content: "Excelente experiência. Atendimento de muita qualidade e serviço (transcrição) prestado com alta eficiência e agilidade. Recomendo." },
@@ -1912,7 +1944,8 @@
       { question: "Como funciona o sigilo e confidencialidade?", answer: "Acesso restrito ao transcritor e revisor do seu pedido. Upload com segurança, armazenamento em servidores seguros, termo de sigilo (NDA) disponível quando necessário. 14 anos de operação, zero incidentes de dados." },
       { question: "Qual o formato de entrega?", answer: "DOCX (editável no Word) e PDF (pronto para leitura e impressão). Tudo formatado, padronizado e pronto para uso." },
       { question: "Vocês atendem todo o Brasil?", answer: "Sim, 100% online. Você pode entrar em contato pelo e-mail, telefone ou WhatsApp. Upload seguro de qualquer lugar. Temos clientes em todos os estados do Brasil e em outros países também." },
-      { question: "Como faço o orçamento?", answer: 'Clique no botão "Simular orçamento", informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente.' }
+      { question: "Como vocês tratam segurança e LGPD dos meus arquivos?", answer: "Upload criptografado, armazenamento em servidores seguros e acesso restrito ao transcritor e revisor do seu pedido. Operamos em conformidade com a LGPD e a exclusão dos arquivos pode ser solicitada após a entrega. 14 anos de operação, zero incidentes de dados. Termo de Sigilo (NDA) disponível quando necessário." },
+      { question: "Como faço o orçamento?", answer: 'Clique no botão "Ver meu preço", informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente.' }
     ];
 
     var showingAllReviews = false;
