@@ -100,3 +100,9 @@ audio :1320 "24-96h"; home :1556/:1618 "24h a 10 dias úteis" (unidades misturad
 
 ### NÃO tocado (é Trilho 2)
 CC1 (remoção do cross-sell de IA — vira variante B), heros #4/#7, A1 banda de preço, reposicionamento automatica, etc.
+
+### Fechamento — decisões validadas (2026-08-06)
+1. **Minutos:** padronizado **"2,5 milhões"** em todas as páginas (audio/degravacao subidos de 2M; home já estava). Claim comprovável.
+2. **Prazos:** menções mistas em horas substituídas por dias úteis. Formulação oficial (na FAQ de prazo): **Instant: a partir de 1 dia útil · Fast: a partir de 2 dias úteis · Flex: a partir de 8 dias úteis**, sempre com direcionamento ao simulador. Campos compactos (cards/tabela) exibem "1 a 8 dias úteis". Exceções mantidas: cancelamento "24h" e narrativas de cliente (não são prazo de entrega).
+3. **Garantia:** resolvido e final — garantia de **30 dias** (simples, sem úteis/corridos) = janela para solicitar revisão; revisão entregue em **2–3 dias úteis** após o pedido. O par "3 vs 30 dias" do D3 foi leitura imprecisa da auditoria (string literal nunca existiu).
+4. **docs/ fora do ar:** criado `.vercelignore` excluindo `docs/` do deploy (arquivo segue versionado no git, mas não é servido/indexado). Verificar no preview: `…/docs/AUDITORIAS-CRO.md` deve retornar **404**.
