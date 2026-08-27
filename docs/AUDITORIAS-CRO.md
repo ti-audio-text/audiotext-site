@@ -142,3 +142,9 @@ CC1 (remoção do cross-sell de IA — vira variante B), heros #4/#7, A1 banda d
 - Sem hero visual (só texto).
 
 **Congruência OK:** garantia 30 dias (`:1515/:1809`) ✓; sem ângulo de contestação ✓; "100% Humana/manual" é método (não precisão) — aceitável; legendagem não usa "+2,5 milhões" (usa "+500 mil palavras", métrica própria) ✓.
+
+### 2026-08-07 — Aplicado (branch `fix/legendagem-pre-lancamento`)
+**Bloqueante nº1 (medição):** `enviarOrcamentoLegendagem()` agora dispara `dataLayer.push({event:'generate_lead', form_name:'legendagem', service_type, leg_formato, leg_estimativa, leg_duracao, user_email, user_name})` (padrão /budget) **antes** de abrir o WhatsApp. Anti-corrida via `eventCallback` + `eventTimeout:1500` + `setTimeout(1500)` fallback + guard `navegou` (abre 1×). **Validado no preview** (javascript_tool): push síncrono presente em 100% dos envios, `window.open` só no callback (não na hora), estimativa 60min×R$6 = R$360,00. A mensagem do WhatsApp já carregava tipo/formato/estimativa (mantida).
+**Trilho 1:** "+1.000"→"+15 mil clientes" (`:907`); card IA removido (comentado); "transcrição R$ 2-5/min"→"R$ 2-3,50/min"; footer E-mail+`</div>`; `<section>` órfã fundida (10/10); schema de prazos → dias úteis.
+**Promovidos do T2:** hero `py-20`→`py-10`; CTA "Fale Conosco"→**"Calcule seu orçamento em 1 minuto"** (7 botões); "closed caption" + "empresas/produtoras/instituições" no hero; trust box "criadores de conteúdo"→"empresas". Reframe completo da seção redes sociais fica no T2 pós-lançamento.
+**Preços de legendagem:** confirmados e **inalterados** (R$ 6/min PT · R$ 9-12/min tradução · R$ 2/min embutida adicional).
