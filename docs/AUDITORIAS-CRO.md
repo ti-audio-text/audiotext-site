@@ -193,3 +193,11 @@ Mesma rubrica da auditoria de 07/08 (68/100). Estado: pós 13 fixes (6 Trilho 1 
 - **Pós-lançamento medido:** depoimento de produtora/agência nominal (M); hero visual (M); prova social numérica no ATF (P); nota fiscal/CNPJ explícito (P); inputs do form 38→44px + inputmode=numeric (P).
 
 **Apêndice (home):** o grid que computa `repeat(4,...)` a 375 é o layout **desktop** da "Como Funciona" (`display:none` no mobile, layout mobile separado renderiza ok) — **não quebra visualmente**, falso positivo. Sem ação.
+
+### 2026-08-07 — Reframe desqualificação DIY (branch `fix/legendagem-desqualificar-diy`) — PÁGINA CONGELADA
+Último ajuste de copy antes do clique 1 (piloto B2B com checkpoints de 2-4 semanas; página congela para teste de demanda limpo).
+- **3× "criadores de conteúdo"** (schemas `:499/:708/:787`) → "produtoras, agências, empresas e instituições".
+- **Seção redes-sociais reframada DIY→B2B:** FAQ "Ideais para" visível (`:1740`) + mirror JSON-LD (`:639`) → comunicação institucional/corporativa, treinamentos e EAD, **campanhas e anúncios de agências e produtoras** (anúncios mantidos, enquadramento B2B), acessibilidade por norma, vídeos sem som (feiras/mídia indoor). Cards `:1577/:970/:1013` e caso de agência `:1140` (leve) alinhados. `twitter:description` `:42` reescrito.
+- **Mantidos** (não são DIY-signal): FAQ de compatibilidade de formatos por plataforma; links sociais da própria Audiotext.
+- **Validação:** 8/8 JSON-LD válidos; scan integral 375×667 sem problema (layout intacto, reframe é copy-only); `generate_lead` reconfirmado. **Nenhum "criadores"/"TikTok"/"redes sociais" residual.**
+- **Congelamento:** após o merge desta branch, a página não recebe mais mudança até o 1º checkpoint do piloto — qualquer T2 restante só entra pós-checkpoint com dado.
