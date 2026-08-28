@@ -165,3 +165,31 @@ CC1 (remoção do cross-sell de IA — vira variante B), heros #4/#7, A1 banda d
 **Validação (programática, 375×667 — screenshot indisponível no ambiente por painel não-composto):** scan seção-a-seção → **todos os grids = 1 coluna, 0 elementos estourando a largura, overflow horizontal da página = 0px**, hero `padding-top` 40px (H1 top 65→105). `generate_lead` **re-testado e intacto** (não regrediu). Confirmação visual final = preview real da Vercel.
 
 **NOVO ITEM PERMANENTE DO CHECKLIST (todos os PRs futuros):** scroll completo em 375×667 com screenshot/scan de CADA seção (hero → rodapé) antes de entregar o preview — pegar quebras de layout mobile que a validação funcional não vê.
+
+---
+
+## 2026-08-07 — Re-audit /legendagem (BASELINE OFICIAL PRÉ-CAMPANHA)
+
+Mesma rubrica da auditoria de 07/08 (68/100). Estado: pós 13 fixes (6 Trilho 1 + 4 promovidos T2 + generate_lead + regressão mobile) + card de modalidade neutralizado.
+
+**Score: 79/100** (era 68 — delta **+11**):
+| Dimensão | Antes | Agora | Δ | Motor |
+|---|---|---|---|---|
+| Above-the-fold /25 | 16 | **19** | +3 | CTA "Calcule seu orçamento em 1 min" (benefício), closed caption + B2B no hero, CTA na dobra 375 |
+| Copy /20 | 15 | **16** | +1 | closed caption/corporativo; DIY-copy ainda presente (T2) |
+| Trust /20 | 13 | **14** | +1 | +1.000→+15 mil (consistência); falta depoimento de produtora (T2) |
+| CTA /15 | 11 | **13** | +2 | copy orientada a orçamento + estimativa ao vivo |
+| Mobile /10 | 6 | **9** | +3 | regressão resolvida: grids 1-col, 0 overflow, hero padding 40px, form usável |
+| Fluxo /10 | 7 | **8** | +1 | cross-sell IA removido; section fundida |
+
+**Validação mobile 375×667 (programática):** H1 top 105 (hero padding 40px), CTA na dobra (bottom 633<667), **todas as seções 1 coluna, 0 overflow horizontal**, form usável (rádios 59px, submit 74px, duração type=number). `generate_lead` intacto (eventCallback + fallback — **não é sendBeacon**). `.py-10` rende 40px em legendagem **e** home.
+
+**13 fixes:** todos vivos e corretos, **sem conflito**.
+
+**VEREDITO: PRONTA para clique pago B2B. Zero bloqueante funcional restante.** A medição (generate_lead) — que era o bloqueante nº1 — funciona; mobile corrigido; preços corretos; message-match B2B ok.
+
+**T2 remanescente (otimização, não bloqueia):**
+- **Pré-campanha se der (reduz spend desperdiçado):** desqualificar DIY — remover 2× "criadores de conteúdo" restantes + reframar seção redes-sociais (TikTok/Instagram) para produtoras/agências/empresas. P/M.
+- **Pós-lançamento medido:** depoimento de produtora/agência nominal (M); hero visual (M); prova social numérica no ATF (P); nota fiscal/CNPJ explícito (P); inputs do form 38→44px + inputmode=numeric (P).
+
+**Apêndice (home):** o grid que computa `repeat(4,...)` a 375 é o layout **desktop** da "Como Funciona" (`display:none` no mobile, layout mobile separado renderiza ok) — **não quebra visualmente**, falso positivo. Sem ação.
