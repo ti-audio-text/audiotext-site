@@ -1,2 +1,4 @@
 # Documentação interna versionada no repo, mas NÃO servida/indexada publicamente.
 docs/
+# Guia interno do projeto (o Claude Code lê do repo; não precisa nem deve ir ao ar).
+CLAUDE.md
