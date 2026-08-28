@@ -891,46 +891,62 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div class="footer-col">
-          <img src="/assets/audiotext-logo.avif" alt="Audiotext" width="140" height="35" style="height:1.75rem; width:auto; filter:brightness(0) invert(1); opacity:0.85; margin-bottom:1rem;">
-          <p style="font-size:0.8125rem; line-height:1.6; margin-bottom:0.75rem;">Transcrição e degravação de áudio profissional desde 2012.</p>
-          <p style="font-size:0.75rem; color:rgba(255,255,255,0.6);">CNPJ: 17.429.373/0001-85</p>
+    <!-- RODAPÉ UNIFICADO (auto-contido; estilos inline, sem dependência do CSS por página) -->
+    <footer style="background:hsl(220,13%,95%);border-top:1px solid hsl(220,13%,91%);color:hsl(220,9%,30%);">
+      <div style="max-width:1200px;margin:0 auto;padding:3rem 1.5rem 1.5rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:2.5rem;">
+
+          <!-- Col 1: identidade + empresa -->
+          <div style="flex:1 1 280px;min-width:260px;">
+            <img src="/assets/audiotext-logo.avif" alt="Audiotext" width="150" height="37" style="height:34px;width:auto;margin-bottom:1rem;" loading="lazy" decoding="async">
+            <p style="font-size:0.875rem;line-height:1.5;margin:0 0 1rem;">Transcrição e degravação de áudio profissional desde 2012.</p>
+            <p style="font-size:0.8125rem;line-height:1.7;color:hsl(220,9%,46%);margin:0 0 0.75rem;">
+              CNPJ 17.429.373/0001-85<br>
+              Rua Buenos Aires, 73, Batel, Curitiba/PR, CEP 80250-070<br>
+              Atendimento 100% online
+            </p>
+            <nav style="display:flex;flex-direction:column;">
+              <a href="/sobre" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Sobre a Audiotext</a>
+              <a href="/#como-funciona" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Como Funciona</a>
+              <a href="/vagas/transcritor/" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Trabalhe Conosco</a>
+            </nav>
+          </div>
+
+          <!-- Col 2: Serviços -->
+          <div style="flex:1 1 220px;min-width:200px;">
+            <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:600;color:hsl(222,47%,20%);margin:0 0 0.5rem;">Serviços</h3>
+            <nav style="display:flex;flex-direction:column;">
+              <a href="/transcricao-automatica" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Transcrição Automática por IA</a>
+              <a href="/transcricao-de-audio" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Transcrição de Áudio Profissional</a>
+              <a href="/degravacao" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Degravação (Transcrição Jurídica)</a>
+              <a href="/legendagem" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Legendagem de Vídeos</a>
+            </nav>
+          </div>
+
+          <!-- Col 3: Contato -->
+          <div style="flex:1 1 220px;min-width:200px;">
+            <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:600;color:hsl(222,47%,20%);margin:0 0 0.5rem;">Contato</h3>
+            <nav style="display:flex;flex-direction:column;">
+              <a href="tel:+554133633220" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">(41) 3363-3220, Curitiba</a>
+              <a href="tel:+551145024489" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">(11) 4502-4489, São Paulo</a>
+              <a href="https://wa.me/5541997990622" target="_blank" rel="noopener noreferrer" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">(41) 99799-0622, WhatsApp</a>
+              <a href="mailto:falecom@audiotext.com.br" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">falecom@audiotext.com.br</a>
+            </nav>
+          </div>
+
         </div>
-        <div class="footer-col">
-          <p class="footer-col-label">Serviços</p>
-          <a href="/degravacao">Degravação</a>
-          <a href="/transcricao-de-audio">Transcrição de Áudio</a>
-          <a href="/transcricao-automatica">Transcrição por IA</a>
-          <a href="/legendagem">Legendagem</a>
-        </div>
-        <div class="footer-col">
-          <p class="footer-col-label">Degravação</p>
-          <a href="/o-que-e-degravacao">O que é degravação?</a>
-          <a href="/degravacao-de-video">Degravação de Vídeo</a>
-          <a href="/degravacao-judicial">Degravação Judicial</a>
-          <a href="/degravacao-ipsis-litteris">Ipsis Litteris</a>
-        </div>
-        <div class="footer-col">
-          <p class="footer-col-label">Contato</p>
-          <a href="tel:+554133633220">(41) 3363-3220, Curitiba</a>
-          <a href="tel:+551145024489">(11) 4502-4489, São Paulo</a>
-          <a href="https://wa.me/5541997990622" target="_blank" rel="noopener">(41) 99799-0622, WhatsApp</a>
-          <a href="mailto:falecom@audiotext.com.br">falecom@audiotext.com.br</a>
+
+        <!-- Base -->
+        <div style="border-top:1px solid hsl(220,13%,88%);margin-top:2rem;padding-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;justify-content:space-between;align-items:center;">
+          <p style="font-size:0.8125rem;color:hsl(220,9%,46%);margin:0;">© 2026 Audiotext Serviços e Cia Ltda. Todos os direitos reservados.</p>
+          <nav style="display:flex;gap:1.5rem;">
+            <a href="/legal#privacidade" style="font-size:0.8125rem;color:hsl(220,9%,46%);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;">Privacidade</a>
+            <a href="/legal#cookies" style="font-size:0.8125rem;color:hsl(220,9%,46%);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;">Cookies</a>
+            <a href="/legal#servicos" style="font-size:0.8125rem;color:hsl(220,9%,46%);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;">Termos</a>
+          </nav>
         </div>
       </div>
-      <div class="footer-bottom">
-        <p>© 2026 Audiotext Serviços e Cia Ltda. Todos os direitos reservados.</p>
-        <div style="display:flex; gap:1.5rem; justify-content:center; margin-top:0.5rem;">
-          <a href="/legal#privacidade" style="color:rgba(255,255,255,0.65);">Privacidade</a>
-          <a href="/legal#cookies" style="color:rgba(255,255,255,0.65);">Cookies</a>
-          <a href="/legal#servicos" style="color:rgba(255,255,255,0.65);">Termos</a>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
   <!-- WhatsApp Floating -->
   <a href="https://wa.me/5541997990622?text=Olá!%20Tenho%20uma%20dúvida%20sobre%20degravação." target="_blank" rel="noopener noreferrer"

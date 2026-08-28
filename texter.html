@@ -468,11 +468,9 @@
     /* === Footer fix === */ 
       .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
       .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-      .lg\:gap-12 { gap: 3rem; }
       .space-y-1 > * + * { margin-top: 0.25rem; }
       .space-y-2 > * + * { margin-top: 0.5rem; }
       .space-y-3 > * + * { margin-top: 0.75rem; }
-      .mb-0\.5 { margin-bottom: 0.125rem; }
       .mt-2 { margin-top: 0.5rem; }
       .pt-8 { padding-top: 2rem; }
       .hover\:text-foreground:hover { color: hsl(var(--foreground)); }
@@ -646,157 +644,59 @@
     </div>
   </section>
 
-  <footer class="border-t mt-8" style="background-color: hsl(var(--muted) / 0.3);">
-      <div class="container mx-auto px-4 py-16">
-        <!-- 4 Columns Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
-          <!-- Column 1: Empresa -->
-          <div>
-            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
-              Empresa
-            </h3>
-            <ul class="space-y-2">
-              <li>
-                <a href="/sobre" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Sobre a Audiotext
-                </a>
-              </li>
-              <li>
-                <a href="/#como-funciona" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Como Funciona
-                </a>
-              </li>
-              <li>
-                <a href="/texter" target="_blank" rel="noopener noreferrer" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Trabalhe Conosco
-                </a>
-              </li>
-            </ul>
+    <!-- RODAPÉ UNIFICADO (auto-contido; estilos inline, sem dependência do CSS por página) -->
+    <footer style="background:hsl(220,13%,95%);border-top:1px solid hsl(220,13%,91%);color:hsl(220,9%,30%);">
+      <div style="max-width:1200px;margin:0 auto;padding:3rem 1.5rem 1.5rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:2.5rem;">
+
+          <!-- Col 1: identidade + empresa -->
+          <div style="flex:1 1 280px;min-width:260px;">
+            <img src="/assets/audiotext-logo.avif" alt="Audiotext" width="150" height="37" style="height:34px;width:auto;margin-bottom:1rem;" loading="lazy" decoding="async">
+            <p style="font-size:0.875rem;line-height:1.5;margin:0 0 1rem;">Transcrição e degravação de áudio profissional desde 2012.</p>
+            <p style="font-size:0.8125rem;line-height:1.7;color:hsl(220,9%,46%);margin:0 0 0.75rem;">
+              CNPJ 17.429.373/0001-85<br>
+              Rua Buenos Aires, 73, Batel, Curitiba/PR, CEP 80250-070<br>
+              Atendimento 100% online
+            </p>
+            <nav style="display:flex;flex-direction:column;">
+              <a href="/sobre" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Sobre a Audiotext</a>
+              <a href="/#como-funciona" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Como Funciona</a>
+              <a href="/vagas/transcritor/" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Trabalhe Conosco</a>
+            </nav>
           </div>
 
-          <!-- Column 2: Serviços -->
-          <div>
-            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
-              Serviços
-            </h3>
-            <ul class="space-y-2">
-              <li>
-                <a href="/transcricao-automatica" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Transcrição Automática por IA
-                </a>
-              </li>
-              <li>
-                <a href="/transcricao-de-audio" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Transcrição de Áudio Profissional
-                </a>
-              </li>
-              <li>
-                <a href="/degravacao" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Degravação (Transcrição Jurídica)
-                </a>
-              </li>
-              <li>
-                <a href="/legendagem" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Legendagem de Vídeos
-                </a>
-              </li>
-            </ul>
+          <!-- Col 2: Serviços -->
+          <div style="flex:1 1 220px;min-width:200px;">
+            <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:600;color:hsl(222,47%,20%);margin:0 0 0.5rem;">Serviços</h3>
+            <nav style="display:flex;flex-direction:column;">
+              <a href="/transcricao-automatica" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Transcrição Automática por IA</a>
+              <a href="/transcricao-de-audio" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Transcrição de Áudio Profissional</a>
+              <a href="/degravacao" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Degravação (Transcrição Jurídica)</a>
+              <a href="/legendagem" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">Legendagem de Vídeos</a>
+            </nav>
           </div>
 
-          <!-- Column 3: Contato -->
-          <div>
-            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
-              Contato
-            </h3>
-            <ul class="space-y-3">
-              <!-- Email -->
-              <li>
-                <p class="text-xs text-muted-foreground mb-0.5">Telefones</p>
-                <div class="space-y-1">
-                  <a href="mailto:falecom@audiotext.com.br" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
-                    falecom@audiotext.com.br
-                  </a>
-              </li>
-
-              <!-- Phones -->
-              <li>
-                <p class="text-xs text-muted-foreground mb-0.5">Telefones</p>
-                <div class="space-y-1">
-                  <a href="tel:+554133633220" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
-                    (41) 3363-3220 - Curitiba
-                  </a>
-                  <a href="tel:+551145024489" class="text-sm text-muted-foreground hover:text-foreground transition-colors block">
-                    (11) 4502-4489 - São Paulo
-                  </a>
-                </div>
-              </li>
-
-              <!-- WhatsApp -->
-              <li>
-                <p class="text-xs text-muted-foreground mb-0.5">WhatsApp</p>
-                <a href="https://wa.me/5541997990622?text=Ol%C3%A1!%20Vi%20o%20site%20da%20Audiotext%20e%20gostaria%20de%20saber%20mais%20sobre%20os%20servi%C3%A7os." target="_blank" rel="noopener noreferrer" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  (41) 99799-0622
-                </a>
-              </li>
-            </ul>
+          <!-- Col 3: Contato -->
+          <div style="flex:1 1 220px;min-width:200px;">
+            <h3 style="font-size:0.75rem;text-transform:uppercase;letter-spacing:0.05em;font-weight:600;color:hsl(222,47%,20%);margin:0 0 0.5rem;">Contato</h3>
+            <nav style="display:flex;flex-direction:column;">
+              <a href="tel:+554133633220" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">(41) 3363-3220, Curitiba</a>
+              <a href="tel:+551145024489" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">(11) 4502-4489, São Paulo</a>
+              <a href="https://wa.me/5541997990622" target="_blank" rel="noopener noreferrer" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">(41) 99799-0622, WhatsApp</a>
+              <a href="mailto:falecom@audiotext.com.br" style="font-size:0.875rem;color:hsl(220,9%,30%);text-decoration:none;min-height:48px;display:inline-flex;align-items:center;">falecom@audiotext.com.br</a>
+            </nav>
           </div>
 
-          <!-- Column 4: Legal -->
-          <div>
-            <h3 class="font-semibold text-sm text-foreground mb-4 uppercase tracking-wider">
-              Legal
-            </h3>
-            <ul class="space-y-2">
-
-              <li>
-                <a href="/legal#privacidade" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Política de Privacidade e LGPD
-                </a>
-              </li>
-              <li>
-                <a href="/legal#cookies" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Política de Cookies
-                </a>
-              </li>
-              <li>
-                <a href="/legal#servicos" class="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                  Termos de Serviço
-                </a>
-              </li>
-            </ul>
-          </div>
         </div>
 
-        <!-- Legal Section -->
-        <div class="border-t mt-12 pt-8 text-center max-w-4xl mx-auto">
-          <!-- Logo -->
-          <div class="flex justify-center mb-4">
-            <img src="/assets/audiotext-logo.avif" alt="Audiotext" class="h-8" loading="lazy" decoding="async">
-          </div>
-
-          <!-- Company Info -->
-          <div class="space-y-1">
-            <p class="text-base font-semibold text-foreground">
-              Audiotext Serviços e Cia Ltda
-            </p>
-            <p class="text-sm text-foreground">CNPJ: 17.429.373/0001-85</p>
-            <p class="text-sm text-foreground mt-2">Atendimento 100% online</p>
-          </div>
-
-          <!-- Addresses -->
-          <div class="mt-4 space-y-3">
-            <!-- Sede - Normal size -->
-            <div>
-              <p class="text-sm font-medium text-foreground">Sede:</p>
-              <p class="text-sm text-muted-foreground">Rua Buenos Aires, 73, Batel</p>
-              <p class="text-sm text-muted-foreground">Curitiba/PR - CEP 80250-070</p>
-            </div>
-          </div>
-
-          <!-- Copyright -->
-          <p class="text-sm text-muted-foreground mt-6">
-            © 2026 Audiotext. Todos os direitos reservados.
-          </p>
+        <!-- Base -->
+        <div style="border-top:1px solid hsl(220,13%,88%);margin-top:2rem;padding-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.5rem 1.5rem;justify-content:space-between;align-items:center;">
+          <p style="font-size:0.8125rem;color:hsl(220,9%,46%);margin:0;">© 2026 Audiotext Serviços e Cia Ltda. Todos os direitos reservados.</p>
+          <nav style="display:flex;gap:1.5rem;">
+            <a href="/legal#privacidade" style="font-size:0.8125rem;color:hsl(220,9%,46%);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;">Privacidade</a>
+            <a href="/legal#cookies" style="font-size:0.8125rem;color:hsl(220,9%,46%);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;">Cookies</a>
+            <a href="/legal#servicos" style="font-size:0.8125rem;color:hsl(220,9%,46%);text-decoration:none;min-height:44px;display:inline-flex;align-items:center;">Termos</a>
+          </nav>
         </div>
       </div>
     </footer>
