@@ -148,3 +148,20 @@ CC1 (remoção do cross-sell de IA — vira variante B), heros #4/#7, A1 banda d
 **Trilho 1:** "+1.000"→"+15 mil clientes" (`:907`); card IA removido (comentado); "transcrição R$ 2-5/min"→"R$ 2-3,50/min"; footer E-mail+`</div>`; `<section>` órfã fundida (10/10); schema de prazos → dias úteis.
 **Promovidos do T2:** hero `py-20`→`py-10`; CTA "Fale Conosco"→**"Calcule seu orçamento em 1 minuto"** (7 botões); "closed caption" + "empresas/produtoras/instituições" no hero; trust box "criadores de conteúdo"→"empresas". Reframe completo da seção redes sociais fica no T2 pós-lançamento.
 **Preços de legendagem:** confirmados e **inalterados** (R$ 6/min PT · R$ 9-12/min tradução · R$ 2/min embutida adicional).
+
+### 2026-08-07 — Regressão visual mobile /legendagem (branch `fix/legendagem-mobile-regressao`)
+
+**Sintomas (produção, mobile):** H1 colado no topo; "Como funciona", "Por que escolher" e rodapé com blocos ilegíveis.
+
+**CAUSA-RAIZ (validada antes do fix — NÃO foi o markup do merge):**
+- Balanceamento de tags da página inteira verificado com analisador de pilha (div/section, ignorando script/style/comentários): **0 problemas de aninhamento, pilha final vazia** — ou seja, os fixes de markup do merge (section órfã, footer, remoção do card IA) **estão corretos**, não desbalancearam nada.
+- **Causa 1 — grids ilegíveis (pré-existente, não do merge):** no `<style>`, dentro de um bloco `/* === Footer fix === */`, havia um **`.lg\:grid-cols-4` FORA de `@media`** → forçava `grid-template-columns: repeat(4,...)` em **todas as larguras**. No mobile os grids `grid md:grid-cols-2 lg:grid-cols-4` viravam 4 colunas de ~68px (cards 68×722px). A home usa `grid grid-cols-1 md:… lg:…` e mantém a regra `lg:grid-cols-4` **dentro** do `@media (min-width:1024px)` — por isso não quebra. Só apareceu agora por ser o 1º tráfego pago mobile da página.
+- **Causa 2 — "H1 colado no topo" (essa SIM veio do merge):** o hero passou a usar `py-10`, mas **`.py-10` não existe** no CSS compilado (só `.py-20`) → `padding-top:0`. Afeta legendagem **e home** (que recebeu `py-10` no Lote A).
+
+**Correção (home como referência canônica):**
+- Removido o `.lg\:grid-cols-4` fora de `@media` (a definição correta permanece no `@media 1024px`). Grids voltam a 1 coluna no mobile.
+- Adicionado `.py-10 { padding: 2.5rem 0 }` em **legendagem e home** (item único p/ as duas) — hero com padding-top adequado no mobile.
+
+**Validação (programática, 375×667 — screenshot indisponível no ambiente por painel não-composto):** scan seção-a-seção → **todos os grids = 1 coluna, 0 elementos estourando a largura, overflow horizontal da página = 0px**, hero `padding-top` 40px (H1 top 65→105). `generate_lead` **re-testado e intacto** (não regrediu). Confirmação visual final = preview real da Vercel.
+
+**NOVO ITEM PERMANENTE DO CHECKLIST (todos os PRs futuros):** scroll completo em 375×667 com screenshot/scan de CADA seção (hero → rodapé) antes de entregar o preview — pegar quebras de layout mobile que a validação funcional não vê.
