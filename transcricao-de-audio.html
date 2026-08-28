@@ -1,6 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+  <!--
+    ============================================================
+    VARIANTE B — /transcricao-de-audio  (teste A/B, onda 2)
+    Base: fix/correcoes-fatuais (preços/fatos/prazos já corrigidos). SEM deploy até 20/08.
+
+    Mudanças vs. controle:
+    [REESCRITO] Hero: H1 "Transcrição de Áudio e Vídeo para Texto" (message-match
+                vídeo/para-texto) + subheads + âncora "a partir de R$ 2,00/min".
+    [REESCRITO] Abertura da comparação (Seção 2): removido "por que pagar mais?" /
+                "quando usar IA" → foco na precisão para conteúdo crítico.
+    [REESCRITO] Seção ex-"Quanto Custa": título "...vale o investimento" + banda de preço (A1).
+    [REESCRITO] CTA: "Simular orçamento" → "Ver meu preço" (CC4).
+    [MOVIDO]    Seção 2 (comparação IA×humano) → DEPOIS da Seção 8 (depoimentos):
+                prova social antes da comparação.
+    [REMOVIDO]  CC1: card "Transcrição Automática por IA" (Serviços relacionados) que
+                vazava tráfego pago para app.audiotext.com.br.
+    [POLIMENTO] Comparação (movida) recebe bg-muted/30 para restaurar a alternância
+                de fundos após o move (muted → branco → muted).
+
+    A2 — dependências verificadas: sem href="#" internos; #como-funciona preservado;
+    scripts inline (reviews-grid, load-more-reviews, .faq-trigger, modal) são por ID/classe
+    e movem junto com suas seções; sem seletores posicionais (nth-child). Parse validado.
+    ============================================================
+  -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5">
 
@@ -968,7 +992,7 @@
       </div>
       <nav class="flex items-center gap-4" aria-label="Navegação principal">
         <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header-transcricao-profissional" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-5 py-2">
-          Simular orçamento
+          Ver meu preço
         </button>
       </nav>
     </div>
@@ -980,22 +1004,22 @@
       <div class="container mx-auto px-4">
         <div class="mx-auto max-w-4xl text-center space-y-8">
           <h1 id="hero-heading" class="text-4xl md:text-6xl font-bold tracking-tight">
-            Transcrição de Áudio Profissional
+            Transcrição de Áudio e Vídeo para Texto
           </h1>
           <p class="text-xl md:text-2xl font-semibold text-foreground max-w-3xl mx-auto">
-            Revisada por Transcritores Profissionais: Precisão Próxima a 100%
+            Transcrição profissional revisada por transcritores. Precisão próxima a 100%.
           </p>
           <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Para acadêmicos, pesquisadores, advogados e empresas que não podem arriscar erros em termos técnicos ou contextos complexos.
+            Áudio, vídeo, entrevistas, reuniões e audiências — para acadêmicos, pesquisadores, advogados e empresas. A partir de R$ 2,00/min.
           </p>
 
           <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-hero-transcricao-profissional" class="w-full sm:w-auto text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-              Simular orçamento
+              Ver meu preço
             </button>
           </div>
-          <p class="text-sm text-muted-foreground">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
+          <p class="text-sm text-muted-foreground">A partir de R$ 2,00/min • orçamento em segundos • sem cadastro</p>
 
           <!-- 3 Bullets -->
           <div class="flex flex-col gap-4 max-w-2xl mx-auto text-left">
@@ -1155,216 +1179,6 @@
       </div>
     </section>
 
-    <!-- SECTION 2: AI vs Human Comparison -->
-    <section class="py-20" aria-labelledby="comparison-heading">
-      <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-          <h2 id="comparison-heading" class="text-3xl md:text-4xl font-bold mb-4">
-            Transcrição de Áudio Profissional vs. Automática: Quando Usar Cada Uma
-          </h2>
-          <div class="max-w-3xl mx-auto text-lg text-muted-foreground space-y-4">
-            <p>
-              Seja honesto: IA custa ~R$ 0,30/min. A transcrição profissional custa de R$ 2,00 a R$ 3,50/min.
-              Por que pagar mais?
-            </p>
-            <p class="font-semibold text-foreground">Resposta simples: quando seu áudio é importante.</p>
-            <p>
-              Se é uma gravação não jurídica, a IA funciona e você pode revisar rápido. Mas se é uma audiência
-              judicial, uma entrevista de doutorado, pesquisa de mercado ou uma reunião de negócios com informações
-              confidenciais, qualquer erro pode custar caro demais.
-            </p>
-          </div>
-        </div>
-
-        <!-- Comparison Table -->
-        <div class="max-w-5xl mx-auto overflow-x-auto">
-          <table class="w-full border-collapse bg-card rounded-lg overflow-hidden">
-            <thead>
-              <tr class="bg-muted">
-                <th class="p-4 text-left font-semibold">O que avaliar</th>
-                <th class="p-4 text-center font-semibold">IA Automática (85-93%)</th>
-                <th class="p-4 text-center font-semibold">Transcrição Profissional (próxima a 100%)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Termos técnicos</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-destructive">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <span class="text-sm">Pode errar 30%</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">Precisão próxima a 100%</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Contexto/ambiguidade</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-destructive">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <span class="text-sm">Não entende</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">Especialista analisa</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Sotaques/áudio ruim</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-destructive">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <span class="text-sm">Falha muito</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">Transcritor decifra</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Nomes próprios</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-destructive">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <span class="text-sm">Inventa nomes</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">Pesquisamos se necessário</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Sigilo/confidencialidade</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-amber-500">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <span class="text-sm">Servidores de IA</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">NDA + exclusão garantida</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Uso jurídico/acadêmico</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-destructive">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                    <span class="text-sm">Pouco aceito</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">Aceito em processos/pesquisas</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Tempo de revisão sua</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-amber-500">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <span class="text-sm">3-5 horas</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">Zero (já revisado)</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Custo</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">R$ 0,30/min</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-amber-500">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <span class="text-sm">R$ 2,00-3,50/min</span>
-                  </div>
-                </td>
-              </tr>
-              <tr class="border-t">
-                <td class="p-4 font-medium">Velocidade</td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-primary">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                    <span class="text-sm">Minutos</span>
-                  </div>
-                </td>
-                <td class="p-4 text-center">
-                  <div class="inline-flex items-center gap-2 text-amber-500">
-                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    <span class="text-sm">1 a 8 dias úteis</span>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- When to use each -->
-        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12">
-          <div class="bg-muted/50 p-6 rounded-lg">
-            <h3 class="font-semibold mb-3">Quando usar IA:</h3>
-            <p class="text-muted-foreground text-sm">
-              aulas, reuniões gerais, podcasts, vídeo YouTube, missa, gravações casuais, ou qualquer gravação que você possa revisar depois
-            </p>
-          </div>
-          <div class="bg-primary/10 p-6 rounded-lg">
-            <h3 class="font-semibold mb-3">Quando usar Humano:</h3>
-            <p class="text-muted-foreground text-sm">
-              processo judicial, pesquisa de mercado, pesquisa qualitativa, tese/dissertação, focus group, reuniões estratégicas, gravação confidencial
-            </p>
-          </div>
-        </div>
-
-        <p class="text-center text-muted-foreground mt-8 max-w-3xl mx-auto">
-          Não acreditamos em soluções únicas. Por isso, oferecemos transcrição por IA e transcrição profissional. Te
-          ajudamos na escolha ideal para o seu objetivo.
-        </p>
-
-        <!-- Disclaimer -->
-        <div class="mt-8 p-4 bg-muted/30 rounded-lg max-w-4xl mx-auto border-l-4 border-primary">
-          <p class="text-sm text-muted-foreground">
-            Nossa transcrição profissional atinge precisão igual ou próxima a 100% em gravações de boa qualidade.
-            Trechos ininteligíveis podem ocorrer em áudios com volume muito baixo ou distorcido, ruído de fundo
-            excessivo, sobreposição de vozes ou fala muito rápida. Seus arquivos são avaliados gratuitamente antes
-            do início da transcrição.
-          </p>
-        </div>
-
-        <div class="text-center mt-8">
-          <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-comparison-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Simular orçamento
-          </button>
-        </div>
-      </div>
-    </section>
-
     <!-- SECTION 3: How It Works -->
     <section id="como-funciona" class="py-20 bg-muted/30" aria-labelledby="how-it-works-heading">
       <div class="container mx-auto px-4">
@@ -1469,7 +1283,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-how-it-works-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Simular orçamento
+            Ver meu preço
           </button>
           <p class="text-sm text-muted-foreground mt-4">Orçamento instantâneo • Pagamento só após aprovação</p>
         </div>
@@ -1766,7 +1580,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-authority-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -1865,7 +1679,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-pillars-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -2175,16 +1989,233 @@
       </div>
     </section>
 
+    <!-- SECTION 2: AI vs Human Comparison -->
+    <section class="py-20 bg-muted/30" aria-labelledby="comparison-heading">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 id="comparison-heading" class="text-3xl md:text-4xl font-bold mb-4">
+            Transcrição de Áudio Profissional vs. Automática: Quando Usar Cada Uma
+          </h2>
+          <div class="max-w-3xl mx-auto text-lg text-muted-foreground space-y-4">
+            <p>
+              Nem todo áudio pede o mesmo cuidado. Quando o conteúdo é crítico — uma audiência, uma tese, uma reunião de negócios — a precisão vale mais do que a economia.
+            </p>
+            <p class="font-semibold text-foreground">A transcrição humana revisada entrega o que a IA não garante: precisão próxima a 100% e contexto.</p>
+            <p>
+              Se é uma gravação não jurídica, a IA funciona e você pode revisar rápido. Mas se é uma audiência
+              judicial, uma entrevista de doutorado, pesquisa de mercado ou uma reunião de negócios com informações
+              confidenciais, qualquer erro pode custar caro demais.
+            </p>
+          </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="max-w-5xl mx-auto overflow-x-auto">
+          <table class="w-full border-collapse bg-card rounded-lg overflow-hidden">
+            <thead>
+              <tr class="bg-muted">
+                <th class="p-4 text-left font-semibold">O que avaliar</th>
+                <th class="p-4 text-center font-semibold">IA Automática (85-93%)</th>
+                <th class="p-4 text-center font-semibold">Transcrição Profissional (próxima a 100%)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Termos técnicos</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-destructive">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <span class="text-sm">Pode errar 30%</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">Precisão próxima a 100%</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Contexto/ambiguidade</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-destructive">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <span class="text-sm">Não entende</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">Especialista analisa</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Sotaques/áudio ruim</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-destructive">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <span class="text-sm">Falha muito</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">Transcritor decifra</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Nomes próprios</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-destructive">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <span class="text-sm">Inventa nomes</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">Pesquisamos se necessário</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Sigilo/confidencialidade</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-amber-500">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span class="text-sm">Servidores de IA</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">NDA + exclusão garantida</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Uso jurídico/acadêmico</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-destructive">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    <span class="text-sm">Pouco aceito</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">Aceito em processos/pesquisas</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Tempo de revisão sua</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-amber-500">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span class="text-sm">3-5 horas</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">Zero (já revisado)</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Custo</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">R$ 0,30/min</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-amber-500">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span class="text-sm">R$ 2,00-3,50/min</span>
+                  </div>
+                </td>
+              </tr>
+              <tr class="border-t">
+                <td class="p-4 font-medium">Velocidade</td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-primary">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                    <span class="text-sm">Minutos</span>
+                  </div>
+                </td>
+                <td class="p-4 text-center">
+                  <div class="inline-flex items-center gap-2 text-amber-500">
+                    <svg class="lucide h-4 w-4" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                    <span class="text-sm">1 a 8 dias úteis</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- When to use each -->
+        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mt-12">
+          <div class="bg-muted/50 p-6 rounded-lg">
+            <h3 class="font-semibold mb-3">Quando usar IA:</h3>
+            <p class="text-muted-foreground text-sm">
+              aulas, reuniões gerais, podcasts, vídeo YouTube, missa, gravações casuais, ou qualquer gravação que você possa revisar depois
+            </p>
+          </div>
+          <div class="bg-primary/10 p-6 rounded-lg">
+            <h3 class="font-semibold mb-3">Quando usar Humano:</h3>
+            <p class="text-muted-foreground text-sm">
+              processo judicial, pesquisa de mercado, pesquisa qualitativa, tese/dissertação, focus group, reuniões estratégicas, gravação confidencial
+            </p>
+          </div>
+        </div>
+
+        <p class="text-center text-muted-foreground mt-8 max-w-3xl mx-auto">
+          Não acreditamos em soluções únicas. Por isso, oferecemos transcrição por IA e transcrição profissional. Te
+          ajudamos na escolha ideal para o seu objetivo.
+        </p>
+
+        <!-- Disclaimer -->
+        <div class="mt-8 p-4 bg-muted/30 rounded-lg max-w-4xl mx-auto border-l-4 border-primary">
+          <p class="text-sm text-muted-foreground">
+            Nossa transcrição profissional atinge precisão igual ou próxima a 100% em gravações de boa qualidade.
+            Trechos ininteligíveis podem ocorrer em áudios com volume muito baixo ou distorcido, ruído de fundo
+            excessivo, sobreposição de vozes ou fala muito rápida. Seus arquivos são avaliados gratuitamente antes
+            do início da transcrição.
+          </p>
+        </div>
+
+        <div class="text-center mt-8">
+          <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-comparison-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
+            Ver meu preço
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- SECTION 9: Why Audiotext -->
     <section class="py-20" aria-labelledby="why-audiotext-heading">
       <div class="container mx-auto px-4">
         <div class="text-center mb-16">
           <h2 id="why-audiotext-heading" class="text-3xl md:text-4xl font-bold mb-4">
-            Quanto Custa a Transcrição de Áudio Profissional
+            Por que a transcrição profissional da Audiotext vale o investimento
           </h2>
           <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-            O que nos diferencia de soluções genéricas (e de IAs automáticas que entregam "rascunhos"):
+            Precisão próxima a 100%, revisão humana e sigilo — o que soluções genéricas e IAs de "rascunho" não entregam.
           </p>
+        </div>
+
+        <!-- [VARIANTE B] Banda de preço (A1) -->
+        <div class="max-w-3xl mx-auto mb-10 rounded-lg border bg-muted/40 p-6 text-center">
+          <p class="text-sm text-muted-foreground mb-1">Transcrição profissional (humana + revisão)</p>
+          <p class="text-2xl md:text-3xl font-bold">A partir de R$ 2,00/min</p>
+          <p class="text-sm text-muted-foreground mt-2">O valor final depende da duração, do prazo (dias úteis) e da modalidade. Veja o preço exato do seu áudio em segundos.</p>
+          <button onclick="openBudgetModal()" class="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground font-medium min-h-[48px] px-6 hover:bg-primary/90">Ver meu preço</button>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -2278,7 +2309,7 @@
             data-gtm-label="cta-why-audiotext-transcricao-profissional"
             onclick="openBudgetModal()"
           >
-            Simular orçamento
+            Ver meu preço
           </button>
         </div>
       </div>
@@ -2323,22 +2354,7 @@
               </a>
             </div>
           </div>
-          <!-- Card 3: Transcrição Automática IA -->
-          <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
-            <div class="flex flex-col space-y-1.5 p-6">
-              <div class="flex items-center gap-2">
-                <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2"/><path d="M20 14h2"/><path d="M15 13v2"/><path d="M9 13v2"/></svg>
-              </div>
-              <h3 class="text-lg font-semibold leading-none tracking-tight mt-2">Transcrição Automática por IA</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <p class="text-muted-foreground text-sm">~R$ 0,30/min • Pronta em minutos • Acurácia média: 93%</p>
-              <a href="https://app.audiotext.com.br" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1 text-primary text-sm font-medium mt-3 hover:underline">
-                Saiba mais
-                <svg class="lucide h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
-              </a>
-            </div>
-          </div>
+          <!-- [VARIANTE B] Card "Transcrição Automática por IA" removido (CC1): não vazar tráfego pago do serviço humano para o produto de IA (app.audiotext.com.br). -->
           <!-- Card 4: Ata de Reuniões -->
           <div class="rounded-lg border bg-card text-card-foreground shadow-sm hover:shadow-lg transition-shadow">
             <div class="flex flex-col space-y-1.5 p-6">
@@ -2595,7 +2611,7 @@
           <p class="text-lg opacity-90">Não há mais necessidade de passar horas ouvindo gravações para encontrar informações importantes. Nós fazemos isso para você, com precisão, sigilo e entrega no prazo escolhido.</p>
           <p class="text-lg font-semibold">Se o seu áudio é importante, confie em quem leva seu projeto tão a sério quanto você.</p>
           <div class="flex justify-center pt-8">
-            <button onclick="openBudgetModal()" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black border-2 border-black hover:bg-gray-50 text-lg px-8 py-6 min-h-[56px] touch-manipulation" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-final-transcricao-profissional">Simular orçamento</button>
+            <button onclick="openBudgetModal()" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black border-2 border-black hover:bg-gray-50 text-lg px-8 py-6 min-h-[56px] touch-manipulation" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-final-transcricao-profissional">Ver meu preço</button>
           </div>
           <p class="text-sm opacity-80 mt-4">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
         </div>
