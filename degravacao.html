@@ -225,6 +225,7 @@
     .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
     .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
     .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; } /* [hotfix] faltava; hero mobile ficava padding 0 */
     .pt-4 { padding-top: 1rem; }
     .pt-6 { padding-top: 1.5rem; }
     .pb-0 { padding-bottom: 0; }
@@ -519,9 +520,9 @@
         width: max-content; /* CORREÇÃO CRUCIAL: Garante que o loop seja infinito e contenha todos os 17 logos */
       }
 
-    /* === Footer fix === */ 
+    /* === Footer fix === */
       .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
-      .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      /* [hotfix] .lg:grid-cols-4 stray REMOVIDO (forçava 4 colunas no mobile); a def correta está no @media (min-width:1024px) acima */
       .lg\:gap-12 { gap: 3rem; }
       .space-y-1 > * + * { margin-top: 0.25rem; }
       .space-y-2 > * + * { margin-top: 0.5rem; }

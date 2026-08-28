@@ -201,3 +201,8 @@ Mesma rubrica da auditoria de 07/08 (68/100). Estado: pós 13 fixes (6 Trilho 1 
 - **Mantidos** (não são DIY-signal): FAQ de compatibilidade de formatos por plataforma; links sociais da própria Audiotext.
 - **Validação:** 8/8 JSON-LD válidos; scan integral 375×667 sem problema (layout intacto, reframe é copy-only); `generate_lead` reconfirmado. **Nenhum "criadores"/"TikTok"/"redes sociais" residual.**
 - **Congelamento:** após o merge desta branch, a página não recebe mais mudança até o 1º checkpoint do piloto — qualquer T2 restante só entra pós-checkpoint com dado.
+
+---
+
+## 2026-08-28 — Hotfix grid/py-10 (branch `fix/grid-mobile-hotfix`)
+`.lg\:grid-cols-4` estava FORA de `@media` no bloco `/* Footer fix */` → footer + seção de cards renderizavam 4 colunas no mobile em PROD (audio/degrav/automatica). `.py-10` também não estava definido nessas 3 (hero mobile com padding 0). Correções: audio/automatica → def de grid-cols-4 envolvida em `@media (min-width:1024px)`; degrav → stray removida (a correta em @media já existia); `.py-10 {padding 2.5rem 0}` definido nas 3. **Datação da regressão:** a stray entrou em `bf4bac3 "Update transcricao-de-audio.html"` (commit manual de edição), **PREDATA o Trilho 1** — não entrou pelo merge dele. Legendagem+home já estavam corretas.
