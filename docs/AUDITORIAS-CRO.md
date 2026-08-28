@@ -102,7 +102,49 @@ audio :1320 "24-96h"; home :1556/:1618 "24h a 10 dias úteis" (unidades misturad
 CC1 (remoção do cross-sell de IA — vira variante B), heros #4/#7, A1 banda de preço, reposicionamento automatica, etc.
 
 ### Fechamento — decisões validadas (2026-08-06)
-1. **Minutos:** padronizado **"2,5 milhões"** em todas as páginas (audio/degravacao subidos de 2M; home já estava). Claim comprovável.
+1. **Minutos:** padronizado **"2,5 milhões"** em todas as páginas (audio/degravacao subidos de 2M; home já estava). Claim comprovável. **Adendo (2026-08-07):** um stat-tile da degravacao mostrava "+1 milhão" (número e "minutos degravados" em elementos separados, escapou da varredura por regex) — corrigido para "+2,5 milhões". Varredura ampla `milh(ão|ões)` confirmou zero resíduo nas 4 páginas.
 2. **Prazos:** menções mistas em horas substituídas por dias úteis. Formulação oficial (na FAQ de prazo): **Instant: a partir de 1 dia útil · Fast: a partir de 2 dias úteis · Flex: a partir de 8 dias úteis**, sempre com direcionamento ao simulador. Campos compactos (cards/tabela) exibem "1 a 8 dias úteis". Exceções mantidas: cancelamento "24h" e narrativas de cliente (não são prazo de entrega).
 3. **Garantia:** resolvido e final — garantia de **30 dias** (simples, sem úteis/corridos) = janela para solicitar revisão; revisão entregue em **2–3 dias úteis** após o pedido. O par "3 vs 30 dias" do D3 foi leitura imprecisa da auditoria (string literal nunca existiu).
 4. **docs/ fora do ar:** criado `.vercelignore` excluindo `docs/` do deploy (arquivo segue versionado no git, mas não é servido/indexado). Verificar no preview: `…/docs/AUDITORIAS-CRO.md` deve retornar **404**.
+
+---
+
+## 2026-08-07 — Auditoria: /legendagem (pré-lançamento de campanha paga B2B)
+
+**Contexto:** campanha de Ads dedicada a legendagem (em desenho). LP recebe tráfego pago comercial B2B pela 1ª vez. **Desafio (CRM):** quem PAGA é B2B/profissional (ticket ~R$518, recorrente); o DIY (legenda de vídeo social) fechou ZERO. A página deve falar com o B2B e desqualificar o DIY naturalmente. **Diagnóstico apenas — nada implementado.**
+
+**Score skill:** **68/100** (ATF 16/25 · Copy 15/20 · Trust 13/20 · CTA 11/15 · Mobile 6/10 · Fluxo 7/10).
+
+**Funil:** legendagem **NÃO usa /budget** — form inline dedicado (tipo PT R$6/EN-ES R$9-12, formato SRT/embutida, estimativa ao vivo) com handoff **WhatsApp** (`api.whatsapp.com/send`). Purpose-built e correto para o serviço.
+
+**Preços citados (validar contra a tabela REAL de legendagem — não assumir a de transcrição):**
+- R$ 6,00/min — legenda PT (FAQ `:1627`, form `:2093/:2096`, schema-ish `:578`)
+- R$ 9,00–12,00/min — legenda + tradução EN/ES (FAQ `:1628`, form `:2101/:2104/:2109/:2112`)
+- R$ 2,00/min — **adicional** legendas embutidas/hardcoded (FAQ `:1750`)
+- Referência cruzada desatualizada: "transcrição (R$ 2-5/min)" (`:1825`) → deveria ser R$ 2-3,50 (tabela corrigida no Trilho 1)
+- IA cross-sell "R$ 0,30/min" (`:1586`); schema `priceRange` "R$ 0,26-R$ 12/minuto" (`:517`, company-wide); Product lowPrice/highPrice 120/1500 (`:794-795`)
+
+**TRILHO 1 (bloqueante do lançamento):**
+1. [🔴 fato] Hero "+1.000 clientes" (`:907`) contradiz "+15 mil" do resto da página (`:518/:1460/:1848`) → +15 mil.
+2. [🔴 congruência] IA cross-sell no corpo (`:1580-1590` → /transcricao-automatica, "R$ 0,30/min · rascunhos") numa LP B2B de R$6-12/min: vaza para o produto barato e convida o DIY — remover/reframar.
+3. [🟡 fato] "transcrição (R$ 2-5/min)" (`:1825`) → "R$ 2-3,50/min".
+4. [🟡 bug] Footer "Telefones" sobre o e-mail + `<div>` aberta (`:1928/:1937`).
+5. [🟡 bug] `<section>` órfã `como-funciona` (`:1023-1024`) → 11/10 desbalanceado.
+6. [🟢 congruência] Schema prazos em horas (`:586` "24-48h…") vs FAQ visível em dias úteis (`:1643-1646`) — alinhar schema.
+7. [ação do cliente] Validar TODOS os preços acima contra a tabela real de legendagem antes do go-live.
+
+**TRILHO 2 (conversão, pós-lançamento):**
+- Desqualificar DIY: "criadores de conteúdo" (`:916`) + seção hardcoded focada em "Redes sociais/TikTok/anúncios" (`:1745-1748`) atraem o segmento que converte zero — reframar para produtoras/agências/empresas/instituições.
+- Hero mobile `py-20`→`py-10` (legendagem não recebeu o #9) — CTA na dobra 375×667.
+- CTA "Fale Conosco pelo WhatsApp" (`:886`) → orientado a ação/orçamento.
+- Trust B2B: nota fiscal/CNPJ explícito, depoimento de produtora/agência nominal.
+- Message-match: incluir "closed caption/acessibilidade/corporativo" no hero/H2 p/ as intenções da campanha (hoje "closed caption" só no meta `:22`).
+- Sem hero visual (só texto).
+
+**Congruência OK:** garantia 30 dias (`:1515/:1809`) ✓; sem ângulo de contestação ✓; "100% Humana/manual" é método (não precisão) — aceitável; legendagem não usa "+2,5 milhões" (usa "+500 mil palavras", métrica própria) ✓.
+
+### 2026-08-07 — Aplicado (branch `fix/legendagem-pre-lancamento`)
+**Bloqueante nº1 (medição):** `enviarOrcamentoLegendagem()` agora dispara `dataLayer.push({event:'generate_lead', form_name:'legendagem', service_type, leg_formato, leg_estimativa, leg_duracao, user_email, user_name})` (padrão /budget) **antes** de abrir o WhatsApp. Anti-corrida via `eventCallback` + `eventTimeout:1500` + `setTimeout(1500)` fallback + guard `navegou` (abre 1×). **Validado no preview** (javascript_tool): push síncrono presente em 100% dos envios, `window.open` só no callback (não na hora), estimativa 60min×R$6 = R$360,00. A mensagem do WhatsApp já carregava tipo/formato/estimativa (mantida).
+**Trilho 1:** "+1.000"→"+15 mil clientes" (`:907`); card IA removido (comentado); "transcrição R$ 2-5/min"→"R$ 2-3,50/min"; footer E-mail+`</div>`; `<section>` órfã fundida (10/10); schema de prazos → dias úteis.
+**Promovidos do T2:** hero `py-20`→`py-10`; CTA "Fale Conosco"→**"Calcule seu orçamento em 1 minuto"** (7 botões); "closed caption" + "empresas/produtoras/instituições" no hero; trust box "criadores de conteúdo"→"empresas". Reframe completo da seção redes sociais fica no T2 pós-lançamento.
+**Preços de legendagem:** confirmados e **inalterados** (R$ 6/min PT · R$ 9-12/min tradução · R$ 2/min embutida adicional).
