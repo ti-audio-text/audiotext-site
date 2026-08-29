@@ -3,7 +3,7 @@
 <head>
   <!--
     ============================================================
-    VARIANTE B — /transcricao-de-audio  (teste A/B, onda 2)
+    VARIANTE B: /transcricao-de-audio  (teste A/B, onda 2)
     Base: fix/correcoes-fatuais (preços/fatos/prazos já corrigidos). SEM deploy até 20/08.
 
     Mudanças vs. controle:
@@ -12,7 +12,7 @@
     [REESCRITO] Abertura da comparação (Seção 2): removido "por que pagar mais?" /
                 "quando usar IA" → foco na precisão para conteúdo crítico.
     [REESCRITO] Seção ex-"Quanto Custa": título "...vale o investimento" + banda de preço (A1).
-    [REESCRITO] CTA: "Simular orçamento" → "Ver meu preço" (CC4).
+    [REESCRITO] CTA: "Simular orçamento" → "Calcular meu preço" (CC4).
     [MOVIDO]    Seção 2 (comparação IA×humano) → DEPOIS da Seção 8 (depoimentos):
                 prova social antes da comparação.
     [REMOVIDO]  CC1: card "Transcrição Automática por IA" (Serviços relacionados) que
@@ -20,7 +20,7 @@
     [POLIMENTO] Comparação (movida) recebe bg-muted/30 para restaurar a alternância
                 de fundos após o move (muted → branco → muted).
 
-    A2 — dependências verificadas: sem href="#" internos; #como-funciona preservado;
+    A2 (dependências verificadas): sem href="#" internos; #como-funciona preservado;
     scripts inline (reviews-grid, load-more-reviews, .faq-trigger, modal) são por ID/classe
     e movem junto com suas seções; sem seletores posicionais (nth-child). Parse validado.
     ============================================================
@@ -34,7 +34,7 @@
 <!-- JS do Cookie Consent -->
 <script defer src="/assets/js/cookieConsent.js"></script>
 
-<!-- GTM Bridge (postMessages do iframe do budget) — depois do cookieConsent -->
+<!-- GTM Bridge (postMessages do iframe do budget), depois do cookieConsent -->
 <script defer src="/assets/js/gtm-bridge.js"></script>
 
   <!-- Vercel Analytics -->
@@ -199,6 +199,7 @@
     .p-8 { padding: 2rem; }
     .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
     .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; } /* [ajuste] faltava; botão do header ficava sem padding horizontal (esmagado) */
     .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
     .px-8 { padding-left: 2rem; padding-right: 2rem; }
     .py-2 { padding-top: 0.5rem; padding-bottom: 0.5rem; }
@@ -946,7 +947,7 @@
       "name": "Posso alterar especificações após o início?",
       "acceptedAnswer": {
         "@type": "Answer",
-        "text": "Geralmente não. O ideal é que toda especificação seja apontada antes do início da transcrição. Entre em contato o mais breve possível — avaliamos caso a caso e informamos os impactos antes de prosseguir."
+        "text": "Geralmente não. O ideal é que toda especificação seja apontada antes do início da transcrição. Entre em contato o mais breve possível. Avaliamos caso a caso e informamos os impactos antes de prosseguir."
       }
     },
     {
@@ -992,7 +993,7 @@
       </div>
       <nav class="flex items-center gap-4" aria-label="Navegação principal">
         <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-header-transcricao-profissional" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-12 px-5 py-2">
-          Ver meu preço
+          Calcular meu preço
         </button>
       </nav>
     </div>
@@ -1010,13 +1011,13 @@
             Transcrição profissional revisada por transcritores. Precisão próxima a 100%.
           </p>
           <p class="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto">
-            Áudio, vídeo, entrevistas, reuniões e audiências — para acadêmicos, pesquisadores, advogados e empresas. A partir de R$ 2,00/min.
+            Áudio, vídeo, entrevistas, reuniões e audiências. Para acadêmicos, pesquisadores, advogados e empresas. A partir de R$ 2,00/min.
           </p>
 
           <!-- CTAs -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-hero-transcricao-profissional" class="w-full sm:w-auto text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-              Ver meu preço
+              Calcular meu preço
             </button>
           </div>
           <p class="text-sm text-muted-foreground">A partir de R$ 2,00/min • orçamento em segundos • sem cadastro</p>
@@ -1283,7 +1284,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-how-it-works-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Ver meu preço
+            Calcular meu preço
           </button>
           <p class="text-sm text-muted-foreground mt-4">Orçamento instantâneo • Pagamento só após aprovação</p>
         </div>
@@ -1580,7 +1581,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-authority-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Ver meu preço
+            Calcular meu preço
           </button>
         </div>
       </div>
@@ -1679,7 +1680,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-pillars-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Ver meu preço
+            Calcular meu preço
           </button>
         </div>
       </div>
@@ -1752,7 +1753,7 @@
               <svg class="lucide h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             </div>
             <p class="text-lg md:text-xl text-center mb-6 italic leading-relaxed">"Gostaria de registrar meu agradecimento à Empresa Audiotext, pelo excelente serviço prestado, prazo de entrega, esclarecimento de dúvidas e a cordialidade no atendimento por todos os profissionais envolvidos. Com toda a certeza o fator preponderante que faz a diferença em uma empresa, é a qualidade e o comprometimento dos serviços contratados, tudo isso me foi transmitido com muita segurança. Parabéns e muitíssimo obrigado."</p>
-            <p class="font-semibold text-center text-lg">— José Eduardo Kinchen</p>
+            <p class="font-semibold text-center text-lg">José Eduardo Kinchen</p>
           </div>
         </div>
 
@@ -1771,7 +1772,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Ótima empresa!!! Excelente serviço prestado por profissionais extramente competentes e atenciosos. Os serviços são sempre prestados de forma descomplicada e muito prática, facilitando muito o desenvolvimento do trabalho. Funcionários sempre muito educados e prontos a lhe atender no que de fato é necessário! Parabéns!!!"</p>
-                <p class="font-semibold text-sm">— Vinicius Castilho</p>
+                <p class="font-semibold text-sm">Vinicius Castilho</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -1784,7 +1785,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Recomendo muito. Estou fazendo Mestrado na Irlanda e eles me ajudaram muito com minhas transcrições. Serviço de primeira linha, atendimento super rápido e preço justo! Quando merece a gente espalha a notícia!"</p>
-                <p class="font-semibold text-sm">— Milton Marcelo</p>
+                <p class="font-semibold text-sm">Milton Marcelo</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -1797,7 +1798,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Excelente experiência. Atendimento de muita qualidade e serviço (transcrição) prestado com alta eficiência e agilidade. Recomendo."</p>
-                <p class="font-semibold text-sm">— Eduardo Shor</p>
+                <p class="font-semibold text-sm">Eduardo Shor</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm">
@@ -1810,7 +1811,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Utilizo os serviços de transcrição da Audiotext e eles são excelentes! Trabalham com uma agilidade impressionante, e enviam o material com muita qualidade. Parabéns!"</p>
-                <p class="font-semibold text-sm">— Daniela Ank</p>
+                <p class="font-semibold text-sm">Daniela Ank</p>
               </div>
             </div>
             <!-- Additional reviews (hidden on mobile by default) -->
@@ -1824,7 +1825,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"O atendimento e o trabalho deles são excelentes."</p>
-                <p class="font-semibold text-sm">— Thaís Karine Amaral Mangrich</p>
+                <p class="font-semibold text-sm">Thaís Karine Amaral Mangrich</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
@@ -1837,7 +1838,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Contratei a audiotext para fazer transcrição de áudio, fui perfeitamente atendimento pelo julio! Eles me entregaram dentro do combinado, super recomendo, muito obrigado 🙏"</p>
-                <p class="font-semibold text-sm">— Monica Oliveira</p>
+                <p class="font-semibold text-sm">Monica Oliveira</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
@@ -1850,7 +1851,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Preço justo e serviço de muita qualidade"</p>
-                <p class="font-semibold text-sm">— João Pedro Gonçalves</p>
+                <p class="font-semibold text-sm">João Pedro Gonçalves</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
@@ -1863,7 +1864,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Excelente trabalho! Comprometido, dentro do prazo, com atendimento de excelência! Gostei muito."</p>
-                <p class="font-semibold text-sm">— Andréa Van Herk</p>
+                <p class="font-semibold text-sm">Andréa Van Herk</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
@@ -1876,7 +1877,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Ótimo atendimento e transcrição perfeita! Recomendo."</p>
-                <p class="font-semibold text-sm">— Janaina Peixoto Kowalski</p>
+                <p class="font-semibold text-sm">Janaina Peixoto Kowalski</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
@@ -1889,7 +1890,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Um atendimento sem igual, eles priorizam o cliente, e o trabalho é fantástico. Recomendo demais."</p>
-                <p class="font-semibold text-sm">— Julio Graziani</p>
+                <p class="font-semibold text-sm">Julio Graziani</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
@@ -1902,7 +1903,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Estou super satisfeito com o trabalho prestado pela empresa Audiotext, recomendo e avalizo 100%"</p>
-                <p class="font-semibold text-sm">— BLC Vídeo Produções</p>
+                <p class="font-semibold text-sm">BLC Vídeo Produções</p>
               </div>
             </div>
             <div class="rounded-lg border bg-card text-card-foreground shadow-sm hidden md:block">
@@ -1915,7 +1916,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Gostei do atendimento. Gostei do serviço. Se você está com dúvidas... Pode confiar! Eles sãos feras!"</p>
-                <p class="font-semibold text-sm">— Anthony BNS</p>
+                <p class="font-semibold text-sm">Anthony BNS</p>
               </div>
             </div>
           </div>
@@ -1942,7 +1943,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Atendimento rápido e eficiente. Transcrições entregues dentro do prazo combinado."</p>
-                <p class="text-sm font-medium">— Isabella Morato, <span class="text-primary font-semibold">CAU/BR</span></p>
+                <p class="text-sm font-medium">Isabella Morato, <span class="text-primary font-semibold">CAU/BR</span></p>
               </div>
             </div>
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
@@ -1955,7 +1956,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"A Audiotext nos atende com qualidade e presteza há anos."</p>
-                <p class="text-sm font-medium">— Guido Lemos, <span class="text-primary font-semibold">FIRB</span></p>
+                <p class="text-sm font-medium">Guido Lemos, <span class="text-primary font-semibold">FIRB</span></p>
               </div>
             </div>
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
@@ -1968,7 +1969,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Vocês foram muito rápidos. O preço foi excelente comparado a outras empresas."</p>
-                <p class="text-sm font-medium">— Erick Aguilar, <span class="text-primary font-semibold">Petrobrás</span></p>
+                <p class="text-sm font-medium">Erick Aguilar, <span class="text-primary font-semibold">Petrobrás</span></p>
               </div>
             </div>
             <div class="rounded-lg border-2 border-primary/10 bg-card shadow-sm">
@@ -1981,7 +1982,7 @@
                   <svg class="lucide h-4 w-4 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
                 </div>
                 <p class="text-muted-foreground text-sm mb-3">"Cumpriu o prazo combinado e superou as expectativas de qualidade."</p>
-                <p class="text-sm font-medium">— Luiz Ribas, <span class="text-primary font-semibold">ASID Brasil</span></p>
+                <p class="text-sm font-medium">Luiz Ribas, <span class="text-primary font-semibold">ASID Brasil</span></p>
               </div>
             </div>
           </div>
@@ -1998,7 +1999,7 @@
           </h2>
           <div class="max-w-3xl mx-auto text-lg text-muted-foreground space-y-4">
             <p>
-              Nem todo áudio pede o mesmo cuidado. Quando o conteúdo é crítico — uma audiência, uma tese, uma reunião de negócios — a precisão vale mais do que a economia.
+              Nem todo áudio pede o mesmo cuidado. Quando o conteúdo é crítico (uma audiência, uma tese, uma reunião de negócios), a precisão vale mais do que a economia.
             </p>
             <p class="font-semibold text-foreground">A transcrição humana revisada entrega o que a IA não garante: precisão próxima a 100% e contexto.</p>
             <p>
@@ -2192,7 +2193,7 @@
 
         <div class="text-center mt-8">
           <button onclick="openBudgetModal()" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-comparison-transcricao-profissional" class="text-lg px-8 py-4 min-h-[56px] touch-manipulation inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 bg-primary text-primary-foreground hover:bg-primary/90">
-            Ver meu preço
+            Calcular meu preço
           </button>
         </div>
       </div>
@@ -2206,16 +2207,19 @@
             Por que a transcrição profissional da Audiotext vale o investimento
           </h2>
           <p class="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Precisão próxima a 100%, revisão humana e sigilo — o que soluções genéricas e IAs de "rascunho" não entregam.
+            Precisão próxima a 100%, revisão humana e sigilo: o que soluções genéricas e IAs de "rascunho" não entregam.
           </p>
         </div>
 
-        <!-- [VARIANTE B] Banda de preço (A1) -->
-        <div class="max-w-3xl mx-auto mb-10 rounded-lg border bg-muted/40 p-6 text-center">
-          <p class="text-sm text-muted-foreground mb-1">Transcrição profissional (humana + revisão)</p>
-          <p class="text-2xl md:text-3xl font-bold">A partir de R$ 2,00/min</p>
-          <p class="text-sm text-muted-foreground mt-2">O valor final depende da duração, do prazo (dias úteis) e da modalidade. Veja o preço exato do seu áudio em segundos.</p>
-          <button onclick="openBudgetModal()" class="mt-4 inline-flex items-center justify-center gap-2 rounded-md bg-primary text-primary-foreground font-medium min-h-[48px] px-6 hover:bg-primary/90">Ver meu preço</button>
+        <!-- [VARIANTE B] Card de preço (A1): estilos inline (independe do CSS por página); hierarquia preço-dominante -->
+        <div style="max-width:32rem;margin:0 auto 3rem;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:0.75rem;box-shadow:0 1px 3px rgba(0,0,0,0.08);padding:2rem;text-align:center;">
+          <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0.5rem;margin-bottom:0.75rem;">
+            <span style="font-size:1rem;font-weight:600;color:hsl(var(--foreground));">Transcrição profissional</span>
+            <span style="display:inline-flex;align-items:center;background:hsl(var(--primary) / 0.1);color:hsl(var(--primary));font-size:0.75rem;font-weight:600;border-radius:9999px;padding:0.15rem 0.6rem;">humana + revisão</span>
+          </div>
+          <p style="font-size:2.25rem;line-height:1.1;font-weight:800;letter-spacing:-0.02em;margin:0;color:hsl(var(--foreground));">A partir de R$ 2,00/min</p>
+          <p style="font-size:0.875rem;color:hsl(var(--muted-foreground));margin:0.75rem auto 0;max-width:24rem;">O valor exato depende da duração, do prazo e da modalidade. Calcule o do seu áudio em segundos.</p>
+          <button onclick="openBudgetModal()" style="margin-top:1.5rem;display:inline-flex;align-items:center;justify-content:center;gap:0.5rem;min-height:48px;padding:0 1.5rem;background:hsl(var(--primary));color:hsl(var(--primary-foreground));font-weight:600;font-size:0.9375rem;border:none;border-radius:0.5rem;cursor:pointer;">Calcular meu preço</button>
         </div>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
@@ -2255,7 +2259,7 @@
               <svg class="lucide h-8 w-8 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
               <div>
                 <h3 class="font-semibold mb-2">Velocidade Sem Comprometer Qualidade</h3>
-                <p class="text-muted-foreground text-sm">Processos otimizados e equipe sincronizada permitem entregar grandes volumes no menor prazo do mercado — mantendo precisão e consistência.</p>
+                <p class="text-muted-foreground text-sm">Processos otimizados e equipe sincronizada permitem entregar grandes volumes no menor prazo do mercado, mantendo precisão e consistência.</p>
               </div>
             </div>
           </div>
@@ -2309,7 +2313,7 @@
             data-gtm-label="cta-why-audiotext-transcricao-profissional"
             onclick="openBudgetModal()"
           >
-            Ver meu preço
+            Calcular meu preço
           </button>
         </div>
       </div>
@@ -2573,7 +2577,7 @@
                 <svg class="lucide h-4 w-4 shrink-0 transition-transform duration-200" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
               </button>
               <div class="faq-content hidden pb-4 pt-0 text-muted-foreground">
-                Geralmente não. O ideal é que toda especificação seja apontada antes do início da transcrição. Entre em contato o mais breve possível — avaliamos caso a caso e informamos os impactos antes de prosseguir.
+                Geralmente não. O ideal é que toda especificação seja apontada antes do início da transcrição. Entre em contato o mais breve possível. Avaliamos caso a caso e informamos os impactos antes de prosseguir.
               </div>
             </div>
             <!-- FAQ 18 -->
@@ -2611,7 +2615,7 @@
           <p class="text-lg opacity-90">Não há mais necessidade de passar horas ouvindo gravações para encontrar informações importantes. Nós fazemos isso para você, com precisão, sigilo e entrega no prazo escolhido.</p>
           <p class="text-lg font-semibold">Se o seu áudio é importante, confie em quem leva seu projeto tão a sério quanto você.</p>
           <div class="flex justify-center pt-8">
-            <button onclick="openBudgetModal()" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black border-2 border-black hover:bg-gray-50 text-lg px-8 py-6 min-h-[56px] touch-manipulation" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-final-transcricao-profissional">Ver meu preço</button>
+            <button onclick="openBudgetModal()" class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-white text-black border-2 border-black hover:bg-gray-50 text-lg px-8 py-6 min-h-[56px] touch-manipulation" data-gtm-category="cta" data-gtm-action="click" data-gtm-label="cta-final-transcricao-profissional">Calcular meu preço</button>
           </div>
           <p class="text-sm opacity-80 mt-4">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
         </div>
