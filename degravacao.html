@@ -681,7 +681,7 @@
         "name": "Quanto tempo leva para degravar?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Depende da duração dos arquivos e do prazo escolhido. Instant: a partir de 1 dia útil; Fast: a partir de 2 dias úteis; Flex: a partir de 8 dias úteis. Clique em Simular orçamento para ver o prazo exato do seu arquivo."
+          "text": "Depende da duração dos arquivos e do prazo escolhido. Instant: a partir de 1 dia útil; Fast: a partir de 2 dias úteis; Flex: a partir de 8 dias úteis. Clique em Ver meu orçamento para ver o prazo exato do seu arquivo."
         }
       },
       {
@@ -745,7 +745,7 @@
         "name": "Como faço o orçamento?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Clique no botão Simular orçamento, informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente."
+          "text": "Clique no botão Ver meu orçamento, informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente."
         }
       }
     ]
@@ -945,7 +945,7 @@
         <img src="/assets/audiotext-logo.avif" alt="Audiotext Degravação" width="226" height="56" loading="eager"  class="h-8 w-auto flex-shrink-0">
       </a>
       <button onclick="openBudgetModal()" class="bg-primary text-white px-5 py-3 min-h-[48px] inline-flex items-center justify-center rounded-lg text-sm font-medium hover:bg-primary/90 transition-colors">
-        Simular orçamento
+        Ver meu orçamento
       </button>
     </div>
   </header>
@@ -959,19 +959,19 @@
             Degravação de Áudio Profissional
           </h1>
           <p class="text-xl md:text-2xl font-semibold max-w-3xl mx-auto">
-            Degravação de áudio e vídeo, ipsis litteris, aceita em processos judiciais
+            Degravação de audiências, depoimentos e oitivas: ipsis litteris, com marcação de tempo, para apresentação como prova em processos judiciais.
           </p>
           <p class="text-lg md:text-xl text-[hsl(220,9%,46%)] max-w-3xl mx-auto">
-            Para advogados, escritórios de advocacia, empresas e cartórios
+            Para advogados, escritórios e cartórios. Sigilo por NDA e entrega no prazo do seu andamento.
           </p>
 
           <!-- CTA -->
           <div class="flex flex-col sm:flex-row gap-4 justify-center pt-4">
             <button onclick="openBudgetModal()" class="w-full sm:w-auto text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-              Simular orçamento
+              Ver meu orçamento
             </button>
           </div>
-          <p class="text-sm text-[hsl(220,9%,46%)]">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
+          <p class="text-sm text-[hsl(220,9%,46%)]">A partir de R$ 3,20/min • orçamento em segundos • sem cadastro</p>
 
           <!-- 3 Bullets -->
           <div class="flex flex-col gap-4 max-w-2xl mx-auto text-left">
@@ -1011,6 +1011,18 @@
               Termo de Sigilo (NDA) disponível quando necessário.
             </p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banda de preço: piso da degravação, R$ 3,20/min -->
+    <section class="py-10" aria-label="Preço da degravação">
+      <div class="container mx-auto px-4">
+        <div class="max-w-3xl mx-auto rounded-lg border border-[hsl(220,13%,91%)] bg-[hsl(220,13%,95%)]/30 p-6 text-center">
+          <p class="text-sm text-[hsl(220,9%,46%)] mb-1">Degravação jurídica (ipsis litteris + revisão)</p>
+          <p class="text-2xl md:text-3xl font-bold">A partir de R$ 3,20/min</p>
+          <p class="text-sm text-[hsl(220,9%,46%)] mt-2">O valor final depende da duração, do prazo (dias úteis) e das características do áudio. Veja o preço exato em segundos.</p>
+          <button onclick="openBudgetModal()" class="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-primary text-white font-medium min-h-[48px] px-6 hover:bg-primary/90 transition-colors">Ver meu orçamento</button>
         </div>
       </div>
     </section>
@@ -1214,7 +1226,7 @@
 
         <div class="text-center mt-8">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu orçamento
           </button>
         </div>
       </div>
@@ -1343,7 +1355,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu orçamento
           </button>
         </div>
       </div>
@@ -1367,7 +1379,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu orçamento
           </button>
         </div>
       </div>
@@ -1445,7 +1457,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu orçamento
           </button>
         </div>
       </div>
@@ -1469,7 +1481,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu orçamento
           </button>
         </div>
       </div>
@@ -1585,7 +1597,7 @@
 
         <div class="text-center mt-12">
           <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors">
-            Simular orçamento
+            Ver meu orçamento
           </button>
         </div>
       </div>
@@ -1641,7 +1653,7 @@
           </div>
           <div class="pt-4">
             <button onclick="openBudgetModal()" class="text-lg px-8 py-4 bg-white text-primary rounded-lg font-medium hover:bg-gray-100 transition-colors">
-              Simular orçamento
+              Ver meu orçamento
             </button>
             <p class="text-sm opacity-70 mt-4">Orçamento em segundos • Sem cadastro • Sem compromisso</p>
           </div>
@@ -1863,7 +1875,7 @@
     var services = [
       { icon: 'scale', title: 'Degravação (Transcrição Jurídica)', desc: 'Transcrição ipsis litteris (na íntegra), aceita em processos judiciais. Possibilidade de ata notarial para dar fé pública ao documento.', current: true },
       { icon: 'fileText', title: 'Transcrição de Áudio Profissional', desc: 'Transcrição revisada por transcritores e revisores especializados. Para qualquer tipo de gravação que exige texto confiável.', link: '/transcricao-de-audio' },
-      { icon: 'bot', title: 'Transcrição Automática por IA', desc: '~R$ 0,30/min • Pronta em minutos • Acurácia média: 93%', link: '/transcricao-automatica' },
+      // Card de transcrição por IA não entra nesta página: numa LP jurídica que vende ipsis litteris, oferecer 93% mina a própria promessa.
       { icon: 'clipboardList', title: 'Transcrição para Ata de Reuniões', desc: 'Transcrição formatada para elaboração de atas formais.', link: '/transcricao-de-audio' },
       { icon: 'graduationCap', title: 'Transcrição para Pesquisa Acadêmica', desc: 'Para mestrandos, doutorandos e pesquisadores.', link: '/transcricao-de-audio' },
       { icon: 'messageCircle', title: 'Legendagem de Vídeos', desc: 'SRT, VTT, embedded. Para acessibilidade.', link: '/legendagem' }
@@ -1904,7 +1916,7 @@
       { question: 'O que significa "ipsis litteris"?', answer: 'Expressão latina que significa "pelas mesmas letras", "textualmente". Na degravação: tudo é transcrito exatamente como foi dito. Inclui vícios, repetições, interrupções.' },
       { question: "Vocês fazem ata notarial?", answer: "Não, ata notarial é de competência exclusiva de tabelionatos. A ata notarial dá fé pública ao documento. Recomendada quando a degravação é prova principal. Consulte seu advogado." },
       { question: "Qual a diferença entre degravação e transcrição ipsis litteris?", answer: '"Degravação" é o termo mais usado no meio jurídico. Ambos significam transcrição literal, palavra por palavra. São sinônimos.' },
-      { question: "Quanto tempo leva para degravar?", answer: 'Depende da duração dos arquivos e do prazo escolhido. Instant: a partir de 1 dia útil · Fast: a partir de 2 dias úteis · Flex: a partir de 8 dias úteis. Clique em "Simular orçamento" para ver o prazo exato do seu arquivo.' },
+      { question: "Quanto tempo leva para degravar?", answer: 'Depende da duração dos arquivos e do prazo escolhido. Instant: a partir de 1 dia útil · Fast: a partir de 2 dias úteis · Flex: a partir de 8 dias úteis. Clique em "Ver meu orçamento" para ver o prazo exato do seu arquivo.' },
       { question: "Como é feita a marcação de tempo?", answer: 'Formato: [hh:mm:ss] no final de cada fala. Exemplo: M1: "Bom dia...". [00:15:30]. Permite localizar qualquer trecho no áudio original facilmente.' },
       { question: "Vocês identificam quem está falando?", answer: "Sim! Em todas nossas transcrições Identificamos os falantes (M1, M2, etc. para vozes masculinas, F1, F2, etc. para vozes femininas, ou por nome quando fornecido). Ideal para entrevistas, reuniões, audiências com múltiplos participantes. O limite viável para identificação por áudio sem vídeo é de até 5 participantes." },
       { question: "O que acontece se meu áudio tiver qualidade ruim?", answer: "Avaliamos cada arquivo gratuitamente antes do início. Informamos se é possível transcrever ou não. Se sim, os trechos ininteligíveis serão marcados na transcrição. Você decide se quer prosseguir ou não. Caso não tenha nada que possa ser transcrito na gravação por conta da baixa qualidade, te avisamos e não seguimos com o serviço." },
@@ -1912,7 +1924,8 @@
       { question: "Como funciona o sigilo e confidencialidade?", answer: "Acesso restrito ao transcritor e revisor do seu pedido. Upload com segurança, armazenamento em servidores seguros, termo de sigilo (NDA) disponível quando necessário. 14 anos de operação, zero incidentes de dados." },
       { question: "Qual o formato de entrega?", answer: "DOCX (editável no Word) e PDF (pronto para leitura e impressão). Tudo formatado, padronizado e pronto para uso." },
       { question: "Vocês atendem todo o Brasil?", answer: "Sim, 100% online. Você pode entrar em contato pelo e-mail, telefone ou WhatsApp. Upload seguro de qualquer lugar. Temos clientes em todos os estados do Brasil e em outros países também." },
-      { question: "Como faço o orçamento?", answer: 'Clique no botão "Simular orçamento", informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente.' }
+      { question: "Como vocês tratam segurança e LGPD dos meus arquivos?", answer: "Upload criptografado, armazenamento em servidores seguros e acesso restrito ao transcritor e revisor do seu pedido. Operamos em conformidade com a LGPD e a exclusão dos arquivos pode ser solicitada após a entrega. 14 anos de operação, zero incidentes de dados. Termo de Sigilo (NDA) disponível quando necessário." },
+      { question: "Como faço o orçamento?", answer: 'Clique no botão "Ver meu orçamento", informe as características das gravações e o orçamento aparece na tela em segundos, instantaneamente.' }
     ];
 
     var showingAllReviews = false;
