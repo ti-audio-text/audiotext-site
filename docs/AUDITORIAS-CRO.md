@@ -350,3 +350,37 @@ Resultado: nenhuma superfície rolável em lugar nenhum. O conteúdo cortado fic
 **Ressalva para validação em preview:** o filho posta com `targetOrigin` fixo em `https://www.audiotext.com.br/` (`app.js:941`), então **em preview da Vercel (e em qualquer host que não seja www) a mensagem `budgetResize` é descartada** e o iframe fica nos 600px fixos, com o filho rolando por dentro. O preview não exercita o caminho corrigido sozinho: é preciso simular a mensagem pelo console. O mesmo vale para o apex `audiotext.com.br`, já anotado na seção anterior.
 
 **Efeito colateral pré-existente observado (não corrigido):** `.budget-modal-iframe` não declara `display:block`, então sobra a folga de linha de ~5px abaixo do iframe. É espaço vazio, não corta conteúdo.
+
+---
+
+## 2026-09-02 (4) Merges do dia e Variante B da /degravacao
+
+**Mergeados em 2026-09-02:** PR #17 (CSP do GA4), #18 (log do incidente), **#19** (`fix/budget-modal-scroll`, Bug 2 do funil), **#20** (`fix/travessoes-e-cta`), **#21** (`fix/legendagem-remove-sheet-morto`).
+
+### Lote de travessões (PR #20)
+
+15 pontos de copy visível em 6 arquivos: atribuições de depoimento passam a mostrar só o nome; FAQ de prazo da degravacao troca o travessão por ponto; aposto e cláusula principal da sobre viram vírgula; rótulo da ipsis-litteris, badge da o-que-e-degravacao e o `name` do JSON-LD da selecao-temp viram dois-pontos. Inclui as strings renderizadas por JS. Re-scan: **zero em texto visível** fora de legal.html (64, lote próprio) e legendagem.html (3 mais 2 meia-riscas, congeladas até o checkpoint).
+
+No mesmo PR, as duas classes-fantasma de CTA: `.px-5` definida em degravacao e index e `.min-h-\[48px\]` na degravacao, mesmo padrão do PR #12. Medição na página ao vivo, desligando as regras: o CTA do topo da degravacao ia de **121×44 com padding-left 0** para **161×48 com 20px**. No index a definição não muda nada visualmente, porque `.btn { height: 2.5rem; padding: 0 1rem }` vem depois no arquivo e vence `.px-5` e `.h-12` por ordem de fonte; foi mantida só para eliminar a classe-fantasma.
+
+### Legendagem (PR #21)
+
+Removido o envio morto para a planilha do Google: a guarda `SHEET_URL !== '<a própria URL real>'` era sempre falsa, então nenhum lead jamais chegou à planilha. Saíram a declaração, o banner de comentário, o bloco de `fetch` e o `URLSearchParams`, lido só dentro daquele corpo. **As UTMs coletadas ali não iam a lugar nenhum**, então não houve perda de medição: a atribuição segue por GTM/GA4. Gate: push síncrono confirmado, `generate_lead` com `form_name:'legendagem'` e estimativa de R$ 360,00 (60 min × R$ 6), WhatsApp aberto 1×. A página recongela após este merge.
+
+### Variante B da /degravacao (branch `variante-b/degravacao-final`)
+
+**Rebase único** do commit da variante sobre a main final, com as resoluções decididas pelo dono: stat tile de minutos e os dois hunks de FAQ resolvidos a favor da main (o travessão do PR #20 **não** foi reintroduzido); rodapé unificado da main preservado, já que a variante não o toca.
+
+**Sete ajustes da validação de copy, aplicados por cima:**
+
+1. CTA único **"Ver meu orçamento"** em 14 pontos: 10 botões, as 2 FAQs que citam o nome do botão e os 2 espelhos JSON-LD. Substitui o "Ver meu preço" da variante. O item da fila no CLAUDE.md dizia "Calcular meu orçamento" e foi atualizado para o rótulo decidido.
+2. Subheadline do hero sem travessão e com claim suavizado: *"Degravação de audiências, depoimentos e oitivas: ipsis litteris, com marcação de tempo, para apresentação como prova em processos judiciais."* O "aceita como prova" prometia admissibilidade, que é decisão do juízo.
+3. Âncora de preço reduzida de 3 para 2 aparições acima da dobra: sai da linha de público, fica na microcopy do hero e na banda.
+4. Comentário de 19 linhas do `<head>` removido: nota interna de teste A/B não vai ao view-source de produção.
+5. Comentário de slot vazio de depoimento jurídico removido do array `googleReviews`. O destaque do Kinchen, que já vinha da main, encerra o item da fila. **Backlog do dono:** captar quote nominal de advogado com nome e OAB.
+6. Gate classe-fantasma pegou um caso novo: a banda usava `bg-[hsl(220,13%,95%)]/40`, sem definição no CSS da página, ou seja, fundo nulo. Trocado pela `/30`, já definida e visualmente equivalente.
+7. Os dois comentários que ainda carregavam o marcador de variante foram neutralizados, um deles porque continha travessão indo a produção.
+
+**Gates:** 0 ocorrências de "Ver meu preço" e de "Simular orçamento" · 14 de "Ver meu orçamento" · 0 de "R$ 2,00" · piso R$ 3,20 em 5 pontos · prazos "a partir de 1/2/8 dias úteis" intactos · 8 JSON-LD válidos · tags balanceadas, pilha final vazia · classes-fantasma **6, exatamente as mesmas da main** (nenhuma nova) · 375×667 com `overflowX` 0, 10 CTAs todos com 48px ou mais, banda com padding de 40px e largura 343 · `cta_click` disparando e modal abrindo com `/budget/`.
+
+**Travessões remanescentes no arquivo (2, fora do escopo, pré-existentes na main):** comentários HTML `<!-- GTM Bridge ... — depois do cookieConsent -->` (`:13`) e `<!-- Cluster Degravação — Links Internos -->` (`:1663`). Não corrigidos.
