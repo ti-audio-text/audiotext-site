@@ -320,3 +320,33 @@ Resultado: nenhuma superfície rolável em lugar nenhum. O conteúdo cortado fic
 - **Descartada:** aumentar os 600px fixos. Não resolve, porque o handler sobrescreve a altura logo em seguida.
 
 **Risco:** a Proposta B mexe em bloco inline de 9 páginas que também contém o listener do `generate_lead`. Gate obrigatório no preview: cadeia consent, `gtm.js`, `cta_click`, `generate_lead` (`form_name:'orcamento'`), mais scan 375×667 e conferência da etapa 2 em 1366×768 a 100% e a 125%.
+
+---
+
+## 2026-09-02 (3) INCIDENTE /budget ENCERRADO: Bug 2 corrigido
+
+**Merges do dia:** PR #17 (`fix/csp-analytics-google`, CSP do GA4) e PR #18 (`docs/incidente-budget`, log do incidente) mergeados na `main` em **2026-09-02**.
+
+### Bug 2 fechado (branch `fix/budget-modal-scroll`)
+
+**Causa-raiz (confirmada por reprodução, retifica o diagnóstico de abertura):** não era a altura fixa de 600px, era o **auto-resize**. O handler de `budgetResize` aplicava a altura total do conteúdo no iframe, o documento filho passava a caber inteiro e **perdia a rolagem própria**, enquanto `.budget-modal-content` (`max-height:90vh` + `overflow:hidden`) cortava o excedente **sem gerar barra**. Nenhuma superfície rolável.
+
+**Correção (Proposta B, autorizada):** `fitBudgetIframe()` aplica `Math.min(altura do conteúdo, Math.round(innerHeight * 0.9))` e guarda a última altura recebida para reaplicar no `resize` do pai, porque mudança de zoom altera o `innerHeight` sem disparar `resize` no filho. Bloco idêntico nas 9 páginas com handler. `postMessage` e o push de `generate_lead` não foram tocados.
+
+**Gates (servidor local replicando o roteamento da Vercel, páginas reais):**
+
+| Verificação | Resultado |
+|---|---|
+| `generate_lead` (`form_name:'orcamento'`) por página | **9/9** disparam, com `service_type`, `user_email`, `user_phone`, `user_name` |
+| Altura aplicada a 1366×625 | 563px em 9/9, igual ao `max-height` computado de 90vh |
+| 1366×625, etapa 2 real | filho volta a rolar 117px, roda do mouse sobre o iframe funciona, botão de envio visível |
+| Zoom 125% (1366×500) | reaplica para 450px no `resize`, filho rola 230px |
+| Tela alta (1920×945) | iframe em 680px, sem limite ativo, botão visível sem rolar. Comportamento igual ao anterior |
+| Mobile 375×667 | iframe 600px, caixa `overflow-y:auto` intacta, sem overflow horizontal |
+| `node --check` nos blocos inline | 10/10 sem erro de sintaxe |
+| JSON-LD | 47 blocos válidos nas 9 páginas |
+| Scan 375×667 | `overflowX = 0` nas 9 páginas |
+
+**Ressalva para validação em preview:** o filho posta com `targetOrigin` fixo em `https://www.audiotext.com.br/` (`app.js:941`), então **em preview da Vercel (e em qualquer host que não seja www) a mensagem `budgetResize` é descartada** e o iframe fica nos 600px fixos, com o filho rolando por dentro. O preview não exercita o caminho corrigido sozinho: é preciso simular a mensagem pelo console. O mesmo vale para o apex `audiotext.com.br`, já anotado na seção anterior.
+
+**Efeito colateral pré-existente observado (não corrigido):** `.budget-modal-iframe` não declara `display:block`, então sobra a folga de linha de ~5px abaixo do iframe. É espaço vazio, não corta conteúdo.
