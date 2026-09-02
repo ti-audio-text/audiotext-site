@@ -215,6 +215,7 @@
     .px-2 { padding-left: 0.5rem; padding-right: 0.5rem; }
     .px-3 { padding-left: 0.75rem; padding-right: 0.75rem; }
     .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .px-5 { padding-left: 1.25rem; padding-right: 1.25rem; } /* [ajuste] faltava; CTA do topo ficava sem padding horizontal */
     .px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
     .px-8 { padding-left: 2rem; padding-right: 2rem; }
     .py-1 { padding-top: 0.25rem; padding-bottom: 0.25rem; }
@@ -273,6 +274,7 @@
     .max-h-full { max-height: 100%; }
     .max-h-\[700px\] { max-height: 700px; }
     .min-h-0 { min-height: 0; }
+    .min-h-\[48px\] { min-height: 48px; } /* [ajuste] faltava; CTA do topo perdia o alvo de toque de 48px */
     
     /* ===== Borders ===== */
     .border { border-width: 1px; }
@@ -679,7 +681,7 @@
         "name": "Quanto tempo leva para degravar?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Depende da duração dos arquivos e do prazo escolhido — Instant: a partir de 1 dia útil; Fast: a partir de 2 dias úteis; Flex: a partir de 8 dias úteis. Clique em Simular orçamento para ver o prazo exato do seu arquivo."
+          "text": "Depende da duração dos arquivos e do prazo escolhido. Instant: a partir de 1 dia útil; Fast: a partir de 2 dias úteis; Flex: a partir de 8 dias úteis. Clique em Simular orçamento para ver o prazo exato do seu arquivo."
         }
       },
       {
@@ -1538,7 +1540,7 @@
             <svg class="h-6 w-6 fill-amber-500 text-amber-500" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor"/></svg>
           </div>
           <p class="text-lg md:text-xl text-center mb-6 italic leading-relaxed">"Gostaria de registrar meu agradecimento à Empresa Audiotext, pelo excelente serviço prestado, prazo de entrega, esclarecimento de dúvidas e a cordialidade no atendimento por todos os profissionais envolvidos. Com toda a certeza o fator preponderante que faz a diferença em uma empresa, é a qualidade e o comprometimento dos serviços contratados, tudo isso me foi transmitido com muita segurança. Parabéns e muitíssimo obrigado."</p>
-          <p class="font-semibold text-center text-lg">— José Eduardo Kinchen</p>
+          <p class="font-semibold text-center text-lg">José Eduardo Kinchen</p>
         </div>
 
         <!-- Google reviews grid -->
@@ -1902,7 +1904,7 @@
       { question: 'O que significa "ipsis litteris"?', answer: 'Expressão latina que significa "pelas mesmas letras", "textualmente". Na degravação: tudo é transcrito exatamente como foi dito. Inclui vícios, repetições, interrupções.' },
       { question: "Vocês fazem ata notarial?", answer: "Não, ata notarial é de competência exclusiva de tabelionatos. A ata notarial dá fé pública ao documento. Recomendada quando a degravação é prova principal. Consulte seu advogado." },
       { question: "Qual a diferença entre degravação e transcrição ipsis litteris?", answer: '"Degravação" é o termo mais usado no meio jurídico. Ambos significam transcrição literal, palavra por palavra. São sinônimos.' },
-      { question: "Quanto tempo leva para degravar?", answer: 'Depende da duração dos arquivos e do prazo escolhido — Instant: a partir de 1 dia útil · Fast: a partir de 2 dias úteis · Flex: a partir de 8 dias úteis. Clique em "Simular orçamento" para ver o prazo exato do seu arquivo.' },
+      { question: "Quanto tempo leva para degravar?", answer: 'Depende da duração dos arquivos e do prazo escolhido. Instant: a partir de 1 dia útil · Fast: a partir de 2 dias úteis · Flex: a partir de 8 dias úteis. Clique em "Simular orçamento" para ver o prazo exato do seu arquivo.' },
       { question: "Como é feita a marcação de tempo?", answer: 'Formato: [hh:mm:ss] no final de cada fala. Exemplo: M1: "Bom dia...". [00:15:30]. Permite localizar qualquer trecho no áudio original facilmente.' },
       { question: "Vocês identificam quem está falando?", answer: "Sim! Em todas nossas transcrições Identificamos os falantes (M1, M2, etc. para vozes masculinas, F1, F2, etc. para vozes femininas, ou por nome quando fornecido). Ideal para entrevistas, reuniões, audiências com múltiplos participantes. O limite viável para identificação por áudio sem vídeo é de até 5 participantes." },
       { question: "O que acontece se meu áudio tiver qualidade ruim?", answer: "Avaliamos cada arquivo gratuitamente antes do início. Informamos se é possível transcrever ou não. Se sim, os trechos ininteligíveis serão marcados na transcrição. Você decide se quer prosseguir ou não. Caso não tenha nada que possa ser transcrito na gravação por conta da baixa qualidade, te avisamos e não seguimos com o serviço." },
@@ -1990,7 +1992,7 @@
         return '<div class="bg-white border border-[hsl(220,13%,91%)] rounded-lg p-4 shadow-sm ' + hiddenClass + '">' +
           '<div class="flex gap-0.5 mb-3">' + starsHtml + '</div>' +
           '<p class="text-[hsl(220,9%,46%)] text-sm mb-3">"' + review.content + '"</p>' +
-          '<p class="font-semibold text-sm">— ' + review.name + '</p>' +
+          '<p class="font-semibold text-sm">' + review.name + '</p>' +
         '</div>';
       }).join('');
     }
@@ -2002,7 +2004,7 @@
         return '<div class="bg-white border-2 border-primary/10 rounded-lg p-4">' +
           '<div class="flex gap-0.5 mb-3">' + starsHtml + '</div>' +
           '<p class="text-[hsl(220,9%,46%)] text-sm mb-3">"' + t.content + '"</p>' +
-          '<p class="text-sm font-medium">— ' + t.author + ', <span class="text-primary font-semibold">' + t.company + '</span></p>' +
+          '<p class="text-sm font-medium">' + t.author + ', <span class="text-primary font-semibold">' + t.company + '</span></p>' +
         '</div>';
       }).join('');
     }
