@@ -1032,6 +1032,17 @@
     }
     window.toggleFAQ = toggleFAQ;
 
+    // Altura do iframe do orcamento limitada ao max-height de 90vh do modal.
+    // Sem o limite o iframe cresce alem da caixa, o filho perde a rolagem propria
+    // e o botao de envio da etapa 2 fica inalcancavel em telas baixas.
+    function fitBudgetIframe(h) {
+      if (typeof h === 'number' && h > 0) fitBudgetIframe.ultimaAltura = h;
+      var iframe = document.getElementById('budgetIframe');
+      if (!iframe || !fitBudgetIframe.ultimaAltura) return;
+      iframe.style.height = Math.min(fitBudgetIframe.ultimaAltura, Math.round(window.innerHeight * 0.9)) + 'px';
+    }
+    window.addEventListener('resize', function() { fitBudgetIframe(); });
+
     window.addEventListener('message', function(e) {
       if (e.origin === window.location.origin) {
         var data = e.data;
@@ -1039,8 +1050,7 @@
         if (data === 'openWhatsApp') window.open('https://api.whatsapp.com/send?phone=5541997990622&text=Ol%C3%A1!%20Tenho%20uma%20d%C3%BAvida%20sobre%20meu%20or%C3%A7amento%2C%20voc%C3%AA%20pode%20me%20ajudar%3F%20', '_blank');
         if (data === 'openTransfer') window.open('https://audiotext.wetransfer.com', '_blank');
         if (data && data.type === 'budgetResize') {
-          var iframe = document.getElementById('budgetIframe');
-          if (iframe) iframe.style.height = data.height + 'px';
+          fitBudgetIframe(data.height);
         }
       }
     });
