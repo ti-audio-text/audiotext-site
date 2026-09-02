@@ -211,3 +211,112 @@ Mesma rubrica da auditoria de 07/08 (68/100). Estado: pós 13 fixes (6 Trilho 1 
 
 ## 2026-08-28 — Rodapé unificado (branch `fix/rodape-unificado`, encadeada no hotfix)
 Rodapé único e auto-contido (estilos inline + flex-wrap; empilha no mobile sem depender do CSS de cada página — lição do py-10) aplicado às **14 páginas** com footer. Design: fundo claro, Col1 identidade/empresa (logo, tagline, CNPJ+NAP consistente com schema Organization, "100% online", Sobre/Como Funciona/Trabalhe Conosco), Col2 Serviços (4), Col3 Contato (2 tels + WhatsApp + e-mail, sem rótulos soltos), base © + Privacidade/Cookies/Termos. SEM cluster de degravação (silo permanece nos links do corpo). Elimina o bug antigo do footer ("Telefones" sobre e-mail + `<div>` aberta). Limpeza: removidas defs órfãs `.mb-0\.5` e `.lg\:gap-12` (0 usos no site); demais classes do bloco `/* Footer fix */` (space-y, grid-cols-1, lg:grid-cols-4) são compartilhadas com o corpo → mantidas. Gates: 14/14 parse · footer byte-idêntico (len 4970) · empilha no mobile, cabe em 375 (maxRight 284), 14 links todos ≥44px, 0 overflow · links resolvem · generate_lead intacto (audio cta_click→modal; legendagem form R$120). **Legendagem congela APÓS este merge** (piloto B2B).
+
+---
+
+## 2026-09-02 — INCIDENTE ABERTO: funil /budget (iframe) — 2 bugs
+
+**Status:** diagnóstico entregue; correção AGUARDANDO ok do dono (parada condicional total — funil de conversão de 3 campanhas). Nenhuma alteração aplicada ao código do budget. Arquivos: `budget/index.html`, `budget/assets/js/{app.js,api.js,tracking.js}`, `budget/assets/css/style.css`; embed pai nas 14 páginas (`iframe.src='/budget/'`, same-origin); `assets/js/gtm-bridge.js`; `vercel.json`.
+
+**Arquitetura (confirmada):** iframe `/budget/` é **same-origin** ao pai (não é third-party). API = `location.origin + /api/v1/` com `credentials:"omit"` → cookies nunca são enviados; auth viaja no corpo (`sessionCode` + `_csrf`), ambos obtidos do GET inicial e mantidos em memória. `vercel.json` faz rewrite `/api → api.audiotext.com.br` e redirect canônico **apenas de `wp.` → www** (o apex `audiotext.com.br` não é coberto no arquivo).
+
+**BUG 1 — "Erro ao salvar dados" (intermitente por máquina, mesma rede/momento).**
+- Mensagem real no código: `showError("Erro ao salvar dados. Tente novamente.")` (`app.js:579`, step 1) — a frase relatada é paráfrase. O erro técnico real vem do backend: `PATCH budget falhou (STATUS): text` (`api.js:34`), só no `console.error`.
+- **Causa-raiz (enabler, confirmada):** o catch do init `loadBudget()` **engole a falha** (`app.js:471`, só `console.error`). Se o GET `/budget` falhar, `sessionCode` e `csrfToken` ficam `""`; o form renderiza normalmente; o usuário preenche e o PATCH sai com `sessionCode:"" / _csrf:null` → backend rejeita → mensagem genérica. Storage bloqueado NÃO é a causa (same-origin + `credentials:omit` + acessos a `localStorage` guardados em try/catch, `document.cookie` degrada para "").
+- **Gatilhos por-máquina (hipóteses ranqueadas):** (1) cookie `audiotext-budget-session` (7 dias) stale/inválido → GET não-2xx só na máquina que tem o cookie; (2) extensão/adblock/proxy corporativo bloqueando `/api` ou o iframe; (3) corrida: submit antes do init assíncrono resolver; (4) transiente de edge/POP no proxy p/ `api.audiotext.com.br`. O status HTTP no console isola qual.
+
+**BUG 2 — etapa 2 sem rolagem, botão de envio inalcançável (por resolução/zoom).**
+- **Causa-raiz (confirmada):** iframe de **altura fixa** (`.budget-modal-iframe height:600px` desktop / `min-height:70vh` mobile, sem resize por postMessage) + dentro do iframe `.App{height:100%;overflow:hidden}` (`style.css:48/54`) e reset `overflow:hidden` (`style.css:25`) + `.budget-modal-content{overflow:hidden}` no pai. Conteúdo mais alto que a caixa é **clipado sem scrollbar**. Zoom 110-125% (padrão em notebook corporativo) ou viewport baixo (laptop 768px, mobile landscape) aumenta o conteúdo em px e estoura os 600px. Zoom-out reduz abaixo do limite e "resolve".
+- **Impacto CVR:** usuário que não alcança o botão da etapa 2 não converte; candidato a explicar parte da CVR mobile inferior (viewports curtos e zoom são comuns).
+
+**Achado colateral (tracking, desacoplado):** `app.js` posta ao pai com alvo fixo `"https://www.audiotext.com.br/"` (`:575/:664/:670`); o listener (`gtm-bridge.js:52`) exige `e.origin===location.origin` (ok em same-origin). Como o `vercel.json` só redireciona `wp.`→www (não o apex), **usuário no apex `audiotext.com.br` tem o postMessage descartado → `generate_lead form_name:'orcamento'` pode não disparar** (o save funciona no apex; só o tracking cai). Verificar se o apex→www está forçado no painel da Vercel.
+
+**Correções propostas (não aplicadas; risco ao funil):** ver bloco entregue ao dono. BUG 2 tem fix CSS-only de baixo risco (scroll interno) sem tocar postMessage/generate_lead; BUG 1 depende do status HTTP real (matriz de reprodução) e mexe no núcleo do funil (init/save) → risco médio, re-teste da cadeia inteira obrigatório.
+
+---
+
+## 2026-09-02 (2) INCIDENTE /budget: Bug 1 ENCERRADO, Bug 2 com causa-raiz confirmada
+
+### BUG 1 (RESOLVIDO): "Não foi possível salvar" = Vercel Bot Protection
+
+**Causa-raiz confirmada** (console F12 + dashboard Vercel): o **Bot Protection da Vercel em modo "Challenge"** interceptava os `fetch()` do `/budget`. O challenge é interativo e insolúvel por `fetch()`, então a requisição voltava **429 com a página "Vercel Security Checkpoint"** em vez de JSON. O **Attack Mode estava OFF**; o mecanismo era o Bot Protection.
+
+- **Perfil afetado:** IP/fingerprint classificados como suspeitos. Caso real reproduzido: IP da Digi Spain via edge `cdg1` (VPN/proxy).
+- **Volume:** **781 requisições desafiadas/dia** no painel Traffic. Usuário real em VPN, proxy ou rede corporativa era bloqueado **em silêncio**, possivelmente há semanas.
+- **Hipótese vinculada:** co-autor provável do sub-registro de conversões da Degravação (ver seção de 20/08). Não é causa única, mas entra como fator.
+- **Correção:** ação do dono no dashboard (Bot Protection de "Challenge" para **"Log"**). **Nenhuma mudança de código.** As hipóteses de cookie stale, extensão/adblock e corrida de init, levantadas no diagnóstico de abertura, ficam descartadas como causa principal.
+
+**BACKLOG (registrado, não implementado):** o app trata o challenge como erro genérico e os GETs iniciais falham em silêncio (`app.js:471`, catch só com `console.error`). Item futuro: detectar resposta de challenge (status 429, ou corpo HTML onde se espera JSON) e exibir mensagem acionável ao usuário em vez de "Erro ao salvar dados".
+
+### CSP: hits do GA4 bloqueados (corrigido, branch `fix/csp-analytics-google`)
+
+Evidência: hit do GA4 `/g/collect` (evento `cta_click`) bloqueado pelo CSP. O `connect-src` liberava `region1.google-analytics.com` mas **não** `region1.analytics.google.com`, que é **domínio diferente**. Eventos GA4 perdidos em parte dos usuários (o endpoint regional varia por sessão).
+
+Correção de uma linha em `vercel.json:30`: adicionado `https://*.analytics.google.com` ao `connect-src` (cobre todas as regiões; mesmo padrão já usado para `*.google-analytics.com`). Nenhuma outra diretiva tocada.
+
+**Outros endpoints que o padrão atual pode bloquear igual (levantados, NÃO corrigidos):**
+
+| # | Endpoint ausente | Diretiva | Efeito provável | Evidência |
+|---|---|---|---|---|
+| 1 | `https://script.google.com` | connect-src | `fetch()` do form de legendagem para a planilha do Google seria bloqueado | `legendagem.html:2108/2217` |
+| 2 | `https://cdn.tailwindcss.com` | script-src | Tailwind da página de termos do app não carrega (página sem estilo) | `termos-e-condicoes-app.html:31` |
+| 3 | `https://www.google.com.br` (e demais ccTLDs) | connect-src | pings de remarketing e user-list do Google Ads vão para o domínio local do usuário; só `www.google.com` está liberado, e o público é 100% BR | padrão do gtag |
+| 4 | `https://td.doubleclick.net` | connect-src | está em `frame-src` mas não em `connect-src`; conversion linker e Google signals também fazem XHR/beacon | comparação das diretivas |
+| 5 | `https://bid.g.doubleclick.net` | connect-src | idem, presente só em `frame-src` | comparação das diretivas |
+| 6 | `https://graph.facebook.com` | connect-src | CAPI e pixel avançado. O beacon de imagem do pixel passa (`img-src https:`) e `www.facebook.com` já está liberado, então o item "CSP bloqueando CAPI" da fila precisa de evidência de console para ser fechado | fila aberta |
+
+**Achado colateral (fora do escopo, não corrigido):** em `legendagem.html:2217` a guarda do envio para a planilha é `if (SHEET_URL && SHEET_URL !== '<a própria URL real>')`, comparação sempre falsa, então o `fetch()` **nunca executa**. A guarda foi escrita para testar contra a URL placeholder, mas o placeholder foi substituído pela URL real no mesmo arquivo. Leads de legendagem não chegam à planilha (WhatsApp e `generate_lead` seguem funcionando).
+
+### BUG 2 (causa-raiz CONFIRMADA, correção NÃO aplicada): etapa 2 sem rolagem
+
+**O mecanismo é o auto-resize do iframe, não a altura fixa.** O diagnóstico de abertura atribuiu o problema à altura fixa de 600px; a reprodução mostrou o contrário: existe resize por `postMessage` e é justamente ele que remove a rolagem.
+
+Cadeia, com arquivo e linha:
+
+1. `budget/assets/js/app.js:938-956` (`notifyParentHeight`): o filho mede `.App .container` (`scrollHeight`) e posta `{type:'budgetResize', height}` ao pai a cada troca de etapa, resize e mutação de DOM.
+2. Pai, exemplo `index.html:2608-2611`: `iframe.style.height = data.height + 'px'`. O iframe **cresce até a altura total do conteúdo**, então o documento filho passa a caber inteiro e **para de ter rolagem própria**.
+3. `index.html:1128-1139`, `.budget-modal-content`: `max-height: 90vh` mais `overflow: hidden`. A caixa **corta** o iframe que cresceu e, por ser `hidden`, **não gera barra de rolagem**.
+4. O overlay `.budget-modal` tem `overflow-y:auto`, mas a caixa nunca ultrapassa 90vh, então o overlay também não rola.
+
+Resultado: nenhuma superfície rolável em lugar nenhum. O conteúdo cortado fica inacessível.
+
+**Medição** (harness local reproduzindo o modal do pai e a etapa 2 do filho, sem depender da API):
+
+- Altura do conteúdo da etapa 2 a 780px de largura: **676px** (`container.scrollHeight` = 680).
+- Base do botão "Ver meu orçamento" dentro do filho: **606,6px**.
+- Condição de visibilidade: `0,9 × innerHeight >= 607`, ou seja **altura útil do navegador >= ~675px CSS**.
+
+| Viewport (px CSS) | Altura do iframe | Caixa (90vh) | Cortado | Botão de envio |
+|---|---|---|---|---|
+| 1920×945 (FHD, 100%) | 676 | 850 | 0px | visível |
+| 1536×721 (1536×864, 100%) | 676 | 649 | 31px | visível, no limite |
+| 1000×674 | 676 | 607 | 69px | **cortado** |
+| 1366×625 (1366×768, 100%) | 676 | 563 | 113px | **cortado** |
+| 1366×500 (1366×768, zoom 125%) | 676 | 450 | 230px | **cortado** |
+| 844×390 (celular em paisagem) | 676 | 351 | 329px | **cortado** |
+| 769×600 | 676 | 540 | 136px | **cortado** |
+| 768×600 e abaixo | 676 | caixa `overflow-y:auto` | 0 | visível, rola normalmente |
+| 375×667 (mobile retrato) | 676 | caixa `overflow-y:auto` | 0 | visível, rola normalmente |
+
+**Recorte do problema:** ocorre **acima de 768px de largura** (abaixo disso o `@media (max-width:768px)` troca a caixa para `overflow-y:auto` e tudo rola) **e com altura útil menor que ~675px CSS**.
+
+**Viewports reais atingidos** (derivado da regra acima, não de dado do GA4):
+- **1366×768 maximizado a 100%**: altura útil entre 600 e 640px CSS. **Sempre quebrado.** É a resolução de notebook mais comum no Brasil.
+- 1536×864 e 1440×900: passam a 100%, **quebram a partir de ~110% de zoom**.
+- 1920×1080: só quebra acima de ~135% de zoom.
+- **Qualquer celular ou tablet em paisagem** (largura acima de 768px): sempre quebrado.
+- Zoom-out resolve porque aumenta o `innerHeight` em px CSS, o que bate com o relato original.
+
+**Páginas afetadas (9, todas com o handler de `budgetResize`):** `index.html:2608`, `transcricao-de-audio.html:2722`, `degravacao.html:1760`, `sobre.html:1075`, `degravacao-judicial.html:918`, `degravacao-de-video.html:898`, `degravacao-ipsis-litteris.html:792`, `o-que-e-degravacao.html:1041`, `transcricao-de-entrevista.html:835`. O CSS do modal é idêntico nas 10 páginas que têm o modal.
+
+**`texter.html` NÃO é afetada:** tem o modal (`:404/:414`) mas não tem o handler, então o iframe fica nos 600px fixos e o documento filho rola por dentro (medido: 84px de rolagem disponível a 1366×625). A única página que funciona é justamente a que não recebeu o auto-resize.
+
+**Impacto no funil:** quem não alcança o botão da etapa 2 não converte e não dispara `generate_lead`. Candidato forte a explicar parte da CVR inferior em telas baixas, ao lado do Bug 1 (Bot Protection), que cobre outra fatia.
+
+**Propostas testadas no harness (nenhuma aplicada):**
+
+- **Proposta B (recomendada):** limitar a altura no handler do pai, `iframe.style.height = Math.min(data.height, Math.round(window.innerHeight * 0.9)) + 'px'`. O iframe passa a caber na caixa e o **documento filho volta a rolar por dentro**. Validado: a 1366×625 o filho ganha 117px de rolagem, a roda do mouse sobre o iframe rola naturalmente e o botão fica visível. Complemento necessário: re-aplicar o limite no `resize` do pai, guardando a última altura recebida, porque mudança de zoom altera o `innerHeight` do pai sem disparar `resize` no filho. Toca 9 páginas, no mesmo bloco `<script>` do listener de `generate_lead`, mas **não toca no `postMessage` nem no push do dataLayer**.
+- **Proposta A (CSS puro):** `overflow-y: auto` em `.budget-modal-content` no ramo desktop. Funciona no sentido de tornar o botão alcançável, mas **a roda do mouse sobre o iframe não rola o contêiner do pai**: a propagação de rolagem não atravessa a fronteira do iframe quando o documento filho não é rolável, então sobra ao usuário arrastar a barra. Medido. Efeito colateral: a barra de rolagem reduz a largura do iframe para 765px e dispara o `@media (max-width:767px)` **dentro** do iframe, trocando o layout da etapa 2 para o modo mobile.
+- **Descartada:** aumentar os 600px fixos. Não resolve, porque o handler sobrescreve a altura logo em seguida.
+
+**Risco:** a Proposta B mexe em bloco inline de 9 páginas que também contém o listener do `generate_lead`. Gate obrigatório no preview: cadeia consent, `gtm.js`, `cta_click`, `generate_lead` (`form_name:'orcamento'`), mais scan 375×667 e conferência da etapa 2 em 1366×768 a 100% e a 125%.
