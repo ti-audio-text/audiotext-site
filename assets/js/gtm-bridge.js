@@ -58,6 +58,7 @@
       window.dataLayer.push({
         'event': 'generate_lead',
         'form_name': 'orcamento',
+        'form_variant': data.variant || 'v1',
         'service_type': data.service || '',
         'page_location': window.location.href,
         // Dados para Enhanced Conversions (Google Ads)

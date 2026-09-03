@@ -2629,7 +2629,7 @@
         const modal = document.getElementById('budgetModal');
         const iframe = document.getElementById('budgetIframe');
         if (!modal || !iframe) return;
-        iframe.src = '/budget/' + window.location.search;
+        iframe.src = '/budget/v2/' + window.location.search;
         modal.classList.add('open');
         document.body.style.overflow = 'hidden';
       };

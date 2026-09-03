@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Orçamento Audiotext</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Caminhos absolutos de proposito: o /budget do controle depende do
+         redirect de barra final para os relativos resolverem. Aqui nao. -->
+    <link rel="stylesheet" href="/budget/v2/assets/css/style.css" />
+  </head>
+  <body>
+    <div class="App">
+      <div class="container">
+        <!-- HEADER -->
+        <div class="head-container">
+          <div class="head-spacer"></div>
+          <img
+            src="/assets/audiotext-logo.avif"
+            alt="AudioText"
+            class="at-logo"
+          />
+          <button id="btn-close" class="close-button" type="button" aria-label="Fechar">&times;</button>
+        </div>
+
+        <!-- PROGRESSO -->
+        <div class="v2-progress" id="v2-progress">
+          <div class="v2-progress-track"><div class="v2-progress-fill" id="v2-progress-fill"></div></div>
+          <p class="v2-progress-label" id="v2-progress-label" aria-live="polite">Passo 1 de 5</p>
+        </div>
+
+        <div class="v2-screens">
+
+          <!-- TELA 1 — SERVICO -->
+          <section class="v2-screen" id="screen-servico" data-screen="servico" aria-labelledby="t-servico">
+            <h2 class="v2-question" id="t-servico">Qual serviço você precisa?</h2>
+            <div class="v2-options" id="opt-servico" role="group" aria-labelledby="t-servico"></div>
+          </section>
+
+          <!-- TELA 2 — MINUTAGEM -->
+          <section class="v2-screen hidden" id="screen-minutos" data-screen="minutos" aria-labelledby="t-minutos">
+            <h2 class="v2-question" id="t-minutos">Quantos minutos de gravação?</h2>
+            <p class="v2-help">Some a duração de todos os arquivos. Uma estimativa já serve.</p>
+            <form id="form-minutos" novalidate>
+              <input
+                id="amount"
+                name="amount"
+                type="number"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="Ex.: 90"
+                class="at-input v2-input-grande"
+                aria-describedby="err-amount"
+              />
+              <div id="err-amount" class="form-error hidden" role="alert"></div>
+              <button type="submit" class="at-button filled v2-btn-largo">Continuar</button>
+            </form>
+          </section>
+
+          <!-- TELA 3 — FINALIDADE (pulada na degravacao) -->
+          <section class="v2-screen hidden" id="screen-finalidade" data-screen="finalidade" aria-labelledby="t-finalidade">
+            <h2 class="v2-question" id="t-finalidade">Para que você vai usar?</h2>
+            <div class="v2-options" id="opt-finalidade" role="group" aria-labelledby="t-finalidade"></div>
+          </section>
+
+          <!-- TELA 4 — IDIOMA -->
+          <section class="v2-screen hidden" id="screen-idioma" data-screen="idioma" aria-labelledby="t-idioma">
+            <h2 class="v2-question" id="t-idioma">Qual o idioma da gravação?</h2>
+            <div class="v2-options" id="opt-idioma" role="group" aria-labelledby="t-idioma"></div>
+          </section>
+
+          <!-- TELA 5 — CONTATO (um grupo, uma tela) -->
+          <section class="v2-screen hidden" id="screen-contato" data-screen="contato" aria-labelledby="t-contato">
+            <h2 class="v2-question" id="t-contato">Para onde enviamos seu orçamento?</h2>
+            <form id="form-contato" novalidate>
+              <input
+                id="username"
+                name="username"
+                type="text"
+                placeholder="Nome completo*"
+                autocomplete="name"
+                class="at-input"
+                aria-describedby="err-username"
+              />
+              <div id="err-username" class="form-error hidden" role="alert"></div>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="E-mail*"
+                autocomplete="email"
+                inputmode="email"
+                class="at-input"
+                aria-describedby="err-email"
+              />
+              <div id="err-email" class="form-error hidden" role="alert"></div>
+
+              <input
+                id="phone"
+                name="phone"
+                type="tel"
+                placeholder="WhatsApp com DDD, sem o 55*"
+                autocomplete="tel"
+                inputmode="tel"
+                class="at-input"
+                aria-describedby="err-phone"
+              />
+              <div id="err-phone" class="form-error hidden" role="alert"></div>
+
+              <button type="button" class="v2-detalhes-toggle" id="btn-detalhes" aria-expanded="false" aria-controls="v2-detalhes">
+                <span class="v2-detalhes-sinal" aria-hidden="true">+</span> Adicionar detalhes (opcional)
+              </button>
+
+              <div class="v2-detalhes hidden" id="v2-detalhes">
+                <input
+                  id="company"
+                  name="company"
+                  type="text"
+                  placeholder="Empresa"
+                  autocomplete="organization"
+                  class="at-input at-input-optional"
+                />
+                <select id="howDidMeetUs" name="howDidMeetUs" class="at-select">
+                  <option value="">Como nos conheceu?</option>
+                </select>
+                <textarea
+                  id="observation"
+                  name="observation"
+                  rows="2"
+                  placeholder="Observações sobre a gravação"
+                  class="at-textarea"
+                ></textarea>
+              </div>
+
+              <div class="v2-salvando hidden" id="v2-salvando" aria-live="polite">
+                Salvando os dados da gravação...
+              </div>
+
+              <div class="v2-falha hidden" id="v2-falha" role="alert">
+                <p id="v2-falha-texto"></p>
+                <button type="button" class="at-button outline" id="btn-retentar">Tentar de novo</button>
+              </div>
+
+              <button type="submit" class="at-button filled v2-btn-largo" id="btn-gerar" disabled>
+                Ver meu orçamento
+              </button>
+            </form>
+          </section>
+
+          <!-- TELA 6 — RESULTADO -->
+          <section class="v2-screen hidden" id="screen-resultado" data-screen="resultado">
+            <div class="BudgetResult">
+              <div class="budgetResult-container-text">
+                <div id="results-text" class="budgetResult-primary-text"></div>
+              </div>
+
+              <div id="spinner-load" class="spinner-load hidden">
+                <div class="spinner"></div>
+              </div>
+
+              <div id="results-table" class="budgetResult-table"></div>
+
+              <div class="spam-warning" id="spam-warning" style="display:none;">
+                <svg class="spam-warning-icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"/></svg>
+                <span>Se não receber o orçamento no e-mail, verifique também a <strong>caixa de spam</strong>.</span>
+              </div>
+
+              <div class="BudgetResult-link-return" id="link-return" style="display:none;">
+                Caso deseje alterar ou fazer um novo orçamento,
+                <a class="newBudget" id="btn-new-budget">clique aqui.</a>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- VOLTAR (botao na tela, o iframe nao tem historico proprio) -->
+        <div class="v2-nav hidden" id="v2-nav">
+          <button type="button" class="v2-voltar" id="btn-voltar">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            Voltar
+          </button>
+        </div>
+
+        <!-- LOADER GLOBAL -->
+        <div id="loader" class="spinner-load hidden">
+          <div class="spinner"></div>
+        </div>
+
+        <!-- ERRO GLOBAL -->
+        <div id="error-box" class="form-error form-error-global hidden" role="alert"></div>
+
+        <footer class="container-footer">
+          <span class="content-version" id="version-label">v2-1q</span>
+        </footer>
+      </div>
+    </div>
+
+    <script src="/budget/v2/assets/js/api.js"></script>
+    <script src="/budget/v2/assets/js/tracking.js"></script>
+    <script src="/budget/v2/assets/js/app.js"></script>
+  </body>
+</html>

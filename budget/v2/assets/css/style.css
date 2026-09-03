@@ -1,0 +1,1220 @@
+/* ===== RESET ===== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  font-weight: normal;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption,
+footer, header, hgroup, menu, nav, output,
+ruby, section, summary, time, mark, audio,
+video, input, button, select, textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  box-sizing: border-box;
+  outline: none;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  background-color: transparent !important;
+  background: transparent !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  color: #1a202c;
+  line-height: 1.5;
+}
+
+/* ===== APP CONTAINER ===== */
+.App {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.App .container {
+  position: relative;
+  width: 100%;
+  max-width: 780px;
+  padding: 30px;
+  box-shadow: 0 5px 8px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+}
+
+/* ===== HEADER — logo centered ===== */
+.head-container {
+  padding: 0 20px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.head-spacer {
+  width: 36px; /* matches close button width to balance centering */
+}
+
+.at-logo {
+  height: 38px;
+}
+
+.close-button {
+  background: none;
+  border: none;
+  font-size: 35px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #4a5568;
+  padding: 4px 8px;
+  line-height: 1;
+  border-radius: 4px;
+  transition: background 0.15s;
+  width: 36px;
+  text-align: center;
+}
+
+.close-button:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+/* ===== PROGRESS BAR ===== */
+.progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 20px 8px;
+  gap: 0;
+}
+
+.progress-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-circle {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  border: 2px solid #e2e8f0;
+}
+
+.progress-step.active .progress-circle {
+  background: #2e3b6b;
+  color: #fff;
+  border-color: #2e3b6b;
+}
+
+.progress-step.completed .progress-circle {
+  background: #38a169;
+  color: #fff;
+  border-color: #38a169;
+}
+
+.progress-label {
+  font-size: 11px;
+  color: #a0aec0;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: color 0.3s ease;
+}
+
+.progress-step.active .progress-label {
+  color: #2e3b6b;
+  font-weight: 600;
+}
+
+.progress-step.completed .progress-label {
+  color: #38a169;
+  font-weight: 600;
+}
+
+.progress-line {
+  flex: 1;
+  height: 3px;
+  background: #e2e8f0;
+  margin: 0 4px;
+  margin-bottom: 22px;
+  border-radius: 2px;
+  overflow: hidden;
+  min-width: 40px;
+}
+
+.progress-line-fill {
+  height: 100%;
+  width: 0%;
+  background: #38a169;
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.progress-line-fill.filled {
+  width: 100%;
+}
+
+/* ===== FORM WRAPPER ===== */
+.FormStap {
+  box-sizing: border-box;
+  padding: 0 20px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ===== STEP SECTIONS ===== */
+.StepSection {
+  animation: fadeInUp 0.3s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== TITLES — centered ===== */
+.container-step-title {
+  text-align: center;
+}
+
+.text-budget-generate > p {
+  line-height: 1.5rem;
+  margin-top: 1%;
+  color: #2e3b6b;
+  font-size: 14px;
+  text-align: center;
+}
+
+.StepSection form {
+  padding-top: 16px;
+}
+
+/* ===== INPUT FIELDS ===== */
+.at-input {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a202c;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.at-input::placeholder {
+  color: #a0aec0;
+  font-weight: 500;
+}
+
+.at-input:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+
+.at-input.valid {
+  border-color: #38a169;
+}
+.at-input.valid:focus {
+  box-shadow: 0 0 0 1px #38a169;
+}
+.at-input.invalid {
+  border-color: #e53e3e;
+}
+.at-input.invalid:focus {
+  box-shadow: 0 0 0 1px #e53e3e;
+}
+
+.at-input-optional {
+  border-style: dashed;
+  border-color: #e2e8f0;
+}
+.at-input-optional::placeholder {
+  color: #cbd5e0;
+}
+
+/* ===== SELECT FIELDS ===== */
+.at-select {
+  display: block;
+  width: 100%;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a202c;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 6px;
+  appearance: auto;
+  cursor: pointer;
+}
+
+.at-select:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+}
+.at-select.valid {
+  border-color: #38a169;
+}
+.at-select.invalid {
+  border-color: #e53e3e;
+}
+.at-select option[value=""] {
+  color: #a0aec0;
+}
+
+/* ===== TEXTAREA ===== */
+.at-textarea {
+  display: block;
+  width: 100%;
+  min-height: 70px;
+  padding: 8px 16px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #1a202c;
+  background: #fff;
+  border: 1px dashed #e2e8f0;
+  border-radius: 6px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  margin-bottom: 6px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.at-textarea::placeholder {
+  color: #cbd5e0;
+  font-weight: 500;
+}
+.at-textarea:focus {
+  border-color: #3182ce;
+  box-shadow: 0 0 0 1px #3182ce;
+  border-style: solid;
+}
+
+/* ===== PHONE LABEL ===== */
+.form-content-phone {
+  margin-top: 2px;
+}
+
+.container-form-label {
+  color: #2e3b6b;
+  margin: 5px;
+  font-weight: 500;
+  font-size: 13px;
+  display: block;
+}
+
+/* ===== BUTTONS ===== */
+.at-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s ease-in-out, opacity 0.15s, transform 0.1s;
+  font-family: inherit;
+}
+
+.at-button:active {
+  transform: scale(0.98);
+}
+
+.at-button.filled {
+  background: #2e3b6b;
+  color: #fff;
+}
+.at-button.filled:hover {
+  background: #253059;
+}
+.at-button.filled:active {
+  background: #1d2648;
+}
+.at-button.filled:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.at-button.outline {
+  background: transparent;
+  color: #2e3b6b;
+  border: 1.5px solid #2e3b6b;
+}
+.at-button.outline:hover {
+  background: rgba(46, 59, 107, 0.06);
+}
+
+.button-forward {
+  width: 100%;
+  margin: 10px 0 8px;
+}
+
+.budgetData-container-button {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin: 10px 0 8px;
+}
+
+.budgetData-container-button > button {
+  width: 48%;
+}
+
+/* ===== SOCIAL PROOF ===== */
+.social-proof {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 4px 0 10px;
+}
+
+.social-proof-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 11.5px;
+  color: #718096;
+  font-weight: 500;
+}
+
+.social-proof-icon {
+  width: 13px;
+  height: 13px;
+  color: #38a169;
+  flex-shrink: 0;
+}
+
+.social-proof-divider {
+  color: #cbd5e0;
+  font-size: 10px;
+  margin: 0 2px;
+}
+
+/* ===== SPAM WARNING ===== */
+.spam-warning {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #fefce8;
+  border: 1px solid #fbbf24;
+  border-radius: 6px;
+  margin-top: 8px;
+}
+
+.spam-warning-icon {
+  width: 22px;
+  height: 22px;
+  color: #d97706;
+  flex-shrink: 0;
+}
+
+.spam-warning span {
+  font-size: 14px;
+  color: #92400e;
+  line-height: 1.4;
+}
+
+.spam-warning strong {
+  font-weight: 700;
+}
+
+/* ===== FORM ERRORS ===== */
+.form-error {
+  color: #fff;
+  text-align: left;
+  display: block;
+  font-size: 11px;
+  background: rgba(142, 0, 0, 0.5);
+  padding: 5px;
+  border: solid 1px #8e0000;
+  margin-bottom: 5px;
+  border-radius: 2px;
+}
+
+.form-error-global {
+  margin: 10px 20px;
+}
+
+/* ===== reCAPTCHA ===== */
+.recaptcha-div {
+  margin: 10px 3px;
+}
+.recaptcha-div > div {
+  margin: 10px 3px;
+}
+
+/* ===== BUDGET RESULT (Step 3) ===== */
+.BudgetResult {
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
+  animation: fadeInUp 0.3s ease-out;
+}
+
+.BudgetResult p {
+  text-align: justify;
+}
+.BudgetResult h1,
+.BudgetResult h2,
+.BudgetResult h3,
+.BudgetResult h4 {
+  text-align: center;
+}
+
+.budgetResult-primary-text > p {
+  text-align: justify;
+  line-height: 1.8rem;
+  font-size: 14px;
+}
+.budgetResult-primary-text > p strong {
+  font-weight: 700;
+}
+
+.budgetResult-table {
+  display: flex;
+  flex-direction: column;
+  margin: 2% 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.BudgetResult-link-return {
+  margin: 5px 0 0 0;
+  text-align: left;
+  font-weight: 500;
+  color: blue;
+  font-size: 14px;
+}
+
+.newBudget {
+  cursor: pointer;
+  color: #fd2217;
+  text-decoration: none;
+  font-weight: 600;
+}
+.newBudget:hover {
+  text-decoration: underline;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* ============================================================
+   PROPOSAL CARDS — Desktop: side by side / Mobile: carousel
+   ============================================================ */
+
+/* --- Desktop: 3 cards in a row --- */
+.proposal-cards-wrapper {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: stretch;
+  width: 100%;
+}
+
+.proposal-card {
+  flex: 1 1 0;
+  min-width: 0;
+  max-width: 240px;
+  background: #fff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 28px 18px 22px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Recommended card highlight */
+.proposal-card.recommended {
+  border-color: #2e3b6b;
+  border-width: 2px;
+  box-shadow: 0 2px 12px rgba(46, 59, 107, 0.18);
+}
+
+.proposal-badge {
+  position: absolute;
+  top: -13px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #2e3b6b;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 10px;
+  white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.proposal-card-plan {
+  font-size: 17px;
+  font-weight: 700;
+  color: #2e3b6b;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.proposal-card-deadline {
+  font-size: 14px;
+  color: #4a5568;
+  font-weight: 500;
+  margin-bottom: 2px;
+}
+.proposal-card-deadline strong {
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.proposal-card-divider {
+  width: 100%;
+  height: 4px;
+  background: #2e3b6b;
+  margin: 8px auto 6px;
+  border-radius: 2px;
+}
+
+/* Plan-specific divider colors */
+.proposal-card.plan-instant .proposal-card-divider {
+  background: #e53e3e;
+}
+.proposal-card.plan-fast .proposal-card-divider {
+  background: #38a169;
+}
+.proposal-card.plan-flex .proposal-card-divider {
+  background: #3182ce;
+}
+
+.proposal-card.recommended .proposal-card-divider {
+  background: #38a169;
+}
+
+.proposal-card-price {
+  font-size: 26px;
+  font-weight: 700;
+  color: #2e3b6b;
+  margin: 1px 0 0;
+}
+
+.proposal-card-price-label {
+  font-size: 20px;
+  color: #718096;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.proposal-card-installment {
+  font-size: 14px;
+  color: #4a5568;
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.proposal-card-btn {
+  margin-top: auto;
+  padding: 11px 14px;
+  background: #2e3b6b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background 0.15s;
+  width: 100%;
+}
+.proposal-card-btn:hover {
+  background: #253059;
+}
+
+/* Carousel dots (mobile only, hidden on desktop) */
+.carousel-dots {
+  display: none;
+}
+
+/* ===== SPINNER / LOADER ===== */
+.spinner-load {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding: 20px 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #e2e8f0;
+  border-top-color: #3182ce;
+  border-radius: 50%;
+  animation: spin 0.65s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ===== WHATSAPP ===== */
+.BudgetResult-link-wpp {
+  padding: 0.5%;
+  color: #34af23;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.wpp-icon {
+  width: 35px;
+  display: inline;
+}
+
+/* ===== FOOTER ===== */
+.container-footer {
+  padding: 10px 20px 0;
+}
+.content-version {
+  color: #2f3b61;
+  font-size: 10px;
+  font-style: italic;
+  text-align: left;
+}
+
+/* ===== UTILITY ===== */
+.hidden {
+  display: none !important;
+}
+
+.text {
+  text-align: left;
+  line-height: 2rem;
+  font-weight: 500;
+}
+
+p > strong {
+  font-weight: 500;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .App .container {
+    padding: 0 15px;
+    overflow-x: hidden;
+  }
+  .App .container::-webkit-scrollbar {
+    width: 0;
+  }
+  .head-container {
+    margin-top: 5px;
+  }
+}
+
+@media (max-width: 767px) {
+  .FormStap {
+    padding: 15px 10px;
+  }
+  .StepSection form {
+    padding-top: 5px;
+  }
+  .form-error {
+    font-size: 8px;
+  }
+  .text-budget-generate {
+    display: none;
+  }
+  .budgetData-container-button {
+    height: 50px;
+  }
+  .budgetData-container-button > button {
+    font-size: 12px;
+    width: 48%;
+    height: 35px;
+  }
+  .container-step-title {
+    line-height: 20px;
+    font-size: 12px;
+  }
+  .budgetResult-container-text {
+    font-size: 12.5px;
+  }
+
+  /* Progress bar mobile */
+  .progress-bar {
+    padding: 14px 10px 6px;
+  }
+  .progress-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
+  }
+  .progress-label {
+    font-size: 10px;
+  }
+  .progress-line {
+    min-width: 24px;
+  }
+
+  /* Social proof mobile */
+  .social-proof {
+    flex-direction: column;
+    gap: 2px;
+  }
+  .social-proof-divider {
+    display: none;
+  }
+  .social-proof-item {
+    font-size: 10.5px;
+  }
+
+  /* Spam warning mobile */
+  .spam-warning {
+    padding: 8px 12px;
+  }
+  .spam-warning span {
+    font-size: 13px;
+  }
+
+  /* ===== MOBILE CAROUSEL ===== */
+  .proposal-cards-wrapper {
+    /* Horizontal scroll snap carousel */
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px 0 8px;
+    /* Allow cards to peek */
+    margin: 0 -10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    justify-content: flex-start;
+  }
+
+  /* Hide scrollbar on mobile */
+  .proposal-cards-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+  .proposal-cards-wrapper {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .proposal-card {
+    flex: 0 0 75%;
+    max-width: 75%;
+    scroll-snap-align: start;
+    min-width: 0;
+    padding: 32px 20px 26px;
+  }
+
+  .proposal-card-plan {
+    font-size: 18px;
+  }
+  .proposal-card-deadline {
+    font-size: 15px;
+  }
+  .proposal-card-divider {
+    margin: 10px auto 8px;
+    height: 5px;
+  }
+  .proposal-card-price {
+    font-size: 28px;
+  }
+  .proposal-card-price-label {
+    font-size: 20px;
+    margin-bottom: 2px;
+  }
+  .proposal-card-installment {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .proposal-card-btn {
+    font-size: 15px;
+    padding: 13px 14px;
+  }
+
+  /* Show carousel dots on mobile */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 0;
+    width: 100%;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e0;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .carousel-dot.active {
+    background: #2e3b6b;
+    transform: scale(1.25);
+  }
+}
+
+@media (max-width: 450px) {
+  .wpp-icon {
+    display: none;
+  }
+
+  .proposal-card {
+    flex: 0 0 78%;
+    max-width: 78%;
+  }
+}
+
+/* ============================================================
+   V2 — uma pergunta por tela
+   Acrescentado sobre a base copiada do controle. Nada abaixo
+   desta linha existe no /budget original.
+   ============================================================ */
+
+/* A base do controle usa overflow:hidden no .App. Aqui nao ha
+   motivo para clipar nada: as telas sao curtas por design. */
+.App {
+  overflow: visible;
+}
+
+.App .container {
+  padding: 24px 20px 16px;
+}
+
+/* ===== PROGRESSO ===== */
+.v2-progress {
+  padding: 16px 4px 4px;
+}
+
+.v2-progress-track {
+  height: 4px;
+  width: 100%;
+  background: #e2e8f0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.v2-progress-fill {
+  height: 100%;
+  width: 20%;
+  background: #2e3b6b;
+  border-radius: 2px;
+  transition: width 0.25s ease;
+}
+
+.v2-progress-label {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #718096;
+  letter-spacing: 0.02em;
+}
+
+/* ===== TELAS ===== */
+.v2-screens {
+  min-height: 280px;
+  padding: 4px 0 8px;
+}
+
+.v2-screen {
+  animation: fadeInUp 0.25s ease-out;
+}
+
+.v2-question {
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 8px 0 4px;
+}
+
+.v2-help {
+  font-size: 14px;
+  color: #718096;
+  margin-bottom: 16px;
+}
+
+/* ===== CARTOES DE RESPOSTA ===== */
+.v2-options {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.v2-option {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  min-height: 56px;
+  padding: 14px 16px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+}
+
+.v2-option:hover {
+  border-color: #2e3b6b;
+  background: #f7fafc;
+}
+
+.v2-option:focus-visible {
+  outline: 2px solid #2e3b6b;
+  outline-offset: 2px;
+}
+
+.v2-option:active {
+  transform: scale(0.995);
+}
+
+.v2-option.selecionada {
+  border-color: #2e3b6b;
+  box-shadow: 0 0 0 1px #2e3b6b;
+}
+
+.v2-option-titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a202c;
+}
+
+.v2-option-desc {
+  font-size: 13px;
+  color: #718096;
+}
+
+/* ===== CAMPOS ===== */
+.v2-screen .at-input,
+.v2-screen .at-select,
+.v2-screen .at-textarea {
+  min-height: 48px;
+  margin-bottom: 10px;
+}
+
+.v2-input-grande {
+  font-size: 20px !important;
+  font-weight: 600;
+  text-align: center;
+  min-height: 56px !important;
+}
+
+.v2-btn-largo {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 8px;
+}
+
+.at-button:focus-visible {
+  outline: 2px solid #2e3b6b;
+  outline-offset: 2px;
+}
+
+/* ===== DETALHES OPCIONAIS ===== */
+.v2-detalhes-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 4px 0;
+  background: none;
+  border: none;
+  color: #2e3b6b;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.v2-detalhes-toggle:focus-visible {
+  outline: 2px solid #2e3b6b;
+  outline-offset: 2px;
+}
+
+.v2-detalhes-sinal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  font-size: 13px;
+  line-height: 1;
+}
+
+.v2-detalhes {
+  padding-top: 6px;
+}
+
+/* ===== ESTADO DO SALVAMENTO ===== */
+.v2-salvando {
+  font-size: 13px;
+  color: #718096;
+  padding: 8px 0;
+}
+
+.v2-falha {
+  background: #fefce8;
+  border: 1px solid #fbbf24;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin: 8px 0;
+}
+
+.v2-falha p {
+  font-size: 13.5px;
+  line-height: 1.45;
+  color: #92400e;
+  margin-bottom: 10px;
+}
+
+.v2-falha .at-button {
+  min-height: 44px;
+  width: 100%;
+}
+
+/* ===== VOLTAR ===== */
+.v2-nav {
+  padding: 4px 0 8px;
+}
+
+.v2-voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 48px;
+  padding: 4px 8px 4px 0;
+  background: none;
+  border: none;
+  color: #718096;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.v2-voltar:hover {
+  color: #2e3b6b;
+}
+
+.v2-voltar:focus-visible {
+  outline: 2px solid #2e3b6b;
+  outline-offset: 2px;
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 767px) {
+  .App .container {
+    padding: 16px 15px 12px;
+  }
+
+  .v2-question {
+    font-size: 18px;
+  }
+
+  .v2-screens {
+    min-height: 240px;
+  }
+
+  .v2-option {
+    min-height: 52px;
+    padding: 12px 14px;
+  }
+}
+
+/* Detalhes opcionais mais compactos: e a unica combinacao que passa dos
+   600px de altura, e so quando o usuario abre a secao de proposito. */
+.v2-detalhes .at-input,
+.v2-detalhes .at-select {
+  min-height: 44px;
+  margin-bottom: 8px;
+}
+
+.v2-detalhes .at-textarea {
+  min-height: 56px;
+  margin-bottom: 8px;
+}
+
+/* O X vinha com 43px da base; sobe para o alvo minimo de toque. */
+.close-button {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+/* Espacador do header acompanha o novo tamanho do X, para a logo
+   seguir centralizada. */
+.head-spacer {
+  width: 48px;
+}
