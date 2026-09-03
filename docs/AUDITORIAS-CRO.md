@@ -406,3 +406,60 @@ Motivo: a página entra em piloto de campanha paga B2B com checkpoints de 2 e 4 
 **Pendências que ficam explicitamente represadas até o checkpoint:** os 3 travessões e 2 meia-riscas da página (`:884`, `:897`, `:1248` mais duas meia-riscas), o depoimento nominal de produtora ou agência, o hero visual, a prova social numérica no ATF, o CNPJ e nota fiscal explícitos e o aumento dos inputs do form de 38 para 44px.
 
 **Exceção única:** incidente que quebre o funil ou a medição (`generate_lead` de `form_name:'legendagem'`). Nesse caso, corrigir e registrar aqui, sem tomar carona para nenhuma outra mudança.
+
+---
+
+## 2026-09-02 (6) /budget/v2: variante "uma pergunta por tela" (branch `feat/budget-v2-one-per-screen`)
+
+Teste restrito à **home**. As outras 8 páginas com o modal seguem no `/budget` controle, intocadas. Desenho aprovado pelo dono antes da implementação; decisões e ajustes registrados no bloco daquela rodada.
+
+### O que foi construído
+
+Cópia independente em `/budget/v2/`, com HTML, CSS e JS próprios: `index.html`, `assets/css/style.css` (base do controle mais o bloco da v2), `assets/js/{api,tracking,app}.js`. Caminhos de asset **absolutos**, não relativos: o controle só funciona porque o redirect de barra final faz `./budget/assets/...` resolver, e essa dependência não sobrevive a um subdiretório.
+
+**Fluxo de 6 telas:** serviço, minutagem, finalidade, idioma, contato, resultado. Avanço automático nas três telas de clique único (serviço, finalidade, idioma). A tela de finalidade é **pulada na degravação** e a contagem se ajusta: "Passo 2 de 4" em vez de "2 de 5". Voltar é botão na tela, preservando as respostas em memória, sem refetch. Os dados de contato são **um grupo, uma tela**, com empresa, "como nos conheceu" e observações atrás de "Adicionar detalhes (opcional)".
+
+**Sem estimativa de preço antes do contato** (opção (a) do desenho): a rodada 1 mede só o formato. O controle também não tem, então a variável fica isolada.
+
+**Duas chamadas de API, como no controle.** O PATCH dos dados da gravação dispara ao escolher o idioma, com **avanço otimista**: a tela de contato abre na hora e o salvamento corre atrás. O botão "Ver meu orçamento" só habilita com o PATCH confirmado. Em falha, até 3 tentativas silenciosas (imediata, 1,5s, 4s) e, só então, mensagem acionável na tela com botão "Tentar de novo". Payload preservado byte a byte: `degravacao` traduzido para `serviceCode:'transcricao'` mais `finalityCode:'juridica'`, `participantsAmount: 1`, `isWhatsApp: true`.
+
+**Erro de challenge nasce tratado:** o `api.js` da v2 classifica 429 ou corpo HTML onde se espera JSON como `kind:'challenge'` e a UI troca a mensagem genérica por uma acionável, que fala de VPN e rede corporativa e oferece o WhatsApp. É o item de backlog aberto no incidente de 2026-09-02, resolvido dentro da v2.
+
+### Duas decisões técnicas que fogem do "idêntico ao controle"
+
+1. **`targetOrigin` do `postMessage`.** O controle usa `https://www.audiotext.com.br/` fixo, o que faz a mensagem ser descartada no apex e **em qualquer preview**. A v2 usa `window.location.origin`. O iframe é sempre same-origin com o pai e o listener do pai já exige `e.origin === location.origin`, então é estritamente mais correto, e sem isso **não daria para validar a conversão no preview da Vercel**.
+2. **`form_step_view` vai direto ao `dataLayer` do pai**, não por `postMessage`. O guardrail permitia uma única linha aditiva no `gtm-bridge.js`, gasta com o `form_variant`. Como o iframe é same-origin, `window.parent.dataLayer.push` resolve sem handler novo no arquivo compartilhado. Envolvido em try/catch: medição secundária não pode derrubar o funil. O `generate_lead` **continua pelo caminho de sempre**, `postMessage` mais bridge.
+
+### Medição
+
+`gtm-bridge.js` ganhou **uma linha**: `'form_variant': data.variant || 'v1'`. A v2 se identifica com `variant:'v2'` no `budget_submitted`; o controle, que não manda nada, cai no `'v1'` e passa a ser rotulado explicitamente. Nenhuma chave existente mudou de nome ou valor.
+
+`form_step_view` carrega `step_name`, `step_number`, `step_total`, `form_variant` e `form_name`, uma vez por tela por sessão.
+
+### Gates
+
+| Verificação | Resultado |
+|---|---|
+| `generate_lead` na v2 | `form_name:'orcamento'` inalterado, `form_variant:'v2'`, mais `service_type`, `user_email`, `user_phone`, `user_name`. **1 evento, sem duplicata** do legado `gerarPropostas` |
+| `generate_lead` no controle | `form_variant:'v1'` em `/degravacao`, com o iframe ainda em `/budget/` |
+| `form_step_view` | 5 de 5 telas no caminho comum; 4 de 4 na degravação |
+| Payload PATCH 1 | `serviceCode:'transcricao'`, `finalityCode:'juridica'`, `participantsAmount:1` na degravação |
+| Payload PATCH 2 | `isWhatsApp:true`; `howDidMeetUs` **inferido do cookie de UTM sem abrir os detalhes** (`utm_source=google` resultou em "Google") |
+| Chamadas de API | 2 PATCH mais 1 POST mais 1 GET, mesma contagem do controle |
+| Altura das telas, 375×667 | 400, 460, 517, 460, 545. Todas abaixo de 600 |
+| Altura das telas, 1366×625 | 507, 543, 507, 555. Iframe em 555 contra limite de 562,5. **Nada cortado** |
+| Alvos de toque | todos com 48px ou mais, o X incluído (subiu de 43 para 48) |
+| Voltar | preserva minutagem e seleção de idioma; refaz o caminho sem repetir perguntas |
+| Falha do PATCH 1 | 3 tentativas silenciosas, mensagem específica de challenge, botão travado, **nenhum lead fantasma** |
+| Classes-fantasma | **0** no HTML e 0 via JS |
+| Parse | tags balanceadas, pilha final vazia |
+| Sintaxe | `node --check` em 4 de 4 arquivos |
+| Roteamento | `index.html` na v2, **8 páginas no controle**, confirmado por grep |
+
+**Duas exceções conhecidas ao gate dos 600px**, ambas em estado que o usuário provoca: com "Adicionar detalhes" **aberto** a tela de contato vai a 729px, e com a caixa de falha visível vai a 739px. Nos dois casos o iframe é limitado a 90vh e o documento filho passa a rolar por dentro, com o botão alcançável (verificado). É o comportamento correto pós-PR #19, não o bug: uma tela de 729px num viewport de 667px rola em qualquer página. O estado padrão da tela, que é o que a maioria vê, fica em 545px.
+
+### Custos assumidos e pendências
+
+- A cópia carrega **CSS morto** do controle, como os estilos da barra de progresso de 3 etapas, que a v2 não usa. É o preço do isolamento total; some quando o teste terminar, com a v2 virando única ou sendo deletada.
+- Duplicação de manutenção enquanto o teste durar: bug no funil precisa ser corrigido nos dois apps.
+- **Correção de um registro anterior deste log:** a seção do Bug 2 diz que `texter.html` "tem o modal mas não tem o handler". A página tem apenas **CSS remanescente** do modal, sem markup, sem `iframe.src` e sem `openBudgetModal`. A conclusão de lá não muda (a página nunca foi afetada pelo Bug 2), mas o motivo é outro: não há modal nenhum, só folha de estilo órfã. Fora do escopo, não corrigido.
