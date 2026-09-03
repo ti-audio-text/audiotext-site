@@ -46,7 +46,7 @@ explícita do dono. Escopo deste arquivo: SITE apenas (Ads tem contexto próprio
 **Decisões de negócio seladas:** `texter.html` permanece indexável (recrutamento legítimo) · metas "grátis" de automatica/por-ia permanecem (intenção grátis é tóxica no pago, não no orgânico freemium).
 
 ## Congelamentos ativos
-- **/legendagem CONGELADA** durante o piloto da campanha paga (checkpoints de 2 e 4 semanas): mudança VISÍVEL só nos checkpoints; schema/invisível pode. Rodapé unificado mergeado (2026-08-29); o congelamento visível formal entra na fila **antes da campanha** (após a variante /degravacao) — ver Pendências.
+- **/legendagem CONGELADA (formal, desde 2026-09-02)**: página FECHADA para qualquer mudança, visível ou invisível, até decisão explícita do dono. Estado congelado: pós PR #21. Única exceção: incidente que quebre o funil ou o `generate_lead` de `form_name:'legendagem'`, corrigido sem carona para nada mais. Pendências represadas até o checkpoint: travessões e meia-riscas da página, depoimento de produtora, hero visual, prova social no ATF, CNPJ/nota fiscal, inputs 38 para 44px.
 - Páginas com campanha ativa: mudanças visíveis exigem decisão do orquestrador (janela de medição).
 
 ## Como trabalhar comigo (Opus 5)

@@ -384,3 +384,25 @@ Removido o envio morto para a planilha do Google: a guarda `SHEET_URL !== '<a pr
 **Gates:** 0 ocorrências de "Ver meu preço" e de "Simular orçamento" · 14 de "Ver meu orçamento" · 0 de "R$ 2,00" · piso R$ 3,20 em 5 pontos · prazos "a partir de 1/2/8 dias úteis" intactos · 8 JSON-LD válidos · tags balanceadas, pilha final vazia · classes-fantasma **6, exatamente as mesmas da main** (nenhuma nova) · 375×667 com `overflowX` 0, 10 CTAs todos com 48px ou mais, banda com padding de 40px e largura 343 · `cta_click` disparando e modal abrindo com `/budget/`.
 
 **Travessões remanescentes no arquivo (2, fora do escopo, pré-existentes na main):** comentários HTML `<!-- GTM Bridge ... — depois do cookieConsent -->` (`:13`) e `<!-- Cluster Degravação — Links Internos -->` (`:1663`). Não corrigidos.
+
+---
+
+## 2026-09-02 (5) MARCO: Variante B da /degravacao no ar + congelamento formal da /legendagem
+
+### Marco de before/after da /degravacao
+
+**PR #22 (`variante-b/degravacao-final`) mergeado na `main` em 2026-09-02, 19:24 (BRT).** Esta é a **data de corte** para leitura de before/after da página: tudo medido até 2026-09-02 é controle, tudo a partir de 2026-09-03 é variante B.
+
+O que mudou de fato na página, para consulta rápida na hora de ler os números: hero com vocabulário jurídico (audiências, depoimentos, oitivas) e claim de prova suavizado para "para apresentação como prova"; banda de preço nova logo abaixo do hero, com o piso de R$ 3,20/min e encaminhamento ao simulador; CTA de "Simular orçamento" para **"Ver meu orçamento"** em 10 botões; FAQ de segurança e LGPD (de 14 para 15 perguntas); card de transcrição por IA removido da seção de serviços.
+
+**Cuidado na leitura:** no mesmo dia entraram três correções que também tocam a página ou o funil dela, e que **não** fazem parte da hipótese da variante. O PR #19 corrigiu o Bug 2 do funil (etapa 2 inalcançável em telas com menos de ~675px de altura útil), o que sozinho tende a **subir a conversão** em desktop de 1366×768 e em paisagem. O PR #20 definiu `.px-5` e `.min-h-\[48px\]` no CTA do topo, que antes renderizava 121×44 com padding horizontal zero. Ou seja, o delta observado na /degravacao a partir de 03/09 é **variante B mais dois consertos de funil**, e não deve ser atribuído só à copy.
+
+### Congelamento formal da /legendagem
+
+**A partir de 2026-09-02, a /legendagem está FECHADA para qualquer mudança**, visível ou invisível, até decisão explícita do dono. Substitui o congelamento parcial anterior, que liberava schema e alterações invisíveis.
+
+Motivo: a página entra em piloto de campanha paga B2B com checkpoints de 2 e 4 semanas, e a janela de medição só é limpa se a página não se mexer. Estado congelado: pós PR #21 (remoção do envio morto para a planilha do Google), com os 13 fixes do pré-lançamento, o reframe de desqualificação DIY e o rodapé unificado.
+
+**Pendências que ficam explicitamente represadas até o checkpoint:** os 3 travessões e 2 meia-riscas da página (`:884`, `:897`, `:1248` mais duas meia-riscas), o depoimento nominal de produtora ou agência, o hero visual, a prova social numérica no ATF, o CNPJ e nota fiscal explícitos e o aumento dos inputs do form de 38 para 44px.
+
+**Exceção única:** incidente que quebre o funil ou a medição (`generate_lead` de `form_name:'legendagem'`). Nesse caso, corrigir e registrar aqui, sem tomar carona para nenhuma outra mudança.
