@@ -384,3 +384,40 @@ Removido o envio morto para a planilha do Google: a guarda `SHEET_URL !== '<a pr
 **Gates:** 0 ocorrências de "Ver meu preço" e de "Simular orçamento" · 14 de "Ver meu orçamento" · 0 de "R$ 2,00" · piso R$ 3,20 em 5 pontos · prazos "a partir de 1/2/8 dias úteis" intactos · 8 JSON-LD válidos · tags balanceadas, pilha final vazia · classes-fantasma **6, exatamente as mesmas da main** (nenhuma nova) · 375×667 com `overflowX` 0, 10 CTAs todos com 48px ou mais, banda com padding de 40px e largura 343 · `cta_click` disparando e modal abrindo com `/budget/`.
 
 **Travessões remanescentes no arquivo (2, fora do escopo, pré-existentes na main):** comentários HTML `<!-- GTM Bridge ... — depois do cookieConsent -->` (`:13`) e `<!-- Cluster Degravação — Links Internos -->` (`:1663`). Não corrigidos.
+
+---
+
+## 2026-09-07 Componente de avisos do site (branch `feat/site-notices`)
+
+Aviso de feriado de 08/09 entregue como **componente genérico dirigido por configuração**, não como modal descartável. Próximos avisos (fim de ano incluído) viram edição de um arquivo de config.
+
+**Parada condicional acionada antes de implementar:** o bloco pedia montagem em layout global único. **Não existe layout global**: o site é HTML estático por página, 17 arquivos independentes, sem build, sem framework, sem pasta de componentes e sem `.ts` em lugar nenhum. Reportado com três alternativas; o dono aprovou a opção B (uma linha idêntica de `<script defer>` nas 15 páginas públicas), descartando pendurar o módulo no `cookieConsent.js` por criar risco assimétrico sobre a camada de consent e medição.
+
+**Módulo autocontido** em `/components/site-notices/`: `notices.js` (entrada única, carrega sozinho config e CSS), `notices-config.js` (lista de avisos mais o comentário de instruções) e `notices.css` (escopo todo prefixado com `.at-notice`). Zero dependência nova.
+
+**Comportamento:** só o primeiro aviso dentro da janela de datas é exibido; janela em ISO com fuso de Brasília (`-03:00`), então independe do fuso do visitante. Dismissal por id em `localStorage` (`at-notice-dismissed:<id>`), com `try/catch` nos dois lados: storage bloqueado mostra o aviso e o fechamento vale pela sessão. Fecha por botão, X e Esc, e o handler de Esc **não** chama `preventDefault` nem `stopPropagation`, para não roubar o Esc do modal do orçamento. Fora de janela o componente não injeta nem o CSS.
+
+**Posição:** `position: fixed` no topo, z-index 9000, abaixo do consent (9998/9999/10000) e do modal do orçamento (9999). O consent ocupa o rodapé, então não há sobreposição possível.
+
+**Primeira entrada:** `feriado-nsl-2026`, janela de 07/09 00:00 a 08/09 23:59:59 BRT. A partir de 09/09 some sozinho, sem deploy.
+
+### Gates
+
+| Verificação | Resultado |
+|---|---|
+| Config vazia | nada renderiza, **CSS nem é injetado**, zero erro de console, página íntegra |
+| Fora de janela (simulando 09/09) | idem, em duas páginas diferentes |
+| Primeira visita | renderiza com título, corpo e botão exatos |
+| Segunda visita | não renderiza, com a marca no `localStorage` |
+| Layout shift | **zero**: topo do `h1` e `scrollHeight` idênticos com e sem o aviso |
+| Esc, X e botão | fecham e gravam o dismissal |
+| Mobile 390px | largura 374px, margens de 8px, botão de 44px, `overflowX` 0 |
+| Desktop 1366 | card de 380px no topo à direita, não cobre a logo |
+| Não sobrepõe consent | aviso em `top 8`, banner em `top 691`: sem interseção |
+| Consent, GTM e bridge | banner presente, `gtm.js` carregado, `dataLayer` e bridge ativos |
+| Funil do /budget | modal abre, etapas 1, 2 e 3 completas, 3 propostas, `cta_click` dispara, `generate_lead` intacto |
+| Grep | linha presente e **idêntica** nas 15 públicas, ausente em `404.html` e `selecao-temp.html` |
+| Diff por página | **+1 linha**, nada mais |
+| Travessão | 0 nos três arquivos do módulo |
+
+Nota de método: o `generate_lead` do /budget não é observável em servidor local, porque o filho posta com `targetOrigin` fixo em www e a mensagem é descartada fora desse host. Foi validado simulando a mensagem `budget_submitted` na origem local, que é o caminho que o bridge escuta.
