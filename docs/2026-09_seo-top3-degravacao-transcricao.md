@@ -400,3 +400,23 @@ A lógica: "vaga" e "transcritor" são as palavras do candidato; "transcrição"
 **Ajuste de contraste, registrado por transparência:** a âncora da home caiu numa seção de fundo azul escuro e, sem estilo, renderizou no azul padrão do navegador (`rgb(0,0,238)`), ilegível. Recebeu `color:inherit` com sublinhado, por estilo inline, mesmo padrão do selo do GMB e pelo mesmo motivo: não criar classe que poderia não existir no CSS da página. Na `/degravacao-ipsis-litteris` não foi preciso, o CSS da página já resolve.
 
 Com o merge desta branch, a **Onda Técnica está encerrada**. Próxima etapa é a Onda On-page, com o T0-SEO já correndo desde 07/09 21:19.
+
+---
+
+# Onda On-page
+
+Aberta em 2026-09-08. **Etapa 1 cobre apenas os satélites.** As páginas-dinheiro `/degravacao` e `/transcricao-de-audio` ficam **CONGELADAS** até a leitura quinzenal de aproximadamente 21 a 22 de setembro, para não contaminar a medição do T0-SEO, que corre desde 07/09 21:19.
+
+## Fila da Etapa 2, para executar só depois da leitura
+
+Registrada agora, sem execução:
+
+1. **Seção "Quanto custa a degravação" na `/degravacao`.** Respeitando os invariantes de preço: degravação é transcrição vezes 1,6, piso de R$ 3,20 por minuto, nunca R$ 2,00 como piso de degravação, prazos sempre em dias úteis, e sempre com encaminhamento ao simulador.
+2. **FAQ ampliada com PAA** nas páginas-dinheiro, a partir das perguntas que o Google exibe para o cluster.
+3. **Bloco E-E-A-T do case UOL 2016 e Lava Jato** nas duas páginas-dinheiro. O material já existe na `/sobre` e na seção de reconhecimento da `/degravacao`; a proposta é dar a ele peso de sinal de autoridade, com lastro de link para a matéria.
+4. **Reforço de "empresa" e "serviço" na `/transcricao-de-audio`**, endereçando o gap de "empresa de transcrição de áudio" que já estava na fila de SEO Ondas 2-4.
+5. **Bloco 7, espelhos `.md` regenerados** a partir das páginas finais, como fechamento da onda. Hoje estão `noindex` desde o PR #25, mas seguem defasados: `/degravacao.md` ainda traz `last_updated: 2026-04-23` e o prazo de 48h que saiu do site em agosto.
+
+## Restrição permanente desta onda
+
+Nenhuma copy visível, title, H1, meta ou âncora vai a produção sem **aprovação explícita do dono sobre o texto exato**. Vale para satélites e para páginas-dinheiro, na Etapa 1 e na Etapa 2.
