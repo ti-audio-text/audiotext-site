@@ -11,7 +11,7 @@ Read-only. Nada implementado. Medições em produção, desktop 1366x768 e mobil
 5. O funil do `/budget` exige **7 campos obrigatórios, incluindo nome, e-mail e telefone, antes de mostrar qualquer preço**. É o maior atrito medido.
 6. Performance **não é problema**: `load` entre 342ms e 525ms nas quatro páginas.
 7. Alvos de toque abaixo de 44px: 16 na degravacao, 14 na home e na judicial, 8 na audio.
-8. A garantia de 30 dias **não aparece** na `/transcricao-de-audio` nem na `/degravacao-judicial`.
+8. A garantia de 30 dias **não aparece na `/degravacao-judicial`**. (Corrigido em 08/09: eu havia dito que também faltava na `/transcricao-de-audio`, e estava errado. Ver a nota de correção no fim.)
 9. O cruzamento com os RSAs do Ads **não pôde ser feito**: o conector do Google Ads pediu reautenticação.
 10. Notas: degravacao 72, transcricao-de-audio 70, home 68, legendagem 70, degravacao-judicial 52, funil do /budget 58.
 
@@ -137,7 +137,7 @@ O H1 descreve **a categoria**, não a oferta. Serve para SEO e não vende. 4U's:
 
 | Problema | Severidade | Impacto | Conserto |
 |---|---|---|---|
-| **Garantia de 30 dias ausente** | 🔴 | Alto | Trazer o bloco que existe na /degravacao |
+| ~~Garantia ausente~~ **achado retirado** | - | - | A página tem seção própria de garantia. Ver nota de correção |
 | Zero prova social na dobra | 🔴 | Alto | Subir logos ou selo |
 | Sem visual de resultado | 🟡 | Médio | Amostra de transcrição |
 | 25.943px no mobile, a maior do site | 🟡 | Médio | Enxugar meio |
@@ -150,7 +150,7 @@ O H1 descreve **a categoria**, não a oferta. Serve para SEO e não vende. 4U's:
 
 ### Sinais de confiança
 
-Logos sim, depoimentos sim (12), avaliações sim, case sim, NDA sim. **Garantia: ausente.** Certificações e selos: ausentes.
+Logos sim, depoimentos sim (12), avaliações sim, case sim, NDA sim, **garantia sim**. Certificações e selos: ausentes.
 
 ### Mobile
 
@@ -160,10 +160,9 @@ Logos sim, depoimentos sim (12), avaliações sim, case sim, NDA sim. **Garantia
 
 | # | Conserto | Impacto | Esforço |
 |---|---|---|---|
-| 1 | Adicionar garantia de 30 dias | Alto | Baixo |
-| 2 | Prova social na dobra | Alto | Baixo |
-| 3 | Padronizar rótulo do CTA | Médio | Baixo |
-| 4 | CTA sticky | Médio | Baixo |
+| 1 | Prova social na dobra | Alto | Baixo |
+| 2 | Padronizar rótulo do CTA | Médio | Baixo |
+| 3 | CTA sticky | Médio | Baixo |
 
 **Nota: 70/100. Confiança: alta.**
 
@@ -318,3 +317,22 @@ Ordem de grandeza: em funis de cotação, mover o valor para antes da captura co
 | `/legendagem` | Calcule seu orçamento em 1 minuto | 6 |
 
 Cada um veio de um ciclo diferente e nenhum foi revisto depois. Não é erro de nenhum ciclo isolado, é dívida acumulada. Padronizar é barato e some com uma variável de ruído em qualquer teste futuro de CTA. **É mudança de copy visível: exige o rito de aprovação do dono.**
+
+
+---
+
+## Nota de correção, 2026-09-08
+
+**Um achado deste relatório estava errado e é retirado: a garantia da `/transcricao-de-audio`.**
+
+O que eu afirmei: que a garantia de 30 dias não aparecia na página, com severidade alta e prioridade 1 no plano de ação.
+
+O que é verdade: a página tem **seção dedicada**, com o H2 "Garantia de Qualidade da Transcrição de Áudio", mais o texto "Garantia de 30 dias: se encontrar erro factual" e a linha "Garantia: 30 dias para correções sem custo".
+
+Causa do erro: a verificação leu `document.body.innerText` procurando a string exata "Garantia de 30 dias", e o trecho estava em bloco recolhido no momento da medição. **Falha do método, não da página.** Refiz a checagem sobre o HTML servido, que é a fonte certa para presença de conteúdo.
+
+**O que muda:** a `/transcricao-de-audio` perde o item de prioridade 1 e passa a ter "prova social na dobra" como primeiro. A nota da página não muda: 70 continua válida, porque já estava dominada pela ausência de prova na dobra e pela falta de visual no hero.
+
+**O que continua valendo:** na `/degravacao-judicial` a garantia realmente **não existe**, verificado agora sobre o HTML. O achado dela está mantido e continua sendo parte do bloco de prova social que aquela página inteira não tem.
+
+Na `/legendagem` existe "garantia de qualidade" sem menção aos 30 dias. Como a página está congelada, fica só como registro.
