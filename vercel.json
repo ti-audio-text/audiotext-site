@@ -75,7 +75,7 @@
         },
         {
           "key": "X-Robots-Tag",
-          "value": "index, follow"
+          "value": "noindex, follow"
         }
       ]
     }
@@ -87,6 +87,17 @@
     }
   ],
   "redirects": [
+    {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "wp.audiotext.com.br"
+        }
+      ],
+      "destination": "https://www.audiotext.com.br/",
+      "permanent": true
+    },
     {
       "source": "/:path*",
       "has": [
@@ -109,27 +120,12 @@
       "permanent": true
     },
     {
-      "source": "/o-que-e-degravacacao-ipsis-litteris/",
-      "destination": "/degravacao-ipsis-litteris",
-      "permanent": true
-    },
-    {
       "source": "/o-que-e-degravacacao-ipsis-litteris",
       "destination": "/degravacao-ipsis-litteris",
       "permanent": true
     },
     {
-      "source": "/analisar-degravacao-de-audio-em-texto/",
-      "destination": "/degravacao",
-      "permanent": true
-    },
-    {
       "source": "/analisar-degravacao-de-audio-em-texto",
-      "destination": "/degravacao",
-      "permanent": true
-    },
-    {
-      "source": "/degravacao-de-audio-em-texto/",
       "destination": "/degravacao",
       "permanent": true
     },
@@ -139,18 +135,8 @@
       "permanent": true
     },
     {
-      "source": "/degravacao-de-audio-em-texto-2/",
-      "destination": "/degravacao",
-      "permanent": true
-    },
-    {
       "source": "/degravacao-de-audio-em-texto-2",
       "destination": "/degravacao",
-      "permanent": true
-    },
-    {
-      "source": "/degravacao-de-audio-em-texto-advogados/",
-      "destination": "/degravacao-judicial",
       "permanent": true
     },
     {
@@ -159,17 +145,7 @@
       "permanent": true
     },
     {
-      "source": "/canal-do-texter/regras-padroes-transcricao-de-audio-em-texto/",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
       "source": "/canal-do-texter/regras-padroes-transcricao-de-audio-em-texto",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
-      "source": "/canal-do-texter/o-que-e-transcricao-de-audio/",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -179,17 +155,7 @@
       "permanent": true
     },
     {
-      "source": "/canal-do-texter/como-revisar-formatar-transcricao-de-audio/",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
       "source": "/canal-do-texter/como-revisar-formatar-transcricao-de-audio",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
-      "source": "/canal-do-texter/modalidades-de-transcricao-de-audio/",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -199,17 +165,7 @@
       "permanent": true
     },
     {
-      "source": "/modelos-de-transcricao-de-audio-em-texto/",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
       "source": "/modelos-de-transcricao-de-audio-em-texto",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
-      "source": "/softwares-de-transcricao-de-audio/",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -219,17 +175,7 @@
       "permanent": true
     },
     {
-      "source": "/transcricao-de-audio-em-texto/",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
       "source": "/transcricao-de-audio-em-texto",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
-      "source": "/transcricao-de-audio-para-texto/",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -239,27 +185,12 @@
       "permanent": true
     },
     {
-      "source": "/transcricao-de-audio-por-voz/",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
       "source": "/transcricao-de-audio-por-voz",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
     {
-      "source": "/transcricao-de-audio/transcricao-automatica/",
-      "destination": "/transcricao-automatica",
-      "permanent": true
-    },
-    {
       "source": "/transcricao-de-audio/transcricao-automatica",
-      "destination": "/transcricao-automatica",
-      "permanent": true
-    },
-    {
-      "source": "/transcricao-automatica-2/",
       "destination": "/transcricao-automatica",
       "permanent": true
     },
@@ -269,17 +200,7 @@
       "permanent": true
     },
     {
-      "source": "/servicos/transcricao-empresarial/",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
       "source": "/servicos/transcricao-empresarial",
-      "destination": "/transcricao-de-audio",
-      "permanent": true
-    },
-    {
-      "source": "/servicos/transcricao-academica/",
       "destination": "/transcricao-de-audio",
       "permanent": true
     },
@@ -289,17 +210,7 @@
       "permanent": true
     },
     {
-      "source": "/dicas-gravar-audio-celular-com-qualidade/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/dicas-gravar-audio-celular-com-qualidade",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/melhores-apps-gravacao-audio-celular/",
       "destination": "/",
       "permanent": true
     },
@@ -309,27 +220,12 @@
       "permanent": true
     },
     {
-      "source": "/dicas-para-digitar-mais-rapido/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/dicas-para-digitar-mais-rapido",
       "destination": "/",
       "permanent": true
     },
     {
-      "source": "/legendagem-filmes-propagandas-videos-youtube/",
-      "destination": "/legendagem",
-      "permanent": true
-    },
-    {
       "source": "/legendagem-filmes-propagandas-videos-youtube",
-      "destination": "/legendagem",
-      "permanent": true
-    },
-    {
-      "source": "/legendagem-video-aulas-treinamentos-palestras/",
       "destination": "/legendagem",
       "permanent": true
     },
@@ -339,18 +235,8 @@
       "permanent": true
     },
     {
-      "source": "/__trashed/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/__trashed",
       "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/lava-jato-case-de-sucesso-audiotext/",
-      "destination": "/sobre",
       "permanent": true
     },
     {
@@ -359,17 +245,7 @@
       "permanent": true
     },
     {
-      "source": "/contato/",
-      "destination": "/",
-      "permanent": true
-    },
-    {
       "source": "/contato",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/como-funciona/",
       "destination": "/",
       "permanent": true
     },
@@ -389,11 +265,6 @@
       "permanent": true
     },
     {
-      "source": "/equipe/",
-      "destination": "/sobre",
-      "permanent": true
-    },
-    {
       "source": "/equipe",
       "destination": "/sobre",
       "permanent": true
@@ -405,11 +276,6 @@
     },
     {
       "source": "/tag/:path*",
-      "destination": "/",
-      "permanent": true
-    },
-    {
-      "source": "/canal-do-texter/",
       "destination": "/",
       "permanent": true
     },
@@ -456,6 +322,51 @@
     {
       "source": "/canal-do-texter/:path*",
       "destination": "/texter",
+      "permanent": true
+    },
+    {
+      "source": "/clientes",
+      "destination": "/sobre",
+      "permanent": true
+    },
+    {
+      "source": "/quem-somos",
+      "destination": "/sobre",
+      "permanent": true
+    },
+    {
+      "source": "/transcricao-de-ata",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/transcricao-automatica",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/videos/regras-padroes-transcricao-de-audio-em-texto",
+      "destination": "/transcricao-de-audio",
+      "permanent": true
+    },
+    {
+      "source": "/degravacao-judicial-de-audio-em-texto/transcricao-automatica",
+      "destination": "/degravacao-judicial",
+      "permanent": true
+    },
+    {
+      "source": "/servicos/searchable-content",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/modelos-de-transcricao-de-audio-em-texto/transcricao-automatica",
+      "destination": "/transcricao-automatica",
       "permanent": true
     }
   ]
