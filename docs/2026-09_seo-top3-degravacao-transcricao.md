@@ -380,3 +380,23 @@ Se a `/transcricao-de-audio` não sair da segunda página para o cluster "transc
 Vale a partir de 2026-09-07. Na prática: bloco que traga redação nova entra como proposta, não como execução, até o dono confirmar o texto exato.
 
 **Primeira aplicação da regra:** as redações do item 3 (title e H1 da `/texter`, âncoras da home e da `/degravacao-ipsis-litteris`) ficaram **retidas** neste ciclo. O campo de confirmação do dono chegou como `[confirmar/ajustar aqui]`, ou seja, em branco. O que não é copy, a troca de `href` e `rel` do rodapé e a URL do selo, foi aplicado.
+
+## Item 6, opção B: copy de intenção (branch `feat/seo-intencao-copy`)
+
+**Redações aprovadas EXPLICITAMENTE pelo dono em 2026-09-08**, conforme a regra selada. Primeira vez que a regra é cumprida na forma prevista: o ciclo anterior reteve estas mesmas redações porque o campo de confirmação veio em branco.
+
+| Onde | Antes | Agora |
+|---|---|---|
+| `/texter` title | Trabalhe como Transcritor \| Processo Seletivo Online - Audiotext | **Vaga de Transcritor: trabalhe de casa \| Audiotext** |
+| `/texter` H1 | Torne-se Transcritor da Audiotext | **Vaga de transcritor freelancer na Audiotext** |
+
+A lógica: "vaga" e "transcritor" são as palavras do candidato; "transcrição" sai da posição de destaque do title, que é onde disputava com a intenção comercial.
+
+**Posicionamento das duas âncoras**, para validação no preview:
+
+1. **Home**, seção de missão, no parágrafo que começa com "Seja uma entrevista de mestrado". A frase nova fecha o parágrafo: *"Você pode contratar transcrição de áudio profissional em poucos minutos."*
+2. **`/degravacao-ipsis-litteris`**, no bloco "Use Transcrição Padrão para conteúdo editorial e pesquisa", fechando o parágrafo: *"Para esses casos, o indicado é o nosso serviço profissional de transcrição de áudio."* É o ponto mais natural da página: o texto acabou de dizer que ali a fluência importa mais que a fidelidade, então o encaminhamento é consequência do argumento, não enxerto.
+
+**Ajuste de contraste, registrado por transparência:** a âncora da home caiu numa seção de fundo azul escuro e, sem estilo, renderizou no azul padrão do navegador (`rgb(0,0,238)`), ilegível. Recebeu `color:inherit` com sublinhado, por estilo inline, mesmo padrão do selo do GMB e pelo mesmo motivo: não criar classe que poderia não existir no CSS da página. Na `/degravacao-ipsis-litteris` não foi preciso, o CSS da página já resolve.
+
+Com o merge desta branch, a **Onda Técnica está encerrada**. Próxima etapa é a Onda On-page, com o T0-SEO já correndo desde 07/09 21:19.
