@@ -457,3 +457,27 @@ Textos aprovados explicitamente pelo dono em 2026-09-08.
 Mesmo princípio da separação de intenção aplicado na `/texter`: quem chegou para entender continua lendo, quem chegou para contratar sai daqui em um clique, e a página informacional passa a doar sinal para a página comercial em vez de reter.
 
 **Ajuste de apresentação, registrado:** o CSS desta página remove sublinhado de `a`, então o link nascia com a mesma cor e o mesmo traço do texto ao redor, indistinguível. Recebeu `text-decoration: underline` por estilo inline, mesmo padrão do selo do GMB e da âncora da home, e pelo mesmo motivo de não criar classe que poderia não existir no CSS da página. A cor segue a do parágrafo.
+
+## Marcos da Etapa 1 (data e hora reais de merge)
+
+| Marco | Quando | PR | O que entrou |
+|---|---|---|---|
+| Abertura da onda e fila da Etapa 2 | **08/09/2026 00:10** | #28 | log, sem mudança de página |
+| **T0-ONPAGE-1** | **08/09/2026 00:15** | #30 | title e description da `/degravacao-ipsis-litteris`; title, H1, description e encaminhamento comercial da `/o-que-e-degravacao` |
+
+**Deploy confirmado em produção** logo após o merge, com User-Agent de navegador: as duas páginas servem os titles e as descriptions novos, e o parágrafo de encaminhamento aparece no HTML inicial da `/o-que-e-degravacao`.
+
+**Nota de execução, para o histórico ficar correto:** a ordem planejada era três merges (`docs`, depois `ipsis`, depois `o-que-e`). Na prática foram **dois**: a de docs sozinha e, em seguida, uma branch única (`feat/onpage-etapa1`) com as duas de copy juntas, criada para resolver o conflito no log que as branches empilhadas causariam. O conteúdo é idêntico ao aprovado, item por item.
+
+**Consequência para a leitura de 21 a 22/09:** o relógio da Etapa 1 começa em 08/09 00:15, ou seja, a leitura acontece com **13 a 14 dias** de exposição. É prazo curto para movimento de posição e suficiente para sinal de CTR, já que o title entra no índice na primeira recontagem. O T0-SEO da Onda Técnica continua valendo em separado, desde 07/09 21:19.
+
+### Ajustes de apresentação aceitos e registrados
+
+Aceitos pelo orquestrador, sem alteração do texto aprovado:
+1. **Aspas em entidade.** A description da `/degravacao-ipsis-litteris` carrega aspas no texto aprovado; no atributo HTML elas foram escritas como `&quot;`, senão o atributo fecharia no lugar errado. Renderizam como aspas normais.
+2. **Sublinhado por estilo inline** no link do encaminhamento da `/o-que-e-degravacao`, porque o CSS da página remove sublinhado de `a` e o link nascia indistinguível do texto ao redor. Mesmo padrão já usado no selo do GMB e na âncora da home, e pelo mesmo motivo de não criar classe-fantasma.
+3. **Triagem dos 7 travessões** da `/o-que-e-degravacao`: todos em comentário de HTML ou de JS (rótulos de schema, "Related Links", "FAQ Data"), nenhum em copy visível, e o número é idêntico ao de antes do bake da FAQ. Copy visível segue em zero.
+
+### Estado da onda
+
+Etapa 1 **completa**, exceto a home (itens 8 e 9), retida até a leitura de 21 a 22/09 mais ok explícito do orquestrador. Páginas-dinheiro seguem congeladas. Nenhuma tarefa nova de copy até a leitura.
