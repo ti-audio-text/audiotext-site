@@ -400,3 +400,25 @@ A lógica: "vaga" e "transcritor" são as palavras do candidato; "transcrição"
 **Ajuste de contraste, registrado por transparência:** a âncora da home caiu numa seção de fundo azul escuro e, sem estilo, renderizou no azul padrão do navegador (`rgb(0,0,238)`), ilegível. Recebeu `color:inherit` com sublinhado, por estilo inline, mesmo padrão do selo do GMB e pelo mesmo motivo: não criar classe que poderia não existir no CSS da página. Na `/degravacao-ipsis-litteris` não foi preciso, o CSS da página já resolve.
 
 Com o merge desta branch, a **Onda Técnica está encerrada**. Próxima etapa é a Onda On-page, com o T0-SEO já correndo desde 07/09 21:19.
+
+## Etapa 1, branch 1: `/degravacao-ipsis-litteris` (itens 5 e 6)
+
+Textos aprovados explicitamente pelo dono em 2026-09-08.
+
+| | Antes | Agora |
+|---|---|---|
+| Title | Degravação Ipsis Litteris: O Que É e Quando Usar \| Audiotext | **Ipsis litteris: significado, tradução e como usar na prática** (60 caracteres) |
+| Description | Degravação ipsis litteris transcreve o áudio nas próprias letras, sem edição alguma. Entenda o que significa, por que é exigida em processos judiciais e como se diferencia de outras modalidades. | **Ipsis litteris significa "nas próprias letras": reproduzir exatamente o que foi dito, sem corrigir nada. Veja a tradução, exemplos e quando usar.** (145 caracteres) |
+
+H1 **mantido** de propósito, para proteger a posição 2,13 da query "ipsis litteris como usar". As aspas da description foram escritas como `&quot;` no atributo, senão o HTML quebraria; renderizam como aspas normais.
+
+### Reclassificação da página
+
+**De "ativo de CTR" para "ativo de autoridade e funil"**, por decisão do dono e do orquestrador.
+
+Fundamentação: o cluster "ipsis" soma cerca de 42 mil impressões em 3 meses e rendeu 20 cliques. A intenção é de dicionário, não de compra, e nenhuma otimização de title muda isso de forma relevante. O valor real da página é autoridade de entidade no termo central da degravação, doação de link interno e citação em AI Overview.
+
+Consequências registradas:
+1. Os itens 5 e 6 entram assim mesmo, porque o custo é zero, mas **sem investimento adicional de conteúdo nesta página na Etapa 2**. O esforço vai para as páginas-dinheiro.
+2. **A métrica de sucesso da página deixa de ser CTR orgânico** e passa a ser navegação interna para `/transcricao-de-audio` e `/degravacao`, medida no GA4 por caminho de página. Entra na régua quinzenal.
+3. Queries de exceção a vigiar: **"transcrição ipsis litteris"**, hoje em posição 1,62, que é para defender, e "ipsis litteris significado jurídico". Se a âncora comercial inserida no ciclo anterior provar escoamento na leitura de 21 a 22/09, avaliar um segundo funil, um bloco jurídico apontando para `/degravacao`, como mudança única da janela seguinte.
