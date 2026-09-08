@@ -481,3 +481,50 @@ Aceitos pelo orquestrador, sem alteração do texto aprovado:
 ### Estado da onda
 
 Etapa 1 **completa**, exceto a home (itens 8 e 9), retida até a leitura de 21 a 22/09 mais ok explícito do orquestrador. Páginas-dinheiro seguem congeladas. Nenhuma tarefa nova de copy até a leitura.
+
+---
+
+# Decisões sobre as auditorias e execução dos consertos estruturais
+
+Registrado em 2026-09-08.
+
+## Reclassificação do orquestrador
+
+**Ação de ranking**, e só isso: os 3 consertos estruturais (malha de links do hub `/transcricao-de-audio`, adoção das 2 órfãs, breadcrumb mais BreadcrumbList) e o `JobPosting` da `/texter`.
+
+**Todo o resto do relatório de CRO é fila de conversão, não de posição.** Entra no ICE da Etapa 2 com essa etiqueta e **sem promessa de SERP**. Vale para: visual de resultado no hero, prova social na dobra, garantia ausente na `/transcricao-de-audio`, CTAs da `/degravacao-judicial`, alvos de toque e rótulo único de CTA.
+
+## Executado agora: breadcrumb visível
+
+Aplicado em **3 páginas de serviço**: `/degravacao`, `/transcricao-de-audio` e `/transcricao-automatica`. O `BreadcrumbList` já existia no schema das quatro; o que faltava era a trilha visível que ele declara.
+
+Detalhes: `.breadcrumb` **não existia** no CSS de nenhuma delas, então a definição entrou junto, senão seriam quatro classes-fantasma. O contêiner usa estilo inline, para não depender de classe de largura que pode não existir na página. O primeiro item do schema foi alinhado de "Home" para **"Audiotext"** em duas páginas, que era a divergência com as 6 páginas de definição.
+
+**`/legendagem` ficou de fora.** É página de serviço e estava no escopo aprovado, mas está sob **congelamento formal desde 02/09**, fechada para qualquer mudança, visível ou invisível. O bloco autorizou nominalmente a exceção da `/transcricao-de-audio` e não mencionou a `/legendagem`, então não estendi a exceção por conta própria. Fica aguardando autorização explícita.
+
+## Retido: JobPosting da /texter
+
+Não implementei, e o motivo é de dado, não de esforço. O `JobPosting` do Google exige **`datePosted`**, e não existe fonte para essa data na página nem no repositório. Inventar data em rich result de vaga é declarar como fato algo que não sei, com risco real: o Google despublica vaga vencida e trata data incorreta como má prática.
+
+**Preciso do dono:** a data de publicação da vaga, a confirmação de que ela está aberta hoje, e se há prazo de validade. Com isso o schema sai em minutos, e é o item de melhor relação entre impacto e esforço de toda a auditoria, já que a `/texter` tem o maior CTR do site, 11,39%.
+
+## Retido: adoção das 2 órfãs
+
+O próprio bloco manda submeter os textos das âncoras antes de implementar. As propostas estão na mensagem de entrega deste ciclo, aguardando aprovação explícita do dono.
+
+Registro da exceção autorizada: a inserção acontecerá na `/transcricao-de-audio`, **congelada**, autorizada pelo orquestrador por ser a correção do achado central, o hub que recebe de 8 páginas e doa 1 link. Terá **data e hora próprias no log** para a leitura de 21 a 22/09 poder segregar o efeito.
+
+## Mortos, registrados
+
+1. **Página "quanto custa degravação".** Morta. "quanto custa" soma 3 impressões em 12 meses nos nossos dados. Vira **seção-teste** dentro da `/degravacao`, na Etapa 2, e a decisão sobre página própria fica condicionada ao que essa seção capturar.
+2. **Página "degravação de audiências".** Morta. Canibalizaria a `/degravacao-judicial`, que já traz audiências no H1, e já ranqueamos entre 6,5 e 7,9 para as 9 variantes da query.
+3. **Avenida programática inteira.** Morta. Veredito artesanal aceito: não há dataset, o volume por variante é baixo, e já ranqueamos para quase tudo que seria alvo.
+
+## Pendência de decisão de negócio, fora da Etapa 2
+
+**Preço antes do lead no funil do `/budget`**, no padrão que a `/legendagem` já usa. Não executar nada. É decisão do dono, com trade-off explícito: tende a subir a conclusão do funil e a baixar a qualificação do lead. Grande demais para entrar de carona em qualquer branch.
+
+## Aguardando a leitura de 21 a 22/09
+
+- As 2 candidatas novas de spoke: página de comparação "degravação vs transcrição" e o `JobPosting` como hub de vagas. Entram no ICE junto com o resto.
+- **Rótulo único de CTA**, hoje com 4 variantes no site. Entra no ICE como item de copy, sujeito ao rito de aprovação do dono.
