@@ -420,3 +420,40 @@ Registrada agora, sem execução:
 ## Restrição permanente desta onda
 
 Nenhuma copy visível, title, H1, meta ou âncora vai a produção sem **aprovação explícita do dono sobre o texto exato**. Vale para satélites e para páginas-dinheiro, na Etapa 1 e na Etapa 2.
+## Etapa 1, branch 1: `/degravacao-ipsis-litteris` (itens 5 e 6)
+
+Textos aprovados explicitamente pelo dono em 2026-09-08.
+
+| | Antes | Agora |
+|---|---|---|
+| Title | Degravação Ipsis Litteris: O Que É e Quando Usar \| Audiotext | **Ipsis litteris: significado, tradução e como usar na prática** (60 caracteres) |
+| Description | Degravação ipsis litteris transcreve o áudio nas próprias letras, sem edição alguma. Entenda o que significa, por que é exigida em processos judiciais e como se diferencia de outras modalidades. | **Ipsis litteris significa "nas próprias letras": reproduzir exatamente o que foi dito, sem corrigir nada. Veja a tradução, exemplos e quando usar.** (145 caracteres) |
+
+H1 **mantido** de propósito, para proteger a posição 2,13 da query "ipsis litteris como usar". As aspas da description foram escritas como `&quot;` no atributo, senão o HTML quebraria; renderizam como aspas normais.
+
+### Reclassificação da página
+
+**De "ativo de CTR" para "ativo de autoridade e funil"**, por decisão do dono e do orquestrador.
+
+Fundamentação: o cluster "ipsis" soma cerca de 42 mil impressões em 3 meses e rendeu 20 cliques. A intenção é de dicionário, não de compra, e nenhuma otimização de title muda isso de forma relevante. O valor real da página é autoridade de entidade no termo central da degravação, doação de link interno e citação em AI Overview.
+
+Consequências registradas:
+1. Os itens 5 e 6 entram assim mesmo, porque o custo é zero, mas **sem investimento adicional de conteúdo nesta página na Etapa 2**. O esforço vai para as páginas-dinheiro.
+2. **A métrica de sucesso da página deixa de ser CTR orgânico** e passa a ser navegação interna para `/transcricao-de-audio` e `/degravacao`, medida no GA4 por caminho de página. Entra na régua quinzenal.
+3. Queries de exceção a vigiar: **"transcrição ipsis litteris"**, hoje em posição 1,62, que é para defender, e "ipsis litteris significado jurídico". Se a âncora comercial inserida no ciclo anterior provar escoamento na leitura de 21 a 22/09, avaliar um segundo funil, um bloco jurídico apontando para `/degravacao`, como mudança única da janela seguinte.
+
+## Etapa 1, branch 2: `/o-que-e-degravacao` (itens 1 a 4)
+
+Textos aprovados explicitamente pelo dono em 2026-09-08.
+
+| | Antes | Agora |
+|---|---|---|
+| Title | O que é Degravação? Significado, Diferenças e Quando Usar [2026] | **O que é degravação? Significado, exemplos e quando é exigida** (60) |
+| H1 | O que é Degravação? | **O que é degravação de áudio: significado e quando é exigida** |
+| Description | Degravação é a transcrição literal de áudio para texto, usada em processos judiciais. Inclui hesitações, pausas e vícios de linguagem. Entenda o significado, quando usar e por que advogados precisam. | **Degravação é a transcrição literal do áudio, preservando hesitações, pausas e vícios de linguagem. Veja um exemplo real e quando ela é exigida no processo.** (155) |
+
+**Encaminhamento comercial** inserido como parágrafo próprio logo abaixo do primeiro, ainda no hero: *"Se você já sabe o que é e precisa contratar, veja nosso serviço de degravação de áudio com prazo e preço na hora."*, com o link em "serviço de degravação de áudio" apontando para `/degravacao`.
+
+Mesmo princípio da separação de intenção aplicado na `/texter`: quem chegou para entender continua lendo, quem chegou para contratar sai daqui em um clique, e a página informacional passa a doar sinal para a página comercial em vez de reter.
+
+**Ajuste de apresentação, registrado:** o CSS desta página remove sublinhado de `a`, então o link nascia com a mesma cor e o mesmo traço do texto ao redor, indistinguível. Recebeu `text-decoration: underline` por estilo inline, mesmo padrão do selo do GMB e da âncora da home, e pelo mesmo motivo de não criar classe que poderia não existir no CSS da página. A cor segue a do parágrafo.
