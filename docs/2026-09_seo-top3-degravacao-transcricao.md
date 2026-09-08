@@ -341,4 +341,42 @@ Baseline no momento do corte, do export de 2026-09-07:
 | `/texter`, posição no cluster de transcrição | 9,77 |
 | `/degravacao-ipsis-litteris` | 61.040 impressões em 3m, CTR 0,07% |
 
-As datas exatas de merge e de deploy entram aqui assim que o dono mergear.
+**T0-SEO = 2026-09-07, 21:19 (BRT).** PR #24 (paridade de HTML servido, selo e sitemap) e PR #25 (redirects e noindex dos espelhos) mergeados no mesmo minuto, com deploy automatico na sequencia.
+
+Smoke test rodado logo apos o deploy, com User-Agent de navegador, porque o firewall devolve 403 a agente generico:
+
+| URL | Resultado |
+|---|---|
+| `wp.audiotext.com.br/` | **1 salto para www, 200** (era 200 direto no wp) |
+| `/clientes/` | 2 saltos para `/sobre`, 200 |
+| `/blog/` | 2 saltos para `/`, 200 |
+| `/quem-somos/` | 2 saltos para `/sobre`, 200 |
+| `/degravacao` | 0 saltos, 200 |
+| `/transcricao-de-audio` | 0 saltos, 200 |
+| `X-Robots-Tag` de `/degravacao.md` | `noindex, follow` |
+
+Nota sobre os 2 saltos: URL digitada **com** barra final gasta um salto so para a normalizacao do `trailingSlash`, e depois o redirect de destino. Sem a barra, e **1 salto**, confirmado em `/clientes`, `/quem-somos`, `/blog` e `/transcricao-de-ata`. A remocao das 29 regras nao acrescentou salto nenhum: elas eram inalcancaveis, e quem gera o primeiro salto e a normalizacao, que roda antes de qualquer regra.
+
+## Item 6, opção B: separação de intenção (branch `feat/seo-intencao`)
+
+**Aplicado nesta branch:** o link "Trabalhe Conosco" do rodapé unificado deixa de apontar para `/vagas/transcritor/`, URL legada que gastava 2 saltos, e passa a apontar direto para `/texter` com `rel="nofollow"`. Nas **14 páginas**, com o texto da âncora inalterado.
+
+Corrige duas coisas de uma vez: as 14 páginas deixam de alimentar o funil de recrutamento com sinal de link, e some uma cadeia de redirect interna.
+
+**Autorização registrada:** a mudança inclui a **/legendagem, congelada**, por autorização explícita do orquestrador. É troca de `href` e `rel` no rodapé, não toca copy visível, funil, marcador nem GTM. Verificado após a mudança: `abrirFormLegendagem` e `enviarOrcamentoLegendagem` intactos, `overflowX` 0.
+
+**Invariante do rodapé preservada:** uma única variante nas 14 páginas, `len` 4972 (era 4969, mais 3 pela troca de `/vagas/transcritor/` por `/texter` somada ao `rel="nofollow"`).
+
+**Selo do GMB:** o encurtador `share.google` foi descartado por mortalidade de shortlink e por carregar parâmetros de tracking. O href passa a ser a URL estável do painel, `https://www.google.com/search?kgmid=/g/11b5pj3r3y`.
+
+### Régua de escalada
+
+Se a `/transcricao-de-audio` não sair da segunda página para o cluster "transcrição de áudio" em **60 dias do deploy desta branch**, escalar para a opção A: `noindex` no funil de recrutamento. Baseline no corte: posição 21,38, atrás de `/texter` (9,77), da home (6,93) e de `wp./vagas/transcritor/` (7,62).
+
+## REGRA SELADA: aprovação de copy
+
+**Toda mudança de copy visível, title, H1 ou âncora exige aprovação EXPLÍCITA do dono antes de implementar. Aprovação do orquestrador não basta.**
+
+Vale a partir de 2026-09-07. Na prática: bloco que traga redação nova entra como proposta, não como execução, até o dono confirmar o texto exato.
+
+**Primeira aplicação da regra:** as redações do item 3 (title e H1 da `/texter`, âncoras da home e da `/degravacao-ipsis-litteris`) ficaram **retidas** neste ciclo. O campo de confirmação do dono chegou como `[confirmar/ajustar aqui]`, ou seja, em branco. O que não é copy, a troca de `href` e `rel` do rodapé e a URL do selo, foi aplicado.
