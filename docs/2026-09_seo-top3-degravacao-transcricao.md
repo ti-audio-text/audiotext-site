@@ -316,7 +316,7 @@ Extensão aprovada pelo orquestrador, mesmo mecanismo e mesmos gates:
 
 Texto renderizado idêntico ao de antes nas três (8.940, 7.462 e 7.403), acordeão abrindo, `overflowX` 0 a 375x667, zero elemento da FAQ estourando a largura, JSON-LD válido e sem classe-fantasma nova.
 
-**Selo com link.** A URL do perfil foi confirmada pelo dono e aplicada nas 3 páginas com `aggregateRating`: `https://share.google/UmDLCJApUAnhVv8Z9`, com `target="_blank"`, `rel="noopener"` e sublinhado por estilo inline, para não depender de classe que poderia não existir no CSS da página. O link resolve para o painel do perfil (`kgmid=/g/11b5pj3r3y`).
+**Selo com link.** A URL do perfil foi confirmada pelo dono e aplicada nas 3 páginas com `aggregateRating`: `https://www.google.com/search?kgmid=/g/11b5pj3r3y`, com `target="_blank"`, `rel="noopener"` e sublinhado por estilo inline, para não depender de classe que poderia não existir no CSS da página. Usada a URL estavel do painel em vez do encurtador share.google, descartado por mortalidade de shortlink e por carregar parametros de tracking.
 
 ## Fechamentos registrados
 
