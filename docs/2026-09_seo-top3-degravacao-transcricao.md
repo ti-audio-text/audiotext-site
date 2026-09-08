@@ -303,3 +303,42 @@ Selo visível com a redação exata **"5.0 · 35 avaliações no Google"**, subs
 ### Nota sobre o gate de classes-fantasma
 
 A contagem da `/degravacao` foi de 6 para 8. **Não são fantasmas novos.** São `hover:text-primary` e `pb-4`, que o scan anterior já listava como "via JS, sem definição no CSS": eram aplicadas em tempo de execução pelo mesmo markup e agora estão no HTML, onde o scan enxerga. O efeito é idêntico antes e depois, ou seja, nulo nas duas situações. Não foram definidas porque defini-las mudaria o visual, e o gate deste bloco é de zero mudança visual. Ficam para triagem.
+
+## Extensão do Bloco 1 e fechamento do selo (2026-09-07, mesmo ciclo)
+
+Extensão aprovada pelo orquestrador, mesmo mecanismo e mesmos gates:
+
+| Página | HTML inicial antes | Agora | FAQ trazida |
+|---|---|---|---|
+| `/o-que-e-degravacao` | 8.179 | 14.783 | 10 perguntas |
+| `/degravacao-ipsis-litteris` | 6.684 | 11.913 | 8 perguntas |
+| `/transcricao-de-audio-por-ia` | 6.711 | 13.907 | 10 perguntas |
+
+Texto renderizado idêntico ao de antes nas três (8.940, 7.462 e 7.403), acordeão abrindo, `overflowX` 0 a 375x667, zero elemento da FAQ estourando a largura, JSON-LD válido e sem classe-fantasma nova.
+
+**Selo com link.** A URL do perfil foi confirmada pelo dono e aplicada nas 3 páginas com `aggregateRating`: `https://share.google/UmDLCJApUAnhVv8Z9`, com `target="_blank"`, `rel="noopener"` e sublinhado por estilo inline, para não depender de classe que poderia não existir no CSS da página. O link resolve para o painel do perfil (`kgmid=/g/11b5pj3r3y`).
+
+## Fechamentos registrados
+
+- **Bloco 8 encerrado sem escopo.** `site.dev`, `audiotext.audiotext` e `ww` retornam NXDOMAIN. Não há host indevido servindo nada, e eram eles os 2,1% de erro de DNS do crawl stats.
+- **Item 8 corrigido.** `wp./vagas/transcritor/` já chega em `/texter` com 200, em 3 saltos. `www/vagas/transcritor` não é página, é redirect. Não há destino a corrigir, só cadeia a encurtar.
+- **Item 10 corrigido.** Dos 37 404s do export, **só 9 continuam 404** hoje; o restante já foi coberto pelas 73 regras depois do último rastreamento.
+- **Item 11 corrigido.** São 29 regras mortas com barra final, não 36.
+- **Classes-fantasma `hover:text-primary` e `pb-4`** na `/degravacao`: registradas para triagem futura, fora deste escopo. Não são novas, apenas migraram de JS para HTML.
+
+## T0-SEO, marco de medição
+
+Régua definida pelo orquestrador: leitura quinzenal no Search Console, posição média de 28 dias, para a query "degravação" e para o cluster "transcrição de áudio". Expectativa de sinal em 4 a 8 semanas.
+
+Baseline no momento do corte, do export de 2026-09-07:
+
+| Métrica | Valor |
+|---|---|
+| "degravação", posição exata | 5,75 (3m) e 5,6 (12m) |
+| `/degravacao`, posição no cluster | 3,69 com 3.653 impressões |
+| `/o-que-e-degravacao`, posição no cluster | 5,62 com 4.894 impressões |
+| `/transcricao-de-audio`, posição no cluster | 21,38 |
+| `/texter`, posição no cluster de transcrição | 9,77 |
+| `/degravacao-ipsis-litteris` | 61.040 impressões em 3m, CTR 0,07% |
+
+As datas exatas de merge e de deploy entram aqui assim que o dono mergear.
