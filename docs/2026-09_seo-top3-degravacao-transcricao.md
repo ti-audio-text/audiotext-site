@@ -341,7 +341,21 @@ Baseline no momento do corte, do export de 2026-09-07:
 | `/texter`, posição no cluster de transcrição | 9,77 |
 | `/degravacao-ipsis-litteris` | 61.040 impressões em 3m, CTR 0,07% |
 
-As datas exatas de merge e de deploy entram aqui assim que o dono mergear.
+**T0-SEO = 2026-09-07, 21:19 (BRT).** PR #24 (paridade de HTML servido, selo e sitemap) e PR #25 (redirects e noindex dos espelhos) mergeados no mesmo minuto, com deploy automatico na sequencia.
+
+Smoke test rodado logo apos o deploy, com User-Agent de navegador, porque o firewall devolve 403 a agente generico:
+
+| URL | Resultado |
+|---|---|
+| `wp.audiotext.com.br/` | **1 salto para www, 200** (era 200 direto no wp) |
+| `/clientes/` | 2 saltos para `/sobre`, 200 |
+| `/blog/` | 2 saltos para `/`, 200 |
+| `/quem-somos/` | 2 saltos para `/sobre`, 200 |
+| `/degravacao` | 0 saltos, 200 |
+| `/transcricao-de-audio` | 0 saltos, 200 |
+| `X-Robots-Tag` de `/degravacao.md` | `noindex, follow` |
+
+Nota sobre os 2 saltos: URL digitada **com** barra final gasta um salto so para a normalizacao do `trailingSlash`, e depois o redirect de destino. Sem a barra, e **1 salto**, confirmado em `/clientes`, `/quem-somos`, `/blog` e `/transcricao-de-ata`. A remocao das 29 regras nao acrescentou salto nenhum: elas eram inalcancaveis, e quem gera o primeiro salto e a normalizacao, que roda antes de qualquer regra.
 
 ## Item 6, opção B: separação de intenção (branch `feat/seo-intencao`)
 
