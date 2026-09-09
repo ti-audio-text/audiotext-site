@@ -528,3 +528,56 @@ Registro da exceção autorizada: a inserção acontecerá na `/transcricao-de-a
 
 - As 2 candidatas novas de spoke: página de comparação "degravação vs transcrição" e o `JobPosting` como hub de vagas. Entram no ICE junto com o resto.
 - **Rótulo único de CTA**, hoje com 4 variantes no site. Entra no ICE como item de copy, sujeito ao rito de aprovação do dono.
+
+## Consertos estruturais, segunda leva (branch `feat/breadcrumb-servico`, aplicado em 2026-09-09)
+
+### Breadcrumb na /legendagem, exceção ao congelamento
+
+Autorizado nominalmente pelo orquestrador. Mesma trilha e mesmo estilo das outras três: `Audiotext › Legendagem`, 48px de altura, e o `.breadcrumb` definido no CSS da própria página, que não existia. Schema alinhado de "Home" para "Audiotext".
+
+**Natureza da exceção, para o registro da página congelada:** é adição de trilha de navegação e da definição de estilo correspondente. **Não toca formulário, marcador nem GTM.** Conferido depois da mudança: `abrirFormLegendagem` e `enviarOrcamentoLegendagem` intactos, `overflowX` 0, H1 na mesma posição.
+
+Com isso, as **4 páginas de serviço** passam a exibir a trilha que o `BreadcrumbList` já declarava.
+
+### JobPosting na /texter
+
+Dados fornecidos pelo dono: publicação em **03/08/2026**, vaga **aberta hoje**.
+
+Sobre a validade, tomei a via evergreen do bloco: a `/texter` é a página de recrutamento permanente do site, por decisão selada, e não uma vaga com data de encerramento. Então `validThrough` ficou em **2026-11-01**, ou seja, 90 dias a partir da publicação, e não os 60 mencionados. **Se a intenção era mesmo encerrar em 60 dias, é trocar uma linha.**
+
+**REGRA DE RENOVAÇÃO, para não expirar o rich result:** o `validThrough` precisa ser empurrado para frente **antes de 01/11/2026**. Vaga com `validThrough` vencido some do Google Empregos. Sugiro renovar a cada 90 dias, atualizando também o `datePosted` se a vaga for republicada de fato. **Próxima renovação: até 25/10/2026.**
+
+Campos declarados: `title`, `description` em HTML, `datePosted`, `validThrough`, `employmentType: CONTRACTOR`, `hiringOrganization` com nome, site e logo iguais aos do `Organization` das outras páginas, `jobLocationType: TELECOMMUTE`, `applicantLocationRequirements: BR`, `directApply` e `url`. É o conjunto que o Google exige para vaga remota.
+
+**Pendência:** a validação no Rich Results Test só roda sobre URL pública, então precisa acontecer **depois do deploy**. Fica com o dono.
+
+### Adoção das 2 órfãs, exceção na /transcricao-de-audio
+
+Duas âncoras em prosa corrente, com os textos aprovados pelo dono:
+
+1. Na seção que compara IA e humano: *"Para gravações simples, com áudio limpo e um só interlocutor, a **transcrição de áudio por IA** resolve com ótimo custo."* Redação ajustada pelo orquestrador, porque a minha proposta original rebaixava o produto de IA.
+2. No fim do parágrafo de abertura: *"Para entrevistas de pesquisa e jornalismo, veja a **transcrição de entrevista**."*
+
+**Ajuste de posicionamento que fiz durante a execução:** a segunda âncora tinha sido inserida no meio do parágrafo e atropelava a frase seguinte, que já falava de pesquisadores e jornalistas. Movi para o fim do mesmo parágrafo. O texto aprovado não mudou, só a posição.
+
+**Efeito sobre o achado central:** a `/transcricao-de-audio` passa de **1 para 3 links de corpo doados**. Deixa de ser hub que só recebe. As duas páginas órfãs passam a ter link de corpo apontando para elas.
+
+Os dois links usam sublinhado por estilo inline, sem classe, pelo mesmo motivo de sempre.
+
+### Datas para a leitura de 21 a 22/09
+
+Esta leva é **posterior ao T0-ONPAGE-1** (08/09 00:15) e precisa ser segregada na leitura. Commits de 09/09; a data e hora de merge entram aqui quando o dono mergear, como nas levas anteriores.
+
+Efeitos esperados por página, para a leitura saber o que olhar:
+- `/transcricao-de-audio`: os 2 links novos são a correção do hub. Efeito esperado em **posição no cluster**, lento.
+- `/transcricao-de-audio-por-ia` e `/transcricao-de-entrevista`: primeira vez com link de corpo. Efeito esperado em **impressões**.
+- 4 páginas de serviço: breadcrumb. Efeito esperado em **apresentação na SERP**, não em posição.
+- `/texter`: `JobPosting`. Efeito esperado em **elegibilidade a rich result de vaga**.
+
+## Aprendizado de método, registrado
+
+**Medição de presença de conteúdo sempre sobre o HTML servido, nunca sobre `innerText` de estado colapsado.**
+
+Origem: afirmei que a `/transcricao-de-audio` não tinha garantia de 30 dias, com severidade alta e prioridade 1. A página tem seção dedicada com H2 próprio. O teste lia `document.body.innerText` procurando string exata, e o trecho estava recolhido no momento da medição.
+
+Vale para qualquer auditoria futura: `innerText` responde "o que está visível agora", que é útil para dobra, contraste e alvo de toque. Para "este conteúdo existe na página", a fonte é o HTML servido.

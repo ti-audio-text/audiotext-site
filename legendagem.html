@@ -683,7 +683,7 @@
       {
         "@type": "ListItem",
         "position": 1,
-        "name": "Home",
+        "name": "Audiotext",
         "item": "https://www.audiotext.com.br"
       },
       {
@@ -871,6 +871,14 @@
   </header>
 
   <main>
+    <!-- BREADCRUMB visivel, par do BreadcrumbList do schema -->
+    <div style="max-width:80rem;margin:0 auto;padding:0.75rem 1rem 0;">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Audiotext</a>
+        <span aria-hidden="true">›</span>
+        <span style="color:hsl(222.2,47%,11%)">Legendagem</span>
+      </nav>
+    </div>
     <!-- SECTION 1: Hero -->
     <section class="py-10 md:py-32 bg-gradient-to-b from-white to-muted/30">
       <div class="max-w-7xl mx-auto px-4">
@@ -2254,6 +2262,11 @@
 
 <style>
   @keyframes leg-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    /* Breadcrumb visivel, espelhando o BreadcrumbList ja declarado no schema */
+    .breadcrumb { padding: 0.875rem 0; font-size: 0.8125rem; color: hsl(220,9%,46%); }
+    .breadcrumb a { color: hsl(220,9%,46%); text-decoration: none; }
+    .breadcrumb a:hover { color: hsl(218,40%,29%); }
+    .breadcrumb span { margin: 0 0.4rem; }
 </style>
 
 </body>
