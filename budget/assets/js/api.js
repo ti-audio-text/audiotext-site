@@ -108,6 +108,9 @@ app.api.budget = {
       utmCampaign,
       utmTerm,
       utmContent,
+      gclid: app.tracking && typeof app.tracking.getClickId === "function"
+        ? app.tracking.getClickId()
+        : "",
     };
 
     const data = await atApiGet("budget", params);

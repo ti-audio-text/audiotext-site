@@ -553,6 +553,10 @@
       amount: amount,
       finalityCode: finalityCode,
       languageCode: languageCode,
+      gclid:
+        app.tracking && typeof app.tracking.getClickId === "function"
+          ? app.tracking.getClickId()
+          : "",
       sessionCode:
         sessionCode ||
         app.cookies.get("audiotext-budget-session") ||
@@ -627,6 +631,10 @@
       howDidMeetUs: howDidMeetUs,
       observation: uf.observation.value || null,
       isWhatsApp: true,
+      gclid:
+        app.tracking && typeof app.tracking.getClickId === "function"
+          ? app.tracking.getClickId()
+          : "",
       sessionCode:
         sessionCode ||
         app.cookies.get("audiotext-budget-session") ||
