@@ -6,6 +6,7 @@ window.app = window.app || {};
 app.tracking = {
   cookieKey: "audiotext-budget-tracking",
   queryParams: ["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"],
+  clickParams: ["gclid", "gbraid", "wbraid"],
   agent: {
     referrer: "",
     utm_source: "Direct",
@@ -13,6 +14,7 @@ app.tracking = {
     utm_campaign: "none",
     utm_term: "none",
     utm_content: "none",
+    clickId: "",
   },
 
   run: function () {
@@ -75,7 +77,21 @@ app.tracking = {
         app.tracking.agent.utm_medium = "Google Ads";
         hasUtmsInUrl = true;
       }
+
+      // Preservar o VALOR do identificador de clique, e nao so o rotulo
+      if (app.tracking.clickParams.indexOf(key) > -1 && !app.tracking.agent.clickId) {
+        var clickDecoded = decoderUtm(rawValue);
+        if (typeof clickDecoded === "string" && clickDecoded.length > 0) {
+          app.tracking.agent.clickId = clickDecoded;
+        }
+      }
     });
+
+    // Fallback: identificador guardado pelo click-id.js na chegada ao site.
+    // Cobre quem chegou por anuncio, navegou e so depois abriu o orcamento.
+    if (!app.tracking.agent.clickId) {
+      app.tracking.agent.clickId = app.tracking.readClickIdCookie();
+    }
 
     // PRIORIDADE 2: Se NÃO tem UTMs na URL, usar referrer
     if (!hasUtmsInUrl) {
@@ -119,6 +135,20 @@ app.tracking = {
     } else {
       console.log('[Budget Tracking] Cookie já existe:', app.cookies.get(app.tracking.cookieKey));
     }
+  },
+
+  // Cookie gravado por /assets/js/click-id.js no dominio do site.
+  // Formato: valor|tipo|timestamp. Aqui interessa apenas o valor.
+  readClickIdCookie: function () {
+    var raw = app.cookies && typeof app.cookies.get === "function"
+      ? app.cookies.get("at_click_id")
+      : null;
+    if (!raw) return "";
+    return raw.split("|")[0] || "";
+  },
+
+  getClickId: function () {
+    return app.tracking.agent.clickId || "";
   },
 
   extractHostname: function (url) {
