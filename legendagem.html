@@ -9,6 +9,7 @@
 
 <!-- JS do Cookie Consent -->
 <script src="/assets/js/cookieConsent.js"></script>
+<script defer src="/assets/js/click-id.js"></script>
 <script defer src="/components/site-notices/notices.js"></script>
 
   <!-- Vercel Analytics -->
@@ -2103,6 +2104,25 @@
 <!-- Script do formulário modal -->
 <script>
 (function() {
+  // --- Identificador de clique de anuncio (cookie at_click_id) ---
+  // Leitura apenas. Quem grava e o /assets/js/click-id.js, inclusive a regra de
+  // apagar o cookie quando o visitante recusa marketing no banner.
+  // Formato gravado: valor|tipo|timestamp.
+  // Nunca lanca: em qualquer falha devolve campos vazios, para que o push do
+  // generate_lead aconteca do mesmo jeito e o funil nao trave.
+  function lerClickId() {
+    try {
+      var row = document.cookie.split('; ').filter(function(item) {
+        return item.indexOf('at_click_id=') === 0;
+      })[0];
+      if (!row) return { value: '', type: '' };
+      var partes = row.split('=').slice(1).join('=').split('|');
+      return { value: partes[0] || '', type: partes[1] || '' };
+    } catch (e) {
+      return { value: '', type: '' };
+    }
+  }
+
   // --- Abrir / Fechar modal ---
   window.abrirFormLegendagem = function() {
     document.getElementById('leg-modal-overlay').style.display = 'block';
@@ -2227,6 +2247,8 @@
       fecharFormLegendagem();
     }
 
+    var clickId = lerClickId();
+
     // GTM — conversão generate_lead (padrão do /budget) ANTES de navegar.
     // O dataLayer.push é síncrono (evento entra 100%); o eventCallback só libera a navegação
     // quando o GTM confirma o disparo das tags. eventTimeout + setTimeout garantem que nunca trava.
@@ -2241,6 +2263,8 @@
         page_location: window.location.href,
         user_email: email,
         user_name: nome,
+        click_id: clickId.value,
+        click_id_type: clickId.type,
         eventCallback: abrirWhatsAppLegendagem,
         eventTimeout: 1500
       });
