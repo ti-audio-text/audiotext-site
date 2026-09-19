@@ -35,7 +35,9 @@ explícita do dono. Escopo deste arquivo: SITE apenas (Ads tem contexto próprio
 - IA (/transcricao-automatica): preço do app (não é regido pela tabela).
 - Faixa antiga "R$2,00-5,50/min" está DESCONTINUADA.
 
-**Fatos:** +15 mil clientes · +2,5 milhões de minutos · precisão "próxima a 100%"/"99%+" (NUNCA "100%") · garantia 30 dias (janela p/ pedir revisão) ≠ revisão entregue em 2-3 dias úteis · prazos SEMPRE em dias úteis (Instant a partir de 1 · Fast 2 · Flex 8) · avaliações: 36 no Google (GMB), schema deve ser consistente e com lastro visível.
+**Fatos:** +15 mil clientes · +2,5 milhões de minutos · precisão "próxima a 100%"/"99%+" (NUNCA "100%") · garantia 30 dias (janela p/ pedir revisão) ≠ revisão entregue em 2-3 dias úteis · prazos SEMPRE em dias úteis (Instant a partir de 1 · Fast 2 · Flex 8) · avaliações: **5.0 com 35 avaliações GMB** (soma de 3 perfis: 25+2+8; perfil linkado `/g/11b5pj3r3y`), schema deve ser consistente e com lastro visível. O "36" anterior estava errado e foi corrigido em 2026-09-18.
+
+**`dateModified` no schema:** só é atualizado quando há mudança real de conteúdo ou de schema da página. Ajuste cosmético, refactor, correção de infra ou script global NÃO tocam a data. Data inflada sem mudança real é sinal falso para o Google.
 
 **Vetos de copy:**
 - Ângulo de "contestação pela parte contrária" VETADO em qualquer página (não criar nem responder cenário de disputa; atributos — ipsis litteris, marcação de tempo, NDA — afirmados como qualidade, nunca como defesa).
@@ -71,7 +73,7 @@ explícita do dono. Escopo deste arquivo: SITE apenas (Ads tem contexto próprio
 - [ ] **Congelamento formal /legendagem** (visível) antes da campanha.
 
 **Aberto (sem ordem fixa):**
-- [ ] T1.1 reviews: aplicar 36 + média real GMB (aguardando valor do dono) + lastro visível.
+- [x] T1.1 reviews (parcial): schema unificado em 5.0/35 nas 5 páginas, agregado duplicado da /transcricao-automatica removido e `sameAs` das entidades com `aggregateRating` passa a citar o perfil GMB (2026-09-18). Falta o lastro visível na /legendagem, único selo sem número nem link.
 - [ ] SEO Ondas 2-4: gap "empresa de transcrição de áudio" · de-canibalização /por-ia + órfã · "quanto custa degravação" · home título hub · avaliar /transcricao-de-video.
 - [ ] CSP bloqueando CAPI/facebook (achado real, desacoplado — corrigir quando priorizado).
 - [ ] Depoimento nominal real de **produtora p/ legendagem** — captação é do dono (o jurídico p/ degravacao já existe, aplicado na variante).
