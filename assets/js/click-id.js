@@ -11,6 +11,9 @@
  * - captura gclid, gbraid e wbraid (campanhas em iOS nao mandam gclid)
  * - last click ganha: uma chegada nova por anuncio sobrescreve a anterior
  * - cookie proprio de 1st party, path=/, 90 dias, SameSite=Lax
+ * - em producao o cookie sobe para .audiotext.com.br, para que o app
+ *   (app.audiotext.com.br) enxergue o identificador; fora do dominio real,
+ *   em preview e em localhost, ele continua host-only
  * - se o visitante rejeitar cookies de marketing no banner, o cookie e apagado
  *
  * Nao altera o cookieConsent.js. A integracao e por leitura da preferencia que
@@ -25,6 +28,21 @@
 
   // Ordem de precedencia: o primeiro encontrado na URL ganha.
   var CLICK_PARAMS = ["gclid", "gbraid", "wbraid"];
+
+  // Escopo do cookie. No dominio real ele sobe para o dominio pai, senao o app
+  // em app.audiotext.com.br nao o enxerga. Em preview (*.vercel.app) e em
+  // localhost o navegador REJEITA esse Domain em silencio, e o cookie nao
+  // chegaria a ser gravado, entao ali ele segue host-only, como antes.
+  var ATRIBUTO_DOMINIO = /(^|\.)audiotext\.com\.br$/i.test(
+    window.location.hostname
+  )
+    ? "; domain=.audiotext.com.br"
+    : "";
+
+  // Um cookie e identificado por nome, dominio e path. As duas variantes
+  // possiveis do mesmo nome precisam ser tratadas juntas, senao sobra uma viva.
+  var EXPIRA_NO_PASSADO =
+    "; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; SameSite=Lax";
 
   // Ids dos controles do banner de cookies. Servem apenas como gatilho para
   // reavaliar a preferencia salva, nunca para alterar o comportamento dele.
@@ -43,13 +61,21 @@
     try {
       var expires = new Date();
       expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+      // Apaga a variante host-only gravada antes de o cookie subir para o
+      // dominio pai. Sem isso o navegador guarda as duas ao mesmo tempo e a
+      // leitura pode devolver o clique antigo, porque a ordem em que
+      // document.cookie lista os valores nao e garantida.
+      if (ATRIBUTO_DOMINIO) {
+        document.cookie = name + "=" + EXPIRA_NO_PASSADO;
+      }
       document.cookie =
         name +
         "=" +
         value +
         "; expires=" +
         expires.toUTCString() +
-        "; path=/; SameSite=Lax";
+        "; path=/; SameSite=Lax" +
+        ATRIBUTO_DOMINIO;
       return true;
     } catch (e) {
       return false;
@@ -58,8 +84,12 @@
 
   function deleteCookie(name) {
     try {
-      document.cookie =
-        name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/; SameSite=Lax";
+      // Host-only primeiro, depois a de dominio. Apagar so uma deixaria a
+      // outra viva, e a recusa de marketing no banner precisa remover as duas.
+      document.cookie = name + "=" + EXPIRA_NO_PASSADO;
+      if (ATRIBUTO_DOMINIO) {
+        document.cookie = name + "=" + EXPIRA_NO_PASSADO + ATRIBUTO_DOMINIO;
+      }
     } catch (e) {
       // sem acao: navegador bloqueou o acesso a cookies
     }
