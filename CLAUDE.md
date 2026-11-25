@@ -48,7 +48,6 @@ explícita do dono. Escopo deste arquivo: SITE apenas (Ads tem contexto próprio
 **Decisões de negócio seladas:** `texter.html` permanece indexável (recrutamento legítimo) · metas "grátis" de automatica/por-ia permanecem (intenção grátis é tóxica no pago, não no orgânico freemium).
 
 ## Congelamentos ativos
-- **/legendagem CONGELADA** durante o piloto da campanha paga (checkpoints de 2 e 4 semanas): mudança VISÍVEL só nos checkpoints; schema/invisível pode. Rodapé unificado mergeado (2026-08-29); o congelamento visível formal entra na fila **antes da campanha** (após a variante /degravacao) — ver Pendências.
 - Páginas com campanha ativa: mudanças visíveis exigem decisão do orquestrador (janela de medição).
 
 ## Como trabalhar comigo (Opus 5)
@@ -70,7 +69,6 @@ explícita do dono. Escopo deste arquivo: SITE apenas (Ads tem contexto próprio
 - [ ] **Varredura de travessões** em todas as páginas (reescrita frase a frase; código/atributos exentos).
 - [ ] **Varredura de classes-fantasma** em todas as páginas: script `classes usadas no HTML × definidas no CSS da própria página` → listar TODOS os órfãos (sem filtrar severidade) + efeito provável → corrigir confirmados caso a caso (definir a classe ou trocar por uma existente ou remover o uso). Cobrir escapes/pseudo-prefixos.
 - [ ] **Variante B /degravacao:** CTA "Ver meu orçamento" · slot → depoimento real **José Eduardo Kinchen** (quote já existe no site/materiais; nominal, jurídico) · zero travessões · hero jurídico #7 · FAQ LGPD.
-- [ ] **Congelamento formal /legendagem** (visível) antes da campanha.
 
 **Aberto (sem ordem fixa):**
 - [x] T1.1 reviews (parcial): schema unificado em 5.0/35 nas 5 páginas, agregado duplicado da /transcricao-automatica removido e `sameAs` das entidades com `aggregateRating` passa a citar o perfil GMB (2026-09-18). Falta o lastro visível na /legendagem, único selo sem número nem link.
