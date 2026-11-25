@@ -155,13 +155,12 @@
         <div class="cookie-banner-content">
           <div class="cookie-banner-text">
             <div class="cookie-banner-header">
-              <span class="cookie-icon" role="img" aria-label="Cookie">🍪</span>
               <div>
-                <h2 class="cookie-banner-title">Cookies e Privacidade</h2>
+                <h2 class="cookie-banner-title">Cookies</h2>
                 <span class="cookie-banner-description">
-                  Usamos cookies para melhorar sua experiência. 
+                  Usamos cookies para medir as visitas ao site e o resultado dos nossos anúncios. Eles não têm acesso aos seus arquivos nem ao conteúdo dos seus orçamentos. Você pode aceitar, recusar ou escolher quais permitir.
                   <a href="${CONFIG.privacyPolicyUrl}" target="_blank" rel="noopener noreferrer" class="cookie-link">
-                    Saiba mais
+                    Política de privacidade
                     <svg class="cookie-link-icon" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                   </a>
                 </span>
@@ -169,11 +168,11 @@
             </div>
           </div>
           <div class="cookie-banner-buttons">
-            <button id="cookie-accept" class="cookie-btn cookie-btn-primary" aria-label="Aceitar todos os cookies">
-              Aceitar
+            <button id="cookie-accept" class="cookie-btn cookie-btn-primary" aria-label="Aceitar cookies">
+              Aceitar cookies
             </button>
-            <button id="cookie-reject" class="cookie-btn cookie-btn-secondary" aria-label="Rejeitar cookies não essenciais">
-              Rejeitar
+            <button id="cookie-reject" class="cookie-btn cookie-btn-secondary" aria-label="Recusar cookies não essenciais">
+              Recusar
             </button>
             <button id="cookie-customize" class="cookie-btn cookie-btn-ghost" aria-label="Personalizar preferências de cookies">
               Personalizar
@@ -258,7 +257,7 @@
               <svg class="cookie-link-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
             <div class="cookie-modal-actions">
-              <button id="modal-accept-all" class="cookie-btn cookie-btn-secondary">Aceitar Todos</button>
+              <button id="modal-accept-all" class="cookie-btn cookie-btn-secondary">Aceitar todos</button>
               <button id="modal-save" class="cookie-btn cookie-btn-primary">Salvar Preferências</button>
             </div>
           </div>
@@ -291,9 +290,20 @@
     }
   }
 
+  // O modal e montado uma vez so. Sem isso, quem decide e reabre as preferencias
+  // na mesma pagina veria os toggles no estado anterior a escolha.
+  function syncModalToggles() {
+    const prefs = getStoredPreferences() || {};
+    const analyticsToggle = document.getElementById('analytics-toggle');
+    const marketingToggle = document.getElementById('marketing-toggle');
+    if (analyticsToggle) analyticsToggle.checked = prefs.analytics === true;
+    if (marketingToggle) marketingToggle.checked = prefs.marketing === true;
+  }
+
   function showModal() {
     const modal = document.getElementById('cookie-modal');
     if (modal) {
+      syncModalToggles();
       modal.style.display = 'block';
       modal.offsetHeight;
       modal.classList.add('cookie-modal-visible');
